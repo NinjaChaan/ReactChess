@@ -1,0 +1,16 @@
+{
+    "name": "greet",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "description": "",
+    "gypfile": "true",
+    "dependencies": {
+        "node-addon-api": "^3.0.0"
+    }
+}

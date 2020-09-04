@@ -1,0 +1,495 @@
+eco	name	fen	moves	whiteWins	blackWins	draws
+D00	Amazon Attack	rnbqkbnr/ppp1pppp/8/3p4/3P4/3Q4/PPP1PPPP/RNB1KBNR b KQkq -	d2d4 d7d5 d1d3	9	13	0
+D00	Blackmar-Diemer Gambit: Bogoljubov Defense, Mad Dog Attack	rnbqk2r/ppp1ppbp/5np1/8/2BP3P/2N2N2/PPP3P1/R1BQK2R b KQkq -	d2d4 d7d5 e2e4 d5e4 b1c3 g8f6 f2f3 e4f3 g1f3 g7g6 f1c4 f8g7 h2h4	19	3	0
+D00	Blackmar-Diemer Gambit: Bogoljubov Variation, Kloss Attack	rnbq1rk1/ppp1ppbp/5np1/8/2BP4/2N2N2/PPP3PP/R1BQ1R1K b - -	d2d4 d7d5 e2e4 d5e4 b1c3 g8f6 f2f3 e4f3 g1f3 g7g6 f1c4 f8g7 e1g1 e8g8 g1h1	8	1	1
+D00	Blackmar-Diemer Gambit: Bogoljubov Variation, Nimzowitsch Attack	rnbqk2r/ppp1ppbp/5np1/4N3/2BP4/2N5/PPP3PP/R1BQK2R b KQkq -	d2d4 d7d5 e2e4 d5e4 b1c3 g8f6 f2f3 e4f3 g1f3 g7g6 f1c4 f8g7 f3e5	39	10	6
+D00	Blackmar-Diemer Gambit: Bogoljubov Variation	rnbqkb1r/ppp1pp1p/5np1/8/3P4/2N2N2/PPP3PP/R1BQKB1R w KQkq -	d2d4 g8f6 b1c3 d7d5 e2e4 d5e4 f2f3 e4f3 g1f3 g7g6	63	45	17
+D00	Blackmar-Diemer Gambit: Bogoljubov Variation, Studier Attack	rnbq1rk1/ppp1ppbp/5np1/8/2BP4/2N2N2/PPP3PP/R1B1QRK1 b - -	d2d4 g8f6 b1c3 d7d5 e2e4 d5e4 f2f3 e4f3 g1f3 g7g6 f1c4 f8g7 e1g1 e8g8 d1e1	35	25	10
+D00	Blackmar-Diemer Gambit Declined, Brombacher Countergambit	rnbqkb1r/pp2pppp/5n2/2p5/3Pp3/2N2P2/PPP3PP/R1BQKBNR w KQkq -	d2d4 g8f6 b1c3 d7d5 e2e4 d5e4 f2f3 c7c5	7	3	1
+D00	Blackmar-Diemer Gambit Declined, Elbert Countergambit	rnbqkb1r/ppp2ppp/5n2/4p3/3Pp3/2N2P2/PPP3PP/R1BQKBNR w KQkq -	d2d4 d7d5 e2e4 d5e4 b1c3 g8f6 f2f3 e7e5	7	1	2
+D00	Blackmar-Diemer Gambit Declined, Grosshans Defense	rn1qkbnr/pppbpppp/8/8/3Pp3/2N5/PPP2PPP/R1BQKBNR w KQkq -	d2d4 d7d5 e2e4 d5e4 b1c3 c8d7	0	2	1
+D00	Blackmar-Diemer Gambit Declined, Lamb Defense	r1bqkb1r/ppp1pppp/2n2n2/8/3Pp3/2N2P2/PPP3PP/R1BQKBNR w KQkq -	d2d4 d7d5 e2e4 d5e4 b1c3 g8f6 f2f3 b8c6	15	0	0
+D00	Blackmar-Diemer Gambit Declined, Langeheinecke Defense	rnbqkb1r/ppp1pppp/5n2/8/3P4/2N1pP2/PPP3PP/R1BQKBNR w KQkq -	d2d4 g8f6 b1c3 d7d5 e2e4 d5e4 f2f3 e4e3	33	24	14
+D00	Blackmar-Diemer Gambit: Diemer-Rosenberg Attack	rnbqkbnr/ppp1pppp/8/8/3Pp3/4B3/PPP2PPP/RN1QKBNR b KQkq -	d2d4 d7d5 e2e4 d5e4 c1e3	2	1	2
+D00	Blackmar-Diemer Gambit: Euwe Defense	rnbqkb1r/ppp2ppp/4pn2/8/3P4/2N2N2/PPP3PP/R1BQKB1R w KQkq -	d2d4 g8f6 b1c3 d7d5 e2e4 d5e4 f2f3 e4f3 g1f3 e7e6	55	27	13
+D00	Blackmar-Diemer Gambit: Euwe Defense, Zilbermints Gambit	r1bqk2r/ppp1bppp/4pn2/6B1/3n4/2NB1N2/PPP3PP/R2Q1R1K b kq -	d2d4 d7d5 e2e4 d5e4 b1c3 g8f6 f2f3 e4f3 g1f3 e7e6 c1g5 f8e7 f1d3 b8c6 e1g1 c6d4 g1h1	0	0	0
+D00	Blackmar-Diemer Gambit: Fritz Attack	rnbqkbnr/ppp1pppp/8/8/2BPp3/8/PPP2PPP/RNBQK1NR b KQkq -	d2d4 d7d5 e2e4 d5e4 f1c4	20	16	6
+D00	Blackmar-Diemer Gambit: Gedult Gambit	rnbqkbnr/ppp1pppp/8/8/3Pp3/5P2/PPP3PP/RNBQKBNR b KQkq -	d2d4 d7d5 e2e4 d5e4 f2f3	35	19	5
+D00	Blackmar-Diemer Gambit: Kaulich Defense	rnbqkb1r/pp2pppp/5n2/2p5/3P4/2N2N2/PPP3PP/R1BQKB1R w KQkq -	d2d4 d7d5 e2e4 d5e4 b1c3 g8f6 f2f3 e4f3 g1f3 c7c5	20	0	0
+D00	Blackmar-Diemer Gambit: Lemberger Countergambit, Diemer Attack	rnbqkbnr/ppp2ppp/8/4p3/3Pp3/2N1B3/PPP2PPP/R2QKBNR b KQkq -	d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 c1e3	13	19	7
+D00	Blackmar-Diemer Gambit: Lemberger Countergambit, Endgame Variation	rnbqkbnr/ppp2ppp/8/4P3/4p3/2N5/PPP2PPP/R1BQKBNR b KQkq -	d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5	10	19	11
+D00	Blackmar-Diemer Gambit: Lemberger Countergambit, Rassmussen Attack	rnbqkbnr/ppp2ppp/8/4p3/3Pp3/2N5/PPP1NPPP/R1BQKB1R b KQkq -	d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 g1e2	11	6	3
+D00	Blackmar-Diemer Gambit: Lemberger Countergambit, Simple Variation	rnbqkbnr/ppp2ppp/8/4p3/3PN3/8/PPP2PPP/R1BQKBNR b KQkq -	d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 c3e4	75	37	29
+D00	Blackmar-Diemer Gambit: Lemberger Countergambit, Sneider Attack	rnbqkbnr/ppp2ppp/8/4p2Q/3Pp3/2N5/PPP2PPP/R1B1KBNR b KQkq -	e2e4 d7d5 d2d4 d5e4 b1c3 e7e5 d1h5	3	3	1
+D00	Blackmar-Diemer Gambit: Pietrowsky Defense	r1bqkb1r/ppp1pppp/2n2n2/8/3P4/2N2N2/PPP3PP/R1BQKB1R w KQkq -	d2d4 d7d5 e2e4 d5e4 b1c3 g8f6 f2f3 e4f3 g1f3 b8c6	13	10	5
+D00	Blackmar-Diemer Gambit: Rasa-Studier Gambit	rnbqkb1r/ppp1pppp/5n2/8/3Pp3/2N1B3/PPP2PPP/R2QKBNR b KQkq -	d2d4 d7d5 e2e4 d5e4 b1c3 g8f6 c1e3	2	4	1
+D00	Blackmar-Diemer Gambit: Ritter Defense	rnbqkb1r/p1p1pppp/1p3n2/8/3P4/2N2N2/PPP3PP/R1BQKB1R w KQkq -	d2d4 d7d5 e2e4 d5e4 b1c3 g8f6 f2f3 e4f3 g1f3 b7b6	5	0	0
+D00	Blackmar-Diemer Gambit	rnbqkb1r/ppp1pppp/5n2/3p4/3PP3/2N5/PPP2PPP/R1BQKBNR b KQkq -	d2d4 g8f6 b1c3 d7d5 e2e4	624	479	206
+D00	Blackmar Gambit	rnbqkbnr/ppp1pppp/8/3p4/3PP3/8/PPP2PPP/RNBQKBNR b KQkq -	d2d4 d7d5 e2e4	2672	1139	519
+D00	Blackmar-Diemer Gambit: Rook Pawn Defense	rnbqkb1r/ppp1ppp1/5n2/7p/3P4/2N2N2/PPP3PP/R1BQKB1R w KQkq -	d2d4 d7d5 e2e4 d5e4 b1c3 g8f6 f2f3 e4f3 g1f3 h7h5	0	0	0
+D00	Blackmar-Diemer Gambit: Ryder Gambit	rnbqkb1r/ppp1pppp/5n2/8/3P4/2N2Q2/PPP3PP/R1B1KBNR b KQkq -	d2d4 d7d5 e2e4 d5e4 b1c3 g8f6 f2f3 e4f3 d1f3	262	96	17
+D00	Blackmar-Diemer Gambit: Schlutter Defense	r1bqkb1r/pppnpppp/5n2/8/3P4/2N2N2/PPP3PP/R1BQKB1R w KQkq -	d2d4 d7d5 e2e4 d5e4 b1c3 g8f6 f2f3 e4f3 g1f3 b8d7	5	0	0
+D00	Blackmar-Diemer Gambit: Tartakower Variation	rn1qkb1r/ppp1pppp/5n2/5b2/3P4/2N2N2/PPP3PP/R1BQKB1R w KQkq -	e2e4 d7d5 d2d4 d5e4 b1c3 g8f6 f2f3 e4f3 g1f3 c8f5	8	3	1
+D00	Blackmar-Diemer Gambit: Teichmann Variation	rn1qkb1r/ppp1pppp/5n2/8/3P2b1/2N2N2/PPP3PP/R1BQKB1R w KQkq -	e2e4 d7d5 d2d4 d5e4 b1c3 g8f6 f2f3 e4f3 g1f3 c8g4	16	17	8
+D00	Blackmar-Diemer Gambit: Vienna Variation	rn1qkb1r/ppp1pppp/5n2/5b2/3Pp3/2N2P2/PPP3PP/R1BQKBNR w KQkq -	d2d4 g8f6 b1c3 d7d5 e2e4 d5e4 f2f3 c8f5	51	29	14
+D00	Blackmar-Diemer Gambit: von Popiel Gambit	rnbqkb1r/ppp1pppp/5n2/6B1/3Pp3/2N5/PPP2PPP/R2QKBNR b KQkq -	d2d4 d7d5 e2e4 d5e4 b1c3 g8f6 c1g5	111	72	38
+D00	Blackmar-Diemer Gambit: von Popiel Gambit, Zilbermints Variation	rn1qk2r/ppp2ppp/5pb1/1Q6/1b1Pp1P1/2N5/PPP2P1P/R3KBNR b KQkq -	d2d4 d7d5 e2e4 d5e4 b1c3 g8f6 c1g5 c8f5 g5f6 e7f6 g2g4 f5g6 d1e2 f8b4 e2b5	1	0	0
+D00	Blackmar-Diemer Gambit: Zeller Defense	rn1qkbnr/ppp1pppp/8/5b2/3Pp3/2N5/PPP2PPP/R1BQKBNR w KQkq -	d2d4 d7d5 e2e4 d5e4 b1c3 c8f5	84	25	9
+D00	Blackmar-Diemer Gambit: Zeller Defense, Soller Attack	rn1qkb1r/ppp1pppp/5n2/5b2/2BPp3/2N2P2/PPP3PP/R1BQK1NR b KQkq -	d2d4 d7d5 e2e4 d5e4 b1c3 c8f5 f2f3 g8f6 f1c4	2	0	0
+D00	Blackmar-Diemer Gambit: Ziegler Defense	rnbqkb1r/pp2pppp/2p2n2/8/3P4/2N2N2/PPP3PP/R1BQKB1R w KQkq -	d2d4 d7d5 e2e4 d5e4 b1c3 g8f6 f2f3 e4f3 g1f3 c7c6	91	46	23
+D00	Blackmar-Diemer, Lemberger Countergambit	rnbqkb1r/ppp2ppp/5n2/3pp3/3PP3/2N5/PPP2PPP/R1BQKBNR w KQkq -	d2d4 d7d5 b1c3 g8f6 e2e4 e7e5	0	0	0
+D00	Queen's Pawn Game: Chigorin Variation	rnbqkbnr/ppp1pppp/8/3p4/3P4/2N5/PPP1PPPP/R1BQKBNR b KQkq -	d2d4 d7d5 b1c3	1838	1569	1154
+D00	Queen's Pawn Game: Hübsch Gambit	rnbqkb1r/ppp1pppp/8/3p4/3Pn3/2N5/PPP2PPP/R1BQKBNR w KQkq -	d2d4 g8f6 b1c3 d7d5 e2e4 f6e4	130	110	57
+D00	Queen's Pawn Game: Levitsky Attack	rnbqkbnr/ppp1pppp/8/3p2B1/3P4/8/PPP1PPPP/RN1QKBNR b KQkq -	d2d4 d7d5 c1g5	2096	1430	1572
+D00	Queen's Pawn Game: Levitsky Attack, Welling Variation	rn1qkbnr/ppp1pppp/8/3p2B1/3P2b1/8/PPP1PPPP/RN1QKBNR w KQkq -	d2d4 d7d5 c1g5 c8g4	6	2	1
+D00	Queen's Pawn Game: Mason Attack	rnbqkbnr/ppp1pppp/8/3p4/3P1B2/8/PPP1PPPP/RN1QKBNR b KQkq -	d2d4 d7d5 c1f4	4202	3035	2938
+D00	Queen's Pawn Game: Morris Countergambit	rnbqkbnr/pp2pppp/8/2pp4/3PPB2/8/PPP2PPP/RN1QKBNR b KQkq -	d2d4 d7d5 c1f4 c7c5 e2e4	20	32	20
+D00	Queen's Pawn Game	rnbqkb1r/ppp1pppp/5n2/3p4/3P4/4P3/PPP2PPP/RNBQKBNR w KQkq -	d2d4 d7d5 e2e3 g8f6	677	862	463
+D00	Queen's Pawn Game	rnbqkbnr/ppp1pppp/8/3p4/3P4/4P3/PPP2PPP/RNBQKBNR b KQkq -	d2d4 d7d5 e2e3	1144	1289	705
+D00	Queen's Pawn Game	rnbqkbnr/ppp1pppp/8/3p4/3P4/8/PPP1PPPP/RNBQKBNR w KQkq -	d2d4 d7d5	145672	89837	121425
+D00	Queen's Pawn Game: Steinitz Countergambit	rnbqkbnr/pp2pppp/8/2pp4/3P1B2/8/PPP1PPPP/RN1QKBNR w KQkq -	d2d4 d7d5 c1f4 c7c5	473	533	442
+D00	Queen's Pawn Game: Stonewall Attack	rnbqkb1r/ppp1pppp/5n2/3p4/3P4/3BP3/PPP2PPP/RNBQK1NR b KQkq -	d2d4 d7d5 e2e3 g8f6 f1d3	492	514	285
+D00	Queen's Pawn Game: Veresov Attack, Alburt Defense	rn1qkbnr/ppp1pppp/8/3p1b2/3P4/2N5/PPP1PPPP/R1BQKBNR w KQkq -	d2d4 d7d5 b1c3 c8f5	167	181	123
+D00	Queen's Pawn Game: Veresov Attack, Anti-Veresov	rn1qkbnr/ppp1pppp/8/3p4/3P2b1/2N5/PPP1PPPP/R1BQKBNR w KQkq -	d2d4 d7d5 b1c3 c8g4	4	1	6
+D00	Queen's Pawn Game: Veresov Attack, Shaviliuk Gambit	rnbqkbnr/ppp2ppp/8/3pp3/3P4/2N5/PPP1PPPP/R1BQKBNR w KQkq -	d2d4 d7d5 b1c3 e7e5	3	5	1
+D00	Queen's Pawn Game: Veresov Attack, Shropshire Defense	rnbqkbnr/ppp1ppp1/8/3p3p/3P4/2N5/PPP1PPPP/R1BQKBNR w KQkq -	d2d4 d7d5 b1c3 h7h5	0	1	0
+D00	Queen's Pawn Game: Zurich Gambit	rnbqkbnr/ppp1pppp/8/3p4/3P2P1/8/PPP1PP1P/RNBQKBNR b KQkq -	d2d4 d7d5 g2g4	1	0	0
+D00	Queen's Pawn Opening: Veresov Attack, Irish Gambit	rnbqkbnr/pp2pppp/8/2pp4/3P4/2N5/PPP1PPPP/R1BQKBNR w KQkq -	d2d4 d7d5 b1c3 c7c5	23	33	20
+D01	Queen's Pawn Game: Veresov Attack, Boyce Defense	rnbqkb1r/ppp1pppp/8/3p2B1/3Pn3/2N5/PPP1PPPP/R2QKBNR w KQkq -	d2d4 g8f6 b1c3 d7d5 c1g5 f6e4	45	26	14
+D01	Queen's Pawn Game: Veresov Attack, Richter Variation	rn1qkb1r/ppp1pppp/5n2/3p1bB1/3P4/2N2P2/PPP1P1PP/R2QKBNR b KQkq -	d2d4 g8f6 b1c3 d7d5 c1g5 c8f5 f2f3	155	149	94
+D01	Queen's Pawn Game: Veresov Attack, Two Knights System, Grünfeld Defense	r1bqkb1r/pppnpp1p/5np1/3p2B1/3P4/2N2N2/PPP1PPPP/R2QKB1R w KQkq -	d2d4 g8f6 b1c3 d7d5 c1g5 b8d7 g1f3 g7g6	84	132	97
+D01	Queen's Pawn Game: Veresov Attack, Two Knights System	r1bqkb1r/pppnpppp/5n2/3p2B1/3P4/2N2N2/PPP1PPPP/R2QKB1R b KQkq -	d2d4 g8f6 b1c3 d7d5 c1g5 b8d7 g1f3	295	378	301
+D01	Queen's Pawn Game: Veresov Attack, Veresov Variation	rn1qkb1r/ppp1pppp/5B2/3p1b2/3P4/2N5/PPP1PPPP/R2QKBNR b KQkq -	d2d4 g8f6 b1c3 d7d5 c1g5 c8f5 g5f6	118	79	102
+D01	Richter-Veresov Attack	rn1qkb1r/ppp1pppp/5n2/3p1bB1/3P4/2N5/PPP1PPPP/R2QKBNR w KQkq -	d2d4 g8f6 b1c3 d7d5 c1g5 c8f5	385	320	293
+D01	Richter-Veresov Attack	rnbqkb1r/ppp1pppp/5n2/3p2B1/3P4/2N5/PPP1PPPP/R2QKBNR b KQkq -	d2d4 g8f6 b1c3 d7d5 c1g5	1978	2099	1619
+D01	Veresov Opening: Malich Gambit	rnbqkb1r/pp2pp1p/5p2/2pP4/4p3/2N5/PPP2PPP/R2QKBNR b KQkq -	d2d4 g8f6 b1c3 d7d5 c1g5 c7c5 g5f6 g7f6 e2e4 d5e4 d4d5	1	7	1
+D02	London System: Poisoned Pawn Variation	rnb1kb1r/pp2pppp/1q3n2/2pp4/3P1B2/2N1PN2/PPP2PPP/R2QKB1R b KQkq -	d2d4 g8f6 g1f3 d7d5 c1f4 c7c5 e2e3 d8b6 b1c3	15	17	11
+D02	Queen's Gambit Accepted: Rosenthal Variation	rnbqkbnr/ppp2ppp/4p3/8/2pP4/5N2/PP2PPPP/RNBQKB1R w KQkq -	d2d4 d7d5 g1f3 e7e6 c2c4 d5c4	104	62	145
+D02	Queen's Gambit Refused: Baltic Defense, Pseudo-Slav	rn1qkbnr/pp3ppp/2p1p3/3p1b2/2PP4/2N2N2/PP2PPPP/R1BQKB1R w KQkq -	d2d4 d7d5 g1f3 c8f5 c2c4 e7e6 b1c3 c7c6	139	77	119
+D02	Queen's Pawn Game: Anti-Torre	rn1qkbnr/ppp1pppp/8/3p4/3P2b1/5N2/PPP1PPPP/RNBQKB1R w KQkq -	g1f3 d7d5 d2d4 c8g4	96	57	33
+D02	Queen's Pawn Game: Chandler Gambit	rnbqkbnr/pp2pppp/8/3p4/3p4/5NP1/PPP1PPBP/RNBQK2R b KQkq -	d2d4 d7d5 g1f3 c7c5 g2g3 c5d4 f1g2	8	14	8
+D02	Queen's Pawn Game: Chigorin Variation	r1bqkbnr/ppp1pppp/2n5/3p4/3P4/5N2/PPP1PPPP/RNBQKB1R w KQkq -	d2d4 d7d5 g1f3 b8c6	1553	839	813
+D02	Queen's Pawn Game: Krause Variation	rnbqkbnr/pp2pppp/8/2pp4/3P4/5N2/PPP1PPPP/RNBQKB1R w KQkq -	d2d4 d7d5 g1f3 c7c5	1037	923	975
+D02	Queen's Pawn Game: Levitsky Attack, Euwe Variation, Modern Line	rnb1kbnr/pp2ppp1/1qp4p/3p4/3P3B/5N2/PPP1PPPP/RN1QKB1R w KQkq -	d2d4 d7d5 g1f3 c7c6 c1g5 h7h6 g5h4 d8b6	22	14	14
+D02	Queen's Pawn Game: London System	rnbqkb1r/ppp1pppp/5n2/3p4/3P1B2/5N2/PPP1PPPP/RN1QKB1R b KQkq -	d2d4 d7d5 g1f3 g8f6 c1f4	2420	2181	2203
+D02	Queen's Pawn Game: Symmetrical Variation, Pseudo-Catalan	rnbqkb1r/ppp1pppp/5n2/3p4/3P4/5NP1/PPP1PP1P/RNBQKB1R b KQkq -	d2d4 d7d5 g1f3 g8f6 g2g3	1529	1243	1341
+D02	Queen's Pawn Game: Symmetrical Variation	rnbqkb1r/ppp1pppp/5n2/3p4/3P4/5N2/PPP1PPPP/RNBQKB1R w KQkq -	d2d4 d7d5 g1f3 g8f6	21017	14796	18426
+D02	Queen's Pawn Game: Zilbermints Countergambit	rnbqkb1r/p1p1pppp/5n2/1p1p4/2PP4/5N2/PP2PPPP/RNBQKB1R w KQkq -	d2d4 d7d5 g1f3 g8f6 c2c4 b7b5	0	0	0
+D02	Queen's Pawn Game: Zukertort Variation	rnbqkbnr/ppp1pppp/8/3p4/3P4/5N2/PPP1PPPP/RNBQKB1R b KQkq -	d2d4 d7d5 g1f3	30587	21634	25845
+D03	Queen's Pawn Game: Torre Attack, Gossip Variation	rnbqkb1r/ppp1pppp/8/3p2B1/3Pn3/5N2/PPP1PPPP/RN1QKB1R w KQkq -	d2d4 d7d5 g1f3 g8f6 c1g5 f6e4	310	404	338
+D03	Queen's Pawn Game: Torre Attack, Grünfeld Variation	rnbqkb1r/ppp1pp1p/5np1/3p2B1/3P4/5N2/PPP1PPPP/RN1QKB1R w KQkq -	d2d4 d7d5 g1f3 g8f6 c1g5 g7g6	18	23	12
+D03	Queen's Pawn Game: Torre Attack	rnbqkb1r/ppp1pppp/5n2/3p2B1/3P4/5N2/PPP1PPPP/RN1QKB1R b KQkq -	d2d4 d7d5 g1f3 g8f6 c1g5	1088	923	932
+D04	Queen's Pawn Game: Colle System, Anti-Colle	rn1qkb1r/ppp1pppp/5n2/3p1b2/3P4/4PN2/PPP2PPP/RNBQKB1R w KQkq -	d2d4 d7d5 g1f3 g8f6 e2e3 c8f5	474	455	441
+D04	Queen's Pawn Game: Colle System, Grünfeld Formation	rnbqk2r/ppp1ppbp/5np1/3p4/3P4/3BPN2/PPP2PPP/RNBQK2R w KQkq -	d2d4 d7d5 g1f3 g8f6 e2e3 g7g6 f1d3 f8g7	61	116	71
+D04	Queen's Pawn Game: Colle System	rnbqkb1r/ppp1pppp/5n2/3p4/3P4/4PN2/PPP2PPP/RNBQKB1R b KQkq -	d2d4 d7d5 g1f3 g8f6 e2e3	3103	2773	2528
+D05	Colle System	rnbqkb1r/ppp2ppp/4pn2/3p4/3P4/3BPN2/PPP2PPP/RNBQK2R b KQkq -	d2d4 d7d5 g1f3 g8f6 e2e3 e7e6 f1d3	1026	578	635
+D05	Colle System	rnbqkb1r/ppp2ppp/4pn2/3p4/3P4/4PN2/PPP2PPP/RNBQKB1R w KQkq -	d2d4 d7d5 g1f3 g8f6 e2e3 e7e6	1243	753	861
+D05	Colle System: Traditional Colle	rnbqkb1r/pp3ppp/4pn2/2pp4/3P4/2PBPN2/PP3PPP/RNBQK2R b KQkq -	d2d4 g8f6 g1f3 e7e6 e2e3 c7c5 f1d3 d7d5 c2c3	44	52	46
+D05	Queen's Pawn Game, Zukertort Variation	rnbqkb1r/pp3ppp/4pn2/2pp4/3P4/1P2PN2/P1PN1PPP/R1BQKB1R b KQkq -	d2d4 d7d5 g1f3 c7c5 e2e3 g8f6 b1d2 e7e6 b2b3	2	1	2
+D05	Rubinstein Opening: Bogoljubov Defense	r1bq1rk1/pp3ppp/2nbpn2/2pp4/3P4/1P1BPN2/PBP2PPP/RN1Q1RK1 w - -	d2d4 g8f6 g1f3 e7e6 e2e3 c7c5 f1d3 d7d5 b2b3 b8c6 e1g1 f8d6 c1b2 e8g8	22	22	16
+D05	Rubinstein Opening: Classical Defense	r1bq1rk1/pp2bppp/2n1pn2/2pp4/3P4/1P1BPN2/PBP2PPP/RN1Q1RK1 w - -	d2d4 g8f6 g1f3 e7e6 e2e3 c7c5 f1d3 d7d5 b2b3 b8c6 e1g1 f8e7 c1b2 e8g8	4	8	5
+D05	Rubinstein Opening	rnbqkb1r/pp3ppp/4pn2/2pp4/3P4/1P1BPN2/P1P2PPP/RNBQK2R b KQkq -	d2d4 g8f6 g1f3 e7e6 e2e3 c7c5 f1d3 d7d5 b2b3	134	106	121
+D05	Rubinstein Opening: Semi-Slav Defense	r1bq1rk1/pppn1ppp/3bpn2/3p4/3P4/1P1BPN2/PBP2PPP/RN1Q1RK1 b - -	d2d4 d7d5 g1f3 g8f6 e2e3 e7e6 f1d3 f8d6 e1g1 e8g8 b2b3 b8d7 c1b2	4	1	2
+D06	Queen's Gambit Refused: Austrian Attack, Salvio Countergambit	rnbqkbnr/pp2pppp/8/2P5/2Pp4/8/PP2PPPP/RNBQKBNR w KQkq -	d2d4 d7d5 c2c4 c7c5 d4c5 d5d4	11	10	9
+D06	Queen's Gambit Refused: Austrian Defense, Gusev Countergambit	rnbqkb1r/pp2pppp/5n2/2pP4/3P4/8/PP2PPPP/RNBQKBNR w KQkq -	d2d4 d7d5 c2c4 c7c5 c4d5 g8f6	58	16	54
+D06	Queen's Gambit Refused: Austrian Defense, Haberditz Variation	rnb1kb1r/pp2pppp/8/q1PP4/4n3/8/PP3PPP/RNBQKBNR w KQkq -	d2d4 d7d5 c2c4 c7c5 c4d5 g8f6 e2e4 f6e4 d4c5 d8a5	2	2	1
+D06	Queen's Gambit Refused: Austrian Defense	rnbqkbnr/pp2pppp/8/2pp4/2PP4/8/PP2PPPP/RNBQKBNR w KQkq -	d2d4 d7d5 c2c4 c7c5	227	98	166
+D06	Queen's Gambit Refused: Baltic Defense, Argentinian Gambit	r2qkbnr/pp2pppp/2n5/8/Q2P4/8/PP2PPPP/RbB1KBNR w KQkq -	d2d4 d7d5 c2c4 c8f5 c4d5 f5b1 d1a4 c7c6 d5c6 b8c6	98	18	67
+D06	Queen's Gambit Refused: Baltic Defense, Pseudo-Chigorin	r2qkbnr/ppp2ppp/2n1p3/3p1b2/2PP4/2N2N2/PP2PPPP/R1BQKB1R w KQkq -	d2d4 d7d5 c2c4 c8f5 b1c3 e7e6 g1f3 b8c6	78	50	54
+D06	Queen's Gambit Refused: Baltic Defense, Queen Attack Deferred	rn1qkbnr/ppp2ppp/4p3/3p1b2/2PP4/1QN5/PP2PPPP/R1B1KBNR b KQkq -	d2d4 d7d5 c2c4 c8f5 b1c3 e7e6 d1b3	22	34	14
+D06	Queen's Gambit Refused: Baltic Defense, Queen Attack	rn1qkbnr/ppp1pppp/8/3p1b2/2PP4/1Q6/PP2PPPP/RNB1KBNR b KQkq -	d2d4 d7d5 c2c4 c8f5 d1b3	55	35	28
+D06	Queen's Gambit Refused: Baltic Defense	rn1qkbnr/ppp1pppp/8/3p1b2/2PP4/8/PP2PPPP/RNBQKBNR w KQkq -	d2d4 d7d5 c2c4 c8f5	1078	660	667
+D06	Queen's Gambit Refused: Marshall Defense	rnbqkb1r/ppp1pppp/5n2/3p4/2PP4/8/PP2PPPP/RNBQKBNR w KQkq -	d2d4 d7d5 c2c4 g8f6	1632	374	325
+D06	Queen's Gambit Refused: Marshall Defense, Tan Gambit	rnbqkb1r/pp2pppp/2p2n2/3P4/3P4/8/PP2PPPP/RNBQKBNR w KQkq -	d2d4 d7d5 c2c4 g8f6 c4d5 c7c6	7	0	1
+D06	Queen's Gambit Refused: Zilbermints Gambit	rnbqkbnr/p1p1pppp/8/1p1p4/2PP4/8/PP2PPPP/RNBQKBNR w KQkq -	d2d4 d7d5 c2c4 b7b5	1	0	0
+D06	Queen's Gambit	rnbqkbnr/ppp1pppp/8/3p4/2PP4/8/PP2PPPP/RNBQKBNR b KQkq -	d2d4 d7d5 c2c4	102481	59050	88185
+D07	Queen's Gambit Refused: Chigorin Defense, Exchange Variation, Costa's Line	r1b1k1nr/ppp2ppp/2n5/3q4/3p4/2B1P3/PP2NPPP/R2QKB1R b KQkq -	d2d4 d7d5 c2c4 b8c6 c4d5 d8d5 e2e3 e7e5 b1c3 f8b4 c1d2 b4c3 d2c3 e5d4 g1e2	137	65	142
+D07	Queen's Gambit Refused: Chigorin Defense, Exchange Variation	r1b1kbnr/ppp1pppp/2n5/3q4/3P4/8/PP2PPPP/RNBQKBNR w KQkq -	d2d4 d7d5 c2c4 b8c6 c4d5 d8d5	553	332	429
+D07	Queen's Gambit Refused: Chigorin Defense, Janowski Variation	r1bqkbnr/ppp1pppp/2n5/8/2pP4/2N2N2/PP2PPPP/R1BQKB1R b KQkq -	d2d4 d7d5 c2c4 b8c6 b1c3 d5c4 g1f3	387	149	191
+D07	Queen's Gambit Refused: Chigorin Defense, Lazard Gambit	r1bqkbnr/ppp2ppp/2n5/3pp3/2PP4/5N2/PP2PPPP/RNBQKB1R w KQkq -	d2d4 d7d5 c2c4 b8c6 g1f3 e7e5	58	50	44
+D07	Queen's Gambit Refused: Chigorin Defense, Main Line, Alekhine Variation	r2qkbnr/ppp1pppp/2n5/3p4/Q1PP2b1/5N2/PP2PPPP/RNB1KB1R b KQkq -	d2d4 d7d5 c2c4 b8c6 g1f3 c8g4 d1a4	39	13	16
+D07	Queen's Gambit Refused: Chigorin Defense, Main Line	r2qkbnr/ppp1pppp/2n5/3p4/2PP2b1/5N2/PP2PPPP/RNBQKB1R w KQkq -	d2d4 d7d5 c2c4 b8c6 g1f3 c8g4	779	513	472
+D07	Queen's Gambit Refused: Chigorin Defense, Modern Gambit	r1bqkb1r/ppp1pppp/2n2n2/8/2pP4/2N2N2/PP2PPPP/R1BQKB1R w KQkq -	d2d4 d7d5 c2c4 b8c6 b1c3 d5c4 g1f3 g8f6	243	113	157
+D07	Queen's Gambit Refused: Chigorin Defense	r1bqkbnr/ppp1pppp/2n5/3p4/2PP4/2N5/PP2PPPP/R1BQKBNR b KQkq -	d2d4 d7d5 c2c4 b8c6 b1c3	1125	530	588
+D07	Queen's Gambit Refused: Chigorin Defense	r1bqkbnr/ppp1pppp/2n5/3p4/2PP4/8/PP2PPPP/RNBQKBNR w KQkq -	d2d4 d7d5 c2c4 b8c6	2774	1636	1711
+D07	Queen's Gambit Refused: Chigorin Defense	r1bqkbnr/ppp1pppp/2n5/8/2pP4/2N5/PP2PPPP/R1BQKBNR w KQkq -	d2d4 d7d5 c2c4 b8c6 b1c3 d5c4	655	312	360
+D07	Queen's Gambit Refused: Chigorin Defense, Tartakower Gambit	r1bqkbnr/ppp2ppp/2n5/3pp3/2PP4/2N5/PP2PPPP/R1BQKBNR w KQkq -	d2d4 d7d5 c2c4 b8c6 b1c3 e7e5	112	48	42
+D08	Queen's Gambit Declined: Albin Countergambit, Balogh Variation	r1b1kbnr/ppp1qppp/2n5/4P3/2Pp4/5N2/PP1NPPPP/R1BQKB1R w KQkq -	d2d4 d7d5 c2c4 e7e5 d4e5 d5d4 g1f3 b8c6 b1d2 d8e7	8	2	1
+D08	Queen's Gambit Declined: Albin Countergambit, Janowski Variation	r1bqkbnr/ppp3pp/2n2p2/4P3/2Pp4/5N2/PP1NPPPP/R1BQKB1R w KQkq -	d2d4 d7d5 c2c4 e7e5 d4e5 d5d4 g1f3 b8c6 b1d2 f7f6	18	10	1
+D08	Queen's Gambit Declined: Albin Countergambit, Krenosz Variation	r3k1nr/ppp1qppp/2n5/4P3/1bPp4/5N1P/PP1BPPP1/R2QKB1R w KQkq -	d2d4 d7d5 c2c4 e7e5 d4e5 d5d4 g1f3 b8c6 b1d2 c8g4 h2h3 g4f3 d2f3 f8b4 c1d2 d8e7	7	0	2
+D08	Queen's Gambit Refused: Albin Countergambit, Lasker Trap	rnbqk1nr/ppp2ppp/8/4P3/1bP5/4p3/PP1B1PPP/RN1QKBNR w KQkq -	d2d4 d7d5 c2c4 e7e5 d4e5 d5d4 e2e3 f8b4 c1d2 d4e3	13	54	8
+D08	Queen's Gambit Refused: Albin Countergambit, Modern Line	r1bqkbnr/ppp2ppp/2n5/4P3/2Pp4/5N2/PP1NPPPP/R1BQKB1R b KQkq -	d2d4 d7d5 c2c4 e7e5 d4e5 d5d4 g1f3 b8c6 b1d2	218	118	69
+D08	Queen's Gambit Refused: Albin Countergambit, Normal Line	rnbqkbnr/ppp2ppp/8/4P3/2Pp4/5N2/PP2PPPP/RNBQKB1R b KQkq -	d2d4 d7d5 c2c4 e7e5 d4e5 d5d4 g1f3	1664	1015	694
+D08	Queen's Gambit Refused: Albin Countergambit	rnbqkbnr/ppp2ppp/8/3pp3/2PP4/8/PP2PPPP/RNBQKBNR w KQkq -	d2d4 d7d5 c2c4 e7e5	2113	1451	936
+D08	Queen's Gambit Refused: Albin Countergambit, Tartakower Defense	rnbqkbnr/pp3ppp/8/2p1P3/2Pp4/5N2/PP2PPPP/RNBQKB1R w KQkq -	d2d4 d7d5 c2c4 e7e5 d4e5 d5d4 g1f3 c7c5	43	12	10
+D09	Queen's Gambit Refused: Albin Countergambit, Fianchetto Variation, Be6 Line	r2qkbnr/ppp2ppp/2n1b3/4P3/2Pp4/5NP1/PP2PP1P/RNBQKB1R w KQkq -	d2d4 d7d5 c2c4 e7e5 d4e5 d5d4 g1f3 b8c6 g2g3 c8e6	283	154	95
+D09	Queen's Gambit Refused: Albin Countergambit, Fianchetto Variation, Bf5 Line	r2qkbnr/ppp2ppp/2n5/4Pb2/2Pp4/5NP1/PP2PP1P/RNBQKB1R w KQkq -	d2d4 d7d5 c2c4 e7e5 d4e5 d5d4 g1f3 b8c6 g2g3 c8f5	56	28	15
+D09	Queen's Gambit Refused: Albin Countergambit, Fianchetto Variation, Bg4 Line	r2qkbnr/ppp2ppp/2n5/4P3/2Pp2b1/5NP1/PP2PP1P/RNBQKB1R w KQkq -	d2d4 d7d5 c2c4 e7e5 d4e5 d5d4 g1f3 b8c6 g2g3 c8g4	234	125	64
+D09	Queen's Gambit Refused: Albin Countergambit, Fianchetto Variation	r1bqkbnr/ppp2ppp/2n5/4P3/2Pp4/5NP1/PP2PP1P/RNBQKB1R b KQkq -	d2d4 d7d5 c2c4 e7e5 d4e5 d5d4 g1f3 b8c6 g2g3	856	495	360
+D10	Slav Defense: Exchange Variation	rnbqkbnr/pp2pppp/2p5/3P4/3P4/8/PP2PPPP/RNBQKBNR b KQkq -	d2d4 d7d5 c2c4 c7c6 c4d5	2847	2324	5723
+D10	Slav Defense	rnbqkbnr/pp2pppp/2p5/3p4/2PP4/2N5/PP2PPPP/R1BQKBNR b KQkq -	d2d4 d7d5 c2c4 c7c6 b1c3	12637	7575	10845
+D10	Slav Defense	rnbqkbnr/pp2pppp/2p5/3p4/2PP4/8/PP2PPPP/RNBQKBNR w KQkq -	d2d4 d7d5 c2c4 c7c6	42431	24527	41149
+D10	Slav Defense	rnbqkbnr/pp2pppp/2p5/8/2pP4/2N5/PP2PPPP/R1BQKBNR w KQkq -	d2d4 d7d5 c2c4 c7c6 b1c3 d5c4	638	470	492
+D10	Slav Defense: Slav Gambit, Alekhine Attack	rnbqkbnr/pp2pppp/2p5/8/2pPP3/2N5/PP3PPP/R1BQKBNR b KQkq -	d2d4 d7d5 c2c4 c7c6 b1c3 d5c4 e2e4	294	152	206
+D10	Slav Defense: Winawer Countergambit, Anti-Winawer Gambit	rnbqkbnr/pp3ppp/2p5/3pp3/2PPP3/2N5/PP3PPP/R1BQKBNR b KQkq -	d2d4 d7d5 c2c4 c7c6 b1c3 e7e5 e2e4	1	2	1
+D10	Slav Defense: Winawer Countergambit	rnbqkbnr/pp3ppp/2p5/3pp3/2PP4/2N5/PP2PPPP/R1BQKBNR w KQkq -	d2d4 d7d5 c2c4 c7c6 b1c3 e7e5	247	151	161
+D11	Slav Defense: Bonet Gambit	rnbqkb1r/pp2pppp/2p2n2/3p2B1/2PP4/5N2/PP2PPPP/RN1QKB1R b KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 c1g5	30	37	16
+D11	Slav Defense: Breyer Variation	rnbqkb1r/pp2pppp/2p2n2/3p4/2PP4/5N2/PP1NPPPP/R1BQKB1R b KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1d2	343	159	253
+D11	Slav Defense: Modern Line	rnbqkbnr/pp2pppp/2p5/3p4/2PP4/5N2/PP2PPPP/RNBQKB1R b KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3	24872	13344	22714
+D11	Slav Defense: Modern	rnbqkb1r/pp2pppp/2p2n2/3p4/2PP4/5N2/PP2PPPP/RNBQKB1R w KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6	22772	12394	21496
+D11	Slav Defense: Quiet Variation, Pin Defense	rn1qkb1r/pp2pppp/2p2n2/3p4/2PP2b1/4PN2/PP3PPP/RNBQKB1R w KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 e2e3 c8g4	866	512	1081
+D11	Slav Defense: Quiet Variation	rnbqkb1r/pp2pppp/2p2n2/3p4/2PP4/4PN2/PP3PPP/RNBQKB1R b KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 e2e3	5911	3003	5707
+D12	Queen's Gambit Declined: Slav, Amsterdam Variation	rn1qkb1r/pp1n1ppp/4p3/3pNb2/3P4/2N1P3/PP3PPP/R1BQKB1R w KQkq -	d2d4 d7d5 g1f3 g8f6 e2e3 c8f5 c2c4 c7c6 c4d5 c6d5 b1c3 e7e6 f3e5 f6d7	5	2	3
+D12	Queen's Gambit Declined: Slav, Landau Variation	rnq1kb1r/pp3ppp/4pn2/3p1b2/3P4/NQ2PN2/PP1B1PPP/R3KB1R b KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 e2e3 c8f5 c4d5 c6d5 d1b3 d8c8 c1d2 e7e6 b1a3	0	0	1
+D12	Slav Defense: Exchange Variation, Schallopp Variation	rn1qkb1r/pp2pppp/5n2/3p1b2/3P4/2N1PN2/PP3PPP/R1BQKB1R b KQkq -	d2d4 d7d5 g1f3 g8f6 e2e3 c8f5 c2c4 c7c6 c4d5 c6d5 b1c3	20	9	14
+D12	Slav Defense: Quiet Variation, Schallopp Defense	rn1qkb1r/pp2pppp/2p2n2/3p1b2/2PP4/4PN2/PP3PPP/RNBQKB1R w KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 e2e3 c8f5	1765	1159	2054
+D13	Slav Defense: Exchange Variation	rnbqkb1r/pp2pppp/5n2/3p4/3P4/5N2/PP2PPPP/RNBQKB1R w KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 c4d5 c6d5	374	304	1270
+D14	Slav Defense: Exchange Variation, Symmetrical Line	r2qkb1r/pp2pppp/2n2n2/3p1b2/3P1B2/2N2N2/PP2PPPP/R2QKB1R w KQkq -	d2d4 d7d5 c2c4 c7c6 c4d5 c6d5 b1c3 g8f6 g1f3 b8c6 c1f4 c8f5	108	99	717
+D14	Slav Defense: Exchange Variation, Trifunovic Variation	r2qk2r/pp3ppp/2n1pn2/3p1b2/1b1P1B2/1QN1PN2/PP3PPP/R3KB1R w KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 c4d5 c6d5 b1c3 b8c6 c1f4 c8f5 e2e3 e7e6 d1b3 f8b4	10	7	59
+D15	Slav Defense: Alekhine Variation	rnbqkb1r/pp2pppp/2p2n2/8/2pP4/2N1PN2/PP3PPP/R1BQKB1R b KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 d5c4 e2e3	162	160	161
+D15	Slav Defense: Chameleon Variation, Advance System	rnbqkb1r/1p2pppp/p1p2n2/2Pp4/3P4/2N2N2/PP2PPPP/R1BQKB1R b KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 a7a6 c4c5	637	363	655
+D15	Slav Defense: Chameleon Variation	rnbqkb1r/1p2pppp/p1p2n2/3p4/2PP4/2N2N2/PP2PPPP/R1BQKB1R w KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 a7a6	2233	1245	2361
+D15	Slav Defense: Geller Gambit	rnbqkb1r/p3pppp/2p2n2/1p2P3/2pP4/2N2N2/PP3PPP/R1BQKB1R b KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 d5c4 e2e4 b7b5 e4e5	238	182	120
+D15	Slav Defense: Geller Gambit	rnbqkb1r/pp2pppp/2p2n2/8/2pPP3/2N2N2/PP3PPP/R1BQKB1R b KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 d5c4 e2e4	297	230	140
+D15	Slav Defense: Süchting Variation	rnb1kb1r/pp2pppp/1qp2n2/3p4/2PP4/2N2N2/PP2PPPP/R1BQKB1R w KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 d8b6	66	29	32
+D15	Slav Defense: Three Knights Variation	rnbqkb1r/pp2pppp/2p2n2/3p4/2PP4/2N2N2/PP2PPPP/R1BQKB1R b KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3	13582	7584	12040
+D15	Slav Defense: Two Knights Attack	rnbqkb1r/pp2pppp/2p2n2/8/2pP4/2N2N2/PP2PPPP/R1BQKB1R w KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 d5c4	4915	2995	4529
+D16	Queen's Gambit Declined: Slav, Smyslov Variation	r2qkb1r/pp2pppp/n1p2n2/8/P1pPP1b1/2N2N2/1P3PPP/R1BQKB1R w KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 d5c4 a2a4 b8a6 e2e4 c8g4	110	50	67
+D16	Slav Defense: Alapin Variation	rnbqkb1r/pp2pppp/2p2n2/8/P1pP4/2N2N2/1P2PPPP/R1BQKB1R b KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 d5c4 a2a4	4378	2545	4181
+D16	Slav Defense: Smyslov Variation	r1bqkb1r/pp2pppp/n1p2n2/8/P1pP4/2N2N2/1P2PPPP/R1BQKB1R w KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 d5c4 a2a4 b8a6	172	118	122
+D16	Slav Defense: Soultanbeieff Variation	rnbqkb1r/pp3ppp/2p1pn2/8/P1pP4/2N2N2/1P2PPPP/R1BQKB1R w KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 d5c4 a2a4 e7e6	249	150	378
+D16	Slav Defense: Steiner Variation	rn1qkb1r/pp2pppp/2p2n2/8/P1pP2b1/2N2N2/1P2PPPP/R1BQKB1R w KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 d5c4 a2a4 c8g4	320	183	197
+D17	Slav Defense: Czech Variation, Bled Attack	rn1qkb1r/pp2pppp/2p2n2/5b2/P1pP3N/2N5/1P2PPPP/R1BQKB1R b KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 d5c4 a2a4 c8f5 f3h4	372	145	291
+D17	Slav Defense: Czech Variation, Carlsbad Variation, Morozevich Variation	r3kb1r/ppqn1p1p/2p5/4nbp1/P1N2B2/2N3P1/1P2PPBP/R2QK2R w KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 d5c4 a2a4 c8f5 f3e5 b8d7 e5c4 d8c7 g2g3 e7e5 d4e5 d7e5 c1f4 f6d7 f1g2 g7g5	173	80	160
+D17	Slav Defense: Czech Variation, Carlsbad Variation	r3kb1r/ppqn1ppp/2p2n2/4pb2/P1NP4/2N3P1/1P2PP1P/R1BQKB1R w KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 d5c4 a2a4 c8f5 f3e5 b8d7 e5c4 d8c7 g2g3 e7e5	402	209	384
+D17	Slav Defense: Czech Variation, Krause Attack, Fazekas Gambit	r2qkb1r/pp2pppp/n1p2n2/4Nb2/P1pPP3/2N5/1P3PPP/R1BQKB1R b KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 d5c4 a2a4 c8f5 f3e5 b8a6 e2e4	2	0	0
+D17	Slav Defense: Czech Variation, Krause Attack	rn1qkb1r/pp2pppp/2p2n2/4Nb2/P1pP4/2N5/1P2PPPP/R1BQKB1R b KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 d5c4 a2a4 c8f5 f3e5	1504	820	1372
+D17	Slav Defense: Czech Variation	rn1qkb1r/pp2pppp/2p2n2/5b2/P1pP4/2N2N2/1P2PPPP/R1BQKB1R w KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 d5c4 a2a4 c8f5	3550	2053	3433
+D17	Slav Defense: Czech Variation, Wiesbaden Variation	rn1qkb1r/pp3ppp/2p1pn2/4Nb2/P1pP4/2N5/1P2PPPP/R1BQKB1R w KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 d5c4 a2a4 c8f5 f3e5 e7e6	459	198	406
+D17	Slav Defense: Czech Variation, Wiesbaden Variation, Sharp Line	rn1qk2r/pp3ppp/2p1pn2/4Nb2/PbpPP3/2N2P2/1P4PP/R1BQKB1R b KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 d5c4 a2a4 c8f5 f3e5 e7e6 f2f3 f8b4 e2e4	175	65	152
+D18	Slav Defense: Czech Variation, Classical System	rn1qkb1r/pp2pppp/2p2n2/5b2/P1pP4/2N1PN2/1P3PPP/R1BQKB1R b KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 d5c4 a2a4 c8f5 e2e3	1657	1066	1758
+D18	Slav Defense: Czech Variation, Lasker Variation	r2qkb1r/pp2pppp/n1p2n2/5b2/P1pP4/2N1PN2/1P3PPP/R1BQKB1R w KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 d5c4 a2a4 c8f5 e2e3 b8a6	36	10	9
+D19	Queen's Gambit Declined: Slav, Dutch, Sämisch Variation	rn1q1rk1/pp3ppp/2p1p3/5b2/PbBPn1P1/2N1PN2/1P2QP1P/R1B2RK1 b - -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 d5c4 a2a4 c8f5 e2e3 e7e6 f1c4 f8b4 e1g1 e8g8 d1e2 f6e4 g2g4	0	1	2
+D19	Queen's Gambit Declined: Slav, Dutch Variation	rn1qk2r/pp3ppp/2p1pn2/5b2/PbBP4/2N1PN2/1P3PPP/R1BQ1RK1 b kq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 d5c4 a2a4 c8f5 e2e3 e7e6 f1c4 f8b4 e1g1	1351	904	1527
+D19	Slav Defense: Czech Variation, Classical System, Main Line	rn1q1rk1/pp3ppp/2p1pn2/5b2/PbBP4/2N1PN2/1P2QPPP/R1B2RK1 b - -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 d5c4 a2a4 c8f5 e2e3 e7e6 f1c4 f8b4 e1g1 e8g8 d1e2	428	305	504
+D20	Queen's Gambit Accepted: Accelerated Mannheim Variation	rnbqkbnr/ppp1pppp/8/8/Q1pP4/8/PP2PPPP/RNB1KBNR b KQkq -	d2d4 d7d5 c2c4 d5c4 d1a4	50	69	34
+D20	Queen's Gambit Accepted: Central Variation, Alekhine System	rnbqkb1r/ppp1pppp/5n2/8/2pPP3/8/PP3PPP/RNBQKBNR w KQkq -	d2d4 d7d5 c2c4 d5c4 e2e4 g8f6	709	462	805
+D20	Queen's Gambit Accepted: Central Variation, Greco Variation	rnbqkbnr/p1p1pppp/8/1p6/2pPP3/8/PP3PPP/RNBQKBNR w KQkq -	d2d4 d7d5 c2c4 d5c4 e2e4 b7b5	103	80	64
+D20	Queen's Gambit Accepted: Central Variation, McDonnell Defense	rnbqkbnr/ppp2ppp/8/4p3/2pPP3/8/PP3PPP/RNBQKBNR w KQkq -	d2d4 d7d5 c2c4 d5c4 e2e4 e7e5	941	527	728
+D20	Queen's Gambit Accepted: Central Variation, McDonnell Defense, Somov Gambit	rnbqkbnr/ppp2ppp/8/4p3/2BPP3/8/PP3PPP/RNBQK1NR b KQkq -	d2d4 d7d5 c2c4 d5c4 e2e4 e7e5 f1c4	8	4	4
+D20	Queen's Gambit Accepted: Central Variation, Modern Defense	r1bqkbnr/ppp1pppp/2n5/8/2pPP3/8/PP3PPP/RNBQKBNR w KQkq -	d2d4 d7d5 c2c4 d5c4 e2e4 b8c6	467	318	312
+D20	Queen's Gambit Accepted: Central Variation, Rubinstein Defense	rnbqkbnr/pp2pppp/8/2p5/2pPP3/8/PP3PPP/RNBQKBNR w KQkq -	d2d4 d7d5 c2c4 d5c4 e2e4 c7c5	309	168	241
+D20	Queen's Gambit Accepted: Central Variation, Rubinstein Defense, Yefimov Gambit	rnbqkbnr/p3pppp/8/1ppP4/2p1P3/8/PP3PPP/RNBQKBNR w KQkq -	d2d4 d7d5 c2c4 d5c4 e2e4 c7c5 d4d5 b7b5	8	9	5
+D20	Queen's Gambit Accepted: Linares Variation	rnbqkb1r/p3pppp/5n2/1ppP4/2p1P3/2N5/PP3PPP/R1BQKBNR w KQkq -	d2d4 d7d5 c2c4 d5c4 e2e4 c7c5 d4d5 g8f6 b1c3 b7b5	83	59	41
+D20	Queen's Gambit Accepted: Old Variation, Billinger Gambit	rnb1kbnr/ppp1qppp/8/8/2Bp4/PQ2P3/1P3PPP/RNB1K1NR b KQkq -	d2d4 d7d5 c2c4 d5c4 e2e3 e7e5 f1c4 e5d4 d1b3 d8e7 a2a3	2	1	1
+D20	Queen's Gambit Accepted: Old Variation, Christensen Gambit	rnb1kbnr/ppp1qppp/8/8/2Bp4/1Q2PN2/PP3PPP/RNB1K2R b KQkq -	d2d4 d7d5 c2c4 d5c4 e2e3 e7e5 f1c4 e5d4 d1b3 d8e7 g1f3	1	2	1
+D20	Queen's Gambit Accepted: Old Variation, Korchnoi Gambit	rnb1kbnr/ppp1qppp/8/8/2Bp4/1Q2P3/PP3PPP/RNB2KNR b kq -	d2d4 d7d5 c2c4 d5c4 e2e3 e7e5 f1c4 e5d4 d1b3 d8e7 e1f1	0	0	1
+D20	Queen's Gambit Accepted: Old Variation, Novikov Gambit	rnb1kbnr/ppp1qppp/8/8/2Bp4/1Q2P3/PP1N1PPP/R1B1K1NR b KQkq -	d2d4 d7d5 c2c4 d5c4 e2e3 e7e5 f1c4 e5d4 d1b3 d8e7 b1d2	0	0	0
+D20	Queen's Gambit Accepted: Old Variation	rnbqkbnr/ppp1pppp/8/8/2pP4/4P3/PP3PPP/RNBQKBNR b KQkq -	d2d4 d7d5 c2c4 d5c4 e2e3	2185	1267	2228
+D20	Queen's Gambit Accepted	rnbqkbnr/ppp1pppp/8/8/2pP4/8/PP2PPPP/RNBQKBNR w KQkq -	d2d4 d7d5 c2c4 d5c4	11134	7174	10692
+D20	Queen's Gambit Accepted: Saduleto Variation	rnbqkbnr/ppp1pppp/8/8/2pPP3/8/PP3PPP/RNBQKBNR b KQkq -	d2d4 d7d5 c2c4 d5c4 e2e4	2656	1601	2179
+D20	Queen's Gambit Accepted: Schwartz Defense	rnbqkbnr/ppp1p1pp/8/5p2/2pPP3/8/PP3PPP/RNBQKBNR w KQkq -	d2d4 d7d5 c2c4 d5c4 e2e4 f7f5	2	0	0
+D21	Queen's Gambit Accepted: Alekhine Defense, Borisenko-Furman Variation	rnbqkbnr/1pp1pppp/p7/8/2pPP3/5N2/PP3PPP/RNBQKB1R b KQkq -	d2d4 d7d5 c2c4 d5c4 g1f3 a7a6 e2e4	65	47	51
+D21	Queen's Gambit Accepted: Godes Variation	r1bqkbnr/pppnpppp/8/8/2pP4/5N2/PP2PPPP/RNBQKB1R w KQkq -	d2d4 d7d5 c2c4 d5c4 g1f3 b8d7	32	18	16
+D21	Queen's Gambit Accepted: Gunsberg Defense	rnbqkbnr/pp2pppp/8/2p5/2pP4/5N2/PP2PPPP/RNBQKB1R w KQkq -	d2d4 d7d5 c2c4 d5c4 g1f3 c7c5	347	241	418
+D21	Queen's Gambit Accepted: Normal Variation	rnbqkbnr/ppp1pppp/8/8/2pP4/5N2/PP2PPPP/RNBQKB1R b KQkq -	d2d4 d7d5 c2c4 d5c4 g1f3	5682	3675	5919
+D21	Queen's Gambit Accepted: Slav Gambit	rnbqkbnr/p1p1pppp/8/1p6/2pP4/5N2/PP2PPPP/RNBQKB1R w KQkq -	d2d4 d7d5 c2c4 d5c4 g1f3 b7b5	33	15	3
+D22	Queen's Gambit Accepted: Alekhine Defense: Alatortsev Variation	rn1qkbnr/1pp2ppp/p3p3/3P4/2B3b1/4PN2/PP3PPP/RNBQK2R b KQkq -	d2d4 d7d5 c2c4 d5c4 g1f3 a7a6 e2e3 c8g4 f1c4 e7e6 d4d5	7	2	11
+D22	Queen's Gambit Accepted: Alekhine Defense, Haberditz Variation	rnbqkbnr/2p1pppp/p7/1p6/2pP4/4PN2/PP3PPP/RNBQKB1R w KQkq -	d2d4 d7d5 c2c4 d5c4 g1f3 a7a6 e2e3 b7b5	120	22	236
+D22	Queen's Gambit Accepted: Alekhine Defense	rnbqkbnr/1pp1pppp/p7/8/2pP4/5N2/PP2PPPP/RNBQKB1R w KQkq -	d2d4 d7d5 c2c4 d5c4 g1f3 a7a6	823	653	1113
+D23	Queen's Gambit Accepted: Mannheim Variation	rnbqkb1r/ppp1pppp/5n2/8/Q1pP4/5N2/PP2PPPP/RNB1KB1R b KQkq -	d2d4 d7d5 c2c4 d5c4 g1f3 g8f6 d1a4	181	97	139
+D23	Queen's Gambit Accepted	rnbqkb1r/ppp1pppp/5n2/8/2pP4/5N2/PP2PPPP/RNBQKB1R w KQkq -	d2d4 d7d5 c2c4 d5c4 g1f3 g8f6	4007	2442	3977
+D24	Queen's Gambit Accepted: Bogoljubov Defense	rnbqkb1r/1pp1pppp/p4n2/8/2pPP3/2N2N2/PP3PPP/R1BQKB1R b KQkq -	d2d4 d7d5 c2c4 d5c4 g1f3 g8f6 b1c3 a7a6 e2e4	214	120	111
+D24	Queen's Gambit Accepted: Gunsberg Defense, Prianishenmo Gambit	rnbqkb1r/pp3ppp/5n2/2ppP3/2p5/2N2N2/PP3PPP/R1BQKB1R b KQkq -	d2d4 d7d5 c2c4 d5c4 g1f3 g8f6 b1c3 c7c5 d4d5 e7e6 e2e4 e6d5 e4e5	55	17	39
+D24	Queen's Gambit Accepted: Showalter Variation	rnbqkb1r/ppp1pppp/5n2/8/2pP4/2N2N2/PP2PPPP/R1BQKB1R b KQkq -	d2d4 d7d5 c2c4 d5c4 g1f3 g8f6 b1c3	747	495	518
+D25	Queen's Gambit Accepted: Janowski-Larsen Variation	rn1qkb1r/ppp1pppp/5n2/8/2pP2b1/4PN2/PP3PPP/RNBQKB1R w KQkq -	d2d4 d7d5 c2c4 d5c4 g1f3 g8f6 e2e3 c8g4	578	387	564
+D25	Queen's Gambit Accepted: Normal Variation	rnbqkb1r/ppp1pppp/5n2/8/2pP4/4PN2/PP3PPP/RNBQKB1R b KQkq -	d2d4 d7d5 c2c4 d5c4 g1f3 g8f6 e2e3	3031	1802	3290
+D25	Queen's Gambit Accepted: Smyslov Variation	rnbqkb1r/ppp1pp1p/5np1/8/2pP4/4PN2/PP3PPP/RNBQKB1R w KQkq -	d2d4 d7d5 c2c4 d5c4 g1f3 g8f6 e2e3 g7g6	129	63	101
+D25	Queen's Gambit Accepted: Winawer Defense	rn1qkb1r/ppp1pppp/4bn2/8/2pP4/4PN2/PP3PPP/RNBQKB1R w KQkq -	d2d4 d7d5 c2c4 d5c4 g1f3 g8f6 e2e3 c8e6	28	28	39
+D26	Queen's Gambit Accepted: Classical Defense, Normal Line	rnbqkb1r/pp3ppp/4pn2/2p5/2BP4/4PN2/PP3PPP/RNBQ1RK1 b kq -	d2d4 d7d5 c2c4 d5c4 g1f3 g8f6 e2e3 e7e6 f1c4 c7c5 e1g1	1279	699	1520
+D26	Queen's Gambit Accepted: Classical Defense	rnbqkb1r/pp3ppp/4pn2/2p5/2BP4/4PN2/PP3PPP/RNBQK2R w KQkq -	d2d4 d7d5 c2c4 d5c4 g1f3 g8f6 e2e3 e7e6 f1c4 c7c5	1432	798	1692
+D26	Queen's Gambit Accepted: Classical Defense, Steinitz Variation, Development Variation	r1bqkb1r/pp3ppp/2n1pn2/2p5/2BP4/4PN2/PP3PPP/RNBQ1RK1 w kq -	d2d4 d7d5 c2c4 d5c4 g1f3 g8f6 e2e3 e7e6 f1c4 c7c5 e1g1 b8c6	140	67	137
+D26	Queen's Gambit Accepted: Classical Defense, Steinitz Variation, Exchange Variation	rnbqkb1r/pp3ppp/4pn2/8/2Bp4/4PN2/PP3PPP/RNBQ1RK1 w kq -	d2d4 d7d5 c2c4 d5c4 g1f3 g8f6 e2e3 e7e6 f1c4 c7c5 e1g1 c5d4	34	7	31
+D26	Queen's Gambit Accepted: Classical, Furman Variation	r1bqk2r/5ppp/p1n1pn2/1pb1P3/2B5/5N2/PP2QPPP/RNB2RK1 b kq -	d2d4 d7d5 c2c4 d5c4 g1f3 g8f6 e2e3 e7e6 f1c4 c7c5 d1e2 a7a6 d4c5 f8c5 e1g1 b8c6 e3e4 b7b5 e4e5	2	3	4
+D26	Queen's Gambit Accepted: Normal Variation, Traditional System	rnbqkb1r/ppp2ppp/4pn2/8/2pP4/4PN2/PP3PPP/RNBQKB1R w KQkq -	d2d4 d7d5 c2c4 d5c4 g1f3 g8f6 e2e3 e7e6	1925	1086	2246
+D27	Queen's Gambit Accepted: Classical Defense, Main Line	rnbqkb1r/1p3ppp/p3pn2/2p5/2BP4/4PN2/PP3PPP/RNBQ1RK1 w kq -	d2d4 d7d5 c2c4 d5c4 g1f3 g8f6 e2e3 e7e6 f1c4 c7c5 e1g1 a7a6	1082	621	1339
+D27	Queen's Gambit Accepted: Classical Defense, Rubinstein Variation	rnbqkb1r/1p3ppp/p3pn2/2p5/P1BP4/4PN2/1P3PPP/RNBQ1RK1 b kq -	d2d4 d7d5 c2c4 d5c4 g1f3 g8f6 e2e3 e7e6 f1c4 c7c5 e1g1 a7a6 a2a4	266	195	335
+D27	Queen's Gambit Accepted: Classical Defense, Russian Gambit	rnbqkb1r/1p3ppp/p3pn2/2p5/2BPP3/5N2/PP3PPP/RNBQ1RK1 b kq -	d2d4 d7d5 c2c4 d5c4 e2e3 g8f6 f1c4 e7e6 g1f3 c7c5 e1g1 a7a6 e3e4	8	2	7
+D27	Queen's Gambit Accepted: Furman Variation	rnbqk2r/1p3ppp/p3pn2/2b5/2B5/4PN2/PP3PPP/RNBQ1RK1 w kq -	d2d4 d7d5 c2c4 d5c4 g1f3 g8f6 e2e3 e7e6 f1c4 c7c5 e1g1 a7a6 d4c5 f8c5	48	25	171
+D28	Queen's Gambit Accepted: Classical Defense, Alekhine System (Except Main Line)	rnbqkb1r/5ppp/p3pn2/1pp5/2BP4/4PN2/PP2QPPP/RNB2RK1 w kq -	d2d4 d7d5 c2c4 d5c4 g1f3 g8f6 e2e3 e7e6 f1c4 c7c5 e1g1 a7a6 d1e2 b7b5	181	146	164
+D28	Queen's Gambit Accepted: Classical Defense, Alekhine System	rnbqkb1r/1p3ppp/p3pn2/2p5/2BP4/4PN2/PP2QPPP/RNB2RK1 b kq -	d2d4 d7d5 c2c4 d5c4 g1f3 g8f6 e2e3 e7e6 f1c4 c7c5 e1g1 a7a6 d1e2	238	178	206
+D28	Queen's Gambit Accepted: Classical, Flohr Variation	r3kb1r/1bq2ppp/p3pn2/1p1P4/2p5/2N1PN2/PPQ2PPP/R1BR2K1 w kq -	d2d4 d7d5 c2c4 d5c4 g1f3 g8f6 e2e3 e7e6 f1c4 c7c5 e1g1 a7a6 d1e2 b7b5 c4b3 b8c6 f1d1 c5c4 b3c2 c6b4 b1c3 b4c2 e2c2 c8b7 d4d5 d8c7	0	0	0
+D29	Queen's Gambit Accepted: Classical Defense, Alekhine System, Main Line	rn1qkb1r/1b3ppp/p3pn2/1pp5/3P4/1B2PN2/PP2QPPP/RNB2RK1 w kq -	d2d4 d7d5 c2c4 d5c4 g1f3 g8f6 e2e3 e7e6 f1c4 c7c5 e1g1 a7a6 d1e2 b7b5 c4b3 c8b7	113	113	111
+D29	Queen's Gambit Accepted: Classical Defense, Alekhine System, Smyslov Variation	r2qk2r/1b1n1ppp/p2bpn2/1pp5/3P4/1BN1PN2/PP2QPPP/R1BR2K1 w kq -	d2d4 d7d5 c2c4 d5c4 g1f3 g8f6 e2e3 e7e6 f1c4 c7c5 e1g1 a7a6 d1e2 b7b5 c4b3 c8b7 f1d1 b8d7 b1c3 f8d6	6	3	4
+D30	French Defense: Diemer-Duhm Gambit	rnbqkbnr/ppp2ppp/4p3/8/2PPp3/8/PP3PPP/RNBQKBNR w KQkq -	d2d4 d7d5 c2c4 e7e6 e2e4 d5e4	2	4	2
+D30	Queen's Gambit Declined: Capablanca	rnbqkb1r/ppp2pp1/4pn1p/3p2B1/2PP4/5N2/PP2PPPP/RN1QKB1R w KQkq -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 c1g5 h7h6	88	84	91
+D30	Queen's Gambit Declined: Capablanca Variation	r1bqkb1r/pp1n1ppp/2p1pn2/3p2B1/2PP4/4PN2/PP1N1PPP/R2QKB1R b KQkq -	d2d4 g8f6 g1f3 e7e6 c2c4 d7d5 c1g5 c7c6 b1d2 b8d7 e2e3	2	0	2
+D30	Queen's Gambit Declined	rnbqkbnr/ppp2ppp/4p3/3p4/2PP4/8/PP2PPPP/RNBQKBNR w KQkq -	d2d4 d7d5 c2c4 e7e6	41018	23119	32526
+D30	Queen's Gambit Declined: Semmering Variation	r1bqkb1r/pp1n1ppp/4pn2/2pp4/2PP4/3BPN2/PP1N1PPP/R1BQK2R w KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 e2e3 e7e6 b1d2 b8d7 f1d3 c6c5	4	6	10
+D30	Queen's Gambit Declined: Spielmann Variation	rnbqkb1r/pp3p1p/2p1pnp1/3p4/2PP4/4PN2/PP1N1PPP/R1BQKB1R w KQkq -	d2d4 d7d5 c2c4 e7e6 g1f3 g8f6 e2e3 c7c6 b1d2 g7g6	0	0	0
+D30	Queen's Gambit Declined: Stonewall Variation	rnbqkb1r/pp4pp/2p1p3/3p1p2/2PPn3/3BPN2/PP1N1PPP/R1BQK2R w KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 e2e3 e7e6 b1d2 f6e4 f1d3 f7f5	1	0	3
+D30	Queen's Gambit Declined: Tarrasch Defense, Pseudo-Tarrasch Bishop Attack	rnbqkbnr/pp3ppp/8/2pp2B1/3P4/5N2/PP2PPPP/RN1QKB1R b KQkq -	d2d4 d7d5 c2c4 e7e6 g1f3 c7c5 c4d5 e6d5 c1g5	82	23	72
+D30	Queen's Gambit Declined: Tarrasch Defense, Pseudo-Tarrasch	rnbqkbnr/pp3ppp/4p3/2pp4/2PP4/5N2/PP2PPPP/RNBQKB1R w KQkq -	d2d4 d7d5 c2c4 e7e6 g1f3 c7c5	1471	561	1124
+D30	Queen's Gambit Declined: Traditional Variation	rnbqkb1r/ppp2ppp/4pn2/3p2B1/2PP4/5N2/PP2PPPP/RN1QKB1R b KQkq -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 c1g5	607	464	613
+D30	Queen's Gambit Declined: Vienna Variation	rnbqk2r/ppp2ppp/4pn2/3p2B1/1bPP4/5N2/PP2PPPP/RN1QKB1R w KQkq -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 c1g5 f8b4	80	100	85
+D30	Semi-Slav Defense: Quiet Variation	r1bqkb1r/pp1n1ppp/2p1pn2/3p4/2PP4/4PN2/PP1N1PPP/R1BQKB1R w KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 e2e3 e7e6 b1d2 b8d7	256	78	181
+D30	Semi-Slav Defense: Quiet Variation	rnbqkb1r/pp3ppp/2p1pn2/3p4/2PP4/4PN2/PP1N1PPP/R1BQKB1R b KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 e2e3 e7e6 b1d2	365	128	277
+D31	Queen's Gambit Declined: Alapin Variation	rnbqkbnr/p1p2ppp/1p2p3/3p4/2PP4/2N5/PP2PPPP/R1BQKBNR w KQkq -	d2d4 e7e6 c2c4 b7b6 b1c3 d7d5	1	1	0
+D31	Queen's Gambit Declined: Charousek (Petrosian) Variation, Miladinovic Gambit	rnbqk1nr/ppp1bppp/4p3/8/2PPp3/2N2P2/PP4PP/R1BQKBNR b KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 f8e7 e2e4 d5e4 f2f3	0	1	0
+D31	Queen's Gambit Declined: Charousek (Petrosian) Variation	rnbqk1nr/ppp1bppp/4p3/3p4/2PP4/2N5/PP2PPPP/R1BQKBNR w KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 f8e7	3209	1733	3686
+D31	Queen's Gambit Declined: Janowski Variation	rnbqkbnr/1pp2ppp/p3p3/3p4/2PP4/2N5/PP2PPPP/R1BQKBNR w KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 a7a6	237	220	263
+D31	Queen's Gambit Declined: Queen's Knight Variation	rnbqkbnr/ppp2ppp/4p3/3p4/2PP4/2N5/PP2PPPP/R1BQKBNR b KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3	27524	16150	21398
+D31	Queen's Gambit Declined: Semi-Slav, Abrahams Variation	rnbqk1nr/5ppp/2p1p3/pp6/PbpP4/2N1PN2/1P1B1PPP/R2QKB1R w KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c6 g1f3 d5c4 a2a4 f8b4 e2e3 b7b5 c1d2 a7a5	153	182	105
+D31	Queen's Gambit Declined: Semi-Slav, Junge Variation	rnb1k1nr/p4ppp/1qp1p3/1p6/PbpP4/2N1PN2/1P1B1PPP/R2QKB1R w KQkq -	d2d4 d7d5 c2c4 e7e6 g1f3 c7c6 b1c3 d5c4 a2a4 f8b4 e2e3 b7b5 c1d2 d8b6	2	0	1
+D31	Queen's Gambit Declined: Semi-Slav, Koomen Variation	rnb1k1nr/p3qppp/2p1p3/1p6/PbpP4/2N1PN2/1P1B1PPP/R2QKB1R w KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c6 g1f3 d5c4 e2e3 b7b5 a2a4 f8b4 c1d2 d8e7	2	3	5
+D31	Queen's Gambit Declined: Uhlmann Variation	rnbq1rk1/ppp1bpp1/4pn1p/8/2pP3B/2N2N2/PP2PPPP/2RQKB1R w K -	d2d4 d7d5 c2c4 e7e6 b1c3 f8e7 g1f3 g8f6 c1g5 h7h6 g5h4 e8g8 a1c1 d5c4	0	1	7
+D31	Semi-Slav Defense: Accelerated Move Order	rnbqkbnr/pp3ppp/2p1p3/3p4/2PP4/2N5/PP2PPPP/R1BQKBNR w KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c6	4422	4259	3997
+D31	Semi-Slav Defense: Anti-Noteboom, Stonewall Variation, Portisch Gambit	rnbqkbnr/pp4pp/2p1p3/3p1p2/2PP2P1/2N1P3/PP3P1P/R1BQKBNR b KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c6 e2e3 f7f5 g2g4	29	20	26
+D31	Semi-Slav Defense: Gunderam Gambit	rnbqkbnr/pp3ppp/2p1p3/8/2PPp3/2N2P2/PP4PP/R1BQKBNR b KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c6 e2e4 d5e4 f2f3	1	1	2
+D31	Semi-Slav Defense: Marshall Gambit, Forgotten Variation	rnbqk1nr/pp3ppp/2p1p3/8/1bPP4/2N5/PP3PPP/R1BQKBNR b KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c6 e2e4 d5e4 c3e4 f8b4 e4c3	84	96	92
+D31	Semi-Slav Defense: Marshall Gambit, Main Line	rnbqk1nr/pp3ppp/2p1p3/8/1bPPN3/8/PP1B1PPP/R2QKBNR b KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c6 e2e4 d5e4 c3e4 f8b4 c1d2	402	282	270
+D31	Semi-Slav Defense: Marshall Gambit	rnbqkbnr/pp3ppp/2p1p3/3p4/2PPP3/2N5/PP3PPP/R1BQKBNR b KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c6 e2e4	707	510	501
+D31	Semi-Slav Defense: Marshall Gambit, Tolush Variation	rnb1k1nr/pp3ppp/4p3/2B5/2P5/8/PP2BPqP/R2QK1NR w KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c6 e2e4 d5e4 c3e4 f8b4 c1d2 d8d4 d2b4 d4e4 f1e2 c6c5 b4c5 e4g2	36	22	17
+D31	Semi-Slav Defense: Noteboom Variation, Abrahams Variation	rnbqk1nr/p4ppp/4p3/1p6/2pP4/2P1PN2/5PPP/R1BQKB1R w KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c6 g1f3 d5c4 a2a4 f8b4 e2e3 b4c3 b2c3 b7b5 a4b5 c6b5	1	0	0
+D31	Semi-Slav Defense: Noteboom Variation, Anti-Noteboom Gambit	rnbqkbnr/pp3ppp/2p1p3/8/2pP4/2N2NP1/PP2PP1P/R1BQKB1R b KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c6 g1f3 d5c4 g2g3	32	36	20
+D31	Semi-Slav Defense: Noteboom Variation, Anti-Noteboom Variation, Belyavsky Line	rnbqkbnr/pp4pp/2p1pp2/6B1/2pP4/2N2N2/PP2PPPP/R2QKB1R w KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c6 g1f3 d5c4 c1g5 f7f6	12	4	6
+D31	Semi-Slav Defense: Noteboom Variation, Anti-Noteboom Variation	rnbqkbnr/pp3ppp/2p1p3/6B1/2pP4/2N2N2/PP2PPPP/R2QKB1R b KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c6 g1f3 d5c4 c1g5	32	14	34
+D31	Semi-Slav Defense: Noteboom Variation	rnbqkbnr/pp3ppp/2p1p3/8/2pP4/2N2N2/PP2PPPP/R1BQKB1R w KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c6 g1f3 d5c4	599	795	417
+D32	Queen's Gambit Declined: Tarrasch Defense	rnbqkbnr/pp3ppp/8/2pp4/3P4/2N5/PP2PPPP/R1BQKBNR w KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c5 c4d5 e6d5	1876	1076	1577
+D32	Tarrasch Defense: Grünfeld Gambit	r1bqkbnr/p4ppp/2n5/1pP5/N2p4/5N2/PP2PPPP/R1BQKB1R w KQkq b6	d2d4 d7d5 c2c4 e7e6 b1c3 c7c5 c4d5 e6d5 g1f3 b8c6 d4c5 d5d4 c3a4 b7b5	14	2	6
+D32	Tarrasch Defense: Marshall Gambit	rnbqkbnr/pp3ppp/8/2pp4/3PP3/2N5/PP3PPP/R1BQKBNR b KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c5 c4d5 e6d5 e2e4	34	27	20
+D32	Tarrasch Defense	rnbqkbnr/pp3ppp/4p3/2pp4/2PP4/2N5/PP2PPPP/R1BQKBNR w KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c5	3036	2063	2395
+D32	Tarrasch Defense: Schara Gambit	rnbqkbnr/pp3ppp/4p3/3P4/3p4/2N5/PP2PPPP/R1BQKBNR w KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c5 c4d5 c5d4	572	437	307
+D32	Tarrasch Defense: Tarrasch Gambit	rnbqkbnr/p4ppp/8/1pP5/N2p4/8/PP2PPPP/R1BQKBNR w KQkq b6	d2d4 d7d5 c2c4 e7e6 b1c3 c7c5 c4d5 e6d5 d4c5 d5d4 c3a4 b7b5	11	13	7
+D32	Tarrasch Defense: Two Knights Variation	rnbqkbnr/pp3ppp/8/2pp4/3P4/2N2N2/PP2PPPP/R1BQKB1R b KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c5 c4d5 e6d5 g1f3	1756	953	1489
+D32	Tarrasch Defense: von Hennig Gambit	r2qkbnr/pp3ppp/2n1b3/3Q4/8/2N5/PP2PPPP/R1B1KBNR w KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c5 c4d5 c5d4 d1d4 b8c6 d4d1 e6d5 d1d5 c8e6	44	15	29
+D33	Tarrasch Defense: Prague Variation	r1bqkb1r/pp3ppp/2n2n2/2pp4/3P4/2N2NP1/PP2PP1P/R1BQKB1R w KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c5 c4d5 e6d5 g1f3 b8c6 g2g3 g8f6	1133	602	1029
+D33	Tarrasch Defense: Rubinstein System	r1bqkbnr/pp3ppp/2n5/2pp4/3P4/2N2NP1/PP2PP1P/R1BQKB1R b KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c5 c4d5 e6d5 g1f3 b8c6 g2g3	1329	712	1175
+D33	Tarrasch Defense: Swedish Variation, Central Break	r1bqkbnr/pp3ppp/2n5/3p4/2pPP3/2N2NP1/PP3P1P/R1BQKB1R b KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c5 c4d5 e6d5 g1f3 b8c6 g2g3 c5c4 e2e4	2	7	4
+D33	Tarrasch Defense: Swedish Variation	r1bqkbnr/pp3ppp/2n5/3p4/2pP4/2N2NP1/PP2PP1P/R1BQKB1R w KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c5 c4d5 e6d5 g1f3 b8c6 g2g3 c5c4	155	99	119
+D33	Tarrasch Defense: Wagner Variation	r2qkb1r/pp3ppp/2n2n2/2pp4/3P2b1/2N2NP1/PP2PPBP/R1BQK2R w KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c5 c4d5 e6d5 g1f3 b8c6 g2g3 g8f6 f1g2 c8g4	12	10	8
+D34	Queen's Gambit Declined: Tarrasch, Stoltz Variation	r2q1rk1/p3bppp/1pn1bn2/2pp2B1/3P4/2N2NP1/PP2PPBP/2RQ1RK1 w - -	d2d4 d7d5 c2c4 e7e6 g1f3 c7c5 c4d5 e6d5 g2g3 b8c6 f1g2 g8f6 e1g1 f8e7 b1c3 e8g8 c1g5 c8e6 a1c1 b7b6	0	0	0
+D34	Tarrasch Defense: Classical Variation, Advance Variation	r1bq1rk1/pp2bppp/2n2n2/3p2B1/2pP4/2N2NP1/PP2PPBP/R2Q1RK1 w - -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c5 c4d5 e6d5 g1f3 b8c6 g2g3 g8f6 f1g2 f8e7 e1g1 e8g8 c1g5 c5c4	157	84	157
+D34	Tarrasch Defense: Classical Variation, Bogoljubov Variation	r2q1rk1/pp2bppp/2n1bn2/3p2B1/2pP4/2N2NP1/PP2PPBP/2RQ1RK1 w - -	d2d4 g8f6 c2c4 e7e6 b1c3 c7c5 g1f3 d7d5 c4d5 e6d5 g2g3 b8c6 f1g2 f8e7 e1g1 e8g8 c1g5 c8e6 a1c1 c5c4	1	0	0
+D34	Tarrasch Defense: Classical Variation, Carlsbad Variation	r1bq1rk1/pp2bppp/2n2n2/2pp2B1/3P4/2N2NP1/PP2PPBP/R2Q1RK1 b - -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c5 c4d5 e6d5 g1f3 b8c6 g2g3 g8f6 f1g2 f8e7 e1g1 e8g8 c1g5	559	280	508
+D34	Tarrasch Defense: Classical Variation, Chandler Variation	r2qr1k1/pp2bpp1/2n1bn1p/3p4/3N4/2N1B1P1/PP2PPBP/2RQ1RK1 w - -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c5 c4d5 e6d5 g1f3 b8c6 g2g3 g8f6 f1g2 f8e7 e1g1 e8g8 c1g5 c5d4 f3d4 h7h6 g5e3 f8e8 a1c1 c8e6	4	3	8
+D34	Tarrasch Defense: Classical Variation, Classical Tarrasch Gambit	r1bq1rk1/pp2bppp/2n2n2/2P5/3p4/2N2NP1/PP2PPBP/R1BQ1RK1 w - -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c5 c4d5 e6d5 g1f3 b8c6 g2g3 g8f6 f1g2 f8e7 e1g1 e8g8 d4c5 d5d4	45	36	34
+D34	Tarrasch Defense: Classical Variation, Endgame Variation	r2q1rk1/pp2bppp/2n1bn2/2pp2B1/3P4/2N2NP1/PP2PPBP/R2Q1RK1 w - -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c5 c4d5 e6d5 g1f3 b8c6 g2g3 g8f6 f1g2 f8e7 e1g1 e8g8 c1g5 c8e6	44	22	47
+D34	Tarrasch Defense: Classical Variation, Main Line	r1bqr1k1/pp2bpp1/2n2n1p/3p4/3N4/2N1B1P1/PP2PPBP/R2Q1RK1 w - -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c5 c4d5 e6d5 g1f3 b8c6 g2g3 g8f6 f1g2 f8e7 e1g1 e8g8 c1g5 c5d4 f3d4 h7h6 g5e3 f8e8	186	105	165
+D34	Tarrasch Defense: Classical Variation, Petursson Variation	r1bqr1k1/pp2bppp/2n2n2/3p2B1/3N4/2N3P1/PP2PPBP/R2Q1RK1 w - -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c5 c4d5 e6d5 g1f3 b8c6 g2g3 g8f6 f1g2 f8e7 e1g1 e8g8 c1g5 c5d4 f3d4 f8e8	33	13	23
+D34	Tarrasch Defense: Classical Variation	r1bq1rk1/pp2bppp/2n2n2/2pp4/3P4/2N2NP1/PP2PPBP/R1BQ1RK1 w - -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c5 c4d5 e6d5 g1f3 b8c6 g2g3 g8f6 f1g2 f8e7 e1g1 e8g8	1012	538	941
+D34	Tarrasch Defense: Classical Variation, Reti Variation	r1bq1rk1/pp3ppp/2n2n2/2bp4/N7/5NP1/PP2PPBP/R1BQ1RK1 b - -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c5 c4d5 e6d5 g1f3 b8c6 g2g3 g8f6 f1g2 f8e7 e1g1 e8g8 d4c5 e7c5 c3a4	71	39	68
+D34	Tarrasch Defense: Classical Variation, Spassky Variation	r2q1rk1/pp2bpp1/2n2n1p/3p4/3N2b1/2N1B1P1/PP2PPBP/R2Q1RK1 w - -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c5 c4d5 e6d5 g1f3 b8c6 g2g3 g8f6 f1g2 f8e7 e1g1 e8g8 c1g5 c5d4 f3d4 h7h6 g5e3 c8g4	42	16	34
+D34	Tarrasch Defense: Prague Variation, Main Line	r1bqk2r/pp2bppp/2n2n2/2pp4/3P4/2N2NP1/PP2PPBP/R1BQK2R w KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c5 c4d5 e6d5 g1f3 b8c6 g2g3 g8f6 f1g2 f8e7	1058	560	972
+D35	Queen's Gambit Declined: Exchange, Chameleon Variation	r1bqrnk1/ppp1bppp/5n2/3p2B1/3P4/2NBP3/PPQ1NPPP/2KR3R b - -	d2d4 g8f6 c2c4 e7e6 b1c3 d7d5 c4d5 e6d5 c1g5 f8e7 e2e3 e8g8 f1d3 b8d7 d1c2 f8e8 g1e2 d7f8 e1c1	1	1	4
+D35	Queen's Gambit Declined: Exchange Variation, Positional Variation	rnbqkb1r/pp3ppp/2p2n2/3p2B1/3P4/2N5/PP2PPPP/R2QKBNR w KQkq -	d2d4 g8f6 c2c4 e7e6 b1c3 d7d5 c4d5 e6d5 c1g5 c7c6	746	388	760
+D35	Queen's Gambit Declined: Exchange Variation, Positional Variation	rnbqkb1r/ppp2ppp/5n2/3p2B1/3P4/2N5/PP2PPPP/R2QKBNR b KQkq -	d2d4 g8f6 c2c4 e7e6 b1c3 d7d5 c4d5 e6d5 c1g5	2512	1081	1898
+D35	Queen's Gambit Declined: Exchange Variation	rnbqkb1r/ppp2ppp/4pn2/3P4/3P4/2N5/PP2PPPP/R1BQKBNR b KQkq -	d2d4 g8f6 c2c4 e7e6 b1c3 d7d5 c4d5	2793	1253	2184
+D35	Queen's Gambit Declined: Exchange Variation, Sämisch Variation	r1bqkb1r/pppn1ppp/5n2/3p4/3P1B2/2N2N2/PP2PPPP/R2QKB1R b KQkq -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 b8d7 c4d5 e6d5 c1f4	69	43	81
+D35	Queen's Gambit Declined: Harrwitz Attack	rnbqkb1r/ppp2ppp/4pn2/3p4/2PP1B2/2N5/PP2PPPP/R2QKBNR b KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 g8f6 c1f4	154	74	78
+D35	Queen's Gambit Declined: Normal Defense	rnbqkb1r/ppp2ppp/4pn2/3p4/2PP4/2N5/PP2PPPP/R1BQKBNR w KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 g8f6	15141	6945	10064
+D36	Queen's Gambit Declined: Exchange Variation, Reshevsky Variation	rnbqkb1r/pp3ppp/2p2n2/3p2B1/3P4/2N5/PPQ1PPPP/R3KBNR b KQkq -	d2d4 g8f6 c2c4 e7e6 b1c3 d7d5 c4d5 e6d5 c1g5 c7c6 d1c2	253	144	236
+D37	Queen's Gambit Declined: Barmen Variation	r1bqkb1r/pppn1ppp/4pn2/3p4/2PP4/2N2N2/PP2PPPP/R1BQKB1R w KQkq -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 b8d7	570	394	741
+D37	Queen's Gambit Declined: Harrwitz Attack, Fianchetto Defense	rnbq1rk1/p1p1bppp/1p2pn2/3p4/2PP1B2/2N1PN2/PP3PPP/R2QKB1R w KQ -	d2d4 d7d5 c2c4 e7e6 b1c3 f8e7 g1f3 g8f6 c1f4 e8g8 e2e3 b7b6	88	33	77
+D37	Queen's Gambit Declined: Harrwitz Attack, Main Line	rnbq1rk1/pp3ppp/4pn2/2bp4/2P2B2/2N1PN2/PP3PPP/R2QKB1R w KQ -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 f8e7 c1f4 e8g8 e2e3 c7c5 d4c5 e7c5	182	93	290
+D37	Queen's Gambit Declined: Harrwitz Attack, Orthodox Defense	rnbq1rk1/pp2bppp/2p1pn2/3p4/2PP1B2/2N1PN2/PP3PPP/R2QKB1R w KQ -	d2d4 d7d5 c2c4 e7e6 b1c3 g8f6 g1f3 f8e7 c1f4 e8g8 e2e3 c7c6	51	23	29
+D37	Queen's Gambit Declined: Harrwitz Attack	r1b2rk1/pp3ppp/2n1pn2/q1bp4/2P2B2/P1N1PN2/1PQ2PPP/2KR1B1R b - -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 f8e7 c1f4 e8g8 e2e3 c7c5 d4c5 e7c5 d1c2 b8c6 a2a3 d8a5 e1c1	12	15	22
+D37	Queen's Gambit Declined: Harrwitz Attack	r1b2rk1/pp3ppp/2n1pn2/q1bp4/2P2B2/P1N1PN2/1PQ2PPP/3RKB1R b K -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 f8e7 c1f4 e8g8 e2e3 c7c5 d4c5 e7c5 d1c2 b8c6 a1d1 d8a5 a2a3	10	6	20
+D37	Queen's Gambit Declined: Harrwitz Attack	rnbqk2r/ppp1bppp/4pn2/3p4/2PP1B2/2N2N2/PP2PPPP/R2QKB1R b KQkq -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 f8e7 c1f4	704	310	878
+D37	Queen's Gambit Declined: Harrwitz Attack, Two Knights Defense, Blockade Line	r1bq1rk1/pppnbppp/4pn2/2Pp4/3P1B2/2N1PN2/PP3PPP/R2QKB1R b KQ -	d2d4 g8f6 c2c4 e7e6 b1c3 d7d5 g1f3 f8e7 c1f4 e8g8 e2e3 b8d7 c4c5	7	4	12
+D37	Queen's Gambit Declined: Harrwitz Attack, Two Knights Defense	r1bq1rk1/pppnbppp/4pn2/3p4/2PP1B2/2N1PN2/PP3PPP/R2QKB1R w KQ -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 f8e7 c1f4 e8g8 e2e3 b8d7	159	86	300
+D37	Queen's Gambit Declined: Knight Defense, Alekhine Gambit	r1bqkb1r/pppn1pp1/4pn1p/8/2pP3B/2N2N2/PP2PPPP/R2QKB1R w KQkq -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 b8d7 c1g5 h7h6 g5h4 d5c4	7	7	10
+D37	Queen's Gambit Declined: Miles Variation	rnbq1rk1/ppp1bppp/4pn2/3p2B1/2PP4/2N2N2/PPQ1PPPP/R3KB1R b KQ -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 f8e7 c1g5 e8g8 d1c2	20	8	26
+D37	Queen's Gambit Declined: Three Knights Variation	rnbqkb1r/ppp2ppp/4pn2/3p4/2PP4/2N2N2/PP2PPPP/R1BQKB1R b KQkq -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3	6042	4241	8477
+D37	Queen's Gambit Declined: Vienna Variation, Quiet Variation	rnbqkb1r/ppp2ppp/4pn2/8/2pP4/2N1PN2/PP3PPP/R1BQKB1R b KQkq -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 d5c4 e2e3	153	210	324
+D37	Queen's Gambit Declined: Vienna Variation	rnbqkb1r/ppp2ppp/4pn2/8/2pP4/2N2N2/PP2PPPP/R1BQKB1R w KQkq -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 d5c4	490	464	905
+D38	Queen's Gambit Declined: Ragozin Defense, Alekhine Variation	rnbqk2r/ppp2ppp/4pn2/3p4/QbPP4/2N2N2/PP2PPPP/R1B1KB1R b KQkq -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 f8b4 d1a4	224	151	249
+D38	Queen's Gambit Declined: Ragozin Defense	rnbqk2r/ppp2ppp/4pn2/3p4/1bPP4/2N2N2/PP2PPPP/R1BQKB1R w KQkq -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 f8b4	1421	1113	1928
+D38	Queen's Gambit Declined: Westphalian Variation	r1bqk2r/pp1n1ppp/4pn2/2pp2B1/1bPP4/2N1PN2/PP3PPP/R2QKB1R w KQkq -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 f8b4 c1g5 b8d7 e2e3 c7c5	42	43	58
+D39	Queen's Gambit Declined: Ragozin Defense, Vienna Variation	rnbqk2r/ppp2ppp/4pn2/6B1/1bpP4/2N2N2/PP2PPPP/R2QKB1R w KQkq -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 f8b4 c1g5 d5c4	40	47	74
+D40	Queen's Gambit Declined: Semi-Tarrasch Defense, Pillsbury Variation	rnbqkb1r/pp3ppp/4pn2/2pp2B1/2PP4/2N2N2/PP2PPPP/R2QKB1R b KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 g8f6 g1f3 c7c5 c1g5	17	13	4
+D40	Queen's Gambit Declined: Semi-Tarrasch Defense	rnbqkb1r/pp3ppp/4pn2/2pp4/2PP4/2N2N2/PP2PPPP/R1BQKB1R w KQkq -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 c7c5	486	270	797
+D40	Queen's Gambit Declined: Semi-Tarrasch Defense, Symmetrical Variation	r1bq1rk1/pp3ppp/2nbpn2/2pp4/2PP4/2NBPN2/PP3PPP/R1BQ1RK1 w - -	c2c4 g8f6 b1c3 e7e6 g1f3 d7d5 e2e3 c7c5 d2d4 b8c6 f1d3 f8d6 e1g1 e8g8	0	0	0
+D40	Queen's Gambit Declined: Semi-Tarrasch, Levenfish Variation	r1b2rk1/pp2qppp/2n1pn2/2bp4/2P1P3/2NB1N2/PP2QPPP/R1B2RK1 b - -	d2d4 d7d5 c2c4 e7e6 b1c3 g8f6 g1f3 c7c5 e2e3 b8c6 f1d3 f8d6 e1g1 e8g8 d1e2 d8e7 d4c5 d6c5 e3e4	0	0	0
+D41	Queen's Gambit Declined: Semi-Tarrasch Defense, Exchange Variation	rnbqkb1r/pp3ppp/4p3/2pn4/3PP3/2N2N2/PP3PPP/R1BQKB1R b KQkq -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 c7c5 c4d5 f6d5 e2e4	204	106	362
+D41	Queen's Gambit Declined: Semi-Tarrasch Defense, Pillsbury Variation	rnbqkb1r/pp3ppp/4p3/2pn4/3P4/2N1PN2/PP3PPP/R1BQKB1R b KQkq -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 c7c5 c4d5 f6d5 e2e3	85	49	146
+D41	Queen's Gambit Declined: Semi-Tarrasch, Kmoch Variation	rnbq1rk1/pp3ppp/4p3/1B6/3PP3/5N2/P2Q1PPP/R3K2R b KQ -	d2d4 d7d5 c2c4 e7e6 b1c3 g8f6 g1f3 c7c5 c4d5 f6d5 e2e4 d5c3 b2c3 c5d4 c3d4 f8b4 c1d2 b4d2 d1d2 e8g8 f1b5	0	0	0
+D41	Queen's Gambit Declined: Semi-Tarrasch	rnbqkb1r/pp3ppp/4pn2/2pP4/3P4/2N2N2/PP2PPPP/R1BQKB1R b KQkq -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 c7c5 c4d5	409	214	702
+D41	Queen's Gambit Declined: Semi-Tarrasch, San Sebastian Variation	rnb1k2r/pp3ppp/4p3/q7/1b1PP3/5N2/P2B1PPP/R2QKB1R w KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 g8f6 c4d5 f6d5 e2e4 d5c3 b2c3 c7c5 g1f3 c5d4 c3d4 f8b4 c1d2 d8a5	11	1	1
+D42	Queen's Gambit Declined: Semi-Tarrasch Defense, Main Line	r1bqkb1r/pp3ppp/2n1p3/2pn4/3P4/2NBPN2/PP3PPP/R1BQK2R b KQkq -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 c7c5 c4d5 f6d5 e2e3 b8c6 f1d3	50	19	79
+D43	Queen's Gambit Declined: Hastings Variation	rnb1kb1r/pp3pp1/2p1pq1p/3p4/2PP4/1QN2N2/PP2PPPP/R3KB1R b KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 e7e6 c1g5 h7h6 g5f6 d8f6 d1b3	63	40	56
+D43	Semi-Slav Defense: Anti-Moscow Gambit	rnbqkb1r/pp3pp1/2p1pn1p/3p4/2PP3B/2N2N2/PP2PPPP/R2QKB1R b KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 e7e6 c1g5 h7h6 g5h4	419	289	271
+D43	Semi-Slav Defense	rnbqkb1r/pp3ppp/2p1pn2/3p4/2PP4/2N2N2/PP2PPPP/R1BQKB1R w KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 e7e6	5618	3104	4747
+D44	Semi-Slav Defense Accepted	rnbqkb1r/pp3ppp/2p1pn2/6B1/2pP4/2N2N2/PP2PPPP/R2QKB1R w KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 e7e6 c1g5 d5c4	676	423	431
+D44	Semi-Slav Defense: Botvinnik System, Alatortsev System	rnbqkb1r/p4p2/2p1p2p/1p1nP1N1/2pP3B/2N5/PP3PPP/R2QKB1R w KQkq -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 c7c6 c1g5 d5c4 e2e4 b7b5 e4e5 h7h6 g5h4 g7g5 f3g5 f6d5	6	1	2
+D44	Semi-Slav Defense: Botvinnik System, Ekstrom Variation	rnbqkb1r/p4p2/2p1pP1p/1p2N3/2pP3p/2N5/PP3PPP/R2QKB1R b KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 e7e6 c1g5 d5c4 e2e4 b7b5 e4e5 h7h6 g5h4 g7g5 e5f6 g5h4 f3e5	76	40	43
+D44	Semi-Slav Defense: Botvinnik System, Lilienthal Variation	r1bqkb1r/p2n1p2/2p1pn2/1p2P1B1/2pP4/2N3P1/PP3P1P/R2QKB1R b KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 e7e6 c1g5 d5c4 e2e4 b7b5 e4e5 h7h6 g5h4 g7g5 f3g5 h6g5 h4g5 b8d7 g2g3	174	108	85
+D44	Semi-Slav Defense: Botvinnik System	rnbqkb1r/p4p2/2p1pn1p/1p2P1N1/2pP3B/2N5/PP3PPP/R2QKB1R b KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 e7e6 c1g5 d5c4 e2e4 b7b5 e4e5 h7h6 g5h4 g7g5 f3g5	413	285	283
+D44	Semi-Slav Defense: Botvinnik System, Szabo Variation	r1bqkb1r/p2n1p2/2p1pn2/1p2P1B1/2pP4/2N2Q2/PP3PPP/R3KB1R b KQkq -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 c7c6 c1g5 d5c4 e2e4 b7b5 e4e5 h7h6 g5h4 g7g5 f3g5 h6g5 h4g5 b8d7 d1f3	3	4	1
+D44	Semi-Slav Defense: Botvinnik Variation	rnbqkb1r/pp3ppp/2p1pn2/6B1/2pPP3/2N2N2/PP3PPP/R2QKB1R b KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 e7e6 c1g5 d5c4 e2e4	571	367	370
+D45	Semi-Slav Defense: Accelerated Meran Variation	rnbqkb1r/1p3ppp/p1p1pn2/3p4/2PP4/2N1PN2/PP3PPP/R1BQKB1R w KQkq -	d2d4 d7d5 c2c4 c7c6 b1c3 g8f6 e2e3 e7e6 g1f3 a7a6	132	71	240
+D45	Semi-Slav Defense: Main Line	rnbqkb1r/pp3ppp/2p1pn2/3p4/2PP4/2N1PN2/PP3PPP/R1BQKB1R b KQkq -	d2d4 d7d5 c2c4 c7c6 b1c3 g8f6 e2e3 e7e6 g1f3	2604	1178	2334
+D45	Semi-Slav Defense: Normal Variation	r1bqkb1r/pp1n1ppp/2p1pn2/3p4/2PP4/2N1PN2/PP3PPP/R1BQKB1R w KQkq -	d2d4 d7d5 c2c4 c7c6 b1c3 g8f6 e2e3 e7e6 g1f3 b8d7	2235	1041	1998
+D45	Semi-Slav Defense: Rubinstein (Anti-Meran) System	r1bqkb1r/pp1n1ppp/2p1pn2/3pN3/2PP4/2N1P3/PP3PPP/R1BQKB1R b KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c6 g1f3 g8f6 e2e3 b8d7 f3e5	4	1	2
+D45	Semi-Slav Defense: Stoltz Variation, Center Variation, Mikhalchishin Line	r1bqk2r/pp1n1ppp/2pb4/4P3/2P1Q3/5N2/PP3PPP/R1B1KB1R b KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 e7e6 e2e3 b8d7 d1c2 f8d6 e3e4 d5e4 c3e4 f6e4 c2e4 e6e5 d4e5	6	2	3
+D45	Semi-Slav Defense: Stoltz Variation, Center Variation	r1bqk2r/pp1n1ppp/2pbpn2/3p4/2PPP3/2N2N2/PPQ2PPP/R1B1KB1R b KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 e7e6 e2e3 b8d7 d1c2 f8d6 e3e4	20	12	27
+D45	Semi-Slav Defense: Stoltz Variation	r1bqkb1r/pp1n1ppp/2p1pn2/3p4/2PP4/2N1PN2/PPQ2PPP/R1B1KB1R b KQkq -	d2d4 d7d5 c2c4 c7c6 b1c3 g8f6 e2e3 e7e6 g1f3 b8d7 d1c2	1173	507	1005
+D45	Semi-Slav Defense: Stoltz Variation, Shabalov Attack	r1bqk2r/pp1n1ppp/2pbpn2/3p4/2PP2P1/2N1PN2/PPQ2P1P/R1B1KB1R b KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 e7e6 e2e3 b8d7 d1c2 f8d6 g2g4	140	79	92
+D45	Semi-Slav Defense: Stonewall Defense	rnbqkb1r/pp4pp/2p1p3/3p1p2/2PPn3/2NBPN2/PP3PPP/R1BQK2R w KQkq -	d2d4 d7d5 g1f3 g8f6 c2c4 c7c6 b1c3 e7e6 e2e3 f6e4 f1d3 f7f5	6	1	1
+D46	Semi-Slav Defense: Bogoljubov Variation	r1bqk2r/pp1nbppp/2p1pn2/3p4/2PP4/2NBPN2/PP3PPP/R1BQK2R w KQkq -	d2d4 d7d5 c2c4 c7c6 b1c3 g8f6 e2e3 e7e6 g1f3 b8d7 f1d3 f8e7	22	9	31
+D46	Semi-Slav Defense: Chigorin Defense	r1bqk2r/pp1n1ppp/2pbpn2/3p4/2PP4/2NBPN2/PP3PPP/R1BQK2R w KQkq -	d2d4 d7d5 c2c4 c7c6 b1c3 g8f6 e2e3 e7e6 g1f3 b8d7 f1d3 f8d6	135	43	91
+D46	Semi-Slav Defense: Main Line	r1bqkb1r/pp1n1ppp/2p1pn2/3p4/2PP4/2NBPN2/PP3PPP/R1BQK2R b KQkq -	d2d4 d7d5 c2c4 c7c6 b1c3 g8f6 e2e3 e7e6 g1f3 b8d7 f1d3	960	452	897
+D46	Semi-Slav Defense: Romih Variation	r1bqk2r/pp1n1ppp/2p1pn2/3p4/1bPP4/2NBPN2/PP3PPP/R1BQK2R w KQkq -	d2d4 d7d5 c2c4 c7c6 b1c3 g8f6 e2e3 e7e6 g1f3 b8d7 f1d3 f8b4	27	8	15
+D47	Semi-Slav Defense: Meran Variation, Lundin Variation	r1bqkb1r/p2n1ppp/2p1pn2/8/1p1P4/2NBPN2/PP3PPP/R1BQK2R w KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 e7e6 e2e3 b8d7 f1d3 d5c4 d3c4 b7b5 c4d3 b5b4	45	23	54
+D47	Semi-Slav Defense: Meran Variation	r1bqkb1r/p2n1ppp/2p1pn2/1p6/2BP4/2N1PN2/PP3PPP/R1BQK2R w KQkq -	d2d4 d7d5 c2c4 c7c6 b1c3 g8f6 e2e3 e7e6 g1f3 b8d7 f1d3 d5c4 d3c4 b7b5	746	381	734
+D47	Semi-Slav Defense: Meran Variation, Wade Variation, Kaidanov Gambit	r2qkb1r/pb1n1ppp/4p3/3nP3/Np1N4/3B4/PP3PPP/R1BQ1RK1 b kq -	d2d4 d7d5 c2c4 c7c6 b1c3 g8f6 e2e3 e7e6 g1f3 b8d7 f1d3 d5c4 d3c4 b7b5 c4d3 c8b7 e3e4 b5b4 c3a4 c6c5 e4e5 f6d5 e1g1 c5d4 f3d4	17	5	10
+D47	Semi-Slav Defense: Meran Variation, Wade Variation, Larsen Variation	r2qkb1r/pb1n1ppp/4p3/2pnP3/Np1P4/3B1N2/PP3PPP/R1BQK2R w KQkq -	d2d4 d7d5 c2c4 c7c6 b1c3 g8f6 e2e3 e7e6 g1f3 b8d7 f1d3 d5c4 d3c4 b7b5 c4d3 c8b7 e3e4 b5b4 c3a4 c6c5 e4e5 f6d5	82	45	87
+D47	Semi-Slav Defense: Meran Variation, Wade Variation	r2qkb1r/pb1n1ppp/2p1pn2/1p6/3P4/2NBPN2/PP3PPP/R1BQK2R w KQkq -	d2d4 d7d5 c2c4 c7c6 b1c3 g8f6 e2e3 e7e6 g1f3 b8d7 f1d3 d5c4 d3c4 b7b5 c4d3 c8b7	242	143	249
+D47	Semi-Slav Defense: Semi-Meran Variation	r1bqkb1r/pp1n1ppp/2p1pn2/8/2BP4/2N1PN2/PP3PPP/R1BQK2R b KQkq -	d2d4 d7d5 c2c4 c7c6 b1c3 g8f6 e2e3 e7e6 g1f3 b8d7 f1d3 d5c4 d3c4	761	387	748
+D48	Queen's Gambit Declined: Semi-Slav, Meran	r1bqkb1r/3n1ppp/p3pn2/1pp5/3PP3/2NB1N2/PP3PPP/R1BQK2R w KQkq -	d2d4 d7d5 c2c4 c7c6 b1c3 g8f6 e2e3 e7e6 g1f3 b8d7 f1d3 d5c4 d3c4 b7b5 c4d3 a7a6 e3e4 c6c5	168	66	131
+D48	Semi-Slav Defense: Meran Variation, Old Variation	r1bqkb1r/3n1ppp/p3pn2/1pp1P3/3P4/2NB1N2/PP3PPP/R1BQK2R b KQkq -	d2d4 d7d5 c2c4 c7c6 b1c3 g8f6 e2e3 e7e6 g1f3 b8d7 f1d3 d5c4 d3c4 b7b5 c4d3 a7a6 e3e4 c6c5 e4e5	79	28	62
+D48	Semi-Slav Defense: Meran Variation, Pirc Variation	r1bqkb1r/3n1ppp/p1p1pn2/8/1p1PP3/2NB1N2/PP3PPP/R1BQK2R w KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 c7c6 e2e3 g8f6 g1f3 b8d7 f1d3 d5c4 d3c4 b7b5 c4d3 a7a6 e3e4 b5b4	4	0	0
+D48	Semi-Slav Defense: Meran Variation	r1bqkb1r/3n1ppp/p1p1pn2/1p6/3P4/2NBPN2/PP3PPP/R1BQK2R w KQkq -	d2d4 d7d5 c2c4 c7c6 b1c3 g8f6 e2e3 e7e6 g1f3 b8d7 f1d3 d5c4 d3c4 b7b5 c4d3 a7a6	223	100	173
+D48	Semi-Slav Defense: Meran Variation, Reynolds' Variation	r1bqkb1r/3n1ppp/p3pn2/1ppP4/4P3/2NB1N2/PP3PPP/R1BQK2R b KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 e7e6 e2e3 b8d7 f1d3 d5c4 d3c4 b7b5 c4d3 a7a6 e3e4 c6c5 d4d5	99	63	72
+D49	Semi-Slav Defense: Meran Variation, Blumenfeld Variation	r1bqkb1r/3n1ppp/p3pn2/1N2P3/3p4/3B1N2/PP3PPP/R1BQK2R b KQkq -	d2d4 d7d5 c2c4 c7c6 b1c3 g8f6 e2e3 e7e6 g1f3 b8d7 f1d3 d5c4 d3c4 b7b5 c4d3 a7a6 e3e4 c6c5 e4e5 c5d4 c3b5	72	24	59
+D49	Semi-Slav Defense: Meran Variation, Rabinovich Variation	r1bqkb1r/3n1ppp/p3p3/1N2P3/3p2n1/3B1N2/PP3PPP/R1BQK2R w KQkq -	d2d4 d7d5 c2c4 c7c6 b1c3 g8f6 e2e3 e7e6 g1f3 b8d7 f1d3 d5c4 d3c4 b7b5 c4d3 a7a6 e3e4 c6c5 e4e5 c5d4 c3b5 f6g4	13	9	17
+D49	Semi-Slav Defense: Meran Variation, Rellstab Attack	r3kb1r/5ppp/b3pn2/1p1qN1B1/3p4/3B4/PP2QPPP/R4RK1 b kq -	d2d4 d7d5 c2c4 c7c6 b1c3 g8f6 g1f3 e7e6 e2e3 b8d7 f1d3 d5c4 d3c4 b7b5 c4d3 a7a6 e3e4 c6c5 e4e5 c5d4 c3b5 d7e5 f3e5 a6b5 e1g1 d8d5 d1e2 c8a6 c1g5	0	1	2
+D49	Semi-Slav Defense: Meran Variation, Sozin Variation	r1bqkb1r/5ppp/4pn2/1p2N3/3p4/3B4/PP3PPP/R1BQ1RK1 b kq -	d2d4 d7d5 g1f3 g8f6 c2c4 c7c6 b1c3 e7e6 e2e3 b8d7 f1d3 d5c4 d3c4 b7b5 c4d3 a7a6 e3e4 c6c5 e4e5 c5d4 c3b5 d7e5 f3e5 a6b5 e1g1	1	1	3
+D49	Semi-Slav Defense: Meran Variation, Sozin Variation	r1bqkb1r/5ppp/p3pn2/1N2n3/3p4/3B1N2/PP3PPP/R1BQK2R w KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 e7e6 e2e3 b8d7 f1d3 d5c4 d3c4 b7b5 c4d3 a7a6 e3e4 c6c5 e4e5 c5d4 c3b5 d7e5	16	7	20
+D49	Semi-Slav Defense: Meran Variation, Stahlberg Variation	r1bqkb1r/5ppp/4pn2/1p2N3/3p4/3B1Q2/PP3PPP/R1B1K2R b KQkq -	d2d4 d7d5 c2c4 c7c6 b1c3 g8f6 e2e3 e7e6 g1f3 b8d7 f1d3 d5c4 d3c4 b7b5 c4d3 a7a6 e3e4 c6c5 e4e5 c5d4 c3b5 d7e5 f3e5 a6b5 d1f3	2	2	1
+D50	Queen's Gambit Declined: Been-Koomen Variation	rnbqkb1r/pp3ppp/4pn2/2pp2B1/2PP4/2N5/PP2PPPP/R2QKBNR w KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 g8f6 c1g5 c7c5	118	78	76
+D50	Queen's Gambit Declined: Modern Variation	rnbqkb1r/ppp2ppp/4pn2/3p2B1/2PP4/2N5/PP2PPPP/R2QKBNR b KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 g8f6 c1g5	6320	3269	4629
+D50	Queen's Gambit Declined: Pseudo-Tarrasch Variation, Canal Variation	rnb1kb1r/pp3ppp/1q2pn2/2pP2B1/3P4/2N5/PP2PPPP/R2QKBNR w KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 g8f6 c1g5 c7c5 c4d5 d8b6	19	13	14
+D50	Queen's Gambit Declined: Pseudo-Tarrasch Variation, Primitive Pillsbury Variation	rnbqkb1r/pp3ppp/4pn2/3p2B1/2PQ4/2N2N2/PP2PPPP/R3KB1R b KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 g8f6 c1g5 c7c5 g1f3 c5d4 d1d4	0	1	0
+D50	Queen's Gambit Declined: Pseudo-Tarrasch Variation	rnbqkb1r/pp3ppp/4pn2/2pP2B1/3P4/2N5/PP2PPPP/R2QKBNR b KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 g8f6 c1g5 c7c5 c4d5	79	58	51
+D50	Queen's Gambit Declined: Semi-Tarrasch, Krause Variation	rnbqkb1r/1p3ppp/p4n2/1N1pp1B1/Q1P5/2N5/PP2PPPP/R3KB1R b KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 g8f6 c1g5 c7c5 g1f3 c5d4 f3d4 e6e5 d4b5 a7a6 d1a4	0	0	0
+D51	Queen's Gambit Declined: Alekhine Variation	r1bqkb1r/pp1n1ppp/2p1pn2/3p2B1/2PPP3/2N2N2/PP3PPP/R2QKB1R b KQkq -	c2c4 e7e6 b1c3 d7d5 d2d4 g8f6 c1g5 b8d7 g1f3 c7c6 e2e4	2	0	0
+D51	Queen's Gambit Declined: Capablanca, Anti-Cambridge Springs Variation	r1bqkb1r/pp1n1ppp/2p1pn2/3p2B1/2PP4/P1N1P3/1P3PPP/R2QKBNR b KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 g8f6 c1g5 b8d7 e2e3 c7c6 a2a3	33	16	28
+D51	Queen's Gambit Declined: Manhattan Variation	r1bqk2r/pppn1ppp/4pn2/3p2B1/1bPP4/2N1P3/PP3PPP/R2QKBNR w KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 g8f6 c1g5 b8d7 e2e3 f8b4	39	25	28
+D51	Queen's Gambit Declined: Modern, Knight Defense	r1bqkb1r/pp1n1ppp/2p1pn2/3p2B1/2PP4/2N1P3/PP3PPP/R2QKBNR w KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 g8f6 c1g5 b8d7 e2e3 c7c6	611	387	434
+D51	Queen's Gambit Declined: Modern, Knight Defense	r1bqkb1r/pppn1ppp/4pn2/3p2B1/2PP4/2N1P3/PP3PPP/R2QKBNR b KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 g8f6 c1g5 b8d7 e2e3	1030	585	754
+D51	Queen's Gambit Declined: Modern, Knight Defense	r1bqkb1r/pppn1ppp/4pn2/3p2B1/2PP4/2N5/PP2PPPP/R2QKBNR w KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 g8f6 c1g5 b8d7	1729	1096	1173
+D51	Queen's Gambit Declined: Rochlin Variation	r1b1kb1r/pp1n1ppp/2p1pn2/q2p4/2PP4/2N2N2/PP1BPPPP/2RQKB1R b Kkq -	d2d4 d7d5 c2c4 e7e6 b1c3 g8f6 c1g5 b8d7 g1f3 c7c6 a1c1 d8a5 g5d2	0	0	0
+D52	Queen's Gambit Declined: Cambridge Springs Defense: Argentine Variation	r1b2rk1/pp1n1ppp/2p1pn2/q2p4/1bPP3B/2N1P3/PPQN1PPP/R3KB1R b KQ -	d2d4 d7d5 c2c4 e7e6 b1c3 g8f6 c1g5 b8d7 e2e3 c7c6 g1f3 d8a5 f3d2 f8b4 d1c2 e8g8 g5h4	7	3	2
+D52	Queen's Gambit Declined: Cambridge Springs Defense: Bogoljubov Variation	r1b1k2r/pp1n1ppp/2p1pn2/q2p2B1/1bPP4/2N1P3/PPQN1PPP/R3KB1R b KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 e7e6 c1g5 b8d7 e2e3 d8a5 f3d2 f8b4 d1c2	79	42	78
+D52	Queen's Gambit Declined: Cambridge Springs Defense: Capablanca Variation	r1b1kb1r/pp1n1ppp/2p1pB2/q2p4/2PP4/2N1PN2/PP3PPP/R2QKB1R b KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 g8f6 c1g5 b8d7 e2e3 c7c6 g1f3 d8a5 g5f6	37	31	37
+D52	Queen's Gambit Declined: Cambridge Springs Defense	r1b1kb1r/pp1n1ppp/2p1pn2/q2P2B1/3P4/2N1PN2/PP3PPP/R2QKB1R b KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 e7e6 c1g5 b8d7 e2e3 d8a5 c4d5	125	70	116
+D52	Queen's Gambit Declined: Cambridge Springs Defense: Rubinstein Variation	r1b1kb1r/pp1n1ppp/2p1pn2/q5B1/2pP4/2N1P3/PP1N1PPP/R2QKB1R w KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 e7e6 c1g5 b8d7 e2e3 d8a5 f3d2 d5c4	29	27	23
+D52	Queen's Gambit Declined: Cambridge Springs Defense: Yugoslav Variation	r1b1kb1r/pp1n1ppp/2p1p3/q2n2B1/3P4/2N1PN2/PP3PPP/R2QKB1R w KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 e7e6 c1g5 b8d7 e2e3 d8a5 c4d5 f6d5	98	61	93
+D52	Queen's Gambit Declined: Cambridge Springs Variation	r1b1kb1r/pp1n1ppp/2p1pn2/q2p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 e7e6 c1g5 b8d7 e2e3 d8a5	257	164	248
+D52	Queen's Gambit Declined	r1bqkb1r/pp1n1ppp/2p1pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R b KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 e7e6 c1g5 b8d7 e2e3	412	207	333
+D53	Queen's Gambit Declined: Lasker Defense	rnbqk2r/ppp1bppp/4p3/3p2B1/2PPn3/2N1P3/PP3PPP/R2QKBNR w KQkq -	d2d4 g8f6 c2c4 e7e6 b1c3 d7d5 c1g5 f8e7 e2e3 f6e4	10	1	8
+D53	Queen's Gambit Declined: Modern Variation, Heral Variation	rnbqk2r/ppp1bppp/4pB2/3p4/2PP4/2N5/PP2PPPP/R2QKBNR b KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 g8f6 c1g5 f8e7 g5f6	14	17	6
+D53	Queen's Gambit Declined	rnbqk2r/ppp1bppp/4pn2/3p2B1/2PP4/2N5/PP2PPPP/R2QKBNR w KQkq -	d2d4 d7d5 c2c4 e7e6 b1c3 g8f6 c1g5 f8e7	3928	1802	3035
+D54	Queen's Gambit Declined: Neo-Orthodox Variation	rnbq1rk1/ppp1bppp/4pn2/3p2B1/2PP4/2N1P3/PP3PPP/2RQKBNR b K -	d2d4 g8f6 c2c4 e7e6 b1c3 d7d5 c1g5 f8e7 e2e3 e8g8 a1c1	96	27	85
+D55	Queen's Gambit Declined: Anti-Tartakower Variation, Petrosian Variation	r1bq1rk1/pp1n1pp1/2p1pb1p/8/2BP4/2N1PN2/PP3PPP/2RQ1RK1 b - -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 f8e7 c1g5 h7h6 g5f6 e7f6 e2e3 e8g8 a1c1 c7c6 f1d3 b8d7 e1g1 d5c4 d3c4	6	4	50
+D55	Queen's Gambit Declined: Anti-Tartakower Variation	rnbq1rk1/ppp1bpp1/4pB1p/3p4/2PP4/2N1PN2/PP3PPP/R2QKB1R b KQ -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 f8e7 c1g5 e8g8 e2e3 h7h6 g5f6	47	21	82
+D55	Queen's Gambit Declined: Modern Variation, Normal Line	rnbq1rk1/ppp1bppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R b KQ -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 f8e7 c1g5 e8g8 e2e3	394	212	610
+D55	Queen's Gambit Declined: Neo-Orthodox Variation, Main Line	rnbq1rk1/ppp1bpp1/4pn1p/3p4/2PP3B/2N1PN2/PP3PPP/R2QKB1R b KQ -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 f8e7 c1g5 h7h6 g5h4 e8g8 e2e3	236	157	565
+D55	Queen's Gambit Declined: Neo-Orthodox Variation	rnbq1rk1/ppp1bpp1/4pn1p/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 f8e7 c1g5 e8g8 e2e3 h7h6	185	103	307
+D55	Queen's Gambit Declined: Pillsbury Attack	rn1q1rk1/pbp1bppp/1p3n2/3pN1B1/3P4/2NBP3/PP3PPP/R2QK2R b KQ -	d2d4 g8f6 c2c4 e7e6 g1f3 b7b6 b1c3 d7d5 c4d5 e6d5 c1g5 f8e7 e2e3 e8g8 f1d3 c8b7 f3e5	0	0	1
+D56	Queen's Gambit Declined: Lasker Defense	rnbq1rk1/ppp1bpp1/4p2p/3p4/2PPn2B/2N1PN2/PP3PPP/R2QKB1R w KQ -	d2d4 d7d5 c2c4 e7e6 b1c3 f8e7 g1f3 g8f6 c1g5 h7h6 g5h4 e8g8 e2e3 f6e4	60	32	158
+D56	Queen's Gambit Declined: Lasker Defense: Russian Variation	r4rk1/pp1bqpp1/2n1pn1p/2p5/2BP4/2N1PN2/PPQ2PPP/R2R2K1 w - -	d2d4 d7d5 c2c4 e7e6 b1c3 g8f6 c1g5 f8e7 e2e3 e8g8 g1f3 h7h6 g5h4 f6e4 h4e7 d8e7 d1c2 e4f6 f1d3 d5c4 d3c4 c7c5 e1g1 b8c6 f1d1 c8d7	0	0	0
+D56	Queen's Gambit Declined: Lasker Defense, Teichmann Variation	rnb2rk1/ppp1qpp1/4p2p/3p4/2PPn3/2N1PN2/PPQ2PPP/R3KB1R b KQ -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 f8e7 c1g5 h7h6 g5h4 e8g8 e2e3 f6e4 h4e7 d8e7 d1c2	5	1	22
+D57	Queen's Gambit Declined: Lasker Defense, Bernstein Variation, Mar del Plata Gambit	rn1r2k1/ppp1qpp1/4b2p/3p4/2PP4/1Q2PN2/P4PPP/R3KB1R w KQ -	d2d4 d7d5 c2c4 e7e6 b1c3 g8f6 c1g5 f8e7 e2e3 e8g8 g1f3 h7h6 g5h4 f6e4 h4e7 d8e7 c4d5 e4c3 b2c3 e6d5 d1b3 f8d8 c3c4 c8e6	1	1	0
+D57	Queen's Gambit Declined: Lasker Defense, Bernstein Variation	rnb2rk1/ppp2pp1/3q3p/3p4/3P4/1QP1PN2/P4PPP/R3KB1R w KQ -	d2d4 g8f6 c2c4 e7e6 b1c3 d7d5 c1g5 f8e7 e2e3 h7h6 g5h4 e8g8 g1f3 f6e4 h4e7 d8e7 c4d5 e4c3 b2c3 e6d5 d1b3 e7d6	1	1	3
+D57	Queen's Gambit Declined: Lasker Defense, Main Line	rnb2rk1/ppp1qpp1/4p2p/3P4/3P4/2P1PN2/P4PPP/R2QKB1R b KQ -	d2d4 d7d5 c2c4 e7e6 b1c3 f8e7 g1f3 g8f6 c1g5 h7h6 g5h4 e8g8 e2e3 f6e4 h4e7 d8e7 c4d5 e4c3 b2c3	13	8	27
+D58	Queen's Gambit Declined: Tartakower Defense	rnbq1rk1/p1p1bpp1/1p2pn1p/3p4/2PP3B/2N1PN2/PP3PPP/R2QKB1R w KQ -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 f8e7 c1g5 h7h6 g5h4 e8g8 e2e3 b7b6	177	118	393
+D58	Queen's Gambit Declined: Tartakower Variation, Exchange Variation	rnbq1rk1/p1p1bpp1/1p3n1p/3p4/3P3B/2N1PN2/PP3PPP/R2QKB1R w KQ -	d2d4 d7d5 c2c4 e7e6 b1c3 f8e7 g1f3 g8f6 c1g5 h7h6 g5h4 e8g8 e2e3 b7b6 c4d5 e6d5	13	8	8
+D59	Queen's Gambit Declined: Tartakower Defense, Makogonov Exchange Variation	rnbq1rk1/p1p1bpp1/1p2p2p/3n4/3P3B/2N1PN2/PP3PPP/R2QKB1R w KQ -	d2d4 d7d5 c2c4 e7e6 b1c3 f8e7 g1f3 g8f6 c1g5 h7h6 g5h4 e8g8 e2e3 b7b6 c4d5 f6d5	29	48	64
+D59	Queen's Gambit Declined: Tartakower Variation	rn3rk1/p1p1qpp1/1p2b2p/3p4/3P4/4PN2/PP3PPP/2RQKB1R w K -	d2d4 d7d5 c2c4 e7e6 b1c3 f8e7 g1f3 g8f6 c1g5 h7h6 g5h4 e8g8 e2e3 b7b6 c4d5 f6d5 h4e7 d8e7 c3d5 e6d5 a1c1 c8e6	7	8	22
+D60	Queen's Gambit Declined: Orthodox Defense, Botvinnik Variation	r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2NBPN2/PP3PPP/R2QK2R b KQ -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 f8e7 c1g5 e8g8 e2e3 b8d7 f1d3	8	13	15
+D60	Queen's Gambit Declined: Orthodox Defense	r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 f8e7 c1g5 e8g8 e2e3 b8d7	131	78	219
+D60	Queen's Gambit Declined: Orthodox Defense, Rauzer Variation	r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/1QN1PN2/PP3PPP/R3KB1R b KQ -	d2d4 d7d5 g1f3 g8f6 c2c4 e7e6 b1c3 f8e7 c1g5 e8g8 e2e3 b8d7 d1b3	1	0	1
+D61	Queen's Gambit Declined: Orthodox Defense, Rubinstein Variation	r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PPQ2PPP/R3KB1R b KQ -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 f8e7 c1g5 e8g8 e2e3 b8d7 d1c2	34	13	70
+D62	Queen's Gambit Declined: Orthodox Defense, Rubinstein Variation, Flohr Line	r1bq1rk1/pp1nbppp/4pn2/2pP2B1/3P4/2N1PN2/PPQ2PPP/R3KB1R b KQ -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 f8e7 c1g5 e8g8 e2e3 b8d7 d1c2 c7c5 c4d5	3	0	22
+D63	Queen's Gambit Declined: Orthodox Defense, Capablanca Variation	r1bq1rk1/p1pnbppp/1p3n2/1B1p2B1/3P4/2N1PN2/PP3PPP/2RQK2R b K -	g1f3 d7d5 d2d4 g8f6 c2c4 e7e6 b1c3 f8e7 c1g5 e8g8 e2e3 b8d7 a1c1 b7b6 c4d5 e6d5 f1b5	1	1	0
+D63	Queen's Gambit Declined: Orthodox Defense, Henneberger Variation	r1bq1rk1/1ppnbppp/p3pn2/3p2B1/2PP4/2N1PN2/PP3PPP/2RQKB1R w K -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 f8e7 c1g5 e8g8 e2e3 b8d7 a1c1 a7a6	17	11	32
+D63	Queen's Gambit Declined: Orthodox Defense, Main Line	r1bq1rk1/pp1nbppp/2p1pn2/3p2B1/2PP4/2N1PN2/PP3PPP/2RQKB1R w K -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 f8e7 c1g5 e8g8 e2e3 b8d7 a1c1 c7c6	39	12	39
+D63	Queen's Gambit Declined: Orthodox Defense, Main Line	r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/2RQKB1R b K -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 f8e7 c1g5 e8g8 e2e3 b8d7 a1c1	72	37	99
+D63	Queen's Gambit Declined: Orthodox Defense, Pillsbury Variation	r1bq1rk1/p1pnbppp/1p3n2/3p2B1/3P4/2NBPN2/PP3PPP/2RQK2R b K -	d2d4 g8f6 c2c4 e7e6 b1c3 d7d5 c1g5 f8e7 e2e3 e8g8 g1f3 b8d7 a1c1 b7b6 c4d5 e6d5 f1d3	4	0	5
+D63	Queen's Gambit Declined: Orthodox Defense: Swiss, Karlsbad Variation	r1bq1rk1/1ppnbppp/p3pn2/3P2B1/3P4/2N1PN2/PP3PPP/2RQKB1R b K -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 f8e7 c1g5 e8g8 e2e3 b8d7 a1c1 a7a6 c4d5	8	4	16
+D64	Queen's Gambit Declined: Orthodox Defense, Rubinstein Attack	r1bq1rk1/1p1nbppp/p1p1pn2/3p2B1/2PP4/2N1PN2/PPQ2PPP/2R1KB1R w K -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 f8e7 c1g5 e8g8 e2e3 b8d7 a1c1 c7c6 d1c2 a7a6	4	0	1
+D64	Queen's Gambit Declined: Orthodox Defense, Rubinstein Attack	r1bq1rk1/1p1nbppp/p1p1pn2/3p2B1/2PP4/P1N1PN2/1PQ2PPP/2R1KB1R b K -	d2d4 g8f6 c2c4 e7e6 b1c3 d7d5 g1f3 f8e7 c1g5 e8g8 e2e3 b8d7 a1c1 c7c6 a2a3 a7a6 d1c2	0	1	0
+D64	Queen's Gambit Declined: Orthodox Defense, Rubinstein Attack	r1bq1rk1/pp1nbppp/2p1p3/3p2B1/2PPn3/2N1PN2/PPQ2PPP/2R1KB1R w K -	g1f3 d7d5 d2d4 g8f6 c2c4 e7e6 b1c3 f8e7 c1g5 e8g8 e2e3 b8d7 a1c1 c7c6 d1c2 f6e4	0	1	0
+D64	Queen's Gambit Declined: Orthodox Defense: Rubinstein Attack	r1bq1rk1/pp1nbppp/2p1pn2/3p2B1/2PP4/2N1PN2/PPQ2PPP/2R1KB1R b K -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 f8e7 c1g5 e8g8 e2e3 b8d7 a1c1 c7c6 d1c2	7	0	6
+D65	Queen's Gambit Declined: Orthodox Defense, Rubinstein Attack	r1bq1rk1/1p1nbppp/p1p1pn2/3P2B1/3P4/2N1PN2/PPQ2PPP/2R1KB1R b K -	d2d4 d7d5 g1f3 g8f6 c2c4 e7e6 b1c3 f8e7 c1g5 e8g8 e2e3 b8d7 a1c1 c7c6 d1c2 a7a6 c4d5	0	0	1
+D66	Queen's Gambit Declined: Orthodox Defense: Bd3 Line	r1bq1rk1/pp1nbppp/2p1pn2/3p2B1/2PP4/2NBPN2/PP3PPP/2RQK2R b K -	d2d4 d7d5 c2c4 e7e6 b1c3 g8f6 c1g5 f8e7 e2e3 e8g8 g1f3 b8d7 a1c1 c7c6 f1d3	89	29	96
+D66	Queen's Gambit Declined: Orthodox Defense, Fianchetto Variation	r1bq1rk1/p2nbppp/2p1pn2/1p4B1/2BP4/2N1PN2/PP3PPP/2RQK2R w K -	d2d4 d7d5 c2c4 e7e6 b1c3 g8f6 c1g5 c7c6 g1f3 f8e7 e2e3 b8d7 a1c1 e8g8 f1d3 d5c4 d3c4 b7b5	0	0	1
+D67	Queen's Gambit Declined: Orthodox Defense, Alekhine Variation	r1b2rk1/pp1nqppp/2p1p3/3n4/2BPN3/4PN2/PP3PPP/2RQK2R b K -	d2d4 d7d5 c2c4 e7e6 b1c3 g8f6 c1g5 f8e7 e2e3 e8g8 g1f3 b8d7 a1c1 c7c6 f1d3 d5c4 d3c4 f6d5 g5e7 d8e7 c3e4	12	2	15
+D67	Queen's Gambit Declined: Orthodox Defense: Bd3 Line	r1b2rk1/pp1nqppp/2p1p3/3n4/2BP4/2N1PN2/PP3PPP/2RQK2R w K -	d2d4 d7d5 c2c4 e7e6 b1c3 g8f6 c1g5 f8e7 e2e3 e8g8 g1f3 b8d7 a1c1 c7c6 f1d3 d5c4 d3c4 f6d5 g5e7 d8e7	39	17	66
+D67	Queen's Gambit Declined: Orthodox Defense, Capablanca System	r1bq1rk1/pp1nbppp/2p1p3/3n2B1/2BP4/2N1PN2/PP3PPP/2RQK2R w K -	d2d4 d7d5 c2c4 e7e6 b1c3 g8f6 c1g5 f8e7 e2e3 e8g8 g1f3 b8d7 a1c1 c7c6 f1d3 d5c4 d3c4 f6d5	41	17	68
+D67	Queen's Gambit Declined: Orthodox Defense, Janowski Variation	r1bq1rk1/pp1nbppp/2p1p3/3n2B1/2BP3P/2N1PN2/PP3PP1/2RQK2R b K -	d2d4 d7d5 g1f3 g8f6 c2c4 e7e6 b1c3 f8e7 c1g5 e8g8 e2e3 b8d7 a1c1 c7c6 f1d3 d5c4 d3c4 f6d5 h2h4	2	0	1
+D67	Queen's Gambit Declined: Orthodox Defense, Main Line	r1b2rk1/pp1nqppp/2p1p3/3n4/2BP4/2N1PN2/PP3PPP/2RQ1RK1 b - -	d2d4 d7d5 c2c4 e7e6 b1c3 g8f6 c1g5 f8e7 e2e3 e8g8 g1f3 b8d7 a1c1 c7c6 f1d3 d5c4 d3c4 f6d5 g5e7 d8e7 e1g1	27	14	47
+D68	Queen's Gambit Declined: Orthodox Defense, Classical Variation	r1b2rk1/pp1nqppp/2p5/4p3/2BP4/2R1PN2/PP3PPP/1Q3RK1 b - -	d2d4 d7d5 c2c4 e7e6 g1f3 g8f6 b1c3 f8e7 c1g5 e8g8 e2e3 b8d7 a1c1 c7c6 f1d3 d5c4 d3c4 f6d5 g5e7 d8e7 e1g1 d5c3 c1c3 e6e5 d1b1	2	1	1
+D68	Queen's Gambit Declined: Orthodox Defense, Classical Variation	r1b2rk1/pp1nqppp/2p5/4p3/2BP4/2R1PN2/PP3PPP/3Q1RK1 w - -	d2d4 d7d5 c2c4 e7e6 b1c3 g8f6 c1g5 f8e7 e2e3 e8g8 g1f3 b8d7 a1c1 c7c6 f1d3 d5c4 d3c4 f6d5 g5e7 d8e7 e1g1 d5c3 c1c3 e6e5	13	7	39
+D68	Queen's Gambit Declined: Orthodox Defense, Classical Variation	r1b2rk1/pp1nqppp/2p5/4p3/2BP4/2R1PN2/PPQ2PPP/5RK1 b - -	d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 f8e7 c1g5 e8g8 e2e3 b8d7 a1c1 c7c6 f1d3 d5c4 d3c4 f6d5 g5e7 d8e7 e1g1 d5c3 c1c3 e6e5 d1c2	3	0	2
+D69	Queen's Gambit Declined: Orthodox Defense, Classical Variation	r1b2rk1/pp3ppp/2p5/4q3/2B5/2R1P3/PP3PPP/3Q1RK1 w - -	d2d4 d7d5 c2c4 e7e6 b1c3 g8f6 c1g5 f8e7 e2e3 e8g8 g1f3 b8d7 a1c1 c7c6 f1d3 d5c4 d3c4 f6d5 g5e7 d8e7 e1g1 d5c3 c1c3 e6e5 d4e5 d7e5 f3e5 e7e5	4	1	15
+D70	Neo-Grünfeld Defense: Goglidze Attack	rnbqkb1r/ppp1pp1p/5np1/3p4/2PP4/5P2/PP2P1PP/RNBQKBNR w KQkq -	d2d4 g8f6 c2c4 g7g6 f2f3 d7d5	580	355	376
+D70	Neo-Grünfeld Defense	rnbqkb1r/ppp1pp1p/5np1/3p4/2PP4/6P1/PP2PP1P/RNBQKBNR w KQkq -	d2d4 g8f6 c2c4 g7g6 g2g3 d7d5	201	116	131
+D71	Neo-Grünfeld Defense: Exchange Variation	rnbqk2r/ppp1ppbp/6p1/3n4/3P4/6P1/PP2PPBP/RNBQK1NR w KQkq -	d2d4 g8f6 c2c4 g7g6 g2g3 f8g7 f1g2 d7d5 c4d5 f6d5	780	481	824
+D74	Neo-Grünfeld Defense: Delayed Exchange Variation	rnbq1rk1/ppp1ppbp/6p1/3n4/3P4/5NP1/PP2PPBP/RNBQ1RK1 b - -	d2d4 g8f6 c2c4 g7g6 g1f3 f8g7 g2g3 e8g8 f1g2 d7d5 c4d5 f6d5 e1g1	266	141	246
+D75	Neo-Grünfeld Defense: Delayed Exchange Variation	rnbq1rk1/pp2ppbp/6p1/2pn4/3P4/2N2NP1/PP2PPBP/R1BQ1RK1 b - -	d2d4 g8f6 c2c4 g7g6 b1c3 f8g7 g1f3 e8g8 g2g3 d7d5 c4d5 f6d5 f1g2 c7c5 e1g1	15	10	16
+D75	Neo-Grünfeld Defense: Delayed Exchange Variation	rnbq1rk1/pp2ppbp/6p1/2Pn4/8/5NP1/PP2PPBP/RNBQ1RK1 b - -	d2d4 g8f6 g1f3 g7g6 c2c4 f8g7 g2g3 e8g8 f1g2 d7d5 c4d5 f6d5 e1g1 c7c5 d4c5	7	4	16
+D76	Neo-Grünfeld Defense: Delayed Exchange Variation	rnbq1rk1/ppp1ppbp/1n4p1/8/3P4/5NP1/PP2PPBP/RNBQ1RK1 w - -	d2d4 g8f6 c2c4 g7g6 g1f3 f8g7 g2g3 e8g8 f1g2 d7d5 c4d5 f6d5 e1g1 d5b6	152	90	168
+D77	Neo-Grünfeld Defense: Classical Variation, Modern Defense	rnbq1rk1/ppp1ppbp/5np1/8/2pP4/5NP1/PP2PPBP/RNBQ1RK1 w - -	d2d4 g8f6 g1f3 g7g6 g2g3 f8g7 f1g2 e8g8 e1g1 d7d5 c2c4 d5c4	180	176	226
+D77	Neo-Grünfeld Defense: Classical Variation, Polgar Variation	r1bq1rk1/ppp1ppbp/2n2np1/3p4/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - -	d2d4 g8f6 g1f3 g7g6 g2g3 f8g7 f1g2 e8g8 e1g1 d7d5 c2c4 b8c6	31	20	36
+D77	Neo-Grünfeld Defense: Classical Variation	rnbq1rk1/ppp1ppbp/5np1/3p4/2PP4/5NP1/PP2PPBP/RNBQ1RK1 b - -	d2d4 g8f6 g1f3 g7g6 g2g3 f8g7 f1g2 e8g8 e1g1 d7d5 c2c4	464	341	548
+D78	Neo-Grünfeld Defense: Classical Variation, Original Defense	rnbq1rk1/pp2ppbp/2p2np1/3p4/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - -	d2d4 g8f6 c2c4 g7g6 g1f3 f8g7 g2g3 e8g8 f1g2 c7c6 e1g1 d7d5	113	67	163
+D79	Neo-Grünfeld Defense: Ultra-delayed Exchange Variation	rnbq1rk1/pp2ppbp/5np1/3p4/3P4/5NP1/PP2PPBP/RNBQ1RK1 w - -	d2d4 g8f6 c2c4 g7g6 g1f3 f8g7 g2g3 e8g8 f1g2 c7c6 e1g1 d7d5 c4d5 c6d5	30	27	78
+D80	Grünfeld Defense: Gibbon Gambit	rnbqkb1r/ppp1pp1p/5np1/3p4/2PP2P1/2N5/PP2PP1P/R1BQKBNR b KQkq -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 g2g4	7	8	3
+D80	Grünfeld Defense: Lundin Variation	rnbqkb1r/pp2pp1p/6p1/2p3B1/2PPp3/8/PP1QPPPP/R3KBNR w KQkq -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 c1g5 f6e4 c3e4 d5e4 d1d2 c7c5	0	1	0
+D80	Grünfeld Defense: Lutikov Variation, Murrey Attack	rnbqkb1r/pp2pp1p/6p1/2pn4/N2P4/5P2/PP2P1PP/R1BQKBNR b KQkq -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 f2f3 c7c5 c4d5 f6d5 c3a4	0	1	1
+D80	Grünfeld Defense: Lutikov Variation	rnbqkb1r/ppp1pp1p/5np1/3p4/2PP4/2N2P2/PP2P1PP/R1BQKBNR b KQkq -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 f2f3	52	42	29
+D80	Grünfeld Defense	rnbqkb1r/ppp1pp1p/5np1/3p4/2PP4/2N5/PP2PPPP/R1BQKBNR w KQkq -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5	18252	14268	18360
+D80	Grünfeld Defense: Stockholm Variation	rnbqkb1r/ppp1pp1p/5np1/3p2B1/2PP4/2N5/PP2PPPP/R2QKBNR b KQkq -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 c1g5	1285	1025	1197
+D80	Grünfeld Defense: Zaitsev Gambit	rnbqkb1r/ppp1pp1p/5np1/3p4/2PP3P/2N5/PP2PPP1/R1BQKBNR b KQkq -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 h2h4	71	39	36
+D81	Grünfeld Defense: Russian Variation, Accelerated Variation	rnbqkb1r/ppp1pp1p/5np1/3p4/2PP4/1QN5/PP2PPPP/R1B1KBNR b KQkq -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 d1b3	273	174	199
+D82	Grünfeld Defense: Brinckmann Attack	rnbqkb1r/ppp1pp1p/5np1/3p4/2PP1B2/2N5/PP2PPPP/R2QKBNR b KQkq -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 c1f4	1566	1191	1808
+D83	Grünfeld Defense: Brinckmann Attack, Grünfeld Gambit, Botvinnik Variation	rn1q1rk1/pp2ppbp/4bnp1/2Pp4/2P2B2/2N1P3/PP3PPP/2RQKBNR w K -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 c1f4 f8g7 e2e3 e8g8 a1c1 c7c5 d4c5 c8e6	51	35	59
+D83	Grünfeld Defense: Brinckmann Attack, Grünfeld Gambit, Capablanca Variation	rnbq1rk1/ppp1ppbp/5np1/3p4/2PP1B2/2N1P3/PP3PPP/2RQKBNR b K -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 c1f4 f8g7 e2e3 e8g8 a1c1	294	194	290
+D83	Grünfeld Defense: Brinckmann Attack, Grünfeld Gambit	rnbq1rk1/ppp1ppbp/5np1/3p4/2PP1B2/2N1P3/PP3PPP/R2QKBNR w KQ -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 c1f4 f8g7 e2e3 e8g8	641	499	729
+D83	Grünfeld Defense: Brinckmann Attack, Reshevsky Gambit	rnb2rk1/pp2ppbp/5np1/q1Pp4/2P2B2/2N1P3/PP3PPP/2RQKBNR w K -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 c1f4 f8g7 a1c1 e8g8 e2e3 c7c5 d4c5 d8a5	17	4	14
+D84	Grünfeld Defense: Brinckmann Attack, Grünfeld Gambit Accepted	rnb2rk1/ppB1ppbp/6p1/3q4/3P4/4P3/PP3PPP/R2QKBNR b KQ -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 c1f4 f8g7 e2e3 e8g8 c4d5 f6d5 c3d5 d8d5 f4c7	137	111	210
+D85	Grünfeld Defense: Exchange Variation, Modern Exchange Variation, Kramnik's Line	rnbqk2r/pp2ppbp/6p1/2p5/3PP3/2P2N1P/P4PP1/R1BQKB1R b KQkq -	d2d4 g8f6 g1f3 g7g6 c2c4 f8g7 b1c3 d7d5 c4d5 f6d5 e2e4 d5c3 b2c3 c7c5 h2h3	10	13	5
+D85	Grünfeld Defense: Exchange Variation, Modern Exchange Variation, Pawn Grab Line	r1bq1rk1/pp2pp1p/2n3p1/2pP4/4P3/2b2N2/P3BPPP/1RBQK2R w K -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 c4d5 f6d5 e2e4 d5c3 b2c3 f8g7 g1f3 c7c5 a1b1 e8g8 f1e2 b8c6 d4d5 g7c3	58	34	34
+D85	Grünfeld Defense: Exchange Variation, Modern Exchange Variation	rnbqk2r/ppp1ppbp/6p1/8/3PP3/2P2N2/P4PPP/R1BQKB1R b KQkq -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 c4d5 f6d5 e2e4 d5c3 b2c3 f8g7 g1f3	1995	1449	2092
+D85	Grünfeld Defense: Exchange Variation, Nadanian Attack	rnbqkb1r/ppp1pp1p/6p1/3n4/N2P4/8/PP2PPPP/R1BQKBNR b KQkq -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 c4d5 f6d5 c3a4	127	95	120
+D85	Grünfeld Defense: Exchange Variation	rnbqkb1r/ppp1pp1p/6p1/3n4/3P4/2N5/PP2PPPP/R1BQKBNR w KQkq -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 c4d5 f6d5	8628	6602	8695
+D86	Grünfeld Defense: Exchange, Larsen Variation	rnb2rk1/p1pqppbp/1p4p1/8/2BPP3/2P5/P3NPPP/R1BQ1RK1 w - -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 c4d5 f6d5 e2e4 d5c3 b2c3 f8g7 f1c4 e8g8 g1e2 d8d7 e1g1 b7b6	44	34	24
+D86	Grünfeld Defense: Exchange, Simagin's Lesser Variation	rnbq1rk1/p1p1ppbp/1p4p1/8/2BPP3/2P5/P3NPPP/R1BQK2R w KQ -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 c4d5 f6d5 e2e4 d5c3 b2c3 f8g7 f1c4 e8g8 g1e2 b7b6	70	58	76
+D86	Grünfeld Defense: Exchange Variation, Classical Variation	rnbqk2r/ppp1ppbp/6p1/8/2BPP3/2P5/P4PPP/R1BQK1NR b KQkq -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 c4d5 f6d5 e2e4 d5c3 b2c3 f8g7 f1c4	2767	2314	2711
+D86	Grünfeld Defense: Exchange Variation, Larsen Variation	rnb2rk1/pppqppbp/6p1/8/2BPP3/2P5/P3NPPP/R1BQK2R w KQ -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 c4d5 f6d5 e2e4 d5c3 b2c3 f8g7 f1c4 e8g8 g1e2 d8d7	58	42	37
+D86	Grünfeld Defense: Exchange Variation, Simagin's Improved Variation	r1bq1rk1/ppp1ppbp/2n3p1/8/2BPP3/2P5/P3NPPP/R1BQK2R w KQ -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 c4d5 f6d5 e2e4 d5c3 b2c3 f8g7 f1c4 e8g8 g1e2 b8c6	235	198	198
+D87	Grünfeld Defense: Exchange Variation, Seville Variation	r2q1rk1/pp2pBbp/6p1/n1p5/3PP1b1/2P1BP2/P3N1PP/R2Q1RK1 b - -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 c4d5 f6d5 e2e4 d5c3 b2c3 f8g7 f1c4 c7c5 g1e2 b8c6 c1e3 e8g8 e1g1 c8g4 f2f3 c6a5 c4f7	38	25	59
+D87	Grünfeld Defense: Exchange Variation, Spassky Variation	rnbq1rk1/pp2ppbp/6p1/2p5/2BPP3/2P5/P3NPPP/R1BQK2R w KQ -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 c4d5 f6d5 e2e4 d5c3 b2c3 f8g7 f1c4 c7c5 g1e2 e8g8	763	553	689
+D88	Grünfeld Defense: Exchange Variation, Spassky Variation	r1bq1rk1/pp2ppbp/2n3p1/8/2BPP3/4B3/P3NPPP/R2Q1RK1 b - -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 c4d5 f6d5 e2e4 d5c3 b2c3 f8g7 f1c4 c7c5 g1e2 b8c6 c1e3 e8g8 e1g1 c5d4 c3d4	32	31	52
+D89	Grünfeld Defense: Exchange Variation, Sokolsky Variation	r2q1rk1/pp2ppbp/4b1p1/n2P4/4P3/3BBP2/P3N1PP/R2Q1RK1 b - -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 c4d5 f6d5 e2e4 d5c3 b2c3 f8g7 f1c4 c7c5 g1e2 e8g8 e1g1 b8c6 c1e3 c8g4 f2f3 c6a5 c4d3 c5d4 c3d4 g4e6 d4d5	24	20	31
+D89	Grünfeld Defense: Exchange Variation, Spassky Variation	r2q1rk1/pp2ppbp/4b1p1/n7/3PP3/3BBP2/P3N1PP/R2Q1RK1 w - -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 c4d5 f6d5 e2e4 d5c3 b2c3 f8g7 f1c4 c7c5 g1e2 b8c6 c1e3 e8g8 e1g1 c8g4 f2f3 c6a5 c4d3 c5d4 c3d4 g4e6	74	51	87
+D90	Grünfeld Defense: Flohr Variation	rnbqk2r/ppp1ppbp/5np1/3p4/Q1PP4/2N2N2/PP2PPPP/R1B1KB1R b KQkq -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 g1f3 f8g7 d1a4	160	106	145
+D90	Grünfeld Defense: Three Knights Variation	rnbqk2r/ppp1ppbp/5np1/3p4/2PP4/2N2N2/PP2PPPP/R1BQKB1R w KQkq -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 g1f3 f8g7	5706	4433	5744
+D90	Grünfeld Defense: Three Knights Variation	rnbqkb1r/ppp1pp1p/5np1/3p4/2PP4/2N2N2/PP2PPPP/R1BQKB1R b KQkq -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 g1f3	5740	4443	5764
+D90	Slav Defense: Schlechter Variation	rnbqkb1r/pp2pp1p/2p2np1/3p4/2PP4/2N2N2/PP2PPPP/R1BQKB1R w KQkq -	d2d4 d7d5 c2c4 c7c6 g1f3 g8f6 b1c3 g7g6	374	103	228
+D91	Grünfeld Defense: Three Knights Variation, Petrosian System	rnbqk2r/ppp1ppbp/5np1/3p2B1/2PP4/2N2N2/PP2PPPP/R2QKB1R b KQkq -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 g1f3 f8g7 c1g5	1259	1148	1316
+D92	Grünfeld Defense: Three Knights Variation, Hungarian Attack	rnbqk2r/ppp1ppbp/5np1/3p4/2PP1B2/2N2N2/PP2PPPP/R2QKB1R b KQkq -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 g1f3 f8g7 c1f4	701	555	719
+D93	Grünfeld Defense: Three Knights Variation, Hungarian Variation	rnbq1rk1/ppp1ppbp/5np1/3p4/2PP1B2/2N1PN2/PP3PPP/R2QKB1R b KQ -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 g1f3 f8g7 c1f4 e8g8 e2e3	259	261	274
+D94	Grünfeld Defense: Flohr Defense	rn1q1rk1/pp2ppbp/2p2np1/3p1b2/2PP4/2NBPN2/PP3PPP/R1BQ1RK1 w - -	d2d4 d7d5 c2c4 c7c6 b1c3 g8f6 e2e3 g7g6 g1f3 f8g7 f1d3 e8g8 e1g1 c8f5	8	5	12
+D94	Grünfeld Defense: Makogonov Variation	rnbq1rk1/ppp1ppbp/5np1/3p4/1PPP4/2N1PN2/P4PPP/R1BQKB1R b KQ -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 g1f3 f8g7 e2e3 e8g8 b2b4	125	89	130
+D94	Grünfeld Defense: Opocensky Variation	rnbq1rk1/ppp1ppbp/5np1/3p4/2PP4/2N1PN2/PP1B1PPP/R2QKB1R b KQ -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 g1f3 f8g7 e2e3 e8g8 c1d2	94	71	158
+D94	Grünfeld Defense: Smyslov Defense	rn1q1rk1/pp2ppbp/2p2np1/3p4/2PP2b1/2NBPN2/PP3PPP/R1BQ1RK1 w - -	d2d4 d7d5 c2c4 c7c6 b1c3 g8f6 e2e3 g7g6 g1f3 f8g7 f1d3 e8g8 e1g1 c8g4	77	28	91
+D94	Grünfeld Defense: Three Knights Variation, Burille Variation	rnbqk2r/ppp1ppbp/5np1/3p4/2PP4/2N1PN2/PP3PPP/R1BQKB1R b KQkq -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 g1f3 f8g7 e2e3	695	626	801
+D94	Grünfeld Defense: Three Knights Variation, Paris Variation	rnbq1rk1/ppp1ppbp/5np1/3p4/2PP4/2NBPN2/PP3PPP/R1BQK2R b KQ -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 g1f3 f8g7 e2e3 e8g8 f1d3	34	62	30
+D95	Grünfeld Defense: Botvinnik Variation	rnbq1rk1/ppp2pbp/4pnp1/3p4/2PP4/1QN1PN2/PP3PPP/R1B1KB1R w KQ -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 g1f3 f8g7 e2e3 e8g8 d1b3 e7e6	35	52	64
+D95	Grünfeld Defense: Pachman Variation	r1bq1rk1/pppnppbp/5np1/6N1/2BP4/1QN1P3/PP3PPP/R1B1K2R b KQ -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 e2e3 f8g7 d1b3 d5c4 f1c4 e8g8 g1f3 b8d7 f3g5	0	0	2
+D95	Grünfeld Defense: Three Knights Variation, Vienna Variation	rnbq1rk1/ppp1ppbp/5np1/3p4/2PP4/1QN1PN2/PP3PPP/R1B1KB1R b KQ -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 g1f3 f8g7 e2e3 e8g8 d1b3	132	81	125
+D96	Grünfeld Defense: Russian Variation	rnbqk2r/ppp1ppbp/5np1/3p4/2PP4/1QN2N2/PP2PPPP/R1B1KB1R b KQkq -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 g1f3 f8g7 d1b3	1737	1148	1512
+D97	Grünfeld Defense: Russian Variation, Byrne (Simagin) Variation	r1bq1rk1/ppp1ppbp/2n2np1/8/2QPP3/2N2N2/PP3PPP/R1B1KB1R w KQ -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 g1f3 f8g7 d1b3 d5c4 b3c4 e8g8 e2e4 b8c6	189	148	219
+D97	Grünfeld Defense: Russian Variation, Hungarian Variation	rnbq1rk1/1pp1ppbp/p4np1/8/2QPP3/2N2N2/PP3PPP/R1B1KB1R w KQ -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 g1f3 f8g7 d1b3 d5c4 b3c4 e8g8 e2e4 a7a6	400	318	421
+D97	Grünfeld Defense: Russian Variation, Levenfish Variation	rnbq1rk1/p1p1ppbp/1p3np1/8/2QPP3/2N2N2/PP3PPP/R1B1KB1R w KQ -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 g1f3 f8g7 d1b3 d5c4 b3c4 e8g8 e2e4 b7b6	20	7	3
+D97	Grünfeld Defense: Russian Variation, Prins Variation	r1bq1rk1/ppp1ppbp/n4np1/8/2QPP3/2N2N2/PP3PPP/R1B1KB1R w KQ -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 g1f3 f8g7 d1b3 d5c4 b3c4 e8g8 e2e4 b8a6	314	210	276
+D97	Grünfeld Defense: Russian Variation, Szabo (Boleslavsky)	rnbq1rk1/pp2ppbp/2p2np1/8/2QPP3/2N2N2/PP3PPP/R1B1KB1R w KQ -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 g1f3 f8g7 d1b3 d5c4 b3c4 e8g8 e2e4 c7c6	135	57	99
+D97	Grünfeld Defense: Russian Variation	rnbq1rk1/ppp1ppbp/5np1/8/2QPP3/2N2N2/PP3PPP/R1B1KB1R b KQ -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 g1f3 f8g7 d1b3 d5c4 b3c4 e8g8 e2e4	1403	957	1297
+D98	Grünfeld Defense: Russian, Keres Variation	r2q1rk1/ppp1ppbp/1nn3p1/8/3PP1b1/2NQBN2/PP2BPPP/2KR3R b - -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 g1f3 f8g7 d1b3 d5c4 b3c4 e8g8 e2e4 c8g4 c1e3 f6d7 f1e2 d7b6 c4d3 b8c6 e1c1	1	2	0
+D98	Grünfeld Defense: Russian Variation, Smyslov Variation	rn1q1rk1/ppp1ppbp/5np1/8/2QPP1b1/2N2N2/PP3PPP/R1B1KB1R w KQ -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 g1f3 f8g7 d1b3 d5c4 b3c4 e8g8 e2e4 c8g4	233	142	208
+D99	Grünfeld Defense: Russian Variation, Smyslov Variation	rn1q1rk1/pppnppbp/6p1/8/3PP1b1/1QN1BN2/PP3PPP/R3KB1R b KQ -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 g1f3 f8g7 d1b3 d5c4 b3c4 e8g8 e2e4 c8g4 c1e3 f6d7 c4b3	87	54	65
+D99	Grünfeld Defense: Russian Variation, Yugoslav Variation	rn1q1rk1/pp1nppbp/6p1/2p5/3PP1b1/1QN1BN2/PP3PPP/R3KB1R w KQ -	d2d4 g8f6 c2c4 g7g6 b1c3 d7d5 g1f3 f8g7 d1b3 d5c4 b3c4 e8g8 e2e4 c8g4 c1e3 f6d7 c4b3 c7c5	20	15	14

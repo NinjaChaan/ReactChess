@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Board from './Components/Board'
+import Footer from './Components/Footer'
 
 const BoardContainer = styled.div`
 	display: flex;
@@ -8,9 +9,11 @@ const BoardContainer = styled.div`
 
 const App = () => {
 	return (
-		<BoardContainer>
-			<Board/>
-		</BoardContainer>
+		<div>
+			<BoardContainer>
+				<Board />
+			</BoardContainer>
+		</div>
 	)
 }
 

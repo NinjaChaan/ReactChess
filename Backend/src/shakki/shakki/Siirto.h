@@ -12,7 +12,7 @@ public:
 	Ruutu getAlkuruutu();
 	Ruutu getLoppuruutu();
 	bool onkoLyhytLinna();
-	bool onkoPitkälinna();
+	bool onkoPitkalinna();
 	bool onkoEnPassant();
 	int getMiksiKorotetaan();
 	void setMiksiKorotetaan(int miksiKorotetaan);

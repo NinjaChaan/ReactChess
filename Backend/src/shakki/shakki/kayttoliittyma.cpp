@@ -167,7 +167,7 @@ void Kayttoliittyma::piirraLauta(Siirto* viimeSiirto) {
 								FOREGROUND_GREEN | FOREGROUND_BLUE);
 						}
 					}
-				}else if (viimeSiirto->onkoPitkälinna()) {
+				}else if (viimeSiirto->onkoPitkalinna()) {
 					if (asema->getSiirtovuoro()) {
 						if ((x == 3 || x == 2) && y == 0) {
 							SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),

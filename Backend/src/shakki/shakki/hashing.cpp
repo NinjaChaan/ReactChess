@@ -109,7 +109,7 @@ void Hash::update(Siirto* siirto, Asema* asema) {
 	Nappula* nappula = lauta[alkuX][alkuY];
 	Nappula* syoty = lauta[loppuX][loppuY];
 
-	if (!siirto->onkoLyhytLinna() && !siirto->onkoPitkälinna()) {
+	if (!siirto->onkoLyhytLinna() && !siirto->onkoPitkalinna()) {
 		int koodi = nappula->_koodi;
 
 		hash = hash ^ nappulat[koodi][alkuX][alkuY];
@@ -173,7 +173,7 @@ void Hash::update(Siirto* siirto, Asema* asema) {
 			hash = hash ^ onkoMustaKTliikkunutHash;
 		}
 	}
-	else if (siirto->onkoPitkälinna()) {
+	else if (siirto->onkoPitkalinna()) {
 		if (asema->getSiirtovuoro() == 0) { //valkoinen
 			hash = hash ^ nappulat[VK][4][0];
 			hash = hash ^ nappulat[VT][0][0];
@@ -225,7 +225,9 @@ bool Hash::tarkista(Asema* asema) {
 	Hash tarkistus = Hash(*this);
 	tarkistus.rebuild(asema);
 	if (tarkistus.hash != hash) {
-		std::cout << "ERROR HASH";
+		std::cout << std::endl;
+		std::cout << "ERROR HASH " << std::endl;
+		
 		return false;
 	}
 #endif

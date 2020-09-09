@@ -8,7 +8,7 @@
         "./src/test.cpp",
         "./src/index.cpp",
 		"./src/HillClimb.cpp",
-		"./src/shakki/*.cpp"
+		"./src/shakki/shakki/*.cpp"
       ],
       "include_dirs": [
         "<!@(node -p \"require('node-addon-api').include\")"

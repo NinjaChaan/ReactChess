@@ -139,37 +139,41 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\asema.cpp" />
-    <ClCompile Include="..\hashing.cpp" />
-    <ClCompile Include="..\kayttoliittyma.cpp" />
-    <ClCompile Include="..\main.cpp" />
-    <ClCompile Include="..\nappula.cpp" />
-    <ClCompile Include="..\openingBook.cpp" />
-    <ClCompile Include="..\peli.cpp" />
-    <ClCompile Include="..\Ruutu.cpp" />
-    <ClCompile Include="..\Siirto.cpp" />
-    <ClCompile Include="..\siirtokello.cpp" />
-    <ClCompile Include="..\stats.cpp" />
-    <ClCompile Include="..\transpositionTable.cpp" />
-    <ClCompile Include="..\vastustaja.cpp" />
+    <ClInclude Include="..\..\..\node_modules\node-addon-api\napi.h" />
+    <ClInclude Include="..\..\node_api.h" />
+    <ClInclude Include="asema.h" />
+    <ClInclude Include="Bot.h" />
+    <ClInclude Include="hashing.h" />
+    <ClInclude Include="Header.h" />
+    <ClInclude Include="kayttoliittyma.h" />
+    <ClInclude Include="lautaDict.h" />
+    <ClInclude Include="minmaxpaluu.h" />
+    <ClInclude Include="nappula.h" />
+    <ClInclude Include="openingBook.h" />
+    <ClInclude Include="peli.h" />
+    <ClInclude Include="Ruutu.h" />
+    <ClInclude Include="Siirto.h" />
+    <ClInclude Include="siirtokello.h" />
+    <ClInclude Include="stats.h" />
+    <ClInclude Include="stringSplit.h" />
+    <ClInclude Include="transpositionTable.h" />
+    <ClInclude Include="vastustaja.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\asema.h" />
-    <ClInclude Include="..\hashing.h" />
-    <ClInclude Include="..\Header.h" />
-    <ClInclude Include="..\kayttoliittyma.h" />
-    <ClInclude Include="..\lautaDict.h" />
-    <ClInclude Include="..\minmaxpaluu.h" />
-    <ClInclude Include="..\nappula.h" />
-    <ClInclude Include="..\openingBook.h" />
-    <ClInclude Include="..\peli.h" />
-    <ClInclude Include="..\Ruutu.h" />
-    <ClInclude Include="..\Siirto.h" />
-    <ClInclude Include="..\siirtokello.h" />
-    <ClInclude Include="..\stats.h" />
-    <ClInclude Include="..\stringSplit.h" />
-    <ClInclude Include="..\transpositionTable.h" />
-    <ClInclude Include="..\vastustaja.h" />
+    <ClCompile Include="asema.cpp" />
+    <ClCompile Include="Bot.cpp" />
+    <ClCompile Include="hashing.cpp" />
+    <ClCompile Include="kayttoliittyma.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="nappula.cpp" />
+    <ClCompile Include="openingBook.cpp" />
+    <ClCompile Include="peli.cpp" />
+    <ClCompile Include="Ruutu.cpp" />
+    <ClCompile Include="Siirto.cpp" />
+    <ClCompile Include="siirtokello.cpp" />
+    <ClCompile Include="stats.cpp" />
+    <ClCompile Include="transpositionTable.cpp" />
+    <ClCompile Include="vastustaja.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -13,6 +13,7 @@ public:
 	bool onkoTasapeli();
 	lautaDict asemaHistoria;
 	static int siirtoVuoro;
+	std::string fen;
 private:
 	void lisaaAsemaHistoriaan(Asema* asema);
 	int _koneenVari; // Valkoinen = 0, Musta = 1

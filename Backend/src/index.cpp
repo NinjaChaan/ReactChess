@@ -7,17 +7,27 @@
 #include <fcntl.h>
 #include <iostream>
 #include <string>
-#include "shakki/peli.h"
+#include "shakki/shakki/Bot.h"
 
-Napi::String playChess(const Napi::CallbackInfo &info)
-{
-	Napi::Env env = info.Env();
+//Bot* b = new Bot();
 
-	Hash::init();
+//  Napi::Function initializeBot(const Napi::CallbackInfo &info)
+// {
+// 	Bot b = Bot();
+// 	Napi::Env env = info.Env();
+// 	return Bot();
+// }
 
-	Peli(1);
-	return Napi::String::New(env, "over");
+Napi::Object Init(Napi::Env env, Napi::Object exports) {
+    Bot::Init(env, exports);
+    return exports;
 }
+
+// Napi::String playTurn(const Napi::CallbackInfo &info, std::string fen)
+// {
+// 	Napi::Env env = info.Env();
+// 	return Napi::String::New(env, b->Play_turn(fen));
+// }
 
 Napi::String climber(const Napi::CallbackInfo &info)
 {
@@ -27,15 +37,16 @@ Napi::String climber(const Napi::CallbackInfo &info)
 	return Napi::String::New(env, result);
 }
 
-Napi::Object Init(Napi::Env env, Napi::Object exports)
-{
-	exports.Set(
-		// Napi::String::New(env, "greetHello"),
-		// Napi::Function::New(env, greetHello));
-		Napi::String::New(env, "playChess"),
-		Napi::Function::New(env, playChess));
+// Napi::Object Init(Napi::Env env, Napi::Object exports)
+// {
+// 	exports.Set(
+// 		Napi::String::New(env, "initializeBot"),
+// 		Napi::Function::New(env, initializeBot));
+// 	// exports.Set(
+// 	// 	Napi::String::New(env, "playTurn"),
+// 	// 	Napi::Function::New(env, playTurn));
 
-	return exports;
-}
+// 	return exports;
+// }
 
 NODE_API_MODULE(greet, Init)

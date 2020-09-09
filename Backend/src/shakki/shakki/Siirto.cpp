@@ -43,7 +43,7 @@ bool Siirto::onkoLyhytLinna() {
 	return lyhytLinna;
 }
 
-bool Siirto::onkoPitkälinna() {
+bool Siirto::onkoPitkalinna() {
 	return pitkalinna;
 }
 

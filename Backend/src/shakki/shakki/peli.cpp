@@ -33,7 +33,7 @@ Peli::Peli(int ihmisenVari) {
 	std::vector<std::string> bookFiles = { "./db/a.tsv"
 		, "./db/b.tsv", "./db/c.tsv", "./db/d.tsv", "./db/e.tsv" };
 	//vector<string> bookFiles = { "./db/white.tsv", "./db/black.tsv" };
-	openingBook.Initialize(bookFiles);	
+	openingBook.Initialize(bookFiles);
 
 	vector<Siirto> siirtolista;
 	Pelimoodi moodi;

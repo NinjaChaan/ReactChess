@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import EventSourcePoly from 'eventsource'
 import Square from '../Components/Square'
+import { CoordinatesNumbers, CoordinatesLetters } from '../Components/Coordinates'
 import FENBoard from 'fen-chess-board'
+import axios from 'axios'
 import w_q from '../../resources/chesspieces/Chess_qlt45.svg'
 import b_q from '../../resources/chesspieces/Chess_qdt45.svg'
 import w_k from '../../resources/chesspieces/Chess_klt45.svg'
@@ -18,38 +21,59 @@ import b_p from '../../resources/chesspieces/Chess_pdt45.svg'
 const Container = styled.div`
 	display: flex;
 `
-const CoordinatesContainerVertical = styled.div`
-	display: grid;
-	margin-right: 10px;
-`
-const CoordinatesContainerHorizontal = styled.div`
-	display: flex;
-	margin-left: 35px;
-`
-
-const CoordinatesVertical = styled.span`
-	font-size: 40px;
-	margin: 0 auto;
-	height: 51.25px;
-`
-const CoordinatesHorizontal = styled.span`
-	font-size: 40px;
-	margin: auto 0;
-	width: 50px;
-	text-align: center;
+const BoardBorder = styled.div`
+	background-color: sienna;
+	padding: 20px;
+	border-radius: 4px;
+	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 `
 
 const BoardStyle = styled.div`
-	background-color: black;
-	padding: 5px;
 	width: fit-content;
 	height: fit-content;
 	display: grid;
-	grid-template-columns: repeat(8, 1fr);
+	grid-template-columns: repeat(8,1fr);
+	border-radius: 4px;
+	border: 5px solid peru;
 	border-radius: 4px;
 `
 const BoardContainer = styled.div`
 	margin: 0 auto;
+`
+
+const StartButton = styled.button`
+	height: 40px;
+	margin: auto;
+	border-radius: 4px;
+	font-weight: 600;
+	&:hover{
+		background-color:#fffafac7;
+	}
+`
+
+const Mask = styled.div`
+	width: 450px;
+	height: 450px;
+	position: absolute;
+	background-color: #615f5fc7;
+	margin-left: -5px;
+	display: flex;
+`
+
+const Banner = styled.div`
+	margin: auto;
+	background-color: #c1fc90;
+	height: 30px;
+	display: flex;
+	border-radius: 4px;
+	padding: 5px;
+	width: 100%;
+	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+`
+
+const BannerText = styled.span`
+	margin: auto;
+	font-weight: 600;
 `
 
 const pieceSwitch = (piece, size) => {
@@ -100,49 +124,122 @@ const pieceSwitch = (piece, size) => {
 	}
 }
 
-const Board = () => {
-	let fenboard = new FENBoard("start")
-	const items = []
-	for (let i = 0; i < 8; i++) {
-		for (let j = 0; j < 8; j++) {
-			items.push(
-				<Square key={`${i}-${j}`} white={(i * 7 + j) % 2 === 0}>
-					{pieceSwitch(fenboard.board[i][j], 46)}
-				</Square>
-			)
+const playTurn = (fen) => {
+	const request = axios.post(`/playTurn`, fen)
+	return request.then((response) => response).catch((error) => (error.response))
+}
+const startStream = () => {
+	console.log('Connecting to event stream')
+	const eventSourceInitDict = {
+		headers: {
+			Authorization: `Bearer `
 		}
 	}
+	const eventSource = new EventSourcePoly(`/fen`, eventSourceInitDict)
+	eventSource.onopen = (m) => {
+		console.log('Connected!', m)
+	}
+	eventSource.onerror = (e) => console.log(e)
+	eventSource.onmessage = (e) => {
+		const data = JSON.parse(e.data)
+		console.log('stream data', data)
+
+
+	}
+
+	return () => {
+		eventSource.close()
+		console.log('eventSource closed!')
+	}
+}
+
+const Board = () => {
+	const [running, setRunning] = useState(false)
+	const [winner, setWinner] = useState()
+	const [turn, setTurn] = useState(0)
+	const [fen, setFen] = useState("")
+	const [fenBoard, setFenboard] = useState(new FENBoard("8/2p5/8/8/8/7k/7B/4r2K w"))
+	const [items, setItems] = useState([])
+
+	useEffect(() => {
+		setFenboard(new FENBoard("8/2p5/8/8/8/7k/7B/4r2K w"))
+		setFen("blaa")
+		console.log('set fen')
+	}, []);
+
+	const setBoard = () => {
+		const tempItems = []
+		for (let i = 0; i < 8; i++) {
+			for (let j = 0; j < 8; j++) {
+				tempItems.push(
+					<Square key={`${i}-${j}`} white={(i * 7 + j) % 2 === 0}>
+						{pieceSwitch(fenBoard.board[i][j], 46)}
+					</Square>
+				)
+			}
+		}
+		setItems(tempItems)
+	}
+
+	const startGame = () => {
+		setRunning(true)
+		setFen("8/2p5/8/8/8/7k/7B/4r2K w")
+		//setFen(`${new FENBoard("start").fen} w KQkq`)
+	}
+
+	useEffect(() => {
+		if (running) {
+			if (fen.length > 0) {
+				playTurn({ fen })
+					.then((result) => {
+						console.log('fen result', result)
+						if (result.data.includes("wins")) {
+							setRunning(false)
+							setWinner(result.data)
+						} else {
+							//const fb = fenBoard
+							//fb.fen = result.data
+							//setFenboard(fb)
+							fenBoard.fen = result.data
+							setFen(`${result.data}`)
+						}
+					})
+			}
+		}
+		setBoard()
+	}, [fen])
 
 	return (
-		<BoardContainer>
-			<Container>
-				<CoordinatesContainerVertical>
-					<CoordinatesVertical>8</CoordinatesVertical>
-					<CoordinatesVertical>7</CoordinatesVertical>
-					<CoordinatesVertical>6</CoordinatesVertical>
-					<CoordinatesVertical>5</CoordinatesVertical>
-					<CoordinatesVertical>4</CoordinatesVertical>
-					<CoordinatesVertical>3</CoordinatesVertical>
-					<CoordinatesVertical>2</CoordinatesVertical>
-					<CoordinatesVertical>1</CoordinatesVertical>
-				</CoordinatesContainerVertical>
-				<BoardStyle>
-					{items}
-				</BoardStyle>
-			</Container>
-			<CoordinatesContainerHorizontal>
-				<CoordinatesHorizontal>A</CoordinatesHorizontal>
-				<CoordinatesHorizontal>B</CoordinatesHorizontal>
-				<CoordinatesHorizontal>C</CoordinatesHorizontal>
-				<CoordinatesHorizontal>D</CoordinatesHorizontal>
-				<CoordinatesHorizontal>E</CoordinatesHorizontal>
-				<CoordinatesHorizontal>F</CoordinatesHorizontal>
-				<CoordinatesHorizontal>G</CoordinatesHorizontal>
-				<CoordinatesHorizontal>H</CoordinatesHorizontal>
-			</CoordinatesContainerHorizontal>
-			<footer>Chess pieces by <a href="https://en.wikipedia.org/wiki/User:Cburnett" title="en:User:Cburnett">Cburnett</a> - <a href="http://creativecommons.org/licenses/by-sa/3.0/" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a></footer>
-		</BoardContainer>
+		<>
+			<BoardContainer>
+				<CoordinatesLetters offsetBottom={-20} />
+				<Container>
+					<CoordinatesNumbers offsetRight={-15} />
+					<BoardBorder>
+						<BoardStyle>
+							{items}
+						</BoardStyle>
+					</BoardBorder>
+					<CoordinatesNumbers offsetLeft={-15} />
+					{!running && (
+						<Mask>
+							{!winner ? (
+								<StartButton onClick={startGame}>Start game</StartButton>
+							) : (
+									<Banner>
+										<BannerText>{winner}</BannerText>
+									</Banner>
+								)}
+						</Mask>
+
+					)}
+				</Container>
+				<CoordinatesLetters offsetTop={-20} />
+
+			</BoardContainer >
+		</>
 	)
+
 }
 
 export default Board

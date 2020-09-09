@@ -10,6 +10,7 @@
 #include "stats.h"
 #include "siirtokello.h"
 #include <thread>
+#include<ctype.h>
 
 
 
@@ -53,6 +54,8 @@ public:
 	Hash hash;
 
 	Asema(); // Asettaa alkuaseman.void paivitaAsema(Siirto* siirto);
+
+	Asema(std::string fen);
 
 	void paivitaAsema(Siirto* siirto);
 	double evaluoi();																	// Aseman numeerinen arviointi.

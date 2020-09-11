@@ -170,16 +170,16 @@ std::string Siirto::toNormalString(Asema* asema) {
 
 		switch (getMiksiKorotetaan()) {
 		case VD: case MD:
-			ss << "=Q";
+			ss << "->Q";
 			break;
 		case VL: case ML:
-			ss << "=B";
+			ss << "->B";
 			break;
 		case VT: case MT:
-			ss << "=R";
+			ss << "->R";
 			break;
 		case VR: case MR:
-			ss << "=N";
+			ss << "->N";
 			break;
 		}
 	}

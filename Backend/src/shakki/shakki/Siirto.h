@@ -18,6 +18,7 @@ public:
 	void setMiksiKorotetaan(int miksiKorotetaan);
 	void setEnPassant(bool enPassant);
 	std::wstring toString(Asema* asema);
+	std::string toNormalString(Asema* asema);
 	bool operator==(const Siirto& other)const;
 	bool operator!=(const Siirto& other)const;
 	bool operator<(const Siirto& other)const;

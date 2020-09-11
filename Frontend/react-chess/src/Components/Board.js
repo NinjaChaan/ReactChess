@@ -43,37 +43,122 @@ const BoardContainer = styled.div`
 
 const StartButton = styled.button`
 	height: 40px;
-	margin: auto;
+	position: absolute;
+	top: 200px;
+	left: ${(props) => (props.width && `calc(50% - ${props.width}px/ 2)`)};
+	border: none;
+	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+
 	border-radius: 4px;
 	font-weight: 600;
 	&:hover{
 		background-color:#fffafac7;
 	}
 `
+// const StartButton = styled.button`
+// 	height: 40px;
+// 	margin: -100px auto 0 auto;
+// 	border-radius: 4px;
+// 	font-weight: 600;
+// 	&:hover{
+// 		background-color:#fffafac7;
+// 	}
+// `
+
 
 const Mask = styled.div`
 	width: 450px;
 	height: 450px;
 	position: absolute;
 	background-color: #615f5fc7;
-	margin-left: -5px;
+	margin-left: -6px;
 	display: flex;
+	border-radius: 4px;
 `
 
 const Banner = styled.div`
-	margin: auto;
-	background-color: #c1fc90;
-	height: 30px;
-	display: flex;
+	margin: 160px auto 0 auto;
+	background-color: ${(props) => (props.winner === "w" && '#c1fc90')
+		|| '#fc9590'
+	};
+	display: grid;
 	border-radius: 4px;
-	padding: 5px;
-	width: 100%;
+	padding: 10px;
+	width: 80%;
 	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+	height: fit-content;
+	z-index: 1;
 `
 
 const BannerText = styled.span`
 	margin: auto;
 	font-weight: 600;
+`
+
+const MoveContainerContainer = styled.div`
+	background-color: burlywood;
+	margin-left: 50px;
+	padding: 5px;
+	border-radius: 4px;
+	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+`
+
+const MoveHistoryContainer = styled.div`
+	background-color: sienna;
+	border-radius: 4px;
+	/* margin-left: 50px; */
+	padding: 10px 0;
+	height: 420px;
+	/* width: 110px; */
+	/* overflow: auto; */
+	/* box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75); */
+`
+
+const MoveContainer = styled.div`
+	height: 410px;
+	width: 90px;
+	overflow: auto;
+	&::-webkit-scrollbar {
+		display: none;
+	}
+  	-ms-overflow-style: none;  /* IE and Edge */
+ 	scrollbar-width: none;  /* Firefox */
+	padding-left: 15px;
+	/* margin-top: 5px; */
+`
+
+const TitleContainer = styled.div`
+	height:20px;
+	position: relative;
+	margin-top: -5px;
+	&:after{
+		content: "";
+		position: absolute;
+		top: 0px;
+		bottom: 0;
+		box-shadow: 0px 5px 8px -2px rgba(0,0,0,0.60);
+		width: 105px;
+		height: 20px;
+		display: inherit;
+	}	
+`
+
+const Title = styled.span`
+	color:#f1d2ab;
+	font-weight: 600;
+	text-align: center;
+	display: grid;
+	padding-bottom: 5px;
+`
+
+const MoveLi = styled.li`
+	color:#f1d2ab;
+	margin: 2.5px 0;
+	&::marker {
+		color: ${(props) => (props.color === "w" && 'white')
+		|| 'black'
+	};
+	}
 `
 
 const pieceSwitch = (piece, size) => {
@@ -155,26 +240,85 @@ const startStream = () => {
 
 const Board = () => {
 	const [running, setRunning] = useState(false)
-	const [winner, setWinner] = useState()
+	const [winner, setWinner] = useState(null)
+	const [winnerText, setWinnerText] = useState()
 	const [turn, setTurn] = useState(0)
 	const [fen, setFen] = useState("")
-	const [fenBoard, setFenboard] = useState(new FENBoard("8/2p5/8/8/8/7k/7B/4r2K w"))
+	const [fenBoard, setFenboard] = useState(new FENBoard("start"))
 	const [items, setItems] = useState([])
+	const [startWidth, setStartWidth] = useState()
+	const [fenHistory, setFenHistory] = useState({})
+	const [moveHistory, setMoveHistory] = useState([])
+	const [lastMove, setLastMove] = useState("")
 
 	useEffect(() => {
-		setFenboard(new FENBoard("8/2p5/8/8/8/7k/7B/4r2K w"))
+		setFenboard(new FENBoard("start"))
 		setFen("blaa")
-		console.log('set fen')
 	}, []);
 
+	useEffect(() => {
+		if (document.getElementById('start')) {
+			setStartWidth(document.getElementById('start').scrollWidth)
+		}
+	}, [winner]);
+
+	const downHandler = (event) => {
+		if (event.ctrlKey == true && (event.which == '61' || event.which == '107' || event.which == '173' || event.which == '171' || event.which == '109' || event.which == '187' || event.which == '189')) {
+			event.preventDefault();
+		}
+	}
+
+	const scrollHandler = (event) => {
+		if (event.ctrlKey == true) {
+			event.preventDefault();
+		}
+	}
+
+	useEffect(() => {
+		window.addEventListener('keydown', downHandler)
+		window.addEventListener('wheel', scrollHandler)
+		// Remove event listeners on cleanup
+
+		return () => {
+			window.removeEventListener('keydown', downHandler)
+			window.removeventListener('wheel', scrollHandler)
+		};
+	}, []); // Empty array ensures that effect is only run on mount and unmount
+
+	const squareInLastMove = (i, j, r1c, r1r, r2c, r2r) => {
+		//console.log('is last', (j===r1c && i === r1r) || (j===r2c && i === r2r) )
+		return (j === r1c && i === r1r) || (j === r2c && i === r2r)
+	}
+
 	const setBoard = () => {
+		let showMove = true;
+
+		const regex = RegExp('B|R|N|K|Q')
+
+		const cleanedMove = (regex.test(lastMove[0]) ? lastMove.substring(1) : lastMove) || "öööööö"
+
+
+		if (lastMove === "O-O" || lastMove === "O-O-O") {
+			showMove = false
+		}
+		const r1c = showMove ? cleanedMove[0].charCodeAt(0) - 'a'.charCodeAt(0) : "";
+		const r1r = showMove ? 7 - (cleanedMove[1].charCodeAt(0) - '1'.charCodeAt(0)) : "";
+		const r2c = showMove ? cleanedMove[3].charCodeAt(0) - 'a'.charCodeAt(0) : "";
+		const r2r = showMove ? 7 - (cleanedMove[4].charCodeAt(0) - '1'.charCodeAt(0)) : "";
+
 		const tempItems = []
 		for (let i = 0; i < 8; i++) {
 			for (let j = 0; j < 8; j++) {
 				tempItems.push(
-					<Square key={`${i}-${j}`} white={(i * 7 + j) % 2 === 0}>
-						{pieceSwitch(fenBoard.board[i][j], 46)}
-					</Square>
+					showMove ? (
+						<Square id={`${i}${j}`} key={`${i}-${j}`} white={(i * 7 + j) % 2 === 0} blue={squareInLastMove(i, j, r1c, r1r, r2c, r2r)}>
+							{pieceSwitch(fenBoard.board[i][j], 46)}
+						</Square>)
+						: (
+							<Square id={`${i}${j}`} key={`${i}-${j}`} white={(i * 7 + j) % 2 === 0} blue={false}>
+								{pieceSwitch(fenBoard.board[i][j], 46)}
+							</Square>
+						)
 				)
 			}
 		}
@@ -182,9 +326,18 @@ const Board = () => {
 	}
 
 	const startGame = () => {
+		setWinner(null)
 		setRunning(true)
-		setFen("8/2p5/8/8/8/7k/7B/4r2K w")
-		//setFen(`${new FENBoard("start").fen} w KQkq`)
+		setItems([])
+		setFenboard(new FENBoard("start"))
+		setFenHistory({})
+		setFen(`${new FENBoard("start").fen} w KQkq`)
+		//setFen(`8/8/8/8/3q1k2/R6K/8/8 w`)
+	}
+
+	const updateScroll = () => {
+		var element = document.getElementById("moveContainer");
+		element.scrollTop = element.scrollHeight;
 	}
 
 	useEffect(() => {
@@ -192,16 +345,43 @@ const Board = () => {
 			if (fen.length > 0) {
 				playTurn({ fen })
 					.then((result) => {
+						//debugger;
 						console.log('fen result', result)
-						if (result.data.includes("wins")) {
+						if (result.data.fen.includes("wins")) {
 							setRunning(false)
-							setWinner(result.data)
+							setWinnerText(result.data.fen)
+							if (result.data.fen.includes("White")) {
+								setWinner("w")
+							} else {
+								setWinner("b")
+							}
+
+						} else if (result.data.fen.includes("Draw")) {
+							setRunning(false)
+							setWinnerText(result.data.fen)
+							setWinner("d")
 						} else {
-							//const fb = fenBoard
-							//fb.fen = result.data
-							//setFenboard(fb)
-							fenBoard.fen = result.data
-							setFen(`${result.data}`)
+							if (result.data.fen in fenHistory) {
+								fenHistory[result.data.fen]++
+								if (fenHistory[result.data.fen] === 3) {
+									setRunning(false)
+									setWinnerText("Draw")
+									setWinner("d")
+								}
+							} else {
+								fenHistory[result.data.fen] = 1
+							}
+							moveHistory.push(
+								{
+									move: result.data.lastMove,
+									color: result.data.fen.includes(" b") ? "w" : "b"
+								})
+							setLastMove(result.data.lastMove)
+							setTimeout(() => {
+								updateScroll()
+							}, 100)
+							fenBoard.fen = result.data.fen
+							setFen(`${result.data.fen}`)
 						}
 					})
 			}
@@ -221,21 +401,37 @@ const Board = () => {
 						</BoardStyle>
 					</BoardBorder>
 					<CoordinatesNumbers offsetLeft={-15} />
+					<MoveContainerContainer>
+						<MoveHistoryContainer>
+							<TitleContainer>
+								<Title >Move history</Title>
+							</TitleContainer>
+							<MoveContainer id="moveContainer">
+								{moveHistory.map((move) => (
+									<MoveLi key={move.move} color={move.color}>{move.move}</MoveLi>
+								))}
+							</MoveContainer>
+						</MoveHistoryContainer>
+					</MoveContainerContainer>
 					{!running && (
 						<Mask>
-							{!winner ? (
-								<StartButton onClick={startGame}>Start game</StartButton>
-							) : (
-									<Banner>
-										<BannerText>{winner}</BannerText>
-									</Banner>
-								)}
+							{winner && (
+								<Banner
+									winner={winner}>
+									<BannerText>{winnerText}</BannerText>
+								</Banner>
+							)}
+
+							<StartButton
+								id="start"
+								width={startWidth}
+								onClick={startGame}>{winner ? "Start new game" : "Start game"}
+							</StartButton>
 						</Mask>
 
 					)}
 				</Container>
 				<CoordinatesLetters offsetTop={-20} />
-
 			</BoardContainer >
 		</>
 	)

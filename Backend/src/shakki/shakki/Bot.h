@@ -18,7 +18,7 @@ public:
 	static Napi::Object Init(Napi::Env env, Napi::Object exports);
 	//Bot();
 	Bot(const Napi::CallbackInfo& info);
-	std::string Play_turn(std::string fen);
+	std::tuple<std::string, std::string, std::vector<std::string>> Play_turn(std::string fen);
 private:
 	static Napi::FunctionReference constructor;
 	Napi::FunctionReference jsFnRef;

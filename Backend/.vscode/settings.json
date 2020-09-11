@@ -51,6 +51,19 @@
 		"xstddef": "cpp",
 		"xstring": "cpp",
 		"xtr1common": "cpp",
-		"xutility": "cpp"
+		"xutility": "cpp",
+		"array": "cpp",
+		"codecvt": "cpp",
+		"ctime": "cpp",
+		"fstream": "cpp",
+		"locale": "cpp",
+		"map": "cpp",
+		"sstream": "cpp",
+		"unordered_set": "cpp",
+		"xlocbuf": "cpp",
+		"xlocmes": "cpp",
+		"xlocmon": "cpp",
+		"xloctime": "cpp",
+		"xtree": "cpp"
 	}
 }

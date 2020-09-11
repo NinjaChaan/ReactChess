@@ -27,11 +27,12 @@ Bot::Bot(const Napi::CallbackInfo &info) : Napi::ObjectWrap<Bot>(info)
 	openingBook.Initialize(bookFiles);
 }
 
-std::string Bot::Play_turn(string fen)
+std::tuple<std::string, std::string, std::vector<std::string>> Bot::Play_turn(string fen)
 {
-
 	using clock = std::chrono::system_clock;
 	using sec = std::chrono::duration<double>;
+	std::tuple<std::string, std::string, std::vector<std::string>> returnValues;
+	std::vector<std::string> laillisetSiirrot;
 
 	lautaDict fake;
 	Asema asema(fen);
@@ -40,7 +41,11 @@ std::string Bot::Play_turn(string fen)
 	if (siirtolista.size() == 0)
 	{
 		wprintf(L"%s voitti!", asema.getSiirtovuoro() == 1 ? L"Valkoinen" : L"Musta");
-		return asema.getSiirtovuoro() == 1 ? "White wins" : "Black wins";
+		std::string fen = asema.getSiirtovuoro() == 1 ? "White wins" : "Black wins";
+		return std::make_tuple(fen, "", std::vector<std::string>());
+	}
+	if(asema.mahdotonLoppupeli()){
+		return std::make_tuple("Draw", "", std::vector<std::string>());
 	}
 
 	auto start = clock::now();
@@ -64,10 +69,15 @@ std::string Bot::Play_turn(string fen)
 	}
 	asema.stats.Print();
 	asema.stats.Reset();
-
+	std::string lastMove = paras._parasSiirto.toNormalString(&asema);
 	asema.paivitaAsema(&paras._parasSiirto);
 
-	return asema.getFen();
+	for (auto s : asema.annaLaillisetSiirrot())
+	{
+		laillisetSiirrot.push_back(s.toNormalString(&asema));
+	}
+
+	return std::make_tuple(asema.getFen(), lastMove, laillisetSiirrot);
 }
 
 Napi::Value Bot::playTurn(const Napi::CallbackInfo &info)
@@ -90,7 +100,19 @@ Napi::Value Bot::playTurn(const Napi::CallbackInfo &info)
 
 	Napi::String fen = info[0].As<Napi::String>();
 
-	string newFen = Play_turn(fen.Utf8Value());
+	std::tuple<std::string, std::string, std::vector<std::string>> returnValues = Play_turn(fen.Utf8Value());
 
-	return Napi::String::New(env, newFen);
+	Napi::Object returnArray = Napi::Object::New(env);
+
+	uint32_t i = 0;
+
+	returnArray["fen"] =  Napi::String::New(info.Env(), std::get<0>(returnValues));
+	returnArray["lastMove"] =  Napi::String::New(info.Env(), std::get<1>(returnValues));
+
+	for (size_t i = 0; i < std::get<2>(returnValues).size(); i++)
+	{
+		returnArray[i] = Napi::String::New(info.Env(), std::get<2>(returnValues)[i]);
+	}
+
+	return returnArray;
 }

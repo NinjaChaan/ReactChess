@@ -8,7 +8,7 @@ const app = express()
 app.use(cors())
 app.use(express.json({ limit: '50mb' }))
 
-const hostname = 'localhost'
+const hostname = '0.0.0.0'
 const port = 3000
 
 const bot = new Bot()
@@ -23,6 +23,7 @@ app.post('/playTurn', async (request, response, next) => {
 	console.log('body: ', body)
 	playTurn(body.fen)
 	.then((result) => {
+		console.log('result: ', result)
 		response.json(result)
 	})
 	.catch((error) => next(error))

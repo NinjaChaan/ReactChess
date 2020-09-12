@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
 import EventSourcePoly from 'eventsource'
 import Square from '../Components/Square'
@@ -228,8 +228,6 @@ const startStream = () => {
 	eventSource.onmessage = (e) => {
 		const data = JSON.parse(e.data)
 		console.log('stream data', data)
-
-
 	}
 
 	return () => {
@@ -243,6 +241,7 @@ const Board = () => {
 	const [winner, setWinner] = useState(null)
 	const [winnerText, setWinnerText] = useState()
 	const [turn, setTurn] = useState(0)
+	const [playAs, setPlayAs] = useState(0)
 	const [fen, setFen] = useState("")
 	const [fenBoard, setFenboard] = useState(new FENBoard("start"))
 	const [items, setItems] = useState([])
@@ -250,10 +249,12 @@ const Board = () => {
 	const [fenHistory, setFenHistory] = useState({})
 	const [moveHistory, setMoveHistory] = useState([])
 	const [lastMove, setLastMove] = useState("")
+	const [selectedPiece, setSelectedPiece] = useState({})
 
 	useEffect(() => {
 		setFenboard(new FENBoard("start"))
 		setFen("blaa")
+		setTurn(0)
 	}, []);
 
 	useEffect(() => {
@@ -262,41 +263,28 @@ const Board = () => {
 		}
 	}, [winner]);
 
-	const downHandler = (event) => {
-		if (event.ctrlKey == true && (event.which == '61' || event.which == '107' || event.which == '173' || event.which == '171' || event.which == '109' || event.which == '187' || event.which == '189')) {
-			event.preventDefault();
-		}
-	}
-
-	const scrollHandler = (event) => {
-		if (event.ctrlKey == true) {
-			event.preventDefault();
-		}
-	}
-
-	useEffect(() => {
-		window.addEventListener('keydown', downHandler)
-		window.addEventListener('wheel', scrollHandler)
-		// Remove event listeners on cleanup
-
-		return () => {
-			window.removeEventListener('keydown', downHandler)
-			window.removeventListener('wheel', scrollHandler)
-		};
-	}, []); // Empty array ensures that effect is only run on mount and unmount
-
 	const squareInLastMove = (i, j, r1c, r1r, r2c, r2r) => {
-		//console.log('is last', (j===r1c && i === r1r) || (j===r2c && i === r2r) )
 		return (j === r1c && i === r1r) || (j === r2c && i === r2r)
 	}
 
+	const selectPiece = (coords) => {
+		console.log('click callback', coords)
+		const pieceSide = fenBoard.board[coords.x][coords.y] === fenBoard.board[coords.x][coords.y].toUpperCase() ? 0 : 1
+		if (pieceSide === playAs && playAs === turn) {
+			console.log('success')
+			setSelectedPiece(coords)
+		}
+		return (pieceSide === playAs && playAs === turn)
+	}
+
 	const setBoard = () => {
+		console.log('setting boards')
+		setSelectedPiece({})
 		let showMove = true;
 
 		const regex = RegExp('B|R|N|K|Q')
 
 		const cleanedMove = (regex.test(lastMove[0]) ? lastMove.substring(1) : lastMove) || "öööööö"
-
 
 		if (lastMove === "O-O" || lastMove === "O-O-O") {
 			showMove = false
@@ -309,16 +297,12 @@ const Board = () => {
 		const tempItems = []
 		for (let i = 0; i < 8; i++) {
 			for (let j = 0; j < 8; j++) {
+				const moved = showMove ? squareInLastMove(i, j, r1c, r1r, r2c, r2r) : false
+				const selected = selectedPiece.x === i && selectedPiece.y === j
 				tempItems.push(
-					showMove ? (
-						<Square id={`${i}${j}`} key={`${i}-${j}`} white={(i * 7 + j) % 2 === 0} blue={squareInLastMove(i, j, r1c, r1r, r2c, r2r)}>
-							{pieceSwitch(fenBoard.board[i][j], 46)}
-						</Square>)
-						: (
-							<Square id={`${i}${j}`} key={`${i}-${j}`} white={(i * 7 + j) % 2 === 0} blue={false}>
-								{pieceSwitch(fenBoard.board[i][j], 46)}
-							</Square>
-						)
+					<Square id={`${i}${j}`} key={`${i}-${j}`} white={(i * 7 + j) % 2 === 0} coords={{ x: i, y: j }} clickCallback={selectPiece} selected={selected} moved={moved}>
+						{pieceSwitch(fenBoard.board[i][j], 46)}
+					</Square>
 				)
 			}
 		}
@@ -332,6 +316,9 @@ const Board = () => {
 		setFenboard(new FENBoard("start"))
 		setFenHistory({})
 		setFen(`${new FENBoard("start").fen} w KQkq`)
+		setMoveHistory([])
+		setLastMove("")
+		setTurn(0)
 		//setFen(`8/8/8/8/3q1k2/R6K/8/8 w`)
 	}
 
@@ -345,7 +332,6 @@ const Board = () => {
 			if (fen.length > 0) {
 				playTurn({ fen })
 					.then((result) => {
-						//debugger;
 						console.log('fen result', result)
 						if (result.data.fen.includes("wins")) {
 							setRunning(false)
@@ -376,6 +362,7 @@ const Board = () => {
 									move: result.data.lastMove,
 									color: result.data.fen.includes(" b") ? "w" : "b"
 								})
+							setTurn(result.data.fen.includes(" b") ? 1 : 0)
 							setLastMove(result.data.lastMove)
 							setTimeout(() => {
 								updateScroll()
@@ -428,14 +415,12 @@ const Board = () => {
 								onClick={startGame}>{winner ? "Start new game" : "Start game"}
 							</StartButton>
 						</Mask>
-
 					)}
 				</Container>
 				<CoordinatesLetters offsetTop={-20} />
 			</BoardContainer >
 		</>
 	)
-
 }
 
 export default Board

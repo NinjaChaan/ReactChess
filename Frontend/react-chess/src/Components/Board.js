@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
 import EventSourcePoly from 'eventsource'
 import Square from '../Components/Square'
+import Ellipsis from './Ellipsis'
 import { CoordinatesNumbers, CoordinatesLetters } from '../Components/Coordinates'
 import FENBoard from 'fen-chess-board'
 import axios from 'axios'
@@ -55,16 +56,6 @@ const StartButton = styled.button`
 		background-color:#fffafac7;
 	}
 `
-// const StartButton = styled.button`
-// 	height: 40px;
-// 	margin: -100px auto 0 auto;
-// 	border-radius: 4px;
-// 	font-weight: 600;
-// 	&:hover{
-// 		background-color:#fffafac7;
-// 	}
-// `
-
 
 const Mask = styled.div`
 	width: 450px;
@@ -161,6 +152,16 @@ const MoveLi = styled.li`
 	}
 `
 
+const ThinkingText = styled.span`
+	display: block;
+	height: 22px;
+	width: 450px;
+	font-size: larger;
+	text-align: center;
+	color: white;
+	margin-bottom: 5px;
+`
+
 const pieceSwitch = (piece, size) => {
 	switch (piece) {
 		case 'k':
@@ -213,6 +214,12 @@ const playTurn = (fen) => {
 	const request = axios.post(`/playTurn`, fen)
 	return request.then((response) => response).catch((error) => (error.response))
 }
+
+const getLegalMoves = (fen) => {
+	const request = axios.post(`/getLegalMoves`, fen)
+	return request.then((response) => response).catch((error) => (error.response))
+}
+
 const startStream = () => {
 	console.log('Connecting to event stream')
 	const eventSourceInitDict = {
@@ -242,20 +249,17 @@ const Board = () => {
 	const [winnerText, setWinnerText] = useState()
 	const [turn, setTurn] = useState(0)
 	const [playAs, setPlayAs] = useState(0)
-	const [fen, setFen] = useState("")
-	const [fenBoard, setFenboard] = useState(new FENBoard("start"))
+	const [fen, setFen] = useState(`${new FENBoard("start").fen}`)
+	const [fenExtras, setFenExtras] = useState({ toMove: 'w', castling: 'KQkq' })
 	const [items, setItems] = useState([])
 	const [startWidth, setStartWidth] = useState()
 	const [fenHistory, setFenHistory] = useState({})
 	const [moveHistory, setMoveHistory] = useState([])
+	const [legalMoves, setLegalMoves] = useState([])
 	const [lastMove, setLastMove] = useState("")
 	const [selectedPiece, setSelectedPiece] = useState({})
-
-	useEffect(() => {
-		setFenboard(new FENBoard("start"))
-		setFen("blaa")
-		setTurn(0)
-	}, []);
+	const [allowedMoves, setAllowedMoves] = useState([])
+	const [botThinking, setBotThinking] = useState(false)
 
 	useEffect(() => {
 		if (document.getElementById('start')) {
@@ -267,19 +271,129 @@ const Board = () => {
 		return (j === r1c && i === r1r) || (j === r2c && i === r2r)
 	}
 
-	const selectPiece = (coords) => {
-		console.log('click callback', coords)
-		const pieceSide = fenBoard.board[coords.x][coords.y] === fenBoard.board[coords.x][coords.y].toUpperCase() ? 0 : 1
-		if (pieceSide === playAs && playAs === turn) {
-			console.log('success')
-			setSelectedPiece(coords)
+	const setCastling = ({castle = false, king = false, qtower = false, ktower = false}) => {
+		if (castle || king) {
+			let extras = fenExtras.castling.replace("K", "")
+			extras = extras.replace("Q", "")
+			setFenExtras({ toMove: 'b', castling: extras })
+		}else if(qtower){
+			let extras = fenExtras.castling.replace("Q", "")
+			setFenExtras({ toMove: 'b', castling: extras })
+		}else if(ktower){
+			let extras = fenExtras.castling.replace("K", "")
+			setFenExtras({ toMove: 'b', castling: extras })
+		}else{
+			setFenExtras({ toMove: 'b', castling: fenExtras.castling })
 		}
+	}
+
+	const clickSquare = (coords) => {
+		const fenBoard = new FENBoard(fen)
+		const pieceSide = fenBoard.board[coords.y][coords.x] === fenBoard.board[coords.y][coords.x].toUpperCase() ? 0 : 1
+
+		if (fenBoard.board[coords.y][coords.x] !== "" && pieceSide === playAs && playAs === turn) {
+			let newAllowedMoves = []
+			setSelectedPiece(coords)
+			for (let i = 0; i < legalMoves.length; i++) {
+				let castling = false;
+				const regex = RegExp('B|R|N|K|Q')
+
+				const cleanedMove = (regex.test(legalMoves[i][0]) ? legalMoves[i].substring(1) : legalMoves[i]) || "öööööö"
+				if (legalMoves[i] === "O-O") {
+					if (fenExtras.toMove === 'w' && coords.x === 4 && coords.y === 7) {
+						newAllowedMoves.push(`O-O`)
+					} else if (fenExtras.toMove === 'b' && coords.x === 4 && coords.y === 0) {
+						newAllowedMoves.push(`O-O`)
+					}
+				}
+				else if (legalMoves[i] === "O-O-O") {
+					if (fenExtras.toMove === 'w' && coords.x === 4 && coords.y === 7) {
+						newAllowedMoves.push(`O-O-O`)
+					} else if (fenExtras.toMove === 'b' && coords.x === 4 && coords.y === 0) {
+						newAllowedMoves.push(`O-O-O`)
+					}
+				} else {
+					const r1c = cleanedMove[0].charCodeAt(0) - 'a'.charCodeAt(0);
+					const r1r = 7 - (cleanedMove[1].charCodeAt(0) - '1'.charCodeAt(0));
+
+					if (r1c === coords.x && r1r === coords.y) {
+						const r2c = cleanedMove[3].charCodeAt(0) - 'a'.charCodeAt(0);
+						const r2r = 7 - (cleanedMove[4].charCodeAt(0) - '1'.charCodeAt(0));
+						newAllowedMoves.push(`${r2c}-${r2r}`)
+					}
+				}
+
+			}
+			setAllowedMoves(newAllowedMoves)
+		}
+		let moved = false
+		let move = ''
+		if (allowedMoves.includes(`${coords.x}-${coords.y}`)) {
+			fenBoard.move(`${String.fromCharCode(selectedPiece.x + 97)}${8 - selectedPiece.y}`, `${String.fromCharCode(coords.x + 97)}${8 - coords.y}`)
+			setFen(fenBoard.fen)
+			moved = true
+			move = `${(fenBoard.board[coords.y][coords.x] !== 'P' ? fenBoard.board[coords.y][coords.x] : '')}${String.fromCharCode(selectedPiece.x + 97)}${8 - selectedPiece.y}-${String.fromCharCode(coords.x + 97)}${8 - coords.y}`
+
+		} else if (allowedMoves.includes(`O-O`)) {
+			if (fenExtras.toMove === 'w' && coords.x === 6 && coords.y === 7) {
+				fenBoard.move(`e1`, `g1`);
+				fenBoard.move(`h1`, `f1`);
+			} else if (fenExtras.toMove === 'b' && coords.x === 6 && coords.y === 0) {
+				fenBoard.move(`e7`, `g7`);
+				fenBoard.move(`h7`, `f7`);
+			} else {
+				return;
+			}
+			moved = true
+			move = 'O-O'
+		} else if (allowedMoves.includes(`O-O-O`)) {
+			if (fenExtras.toMove === 'w' && coords.x === 2 && coords.y === 7) {
+				fenBoard.move(`e1`, `c1`);
+				fenBoard.move(`a1`, `d1`);
+			} else if (fenExtras.toMove === 'b' && coords.x === 2 && coords.y === 0) {
+				fenBoard.move(`e7`, `c7`);
+				fenBoard.move(`a7`, `d7`);
+			} else {
+				return;
+			}
+			moved = true
+			move = 'O-O-O'
+		}
+		setLastMove(move)
+
+		if (moved) {
+			setTurn(1)
+			setFen(fenBoard.fen)
+			setSelectedPiece({})
+			setAllowedMoves([])
+			
+			if (fenExtras.toMove === 'w') {
+				if (move === 'O-O' || move === 'O-O-O') {
+					setCastling({castle: true})
+				}else if(move[0] === 'K'){
+					setCastling({king: true})
+				}else if(move[0] === 'R' && move[1] === 'h' && move[2] === '1'){
+					setCastling({ktower: true})
+				}else if(move[0] === 'R' && move[1] === 'a' && move[2] === '1'){
+					setCastling({qtower: true})
+				} else {
+					setCastling({})
+				}
+			} else {
+				setFenExtras({ toMove: 'w', castling: fenExtras.castling })
+			}
+			moveHistory.push(
+				{
+					move,
+					color: fenExtras.toMove
+				})
+		}
+
 		return (pieceSide === playAs && playAs === turn)
 	}
 
-	const setBoard = () => {
-		console.log('setting boards')
-		setSelectedPiece({})
+	const setBoard = (movedPiece) => {
+		const fenBoard = new FENBoard(fen)
 		let showMove = true;
 
 		const regex = RegExp('B|R|N|K|Q')
@@ -298,9 +412,12 @@ const Board = () => {
 		for (let i = 0; i < 8; i++) {
 			for (let j = 0; j < 8; j++) {
 				const moved = showMove ? squareInLastMove(i, j, r1c, r1r, r2c, r2r) : false
-				const selected = selectedPiece.x === i && selectedPiece.y === j
+				const shortCastle = allowedMoves.includes("O-O") && ((turn === 0 && j === 6 && i === 7) || (turn === 1 && j === 6 && i === 0))
+				const longCastle = allowedMoves.includes("O-O-O") && ((turn === 0 && j === 2 && i === 7) || (turn === 1 && j === 2 && i === 0))
+				const allowed = !movedPiece && (allowedMoves.includes(`${j}-${i}`) || shortCastle || longCastle)
+				
 				tempItems.push(
-					<Square id={`${i}${j}`} key={`${i}-${j}`} white={(i * 7 + j) % 2 === 0} coords={{ x: i, y: j }} clickCallback={selectPiece} selected={selected} moved={moved}>
+					<Square id={`${j}${i}`} key={`${j}-${i}`} white={(i * 7 + j) % 2 === 0} allowed={allowed} coords={{ x: j, y: i }} clickCallback={clickSquare} moved={moved}>
 						{pieceSwitch(fenBoard.board[i][j], 46)}
 					</Square>
 				)
@@ -312,14 +429,23 @@ const Board = () => {
 	const startGame = () => {
 		setWinner(null)
 		setRunning(true)
-		setItems([])
-		setFenboard(new FENBoard("start"))
 		setFenHistory({})
-		setFen(`${new FENBoard("start").fen} w KQkq`)
+		setFen(`${new FENBoard("start").fen}`)
+		setFenExtras({ toMove: 'w', castling: 'KQkq' })
 		setMoveHistory([])
 		setLastMove("")
 		setTurn(0)
-		//setFen(`8/8/8/8/3q1k2/R6K/8/8 w`)
+		getLegalMoves({ fen: `${new FENBoard("start").fen} w KQkq` })
+			.then((result) => {
+				console.log('fen result', result)
+				let moves = []
+				for (const move in result.data) {
+					if (!isNaN(move)) {
+						moves.push(result.data[move])
+					}
+				}
+				setLegalMoves(moves)
+			})
 	}
 
 	const updateScroll = () => {
@@ -327,58 +453,88 @@ const Board = () => {
 		element.scrollTop = element.scrollHeight;
 	}
 
-	useEffect(() => {
-		if (running) {
-			if (fen.length > 0) {
-				playTurn({ fen })
-					.then((result) => {
-						console.log('fen result', result)
-						if (result.data.fen.includes("wins")) {
-							setRunning(false)
-							setWinnerText(result.data.fen)
-							if (result.data.fen.includes("White")) {
-								setWinner("w")
-							} else {
-								setWinner("b")
-							}
-
-						} else if (result.data.fen.includes("Draw")) {
-							setRunning(false)
-							setWinnerText(result.data.fen)
-							setWinner("d")
+	const playBotTurn = (fen) => {
+		console.log('play fen', fen)
+		setBotThinking(true)
+		if (fen.length > 0) {
+			playTurn({ fen })
+				.then((result) => {
+					console.log('result', result)
+					console.log('receive fen', result.data.fen)
+					if (result.data.fen.includes("wins")) {
+						setRunning(false)
+						setWinnerText(result.data.fen)
+						if (result.data.fen.includes("White")) {
+							setWinner("w")
 						} else {
-							if (result.data.fen in fenHistory) {
-								fenHistory[result.data.fen]++
-								if (fenHistory[result.data.fen] === 3) {
-									setRunning(false)
-									setWinnerText("Draw")
-									setWinner("d")
-								}
-							} else {
-								fenHistory[result.data.fen] = 1
-							}
-							moveHistory.push(
-								{
-									move: result.data.lastMove,
-									color: result.data.fen.includes(" b") ? "w" : "b"
-								})
-							setTurn(result.data.fen.includes(" b") ? 1 : 0)
-							setLastMove(result.data.lastMove)
-							setTimeout(() => {
-								updateScroll()
-							}, 100)
-							fenBoard.fen = result.data.fen
-							setFen(`${result.data.fen}`)
+							setWinner("b")
 						}
-					})
-			}
+						setBotThinking(false)
+
+					} else if (result.data.fen.includes("Draw")) {
+						setRunning(false)
+						setWinnerText(result.data.fen)
+						setWinner("d")
+						setBotThinking(false)
+					} else {
+						if (result.data.fen in fenHistory) {
+							fenHistory[result.data.fen]++
+							if (fenHistory[result.data.fen] === 3) {
+								setRunning(false)
+								setWinnerText("Draw")
+								setWinner("d")
+							}
+						} else {
+							fenHistory[result.data.fen] = 1
+						}
+						moveHistory.push(
+							{
+								move: result.data.lastMove,
+								color: result.data.fen.includes(" b") ? "w" : "b"
+							})
+						let moves = []
+						for (const move in result.data) {
+							if (!isNaN(move)) {
+								moves.push(result.data[move])
+							}
+						}
+						setLegalMoves(moves)
+						setTurn(result.data.fen.includes(" b") ? 1 : 0)
+						setLastMove(result.data.lastMove)
+						setTimeout(() => {
+							updateScroll()
+						}, 100)
+						// fenBoard.fen = result.data.fen
+						var splitfen = result.data.fen.split(' ')
+						setFen(splitfen[0])
+						setFenExtras({ toMove: splitfen[1], castling: splitfen[2] || '' })
+						setBotThinking(false)
+					}
+				})
 		}
-		setBoard()
-	}, [fen])
+	}
+
+	useEffect(() => {
+		setBoard(false)
+
+		if (fenExtras.toMove === 'b' && !botThinking) {
+			playBotTurn(`${fen} ${fenExtras.toMove} ${fenExtras.castling}`)
+		}
+	}, [fen, fenExtras, allowedMoves, selectedPiece, legalMoves, botThinking, turn])
 
 	return (
 		<>
 			<BoardContainer>
+				<ThinkingText>
+					{botThinking ? (
+						<>
+							<span>The bot is thinking</span>
+							<Ellipsis />
+						</>
+					) : (
+							<span> </span>
+						)}
+				</ThinkingText>
 				<CoordinatesLetters offsetBottom={-20} />
 				<Container>
 					<CoordinatesNumbers offsetRight={-15} />

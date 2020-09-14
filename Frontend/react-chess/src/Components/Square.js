@@ -10,9 +10,6 @@ const SquareStyle = styled.button`
 		|| 'sienna'
 	};
 	box-shadow: ${(props) => (props.moved && 'inset 2000px 0 0 0 rgba(0, 255, 0, 0.25)')};
-	/* border: ${(props) => (props.clicked && '3px solid yellow')
-		|| '3px solid transparent'
-	}; */
 	border: none;
 	&:after {
 		${(props) => props.selected && css`
@@ -25,14 +22,21 @@ const SquareStyle = styled.button`
 			display: inherit;
 			box-shadow: 0 0 0 2px yellow;
 		`}	
+		${(props) => props.allowed && css`
+			content: "";
+			position: absolute;
+			left: 12.5px;
+			top: 12.5px;
+			width: 25px;
+			height: 25px;
+			display: inherit;
+			border-radius:50%;
+			box-shadow: inset 2000px 0 0 0 rgb(251, 248, 74);
+		`}
 	}
-
-	/* &:hover{
-		box-shadow: inset 2000px 0 0 0 rgba(0, 255, 0, 0.5);
-	} */
 `
 
-const Square = ({ white, moved, children, selected, id, coords, clickCallback }) => {
+const Square = ({ white, moved, children, selected, allowed, id, coords, clickCallback }) => {
 	const [clicked, setClicked] = useState(false)
 
 	const selectPiece = () => {
@@ -41,12 +45,8 @@ const Square = ({ white, moved, children, selected, id, coords, clickCallback })
 		}
 	}
 
-	useEffect(() => {
-		setClicked(selected)
-	}, [selected]);
-
 	const click = () => {
-		setClicked(clickCallback(coords))
+		setClicked(clickCallback(coords) && children !== null)
 	}	
 
 	return (
@@ -55,8 +55,9 @@ const Square = ({ white, moved, children, selected, id, coords, clickCallback })
 			white={white}
 			moved={moved}
 			selected={clicked}
+			allowed={allowed}
 			onClick={click}
-			onBlur={() => { setClicked(false) }}>
+			onBlur={() => { setClicked(false)}}>
 			{children}
 		</SquareStyle>
 	)

@@ -5,9 +5,7 @@
       "cflags!": [ "-fno-exceptions" ],
       "cflags_cc!": [ "-fno-exceptions" ],
       "sources": [
-        "./src/test.cpp",
         "./src/index.cpp",
-		"./src/HillClimb.cpp",
 		"./src/shakki/shakki/*.cpp"
       ],
       "include_dirs": [

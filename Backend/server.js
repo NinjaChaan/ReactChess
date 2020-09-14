@@ -2,7 +2,7 @@ const http = require('http');
 const express = require('express')
 const cors = require('cors')
 const path = require('path')
-const { Bot }  = require('./build/Release/greet.node')
+const { Bot } = require('./build/Release/greet.node')
 
 const app = express()
 app.use(cors())
@@ -16,17 +16,31 @@ const bot = new Bot()
 
 async function playTurn(fen) {
 	return await Promise.resolve(bot.playTurn(fen));
-  }
+}
+
+async function getLegalMoves(fen) {
+	return await Promise.resolve(bot.getLegalMoves(fen));
+}
 
 app.post('/playTurn', async (request, response, next) => {
 	const { body } = request
 	console.log('body: ', body)
 	playTurn(body.fen)
-	.then((result) => {
-		console.log('result: ', result)
-		response.json(result)
-	})
-	.catch((error) => next(error))
+		.then((result) => {
+			console.log('result: ', result)
+			response.json(result)
+		})
+		.catch((error) => next(error))
+})
+app.post('/getLegalMoves', async (request, response, next) => {
+	const { body } = request
+	console.log('body: ', body)
+	getLegalMoves(body.fen)
+		.then((result) => {
+			console.log('result: ', result)
+			response.json(result)
+		})
+		.catch((error) => next(error))
 })
 
 

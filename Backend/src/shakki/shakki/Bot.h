@@ -19,12 +19,14 @@ public:
 	//Bot();
 	Bot(const Napi::CallbackInfo& info);
 	std::tuple<std::string, std::string, std::vector<std::string>> Play_turn(std::string fen);
+	std::vector<std::string> GetLegalMoves(std::string fen);
 private:
 	static Napi::FunctionReference constructor;
 	Napi::FunctionReference jsFnRef;
     Napi::Function jsFn;
 
 	Napi::Value playTurn(const Napi::CallbackInfo& info);
+	Napi::Value getLegalMoves(const Napi::CallbackInfo& info);
 
 	OpeningBook openingBook;
 };

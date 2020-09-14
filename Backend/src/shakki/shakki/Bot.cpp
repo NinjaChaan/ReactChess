@@ -8,7 +8,7 @@ Napi::Object Bot::Init(Napi::Env env, Napi::Object exports)
 {
 	Napi::HandleScope scope(env);
 
-	Napi::Function func = DefineClass(env, "Bot", {InstanceMethod("playTurn", &Bot::playTurn)});
+	Napi::Function func = DefineClass(env, "Bot", {InstanceMethod("playTurn", &Bot::playTurn), InstanceMethod("getLegalMoves", &Bot::getLegalMoves)});
 
 	constructor = Napi::Persistent(func);
 	constructor.SuppressDestruct();
@@ -76,6 +76,12 @@ std::tuple<std::string, std::string, std::vector<std::string>> Bot::Play_turn(st
 	{
 		laillisetSiirrot.push_back(s.toNormalString(&asema));
 	}
+	if (laillisetSiirrot.size() == 0)
+	{
+		wprintf(L"%s voitti!", asema.getSiirtovuoro() == 1 ? L"Valkoinen" : L"Musta");
+		std::string fen = asema.getSiirtovuoro() == 1 ? "White wins" : "Black wins";
+		return std::make_tuple(fen, "", std::vector<std::string>());
+	}
 
 	return std::make_tuple(asema.getFen(), lastMove, laillisetSiirrot);
 }
@@ -112,6 +118,57 @@ Napi::Value Bot::playTurn(const Napi::CallbackInfo &info)
 	for (size_t i = 0; i < std::get<2>(returnValues).size(); i++)
 	{
 		returnArray[i] = Napi::String::New(info.Env(), std::get<2>(returnValues)[i]);
+	}
+
+	return returnArray;
+}
+
+
+std::vector<std::string> Bot::GetLegalMoves(string fen)
+{
+	std::vector<std::string> laillisetSiirrot;
+
+	lautaDict fake;
+	Asema asema(fen);
+	vector<Siirto> siirtolista = asema.annaLaillisetSiirrot();
+
+	for (auto s : asema.annaLaillisetSiirrot())
+	{
+		laillisetSiirrot.push_back(s.toNormalString(&asema));
+	}
+
+	return laillisetSiirrot;
+}
+
+Napi::Value Bot::getLegalMoves(const Napi::CallbackInfo &info)
+{
+	Napi::Env env = info.Env();
+
+	if (info.Length() < 1)
+	{
+		Napi::TypeError::New(env, "Wrong number of arguments")
+			.ThrowAsJavaScriptException();
+		return env.Null();
+	}
+
+	if (!info[0].IsString())
+	{
+		Napi::TypeError::New(env, "Pass a fen to the function")
+			.ThrowAsJavaScriptException();
+		return env.Null();
+	}
+
+	Napi::String fen = info[0].As<Napi::String>();
+
+	std::vector<std::string> returnValues = GetLegalMoves(fen.Utf8Value());
+
+	Napi::Object returnArray = Napi::Object::New(env);
+
+	uint32_t i = 0;
+
+	for (size_t i = 0; i < returnValues.size(); i++)
+	{
+		returnArray[i] = Napi::String::New(info.Env(), returnValues[i]);
 	}
 
 	return returnArray;

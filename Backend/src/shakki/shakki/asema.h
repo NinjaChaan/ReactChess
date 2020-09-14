@@ -14,22 +14,22 @@
 
 
 
-// Ns. "forward declaration". Nyt Asema-luokassa voidaa esitellä Nappula-osoittimia ilman,
-// että nappula.h -tiedostoa täytyy includoida.
+// Ns. "forward declaration". Nyt Asema-luokassa voidaa esitellï¿½ Nappula-osoittimia ilman,
+// ettï¿½ nappula.h -tiedostoa tï¿½ytyy includoida.
 class Nappula;
 
 
-// Asema sisältää kaiken tarvittavan informaation pelitilanteen kuvaamiseksi
+// Asema sisï¿½ltï¿½ï¿½ kaiken tarvittavan informaation pelitilanteen kuvaamiseksi
 // (nappuloiden sijainti, siirtovuoro, linnoitusoikeudet jne.).
 class Asema {
 
 public:
-	// Pelilauta sisältää osoittimet kunkin ruudun nappula-olioon (nullptr/NULL/0 jos ruutu on tyhjä).
-	// Public-määreellä, koska tätä käytetään paljon muualla.
+	// Pelilauta sisï¿½ltï¿½ï¿½ osoittimet kunkin ruudun nappula-olioon (nullptr/NULL/0 jos ruutu on tyhjï¿½).
+	// Public-mï¿½ï¿½reellï¿½, koska tï¿½tï¿½ kï¿½ytetï¿½ï¿½n paljon muualla.
 	Nappula* lauta[8][8];
 
-	// Nappula-oliot. Huomaa, että samaa nappulaa voidaan käyttää useissa eri ruuduissa.
-	// Määritelty static-määreellä, joten nappulat ovat kaikkien lauta-olioiden "yhteiskäytössä"
+	// Nappula-oliot. Huomaa, ettï¿½ samaa nappulaa voidaan kï¿½yttï¿½ï¿½ useissa eri ruuduissa.
+	// Mï¿½ï¿½ritelty static-mï¿½ï¿½reellï¿½, joten nappulat ovat kaikkien lauta-olioiden "yhteiskï¿½ytï¿½ssï¿½"
 	// (suorituskyvyn vuoksi).
 	static Nappula* vk, * vd, * vt, * vl, * vr, * vs;	// Valkeat nappulat.
 	static Nappula* mk, * md, * mt, * ml, * mr, * ms;	// Mustat nappulat.
@@ -38,10 +38,10 @@ public:
 	static Siirtokello siirtokello;
 	static void AlustaEvaluaatio();
 
-	// Ohestalyöntiä varten (-1 = sotilaan kaksoisaskelta ei tapahtunut edellisellä siirrolla).
+	// Ohestalyï¿½ntiï¿½ varten (-1 = sotilaan kaksoisaskelta ei tapahtunut edellisellï¿½ siirrolla).
 	int kaksoisaskelSarakkeella = -1;
 
-	// Siirtojen määrä
+	// Siirtojen mï¿½ï¿½rï¿½
 	int vDsiirrot = 0;
 	int mDsiirrot = 0;
 	int vLsiirrot = 0;
@@ -62,7 +62,7 @@ public:
 	double evaluoiNegamax();
 	double quiescent(double alpha, double beta);
 	
-	MinMaxPaluu iteratiivinenAlphaBeta2(const lautaDict& historia, int kello, int* maxSyvyys);
+	MinMaxPaluu iteratiivinenAlphaBeta2(const lautaDict& historia, float kello, int* maxSyvyys);
 	MinMaxPaluu iterAlphaBetaRoot2(int syvyys, std::vector<MinMaxPaluu>* paluuarvot, lautaDict historia, Siirto viimeParasSiirto);
 	double iterAlphaBeta2(int syvyys, int syvyysJuuresta, const lautaDict& historia, double alpha, double beta);
 

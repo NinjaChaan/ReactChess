@@ -10,6 +10,6 @@ private:
 	std::chrono::time_point<clock> startTime;
 	sec endTime;
 public:
-	void Aloita(int sec);
+	void Aloita(float sec);
 	bool AikaLoppu();
 };

@@ -1,7 +1,7 @@
 #include "siirtokello.h"
 
 
-void Siirtokello::Aloita(int seconds) {
+void Siirtokello::Aloita(float seconds) {
 	startTime = clock::now();
 	endTime = (sec)seconds;
 }

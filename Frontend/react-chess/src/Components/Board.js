@@ -65,6 +65,8 @@ const Mask = styled.div`
 	margin-left: -6px;
 	display: flex;
 	border-radius: 4px;
+	top: 35px;
+	left: 458px;
 `
 
 const Banner = styled.div`
@@ -162,6 +164,39 @@ const ThinkingText = styled.span`
 	margin-bottom: 5px;
 `
 
+const PromotionContainer = styled.div`
+	position: relative;
+	top: 30%;
+	left: 115px;
+	background-color: burlywood;
+	height: 90px;
+	border-radius: 4px;
+	padding: 5px;
+
+`
+
+const PromotionInner = styled.div`
+	background-color: sienna;
+	padding: 5px;
+`
+
+const PromotionTitle = styled.span`
+    text-align: center;
+    width: 100%;
+    display: block;
+    font-size: larger;
+    margin-bottom: 5px;
+	color: #f1d2ab;
+`
+
+const PromotionButton = styled.button`
+	background: ${(props) => (props.image && `url(${props.image})`)};
+	background-color: beige;
+	height: 50px;
+	width: 50px;
+	border-radius: 4px;
+`
+
 const pieceSwitch = (piece, size) => {
 	switch (piece) {
 		case 'k':
@@ -249,7 +284,7 @@ const Board = () => {
 	const [winnerText, setWinnerText] = useState()
 	const [turn, setTurn] = useState(0)
 	const [playAs, setPlayAs] = useState(0)
-	const [fen, setFen] = useState(`${new FENBoard("start").fen}`)
+	const [fen, setFen] = useState(`${new FENBoard("8/P7/8/8/8/8/8/K6k").fen}`)
 	const [fenExtras, setFenExtras] = useState({ toMove: 'w', castling: 'KQkq' })
 	const [items, setItems] = useState([])
 	const [startWidth, setStartWidth] = useState()
@@ -260,6 +295,8 @@ const Board = () => {
 	const [selectedPiece, setSelectedPiece] = useState({})
 	const [allowedMoves, setAllowedMoves] = useState([])
 	const [botThinking, setBotThinking] = useState(false)
+	const [promotion, setPromotion] = useState(false)
+	const [toPromote, setToPromote] = useState({})
 
 	useEffect(() => {
 		if (document.getElementById('start')) {
@@ -271,20 +308,42 @@ const Board = () => {
 		return (j === r1c && i === r1r) || (j === r2c && i === r2r)
 	}
 
-	const setCastling = ({castle = false, king = false, qtower = false, ktower = false}) => {
+	const changeTurnAndCastling = ({ castle = false, king = false, qtower = false, ktower = false }) => {
+		const nextToMove = fenExtras.toMove === 'w' ? 'b' : 'w'
 		if (castle || king) {
-			let extras = fenExtras.castling.replace("K", "")
-			extras = extras.replace("Q", "")
-			setFenExtras({ toMove: 'b', castling: extras })
-		}else if(qtower){
-			let extras = fenExtras.castling.replace("Q", "")
-			setFenExtras({ toMove: 'b', castling: extras })
-		}else if(ktower){
-			let extras = fenExtras.castling.replace("K", "")
-			setFenExtras({ toMove: 'b', castling: extras })
-		}else{
-			setFenExtras({ toMove: 'b', castling: fenExtras.castling })
+			let extras = fenExtras.castling.replace(fenExtras.toMove === 'w' ? "K" : "k", "")
+			extras = extras.replace(fenExtras.toMove === 'w' ? "Q" : "q", "")
+			setFenExtras({ toMove: nextToMove, castling: extras })
+		} else if (qtower) {
+			let extras = fenExtras.castling.replace(fenExtras.toMove === 'w' ? "Q" : "q", "")
+			setFenExtras({ toMove: nextToMove, castling: extras })
+		} else if (ktower) {
+			let extras = fenExtras.castling.replace(fenExtras.toMove === 'w' ? "K" : "k", "")
+			setFenExtras({ toMove: nextToMove, castling: extras })
+		} else {
+			setFenExtras({ toMove: nextToMove, castling: fenExtras.castling })
 		}
+	}
+
+	const promote = (selection) => {
+		const fenBoard = new FENBoard(fen)
+		fenBoard.move(`${String.fromCharCode(selectedPiece.x + 97)}${8 - selectedPiece.y}`, `${String.fromCharCode(toPromote.x + 97)}${8 - toPromote.y}`)
+		fenBoard.board[toPromote.y][toPromote.x] = selection
+		setFen(fenBoard.fen)
+		const move = `${(fenBoard.board[toPromote.y][toPromote.x] !== 'P' ? fenBoard.board[toPromote.y][toPromote.x] : '')}${String.fromCharCode(selectedPiece.x + 97)}${8 - selectedPiece.y}-${String.fromCharCode(toPromote.x + 97)}${8 - toPromote.y}`
+		setLastMove(move)
+		setTurn(1)
+		setFen(fenBoard.fen)
+		setSelectedPiece({})
+		setAllowedMoves([])
+		moveHistory.push(
+			{
+				move,
+				color: fenExtras.toMove
+			})
+		setPromotion(false)
+		setToPromote({})
+		changeTurnAndCastling({})
 	}
 
 	const clickSquare = (coords) => {
@@ -293,6 +352,11 @@ const Board = () => {
 
 		if (fenBoard.board[coords.y][coords.x] !== "" && pieceSide === playAs && playAs === turn) {
 			let newAllowedMoves = []
+			if (selectedPiece.x === coords.x && selectedPiece.y === coords.y) {
+				setSelectedPiece({})
+				setAllowedMoves([])
+				return
+			}
 			setSelectedPiece(coords)
 			for (let i = 0; i < legalMoves.length; i++) {
 				let castling = false;
@@ -330,10 +394,13 @@ const Board = () => {
 		let move = ''
 		if (allowedMoves.includes(`${coords.x}-${coords.y}`)) {
 			fenBoard.move(`${String.fromCharCode(selectedPiece.x + 97)}${8 - selectedPiece.y}`, `${String.fromCharCode(coords.x + 97)}${8 - coords.y}`)
-			setFen(fenBoard.fen)
-			moved = true
-			move = `${(fenBoard.board[coords.y][coords.x] !== 'P' ? fenBoard.board[coords.y][coords.x] : '')}${String.fromCharCode(selectedPiece.x + 97)}${8 - selectedPiece.y}-${String.fromCharCode(coords.x + 97)}${8 - coords.y}`
-
+			if (fenExtras.toMove === 'w' && coords.y === 0 && fenBoard.board[coords.y][coords.x] === 'P') {
+				setPromotion(true)
+				setToPromote(coords)
+			} else {
+				moved = true
+				move = `${(fenBoard.board[coords.y][coords.x] !== 'P' ? fenBoard.board[coords.y][coords.x] : '')}${String.fromCharCode(selectedPiece.x + 97)}${8 - selectedPiece.y}-${String.fromCharCode(coords.x + 97)}${8 - coords.y}`
+			}
 		} else if (allowedMoves.includes(`O-O`)) {
 			if (fenExtras.toMove === 'w' && coords.x === 6 && coords.y === 7) {
 				fenBoard.move(`e1`, `g1`);
@@ -359,29 +426,26 @@ const Board = () => {
 			moved = true
 			move = 'O-O-O'
 		}
-		setLastMove(move)
 
 		if (moved) {
+			setLastMove(move)
 			setTurn(1)
 			setFen(fenBoard.fen)
 			setSelectedPiece({})
 			setAllowedMoves([])
-			
-			if (fenExtras.toMove === 'w') {
-				if (move === 'O-O' || move === 'O-O-O') {
-					setCastling({castle: true})
-				}else if(move[0] === 'K'){
-					setCastling({king: true})
-				}else if(move[0] === 'R' && move[1] === 'h' && move[2] === '1'){
-					setCastling({ktower: true})
-				}else if(move[0] === 'R' && move[1] === 'a' && move[2] === '1'){
-					setCastling({qtower: true})
-				} else {
-					setCastling({})
-				}
+
+			if (move === 'O-O' || move === 'O-O-O') {
+				changeTurnAndCastling({ castle: true })
+			} else if (move[0] === 'K') {
+				changeTurnAndCastling({ king: true })
+			} else if (move[0] === 'R' && move[1] === 'h' && move[2] === '1') {
+				changeTurnAndCastling({ ktower: true })
+			} else if (move[0] === 'R' && move[1] === 'a' && move[2] === '1') {
+				changeTurnAndCastling({ qtower: true })
 			} else {
-				setFenExtras({ toMove: 'w', castling: fenExtras.castling })
+				changeTurnAndCastling({})
 			}
+
 			moveHistory.push(
 				{
 					move,
@@ -415,9 +479,9 @@ const Board = () => {
 				const shortCastle = allowedMoves.includes("O-O") && ((turn === 0 && j === 6 && i === 7) || (turn === 1 && j === 6 && i === 0))
 				const longCastle = allowedMoves.includes("O-O-O") && ((turn === 0 && j === 2 && i === 7) || (turn === 1 && j === 2 && i === 0))
 				const allowed = !movedPiece && (allowedMoves.includes(`${j}-${i}`) || shortCastle || longCastle)
-				
+
 				tempItems.push(
-					<Square id={`${j}${i}`} key={`${j}-${i}`} white={(i * 7 + j) % 2 === 0} allowed={allowed} coords={{ x: j, y: i }} clickCallback={clickSquare} moved={moved}>
+					<Square id={`${j}${i}`} key={`${j}-${i}`} allowedMoves={allowedMoves.length} white={(i * 7 + j) % 2 === 0} allowed={allowed} coords={{ x: j, y: i }} clickCallback={clickSquare} moved={moved}>
 						{pieceSwitch(fenBoard.board[i][j], 46)}
 					</Square>
 				)
@@ -430,12 +494,12 @@ const Board = () => {
 		setWinner(null)
 		setRunning(true)
 		setFenHistory({})
-		setFen(`${new FENBoard("start").fen}`)
-		setFenExtras({ toMove: 'w', castling: 'KQkq' })
+		setFen(`${new FENBoard("8/P7/8/8/8/8/8/K6k").fen}`)
+		setFenExtras({ toMove: 'w', castling: '' })
 		setMoveHistory([])
 		setLastMove("")
 		setTurn(0)
-		getLegalMoves({ fen: `${new FENBoard("start").fen} w KQkq` })
+		getLegalMoves({ fen: `${new FENBoard("8/P7/8/8/8/8/8/K6k").fen} w ` })
 			.then((result) => {
 				console.log('fen result', result)
 				let moves = []
@@ -517,10 +581,10 @@ const Board = () => {
 	useEffect(() => {
 		setBoard(false)
 
-		if (fenExtras.toMove === 'b' && !botThinking) {
+		if (fenExtras.toMove === 'b' && !botThinking && running) {
 			playBotTurn(`${fen} ${fenExtras.toMove} ${fenExtras.castling}`)
 		}
-	}, [fen, fenExtras, allowedMoves, selectedPiece, legalMoves, botThinking, turn])
+	}, [fen, fenExtras, allowedMoves, selectedPiece, legalMoves, botThinking, turn, promotion])
 
 	return (
 		<>
@@ -550,8 +614,8 @@ const Board = () => {
 								<Title >Move history</Title>
 							</TitleContainer>
 							<MoveContainer id="moveContainer">
-								{moveHistory.map((move) => (
-									<MoveLi key={move.move} color={move.color}>{move.move}</MoveLi>
+								{moveHistory.map((move, i) => (
+									<MoveLi key={i} color={move.color}>{move.move}</MoveLi>
 								))}
 							</MoveContainer>
 						</MoveHistoryContainer>
@@ -574,7 +638,22 @@ const Board = () => {
 					)}
 				</Container>
 				<CoordinatesLetters offsetTop={-20} />
-			</BoardContainer >
+			</BoardContainer>
+			{promotion && (
+				<Mask>
+					<PromotionContainer>
+						<PromotionInner>
+							<PromotionTitle>What to promote to?</PromotionTitle>
+							<div>
+								<PromotionButton image={w_q} onClick={() => promote('Q')}></PromotionButton>
+								<PromotionButton image={w_r} onClick={() => promote('R')}></PromotionButton>
+								<PromotionButton image={w_b} onClick={() => promote('B')}></PromotionButton>
+								<PromotionButton image={w_n} onClick={() => promote('N')}></PromotionButton>
+							</div>
+						</PromotionInner>
+					</PromotionContainer>
+				</Mask>
+			)}
 		</>
 	)
 }

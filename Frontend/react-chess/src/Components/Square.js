@@ -25,10 +25,10 @@ const SquareStyle = styled.button`
 		${(props) => props.allowed && css`
 			content: "";
 			position: absolute;
-			left: 12.5px;
-			top: 12.5px;
-			width: 25px;
-			height: 25px;
+			left: 18.75px;
+			top: 18.75px;
+			width: 12.5px;
+			height: 12.5px;
 			display: inherit;
 			border-radius:50%;
 			box-shadow: inset 2000px 0 0 0 rgb(251, 248, 74);

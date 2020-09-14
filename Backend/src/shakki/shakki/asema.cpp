@@ -869,7 +869,7 @@ double Asema::quiescent(double alpha, double beta)
 	return alpha;
 }
 
-MinMaxPaluu Asema::iteratiivinenAlphaBeta2(const lautaDict &historia, int kello, int *maxSyvyys)
+MinMaxPaluu Asema::iteratiivinenAlphaBeta2(const lautaDict &historia, float kello, int *maxSyvyys)
 {
 
 	siirtokello.Aloita(kello);
@@ -919,6 +919,8 @@ MinMaxPaluu Asema::iteratiivinenAlphaBeta2(const lautaDict &historia, int kello,
 			i = 0;
 		}
 	}
+
+	viimeParas = viimePaluuLista[rand() % viimePaluuLista.size()];
 
 	*maxSyvyys = depth;
 	if (siirtovuoro)

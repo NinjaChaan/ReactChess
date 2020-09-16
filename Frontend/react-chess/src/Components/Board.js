@@ -494,11 +494,11 @@ const Board = () => {
 		setFenHistory({})
 		//setFen(`${new FENBoard("8/P7/8/8/8/8/8/K6k").fen}`)
 		setFen(`${new FENBoard("start").fen}`)
-		setFenExtras({ toMove: 'w', castling: '' })
+		setFenExtras({ toMove: 'w', castling: 'KQkq' })
 		setMoveHistory([])
 		setLastMove("")
 		setTurn(0)
-		getLegalMoves({ fen: `${new FENBoard("start").fen} w ` })
+		getLegalMoves({ fen: `${new FENBoard("start").fen} w KQkq` })
 			.then((result) => {
 				console.log('fen result', result)
 				let moves = []

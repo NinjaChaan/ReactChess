@@ -53,7 +53,7 @@ std::tuple<std::string, std::string, std::vector<std::string>> Bot::Play_turn(st
 	int maxSyvyys = 0;
 	MinMaxPaluu paras;
 
-	paras = asema.iteratiivinenAlphaBeta2(fake, 0.05, &maxSyvyys);
+	paras = asema.iteratiivinenAlphaBeta2(fake, 1, &maxSyvyys);
 
 	wcout << endl
 		  << "Koneen suosittelema siirto: " << endl;

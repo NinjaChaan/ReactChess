@@ -5,12 +5,12 @@ const CoordinatesContainerVertical = styled.div`
 	display: grid;
 	padding: 25px 0;
 	z-index: 1;
-	margin-right: ${(props) => (`${props.offsetRight}px`)};
-	margin-left: ${(props) => (`${props.offsetLeft}px`)};
+	margin-right: -15px;
+	margin-left: -15px;
 `
 const CoordinatesContainerHorizontal = styled.div`
 	display: flex;
-	margin-left: 19px;
+	margin-left: 4px;
 	margin-top: ${(props) => (`${props.offsetTop}px`)};
 	margin-bottom: ${(props) => (`${props.offsetBottom}px`)};
 	z-index: 2;

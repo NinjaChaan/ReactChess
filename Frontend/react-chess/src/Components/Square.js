@@ -11,6 +11,7 @@ const SquareStyle = styled.button`
 	};
 	box-shadow: ${(props) => (props.moved && 'inset 2000px 0 0 0 rgba(0, 255, 0, 0.25)')};
 	border: none;
+	outline: none;
 	&:after {
 		${(props) => props.selected && css`
 			content: "";

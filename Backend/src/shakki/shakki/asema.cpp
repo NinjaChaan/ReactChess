@@ -919,8 +919,8 @@ MinMaxPaluu Asema::iteratiivinenAlphaBeta2(const lautaDict &historia, float kell
 			i = 0;
 		}
 	}
-
-	viimeParas = viimePaluuLista[rand() % viimePaluuLista.size()];
+	// Get a random move 
+	//viimeParas = viimePaluuLista[rand() % viimePaluuLista.size()];
 
 	*maxSyvyys = depth;
 	if (siirtovuoro)

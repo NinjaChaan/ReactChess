@@ -62,11 +62,9 @@ const Mask = styled.div`
 	height: 450px;
 	position: absolute;
 	background-color: #615f5fc7;
-	margin-left: -6px;
 	display: flex;
 	border-radius: 4px;
-	top: 35px;
-	left: 458px;
+	margin-left: -21px;
 `
 
 const Banner = styled.div`
@@ -284,7 +282,7 @@ const Board = () => {
 	const [winnerText, setWinnerText] = useState()
 	const [turn, setTurn] = useState(0)
 	const [playAs, setPlayAs] = useState(0)
-	const [fen, setFen] = useState(`${new FENBoard("8/P7/8/8/8/8/8/K6k").fen}`)
+	const [fen, setFen] = useState(`${new FENBoard("start").fen}`)
 	const [fenExtras, setFenExtras] = useState({ toMove: 'w', castling: 'KQkq' })
 	const [items, setItems] = useState([])
 	const [startWidth, setStartWidth] = useState()
@@ -494,12 +492,13 @@ const Board = () => {
 		setWinner(null)
 		setRunning(true)
 		setFenHistory({})
-		setFen(`${new FENBoard("8/P7/8/8/8/8/8/K6k").fen}`)
+		//setFen(`${new FENBoard("8/P7/8/8/8/8/8/K6k").fen}`)
+		setFen(`${new FENBoard("start").fen}`)
 		setFenExtras({ toMove: 'w', castling: '' })
 		setMoveHistory([])
 		setLastMove("")
 		setTurn(0)
-		getLegalMoves({ fen: `${new FENBoard("8/P7/8/8/8/8/8/K6k").fen} w ` })
+		getLegalMoves({ fen: `${new FENBoard("start").fen} w ` })
 			.then((result) => {
 				console.log('fen result', result)
 				let moves = []
@@ -599,15 +598,15 @@ const Board = () => {
 							<span> </span>
 						)}
 				</ThinkingText>
-				<CoordinatesLetters offsetBottom={-20} />
 				<Container>
-					<CoordinatesNumbers offsetRight={-15} />
+					<CoordinatesLetters />
+					<CoordinatesNumbers />
 					<BoardBorder>
 						<BoardStyle>
 							{items}
 						</BoardStyle>
 					</BoardBorder>
-					<CoordinatesNumbers offsetLeft={-15} />
+					<CoordinatesNumbers />
 					<MoveContainerContainer>
 						<MoveHistoryContainer>
 							<TitleContainer>
@@ -636,24 +635,24 @@ const Board = () => {
 							</StartButton>
 						</Mask>
 					)}
+					<CoordinatesLetters offsetTop={430} />
+					{promotion && (
+						<Mask>
+							<PromotionContainer>
+								<PromotionInner>
+									<PromotionTitle>What to promote to?</PromotionTitle>
+									<div>
+										<PromotionButton image={w_q} onClick={() => promote('Q')}></PromotionButton>
+										<PromotionButton image={w_r} onClick={() => promote('R')}></PromotionButton>
+										<PromotionButton image={w_b} onClick={() => promote('B')}></PromotionButton>
+										<PromotionButton image={w_n} onClick={() => promote('N')}></PromotionButton>
+									</div>
+								</PromotionInner>
+							</PromotionContainer>
+						</Mask>
+					)}
 				</Container>
-				<CoordinatesLetters offsetTop={-20} />
 			</BoardContainer>
-			{promotion && (
-				<Mask>
-					<PromotionContainer>
-						<PromotionInner>
-							<PromotionTitle>What to promote to?</PromotionTitle>
-							<div>
-								<PromotionButton image={w_q} onClick={() => promote('Q')}></PromotionButton>
-								<PromotionButton image={w_r} onClick={() => promote('R')}></PromotionButton>
-								<PromotionButton image={w_b} onClick={() => promote('B')}></PromotionButton>
-								<PromotionButton image={w_n} onClick={() => promote('N')}></PromotionButton>
-							</div>
-						</PromotionInner>
-					</PromotionContainer>
-				</Mask>
-			)}
 		</>
 	)
 }

@@ -62,7 +62,7 @@ public:
 	double evaluoiNegamax();
 	double quiescent(double alpha, double beta);
 	
-	MinMaxPaluu iteratiivinenAlphaBeta2(const lautaDict& historia, float kello, int* maxSyvyys);
+	MinMaxPaluu iteratiivinenAlphaBeta2(const lautaDict& historia, float kello, int maxSyvyys, int *syvyys);
 	MinMaxPaluu iterAlphaBetaRoot2(int syvyys, std::vector<MinMaxPaluu>* paluuarvot, lautaDict historia, Siirto viimeParasSiirto);
 	double iterAlphaBeta2(int syvyys, int syvyysJuuresta, const lautaDict& historia, double alpha, double beta);
 

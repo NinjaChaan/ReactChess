@@ -14,8 +14,8 @@ const port = 3000
 const bot = new Bot()
 // console.log(bot.playTurn("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"))
 
-async function playTurn(fen) {
-	return await Promise.resolve(bot.playTurn(fen));
+async function playTurn(fen, difficulty) {
+	return await Promise.resolve(bot.playTurn(fen, difficulty));
 }
 
 async function getLegalMoves(fen) {
@@ -25,7 +25,7 @@ async function getLegalMoves(fen) {
 app.post('/playTurn', async (request, response, next) => {
 	const { body } = request
 	console.log('body: ', body)
-	playTurn(body.fen)
+	playTurn(body.fen, body.difficulty)
 		.then((result) => {
 			console.log('result: ', result)
 			response.json(result)

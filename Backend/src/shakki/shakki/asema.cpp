@@ -869,7 +869,7 @@ double Asema::quiescent(double alpha, double beta)
 	return alpha;
 }
 
-MinMaxPaluu Asema::iteratiivinenAlphaBeta2(const lautaDict &historia, float kello, int *maxSyvyys)
+MinMaxPaluu Asema::iteratiivinenAlphaBeta2(const lautaDict &historia, float kello, int maxSyvyys, int *syvyys)
 {
 
 	siirtokello.Aloita(kello);
@@ -891,6 +891,8 @@ MinMaxPaluu Asema::iteratiivinenAlphaBeta2(const lautaDict &historia, float kell
 		depth++;
 
 		if (depth > 30)
+			break;
+		if(maxSyvyys > 0 && depth > maxSyvyys)
 			break;
 	}
 	std::wcout << std::endl;
@@ -922,7 +924,7 @@ MinMaxPaluu Asema::iteratiivinenAlphaBeta2(const lautaDict &historia, float kell
 	// Get a random move 
 	//viimeParas = viimePaluuLista[rand() % viimePaluuLista.size()];
 
-	*maxSyvyys = depth;
+	*syvyys = depth;
 	if (siirtovuoro)
 	{
 		viimeParas._evaluointiArvo = -viimeParas._evaluointiArvo;
@@ -957,7 +959,8 @@ MinMaxPaluu Asema::iterAlphaBetaRoot2(int syvyys, std::vector<MinMaxPaluu> *palu
 		{
 			Asema uusiAsema = Asema(*this);
 			uusiAsema.paivitaAsema(&s);
-			double nVal = -uusiAsema.iterAlphaBeta2(syvyys - 1, 0, historia, -betaNum, -alphaNum);
+			//double nVal = -uusiAsema.iterAlphaBeta2(syvyys - 1, 0, historia, -betaNum, -alphaNum);
+			double nVal = -uusiAsema.iterAlphaBeta2(syvyys - 1, 0, historia, INT_MIN, INT_MAX);
 			MinMaxPaluu arvo;
 			arvo._evaluointiArvo = nVal;
 			arvo._parasSiirto = s;

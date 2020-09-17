@@ -277,6 +277,7 @@ const startStream = () => {
 }
 
 const Board = () => {
+	const [difficulty, setDifficulty] = useState(3)
 	const [running, setRunning] = useState(false)
 	const [winner, setWinner] = useState(null)
 	const [winnerText, setWinnerText] = useState()
@@ -520,7 +521,7 @@ const Board = () => {
 		console.log('play fen', fen)
 		setBotThinking(true)
 		if (fen.length > 0) {
-			playTurn({ fen })
+			playTurn({ fen, difficulty })
 				.then((result) => {
 					console.log('result', result)
 					console.log('receive fen', result.data.fen)

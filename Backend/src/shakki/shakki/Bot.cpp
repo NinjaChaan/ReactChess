@@ -27,7 +27,7 @@ Bot::Bot(const Napi::CallbackInfo &info) : Napi::ObjectWrap<Bot>(info)
 	openingBook.Initialize(bookFiles);
 }
 
-std::tuple<std::string, std::string, std::vector<std::string>> Bot::Play_turn(string fen)
+std::tuple<std::string, std::string, std::vector<std::string>> Bot::Play_turn(string fen, int difficulty)
 {
 	using clock = std::chrono::system_clock;
 	using sec = std::chrono::duration<double>;
@@ -50,18 +50,34 @@ std::tuple<std::string, std::string, std::vector<std::string>> Bot::Play_turn(st
 
 	auto start = clock::now();
 
-	int maxSyvyys = 0;
+	int saavutettuSyvyys = 0;
+	int maxSyvyys = 2;
+	switch (difficulty)
+	{
+	case 1:
+		maxSyvyys = 2;
+		break;	
+	case 2:
+		maxSyvyys = 4;
+		break;		
+	case 3:
+		maxSyvyys = 30;
+		break;
+	default:
+		maxSyvyys = 2;
+		break;
+	}
 	MinMaxPaluu paras;
 
-	paras = asema.iteratiivinenAlphaBeta2(fake, 0.1f, &maxSyvyys);
+	paras = asema.iteratiivinenAlphaBeta2(fake, 1, maxSyvyys, &saavutettuSyvyys);
 
 	wcout << endl
 		  << "Koneen suosittelema siirto: " << endl;
 	wprintf(L"%s : %.2f\n", paras._parasSiirto.toString(&asema).c_str(), paras._evaluointiArvo);
 	const sec duration = clock::now() - start;
-	wprintf(L"Evaluointi kesti %.2fs. Syvyys: %d \n", duration.count(), maxSyvyys - 1);
+	wprintf(L"Evaluointi kesti %.2fs. Syvyys: %d \n", duration.count(), saavutettuSyvyys - 1);
 
-	std::vector<int> items = asema.transposTable.checkItems(maxSyvyys);
+	std::vector<int> items = asema.transposTable.checkItems(saavutettuSyvyys);
 
 	for (size_t i = 0; i < items.size(); i++)
 	{
@@ -99,14 +115,22 @@ Napi::Value Bot::playTurn(const Napi::CallbackInfo &info)
 
 	if (!info[0].IsString())
 	{
-		Napi::TypeError::New(env, "Pass a fen to the function")
+		Napi::TypeError::New(env, "Pass a fen string to the function")
+			.ThrowAsJavaScriptException();
+		return env.Null();
+	}
+
+	if (!info[1].IsNumber())
+	{
+		Napi::TypeError::New(env, "Pass a difficulty number to the function")
 			.ThrowAsJavaScriptException();
 		return env.Null();
 	}
 
 	Napi::String fen = info[0].As<Napi::String>();
+	Napi::Number difficulty = info[1].As<Napi::Number>();
 
-	std::tuple<std::string, std::string, std::vector<std::string>> returnValues = Play_turn(fen.Utf8Value());
+	std::tuple<std::string, std::string, std::vector<std::string>> returnValues = Play_turn(fen.Utf8Value(), difficulty);
 
 	Napi::Object returnArray = Napi::Object::New(env);
 

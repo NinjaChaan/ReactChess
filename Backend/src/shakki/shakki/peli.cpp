@@ -98,15 +98,17 @@ Peli::Peli(int ihmisenVari) {
 		}*/
 		bool laillinen = false;
 		Siirto s;
-		int syvyys = 6;
-		if (asema.nappuloidenMaara < 10) {
-			syvyys += 1;
-		}
-		if (asema.nappuloidenMaara < 5) {
-			syvyys += 1;
-		}
+		
+		// int syvyys = 6;
+		// if (asema.nappuloidenMaara < 10) {
+		// 	syvyys += 1;
+		// }
+		// if (asema.nappuloidenMaara < 5) {
+		// 	syvyys += 1;
+		// }
 
-		int maxSyvyys = syvyys + 1;
+		int maxSyvyys = -1;
+
 		MinMaxPaluu paras;
 		OpeningNode* uusiNode = nullptr;
 
@@ -127,14 +129,15 @@ Peli::Peli(int ihmisenVari) {
 			}
 		}
 		if (uusiNode == nullptr) {
-			paras = asema.iteratiivinenAlphaBeta2(asemaHistoria, 5, &maxSyvyys);
+			int saavutettuSyvyys = 0;
+			paras = asema.iteratiivinenAlphaBeta2(asemaHistoria, 5, maxSyvyys, &saavutettuSyvyys);
 
 			wcout << endl << "Koneen suosittelema siirto: " << endl;
 			wprintf(L"%s : %.2f\n", paras._parasSiirto.toString(&asema).c_str(), paras._evaluointiArvo);
 			const sec duration = clock::now() - start;
-			wprintf(L"Evaluointi kesti %.2fs. Syvyys: %d \n", duration.count(), maxSyvyys - 1);
+			wprintf(L"Evaluointi kesti %.2fs. Syvyys: %d \n", duration.count(), saavutettuSyvyys - 1);
 
-			std::vector<int> items = asema.transposTable.checkItems(maxSyvyys);
+			std::vector<int> items = asema.transposTable.checkItems(saavutettuSyvyys);
 
 			for (size_t i = 0; i < items.size(); i++) {
 				wcout << "Depth " << i << ": " << items[i] << endl;
@@ -173,7 +176,7 @@ Peli::Peli(int ihmisenVari) {
 		lisaaAsemaHistoriaan(&asema);
 
 
-		//Päivitä opening book
+		//Pï¿½ivitï¿½ opening book
 		OpeningNode* actual = nullptr;
 		if (vuoro == 0) {
 			actual = openingBook.HaeJuuri(s);

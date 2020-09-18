@@ -22,6 +22,11 @@ import b_p from '../../resources/chesspieces/Chess_pdt45.svg'
 const Container = styled.div`
 	display: flex;
 `
+
+const VertContainer = styled.div`
+	display: grid;
+`
+
 const BoardBorder = styled.div`
 	background-color: sienna;
 	padding: 20px;
@@ -39,7 +44,7 @@ const BoardStyle = styled.div`
 	border-radius: 4px;
 `
 const BoardContainer = styled.div`
-	margin: 0 auto;
+	margin: 0 200px 0 500px;
 `
 
 const StartButton = styled.button`
@@ -193,6 +198,45 @@ const PromotionButton = styled.button`
 	height: 50px;
 	width: 50px;
 	border-radius: 4px;
+`
+
+const DifficultyButton = styled.button`
+	background-color: sienna;
+	width: 75px;
+	height: 30px;
+	border-radius: 4px;
+	color: #f1d2ab;
+	border: 2px solid burlywood;
+	margin-right: 10px;
+	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+	opacity:${(props) => (props.selected && '100%')
+		|| '60%'};
+	&:hover {
+		background-color: #a5603f;
+		opacity: 100%;
+	};
+	&:last-of-type{
+		margin-right: 0px;
+	}
+`
+
+const SettingsContainer = styled.div`
+	position: absolute;
+	left: 50px;
+	top: 10px;
+	margin: 25px -150px 0 50px;
+	background-color: burlywood;
+	padding: 5px;
+	border-radius: 4px;
+	height: max-content;
+	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+`
+
+const SettingsInner = styled.div`
+	background-color: sienna;
+	border-radius: 4px;
+	padding: 10px;
+	height: 100%;
 `
 
 const pieceSwitch = (piece, size) => {
@@ -588,72 +632,82 @@ const Board = () => {
 
 	return (
 		<>
-			<BoardContainer>
-				<ThinkingText>
-					{botThinking ? (
-						<>
-							<span>The bot is thinking</span>
-							<Ellipsis />
-						</>
-					) : (
-							<span> </span>
-						)}
-				</ThinkingText>
-				<Container>
-					<CoordinatesLetters />
-					<CoordinatesNumbers />
-					<BoardBorder>
-						<BoardStyle>
-							{items}
-						</BoardStyle>
-					</BoardBorder>
-					<CoordinatesNumbers />
-					<MoveContainerContainer>
-						<MoveHistoryContainer>
-							<TitleContainer>
-								<Title >Move history</Title>
-							</TitleContainer>
-							<MoveContainer id="moveContainer">
-								{moveHistory.map((move, i) => (
-									<MoveLi key={i} color={move.color}>{move.move}</MoveLi>
-								))}
-							</MoveContainer>
-						</MoveHistoryContainer>
-					</MoveContainerContainer>
-					{!running && (
-						<Mask>
-							{winner && (
-								<Banner
-									winner={winner}>
-									<BannerText>{winnerText}</BannerText>
-								</Banner>
+			<>
+				<BoardContainer>
+				<SettingsContainer>
+					<SettingsInner>
+						<Title>Difficulty</Title>
+						<DifficultyButton selected={difficulty === 1} onClick={() => { setDifficulty(1) }}>Easy</DifficultyButton>
+						<DifficultyButton selected={difficulty === 2} onClick={() => { setDifficulty(2) }}>Medium</DifficultyButton>
+						<DifficultyButton selected={difficulty === 3} onClick={() => { setDifficulty(3) }}>Hard</DifficultyButton>
+					</SettingsInner>
+				</SettingsContainer>
+					<ThinkingText>
+						{botThinking ? (
+							<>
+								<span>The bot is thinking</span>
+								<Ellipsis />
+							</>
+						) : (
+								<span> </span>
 							)}
+					</ThinkingText>
+					<Container>
+						<CoordinatesLetters />
+						<CoordinatesNumbers />
+						<BoardBorder>
+							<BoardStyle>
+								{items}
+							</BoardStyle>
+						</BoardBorder>
+						<CoordinatesNumbers />
+						<MoveContainerContainer>
+							<MoveHistoryContainer>
+								<TitleContainer>
+									<Title >Move history</Title>
+								</TitleContainer>
+								<MoveContainer id="moveContainer">
+									{moveHistory.map((move, i) => (
+										<MoveLi key={i} color={move.color}>{move.move}</MoveLi>
+									))}
+								</MoveContainer>
+							</MoveHistoryContainer>
+						</MoveContainerContainer>
+						{!running && (
+							<Mask>
+								{winner && (
+									<Banner
+										winner={winner}>
+										<BannerText>{winnerText}</BannerText>
+									</Banner>
+								)}
 
-							<StartButton
-								id="start"
-								width={startWidth}
-								onClick={startGame}>{winner ? "Start new game" : "Start game"}
-							</StartButton>
-						</Mask>
-					)}
-					<CoordinatesLetters offsetTop={430} />
-					{promotion && (
-						<Mask>
-							<PromotionContainer>
-								<PromotionInner>
-									<PromotionTitle>What to promote to?</PromotionTitle>
-									<div>
-										<PromotionButton image={w_q} onClick={() => promote('Q')}></PromotionButton>
-										<PromotionButton image={w_r} onClick={() => promote('R')}></PromotionButton>
-										<PromotionButton image={w_b} onClick={() => promote('B')}></PromotionButton>
-										<PromotionButton image={w_n} onClick={() => promote('N')}></PromotionButton>
-									</div>
-								</PromotionInner>
-							</PromotionContainer>
-						</Mask>
-					)}
-				</Container>
-			</BoardContainer>
+								<StartButton
+									id="start"
+									width={startWidth}
+									onClick={startGame}>{winner ? "Start new game" : "Start game"}
+								</StartButton>
+							</Mask>
+						)}
+						<CoordinatesLetters offsetTop={430} />
+						{promotion && (
+							<Mask>
+								<PromotionContainer>
+									<PromotionInner>
+										<PromotionTitle>What to promote to?</PromotionTitle>
+										<div>
+											<PromotionButton image={w_q} onClick={() => promote('Q')}></PromotionButton>
+											<PromotionButton image={w_r} onClick={() => promote('R')}></PromotionButton>
+											<PromotionButton image={w_b} onClick={() => promote('B')}></PromotionButton>
+											<PromotionButton image={w_n} onClick={() => promote('N')}></PromotionButton>
+										</div>
+									</PromotionInner>
+								</PromotionContainer>
+							</Mask>
+						)}
+					</Container>
+				</BoardContainer>
+			</>
 		</>
 	)
 }

@@ -321,7 +321,7 @@ const startStream = () => {
 }
 
 const Board = () => {
-	const [difficulty, setDifficulty] = useState(3)
+	const [difficulty, setDifficulty] = useState(1)
 	const [running, setRunning] = useState(false)
 	const [winner, setWinner] = useState(null)
 	const [winnerText, setWinnerText] = useState()
@@ -341,6 +341,29 @@ const Board = () => {
 	const [promotion, setPromotion] = useState(false)
 	const [toPromote, setToPromote] = useState({})
 	const [enPassant, setEnPassant] = useState('-')
+
+	const startGame = () => {
+		setWinner(null)
+		setRunning(true)
+		setFenHistory({})
+		setFen(`${new FENBoard("start").fen}`)
+		// setFen(`${new FENBoard("start").fen}`)
+		setFenExtras({ toMove: 'w', castling: '' })
+		setMoveHistory([])
+		setLastMove("")
+		setTurn(0)
+		getLegalMoves({ fen: `${new FENBoard("start").fen} w ` })
+			.then((result) => {
+				console.log('fen result', result)
+				let moves = []
+				for (const move in result.data) {
+					if (!isNaN(move)) {
+						moves.push(result.data[move])
+					}
+				}
+				setLegalMoves(moves)
+			})
+	}
 
 	useEffect(() => {
 		if (document.getElementById('start')) {
@@ -447,19 +470,19 @@ const Board = () => {
 				setToPromote(coords)
 			} else {
 				moved = true
-
+				if (allowedMoves.includes(`${coords.x}x${coords.y}`) && enPassant === `${String.fromCharCode(coords.x + 97)}${8 - coords.y}`) {
+					console.log(`en passant at ${String.fromCharCode(coords.x + 97)}${8 - coords.y + (fenExtras.toMove === 'w' ? -1 : 1)}`)
+					fenBoard.put(`${String.fromCharCode(coords.x + 97)}${8 - coords.y + (fenExtras.toMove === 'w' ? -1 : 1)}`, "");
+					dash = 'x'
+				}
+				move = `${(fenBoard.board[coords.y][coords.x] !== 'P' ? fenBoard.board[coords.y][coords.x] : '')}${String.fromCharCode(selectedPiece.x + 97)}${8 - selectedPiece.y}${dash}${String.fromCharCode(coords.x + 97)}${8 - coords.y}`
+			
 				if (fenBoard.board[coords.y][coords.x] === 'P' && Math.abs(coords.y - selectedPiece.y) === 2) {
 					console.log('en passant possible')
 					setEnPassant(`${String.fromCharCode(coords.x + 97)}${fenExtras.toMove === 'w' ? '3' : '6'}`)
 				} else {
 					setEnPassant('-')
 				}
-				if (allowedMoves.includes(`${coords.x}x${coords.y}`)) {
-					console.log(`${String.fromCharCode(coords.x + 97)}${8 - coords.y + (fenExtras.toMove === 'w' ? -1 : 1)}`)
-					fenBoard.put(`${String.fromCharCode(coords.x + 97)}${8 - coords.y + (fenExtras.toMove === 'w' ? -1 : 1)}`, "");
-					move = `${(fenBoard.board[coords.y][coords.x] !== 'P' ? fenBoard.board[coords.y][coords.x] : '')}${String.fromCharCode(selectedPiece.x + 97)}${8 - selectedPiece.y}x${String.fromCharCode(coords.x + 97)}${8 - coords.y}`
-				}
-				move = `${(fenBoard.board[coords.y][coords.x] !== 'P' ? fenBoard.board[coords.y][coords.x] : '')}${String.fromCharCode(selectedPiece.x + 97)}${8 - selectedPiece.y}${dash}${String.fromCharCode(coords.x + 97)}${8 - coords.y}`
 			}
 		} if (allowedMoves.includes(`O-O`)) {
 			if (fenExtras.toMove === 'w' && coords.x === 6 && coords.y === 7) {
@@ -486,6 +509,8 @@ const Board = () => {
 				move = 'O-O-O'
 			}
 		}
+
+		// setEnPassant('-')
 
 		if (moved) {
 			setLastMove(move)
@@ -550,32 +575,22 @@ const Board = () => {
 		setItems(tempItems)
 	}
 
-	const startGame = () => {
-		setWinner(null)
-		setRunning(true)
-		setFenHistory({})
-		//setFen(`${new FENBoard("8/P7/8/8/8/8/8/K6k").fen}`)
-		setFen(`${new FENBoard("start").fen}`)
-		setFenExtras({ toMove: 'w', castling: '' })
-		setMoveHistory([])
-		setLastMove("")
-		setTurn(0)
-		getLegalMoves({ fen: `${new FENBoard("start").fen} w` })
-			.then((result) => {
-				console.log('fen result', result)
-				let moves = []
-				for (const move in result.data) {
-					if (!isNaN(move)) {
-						moves.push(result.data[move])
-					}
-				}
-				setLegalMoves(moves)
-			})
-	}
-
 	const updateScroll = () => {
 		var element = document.getElementById("moveContainer");
 		element.scrollTop = element.scrollHeight;
+	}
+
+	const doFinalMove = (result) => {
+		const fenBoard = new FENBoard(fen)
+		var splitfen = result.data.fen.split(' ')
+		moveHistory.push(
+			{
+				move: result.data.lastMove,
+				color: splitfen[1] === "b" ? "w" : "b"
+			})
+			fenBoard.move(`${result.data.lastMove[0]}${result.data.lastMove[1]}`, `${result.data.lastMove[3]}${result.data.lastMove[4]}`);
+			setFen(fenBoard.fen)
+			setBoard(true)
 	}
 
 	const playBotTurn = (fen) => {
@@ -585,7 +600,8 @@ const Board = () => {
 			playTurn({ fen, difficulty })
 				.then((result) => {
 					console.log('result', result)
-					console.log('receive fen', result.data.fen)
+					console.log(`receive fen ${result.data.fen} ${result.data.enPassant}`)
+					var splitfen = result.data.fen.split(' ')
 					if (result.data.fen.includes("wins")) {
 						setRunning(false)
 						setWinnerText(result.data.fen)
@@ -595,12 +611,13 @@ const Board = () => {
 							setWinner("b")
 						}
 						setBotThinking(false)
-
+						doFinalMove(result)
 					} else if (result.data.fen.includes("Draw")) {
 						setRunning(false)
 						setWinnerText(result.data.fen)
 						setWinner("d")
 						setBotThinking(false)
+						doFinalMove(result)
 					} else {
 						if (result.data.fen in fenHistory) {
 							fenHistory[result.data.fen]++
@@ -615,7 +632,7 @@ const Board = () => {
 						moveHistory.push(
 							{
 								move: result.data.lastMove,
-								color: result.data.fen.includes(" b") ? "w" : "b"
+								color: splitfen[1] === "b" ? "w" : "b"
 							})
 						let moves = []
 						for (const move in result.data) {
@@ -624,15 +641,15 @@ const Board = () => {
 							}
 						}
 						setLegalMoves(moves)
-						setTurn(result.data.fen.includes(" b") ? 1 : 0)
+						setTurn(splitfen[1] === "b" ? 1 : 0)
 						setLastMove(result.data.lastMove)
 						setTimeout(() => {
 							updateScroll()
 						}, 100)
 						// fenBoard.fen = result.data.fen
-						var splitfen = result.data.fen.split(' ')
 						setFen(splitfen[0])
 						setFenExtras({ toMove: splitfen[1], castling: splitfen[2] || '' })
+						setEnPassant(result.data.enPassant)
 						setBotThinking(false)
 					}
 				})
@@ -643,7 +660,8 @@ const Board = () => {
 		setBoard(false)
 
 		if (fenExtras.toMove === 'b' && !botThinking && running) {
-			playBotTurn(`${fen} ${fenExtras.toMove} ${fenExtras.castling}${enPassant}`)
+			const castling = fenExtras.castling !== '' ? ' ' + fenExtras.castling : ''
+			playBotTurn(`${fen} ${fenExtras.toMove}${castling}${' ' + enPassant}`)
 		}
 	}, [fen, fenExtras, allowedMoves, selectedPiece, legalMoves, botThinking, turn, promotion])
 

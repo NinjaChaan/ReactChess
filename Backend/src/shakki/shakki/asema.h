@@ -90,6 +90,7 @@ public:
 	double tuplaSotilaat(int sarake, int rivi, int vari);
 	bool mahdotonLoppupeli();
 	std::string getFen();
+	std::string getEnPassant();
 
 private:
 	bool siirtovuoro;

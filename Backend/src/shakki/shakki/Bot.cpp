@@ -27,7 +27,7 @@ Bot::Bot(const Napi::CallbackInfo &info) : Napi::ObjectWrap<Bot>(info)
 	openingBook.Initialize(bookFiles);
 }
 
-std::tuple<std::string, std::string, std::vector<std::string>> Bot::Play_turn(string fen, int difficulty)
+std::tuple<std::string, std::string, std::vector<std::string>, std::string> Bot::Play_turn(string fen, int difficulty)
 {
 	using clock = std::chrono::system_clock;
 	using sec = std::chrono::duration<double>;
@@ -42,10 +42,10 @@ std::tuple<std::string, std::string, std::vector<std::string>> Bot::Play_turn(st
 	{
 		wprintf(L"%s voitti!", asema.getSiirtovuoro() == 1 ? L"Valkoinen" : L"Musta");
 		std::string fen = asema.getSiirtovuoro() == 1 ? "White wins" : "Black wins";
-		return std::make_tuple(fen, "", std::vector<std::string>());
+		return std::make_tuple(fen, "", std::vector<std::string>(), "-");
 	}
 	if(asema.mahdotonLoppupeli()){
-		return std::make_tuple("Draw", "", std::vector<std::string>());
+		return std::make_tuple("Draw", "", std::vector<std::string>(), "-");
 	}
 
 	auto start = clock::now();
@@ -96,10 +96,10 @@ std::tuple<std::string, std::string, std::vector<std::string>> Bot::Play_turn(st
 	{
 		wprintf(L"%s voitti!", asema.getSiirtovuoro() == 1 ? L"Valkoinen" : L"Musta");
 		std::string fen = asema.getSiirtovuoro() == 1 ? "White wins" : "Black wins";
-		return std::make_tuple(fen, "", std::vector<std::string>());
+		return std::make_tuple(fen, lastMove, std::vector<std::string>(), "-");
 	}
 
-	return std::make_tuple(asema.getFen(), lastMove, laillisetSiirrot);
+	return std::make_tuple(asema.getFen(), lastMove, laillisetSiirrot, asema.getEnPassant());
 }
 
 Napi::Value Bot::playTurn(const Napi::CallbackInfo &info)
@@ -130,7 +130,7 @@ Napi::Value Bot::playTurn(const Napi::CallbackInfo &info)
 	Napi::String fen = info[0].As<Napi::String>();
 	Napi::Number difficulty = info[1].As<Napi::Number>();
 
-	std::tuple<std::string, std::string, std::vector<std::string>> returnValues = Play_turn(fen.Utf8Value(), difficulty);
+	std::tuple<std::string, std::string, std::vector<std::string>, std::string> returnValues = Play_turn(fen.Utf8Value(), difficulty);
 
 	Napi::Object returnArray = Napi::Object::New(env);
 
@@ -143,6 +143,7 @@ Napi::Value Bot::playTurn(const Napi::CallbackInfo &info)
 	{
 		returnArray[i] = Napi::String::New(info.Env(), std::get<2>(returnValues)[i]);
 	}
+	returnArray["enPassant"] =  Napi::String::New(info.Env(), std::get<3>(returnValues));
 
 	return returnArray;
 }

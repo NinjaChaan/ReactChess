@@ -18,7 +18,7 @@ public:
 	static Napi::Object Init(Napi::Env env, Napi::Object exports);
 	//Bot();
 	Bot(const Napi::CallbackInfo& info);
-	std::tuple<std::string, std::string, std::vector<std::string>> Play_turn(std::string fen, int difficulty);
+	std::tuple<std::string, std::string, std::vector<std::string>, std::string> Play_turn(std::string fen, int difficulty);
 	std::vector<std::string> GetLegalMoves(std::string fen);
 private:
 	static Napi::FunctionReference constructor;

@@ -849,21 +849,30 @@ std::string Asema::getFen()
 	{
 		fen += "q";
 	}
+
+	return fen;
+}
+
+std::string Asema::getEnPassant()
+{
+	std::string enPassant = "";
 	if (kaksoisaskelSarakkeella != -1)
 	{
-		fen += " ";
-		fen += (char)kaksoisaskelSarakkeella + 'a';
+		enPassant += (char)kaksoisaskelSarakkeella + 'a';
 		if (getSiirtovuoro() == 0)
 		{
-			fen += 3 + '0';
+			enPassant += 6 + '0';
 		}
 		else
 		{
-			fen += 6 + '0';
+			enPassant += 3 + '0';
 		}
 	}
-
-	return fen;
+	else
+	{
+		enPassant = "-";
+	}
+	return enPassant;
 }
 
 double Asema::quiescent(double alpha, double beta)

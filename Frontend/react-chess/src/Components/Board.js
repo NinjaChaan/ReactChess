@@ -328,7 +328,7 @@ const Board = () => {
 	const [turn, setTurn] = useState(0)
 	const [playAs, setPlayAs] = useState(0)
 	const [fen, setFen] = useState(`${new FENBoard("start").fen}`)
-	const [fenExtras, setFenExtras] = useState({ toMove: 'w', castling: 'KQkq' })
+	const [fenExtras, setFenExtras] = useState({ toMove: 'w', castling: '' })
 	const [items, setItems] = useState([])
 	const [startWidth, setStartWidth] = useState()
 	const [fenHistory, setFenHistory] = useState({})
@@ -340,6 +340,7 @@ const Board = () => {
 	const [botThinking, setBotThinking] = useState(false)
 	const [promotion, setPromotion] = useState(false)
 	const [toPromote, setToPromote] = useState({})
+	const [enPassant, setEnPassant] = useState('-')
 
 	useEffect(() => {
 		if (document.getElementById('start')) {
@@ -426,7 +427,7 @@ const Board = () => {
 					if (r1c === coords.x && r1r === coords.y) {
 						const r2c = cleanedMove[3].charCodeAt(0) - 'a'.charCodeAt(0);
 						const r2r = 7 - (cleanedMove[4].charCodeAt(0) - '1'.charCodeAt(0));
-						newAllowedMoves.push(`${r2c}-${r2r}`)
+						newAllowedMoves.push(`${r2c}${cleanedMove[2]}${r2r}`)
 					}
 				}
 
@@ -435,39 +436,55 @@ const Board = () => {
 		}
 		let moved = false
 		let move = ''
-		if (allowedMoves.includes(`${coords.x}-${coords.y}`)) {
+		if (allowedMoves.includes(`${coords.x}-${coords.y}`) || allowedMoves.includes(`${coords.x}x${coords.y}`)) {
+			let dash = '-'
+			if (fenBoard.board[coords.y][coords.x] !== '') {
+				dash = 'x'
+			}
 			fenBoard.move(`${String.fromCharCode(selectedPiece.x + 97)}${8 - selectedPiece.y}`, `${String.fromCharCode(coords.x + 97)}${8 - coords.y}`)
 			if (fenExtras.toMove === 'w' && coords.y === 0 && fenBoard.board[coords.y][coords.x] === 'P') {
 				setPromotion(true)
 				setToPromote(coords)
 			} else {
 				moved = true
-				move = `${(fenBoard.board[coords.y][coords.x] !== 'P' ? fenBoard.board[coords.y][coords.x] : '')}${String.fromCharCode(selectedPiece.x + 97)}${8 - selectedPiece.y}-${String.fromCharCode(coords.x + 97)}${8 - coords.y}`
+
+				if (fenBoard.board[coords.y][coords.x] === 'P' && Math.abs(coords.y - selectedPiece.y) === 2) {
+					console.log('en passant possible')
+					setEnPassant(`${String.fromCharCode(coords.x + 97)}${fenExtras.toMove === 'w' ? '3' : '6'}`)
+				} else {
+					setEnPassant('-')
+				}
+				if (allowedMoves.includes(`${coords.x}x${coords.y}`)) {
+					console.log(`${String.fromCharCode(coords.x + 97)}${8 - coords.y + (fenExtras.toMove === 'w' ? -1 : 1)}`)
+					fenBoard.put(`${String.fromCharCode(coords.x + 97)}${8 - coords.y + (fenExtras.toMove === 'w' ? -1 : 1)}`, "");
+					move = `${(fenBoard.board[coords.y][coords.x] !== 'P' ? fenBoard.board[coords.y][coords.x] : '')}${String.fromCharCode(selectedPiece.x + 97)}${8 - selectedPiece.y}x${String.fromCharCode(coords.x + 97)}${8 - coords.y}`
+				}
+				move = `${(fenBoard.board[coords.y][coords.x] !== 'P' ? fenBoard.board[coords.y][coords.x] : '')}${String.fromCharCode(selectedPiece.x + 97)}${8 - selectedPiece.y}${dash}${String.fromCharCode(coords.x + 97)}${8 - coords.y}`
 			}
-		} else if (allowedMoves.includes(`O-O`)) {
+		} if (allowedMoves.includes(`O-O`)) {
 			if (fenExtras.toMove === 'w' && coords.x === 6 && coords.y === 7) {
 				fenBoard.move(`e1`, `g1`);
 				fenBoard.move(`h1`, `f1`);
+				moved = true
+				move = 'O-O'
 			} else if (fenExtras.toMove === 'b' && coords.x === 6 && coords.y === 0) {
 				fenBoard.move(`e7`, `g7`);
 				fenBoard.move(`h7`, `f7`);
-			} else {
-				return;
+				moved = true
+				move = 'O-O'
 			}
-			moved = true
-			move = 'O-O'
-		} else if (allowedMoves.includes(`O-O-O`)) {
+		} if (allowedMoves.includes(`O-O-O`)) {
 			if (fenExtras.toMove === 'w' && coords.x === 2 && coords.y === 7) {
 				fenBoard.move(`e1`, `c1`);
 				fenBoard.move(`a1`, `d1`);
+				moved = true
+				move = 'O-O-O'
 			} else if (fenExtras.toMove === 'b' && coords.x === 2 && coords.y === 0) {
 				fenBoard.move(`e7`, `c7`);
 				fenBoard.move(`a7`, `d7`);
-			} else {
-				return;
+				moved = true
+				move = 'O-O-O'
 			}
-			moved = true
-			move = 'O-O-O'
 		}
 
 		if (moved) {
@@ -521,7 +538,7 @@ const Board = () => {
 				const moved = showMove ? squareInLastMove(i, j, r1c, r1r, r2c, r2r) : false
 				const shortCastle = allowedMoves.includes("O-O") && ((turn === 0 && j === 6 && i === 7) || (turn === 1 && j === 6 && i === 0))
 				const longCastle = allowedMoves.includes("O-O-O") && ((turn === 0 && j === 2 && i === 7) || (turn === 1 && j === 2 && i === 0))
-				const allowed = !movedPiece && (allowedMoves.includes(`${j}-${i}`) || shortCastle || longCastle)
+				const allowed = !movedPiece && (allowedMoves.includes(`${j}-${i}`) || allowedMoves.includes(`${j}x${i}`) || shortCastle || longCastle)
 
 				tempItems.push(
 					<Square id={`${j}${i}`} key={`${j}-${i}`} allowedMoves={allowedMoves.length} white={(i * 7 + j) % 2 === 0} allowed={allowed} coords={{ x: j, y: i }} clickCallback={clickSquare} moved={moved}>
@@ -539,11 +556,11 @@ const Board = () => {
 		setFenHistory({})
 		//setFen(`${new FENBoard("8/P7/8/8/8/8/8/K6k").fen}`)
 		setFen(`${new FENBoard("start").fen}`)
-		setFenExtras({ toMove: 'w', castling: 'KQkq' })
+		setFenExtras({ toMove: 'w', castling: '' })
 		setMoveHistory([])
 		setLastMove("")
 		setTurn(0)
-		getLegalMoves({ fen: `${new FENBoard("start").fen} w KQkq` })
+		getLegalMoves({ fen: `${new FENBoard("start").fen} w` })
 			.then((result) => {
 				console.log('fen result', result)
 				let moves = []
@@ -626,7 +643,7 @@ const Board = () => {
 		setBoard(false)
 
 		if (fenExtras.toMove === 'b' && !botThinking && running) {
-			playBotTurn(`${fen} ${fenExtras.toMove} ${fenExtras.castling}`)
+			playBotTurn(`${fen} ${fenExtras.toMove} ${fenExtras.castling}${enPassant}`)
 		}
 	}, [fen, fenExtras, allowedMoves, selectedPiece, legalMoves, botThinking, turn, promotion])
 
@@ -634,14 +651,14 @@ const Board = () => {
 		<>
 			<>
 				<BoardContainer>
-				<SettingsContainer>
-					<SettingsInner>
-						<Title>Difficulty</Title>
-						<DifficultyButton selected={difficulty === 1} onClick={() => { setDifficulty(1) }}>Easy</DifficultyButton>
-						<DifficultyButton selected={difficulty === 2} onClick={() => { setDifficulty(2) }}>Medium</DifficultyButton>
-						<DifficultyButton selected={difficulty === 3} onClick={() => { setDifficulty(3) }}>Hard</DifficultyButton>
-					</SettingsInner>
-				</SettingsContainer>
+					<SettingsContainer>
+						<SettingsInner>
+							<Title>Difficulty</Title>
+							<DifficultyButton selected={difficulty === 1} onClick={() => { setDifficulty(1) }}>Easy</DifficultyButton>
+							<DifficultyButton selected={difficulty === 2} onClick={() => { setDifficulty(2) }}>Medium</DifficultyButton>
+							<DifficultyButton selected={difficulty === 3} onClick={() => { setDifficulty(3) }}>Hard</DifficultyButton>
+						</SettingsInner>
+					</SettingsContainer>
 					<ThinkingText>
 						{botThinking ? (
 							<>

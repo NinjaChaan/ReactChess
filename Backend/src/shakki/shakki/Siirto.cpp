@@ -1,7 +1,8 @@
 #include "Siirto.h"
 #include "asema.h"
 #include <sstream>
-Siirto::Siirto(Ruutu alku, Ruutu loppu) {
+Siirto::Siirto(Ruutu alku, Ruutu loppu)
+{
 	alkuRuutu = alku;
 	loppuRuutu = loppu;
 	miksiKorotetaan = 0;
@@ -11,7 +12,8 @@ Siirto::Siirto(Ruutu alku, Ruutu loppu) {
 	syonti = false;
 }
 
-Siirto::Siirto() {
+Siirto::Siirto()
+{
 	alkuRuutu = Ruutu();
 	loppuRuutu = Ruutu();
 	miksiKorotetaan = 0;
@@ -21,7 +23,8 @@ Siirto::Siirto() {
 	syonti = false;
 }
 
-Siirto::Siirto(bool lyhytLinna, bool pitkaLinna) {
+Siirto::Siirto(bool lyhytLinna, bool pitkaLinna)
+{
 	alkuRuutu = Ruutu();
 	loppuRuutu = Ruutu();
 	miksiKorotetaan = 0;
@@ -31,67 +34,85 @@ Siirto::Siirto(bool lyhytLinna, bool pitkaLinna) {
 	syonti = false;
 }
 
-Ruutu Siirto::getAlkuruutu() {
+Ruutu Siirto::getAlkuruutu()
+{
 	return alkuRuutu;
 }
 
-Ruutu Siirto::getLoppuruutu() {
+Ruutu Siirto::getLoppuruutu()
+{
 	return loppuRuutu;
 }
 
-bool Siirto::onkoLyhytLinna() {
+bool Siirto::onkoLyhytLinna()
+{
 	return lyhytLinna;
 }
 
-bool Siirto::onkoPitkalinna() {
+bool Siirto::onkoPitkalinna()
+{
 	return pitkalinna;
 }
 
-bool Siirto::onkoEnPassant() {
+bool Siirto::onkoEnPassant()
+{
 	return enPassant;
 }
 
-int Siirto::getMiksiKorotetaan() {
+int Siirto::getMiksiKorotetaan()
+{
 	return miksiKorotetaan;
 }
 
-void Siirto::setMiksiKorotetaan(int miksiKorotetaan) {
+void Siirto::setMiksiKorotetaan(int miksiKorotetaan)
+{
 	this->miksiKorotetaan = miksiKorotetaan;
 }
 
-void Siirto::setEnPassant(bool enPassant) {
+void Siirto::setEnPassant(bool enPassant)
+{
 	this->enPassant = enPassant;
 }
 
-std::wstring Siirto::toString(Asema* asema) {
-	Nappula* nappula = asema->lauta[alkuRuutu.getSarake()][alkuRuutu.getRivi()];
+std::wstring Siirto::toString(Asema *asema)
+{
+	Nappula *nappula = asema->lauta[alkuRuutu.getSarake()][alkuRuutu.getRivi()];
 
 	std::wstringstream ss;
 
-	if (lyhytLinna) {
+	if (lyhytLinna)
+	{
 		return L"O-O";
 	}
-	else if (pitkalinna) {
+	else if (pitkalinna)
+	{
 		return L"O-O-O";
 	}
 
-	if (nappula == Asema::vk || nappula == Asema::mk) {
+	if (nappula == Asema::vk || nappula == Asema::mk)
+	{
 		ss << " K";
 	}
-	else if (nappula == Asema::vd || nappula == Asema::md) {
+	else if (nappula == Asema::vd || nappula == Asema::md)
+	{
 		ss << " D";
 	}
-	else if (nappula == Asema::vl || nappula == Asema::ml) {
+	else if (nappula == Asema::vl || nappula == Asema::ml)
+	{
 		ss << " L";
 	}
-	else if (nappula == Asema::vt || nappula == Asema::mt) {
+	else if (nappula == Asema::vt || nappula == Asema::mt)
+	{
 		ss << " T";
 	}
-	else if (nappula == Asema::vr || nappula == Asema::mr) {
+	else if (nappula == Asema::vr || nappula == Asema::mr)
+	{
 		ss << " R";
 	}
-	else if (nappula == Asema::vs || nappula == Asema::ms) {
-		if (!(getLoppuruutu().getRivi() == 0 || getLoppuruutu().getRivi() == 7)) {
+	else if (nappula == Asema::vs || nappula == Asema::ms)
+	{
+		if (!(getLoppuruutu().getRivi() == 0 || getLoppuruutu().getRivi() == 7))
+		{
 			ss << "  ";
 		}
 	}
@@ -102,21 +123,25 @@ std::wstring Siirto::toString(Asema* asema) {
 	ss << (char)(loppuRuutu.getSarake() + 'a');
 	ss << (char)(loppuRuutu.getRivi() + '1');
 
+	if (nappula != NULL && (nappula == Asema::vs || nappula == Asema::ms) && (getLoppuruutu().getRivi() == 0 || getLoppuruutu().getRivi() == 7))
+	{
 
-	if (nappula != NULL && (nappula == Asema::vs || nappula == Asema::ms) && (getLoppuruutu().getRivi() == 0 ||
-		getLoppuruutu().getRivi() == 7)) {
-
-		switch (getMiksiKorotetaan()) {
-		case VD: case MD:
+		switch (getMiksiKorotetaan())
+		{
+		case VD:
+		case MD:
 			ss << L"=D";
 			break;
-		case VL: case ML:
+		case VL:
+		case ML:
 			ss << L"=L";
 			break;
-		case VT: case MT:
+		case VT:
+		case MT:
 			ss << L"=T";
 			break;
-		case VR: case MR:
+		case VR:
+		case MR:
 			ss << L"=R";
 			break;
 		}
@@ -125,89 +150,131 @@ std::wstring Siirto::toString(Asema* asema) {
 	return ss.str();
 }
 
-std::string Siirto::toNormalString(Asema* asema) {
-	Nappula* nappula = asema->lauta[alkuRuutu.getSarake()][alkuRuutu.getRivi()];
+std::string Siirto::toNormalString(Asema *asema)
+{
+	Nappula *nappula = asema->lauta[alkuRuutu.getSarake()][alkuRuutu.getRivi()];
+	Nappula *vnappula = asema->lauta[loppuRuutu.getSarake()][loppuRuutu.getRivi()];
 
 	std::stringstream ss;
 
-	if (lyhytLinna) {
+	if (lyhytLinna)
+	{
 		return "O-O";
 	}
-	else if (pitkalinna) {
+	else if (pitkalinna)
+	{
 		return "O-O-O";
 	}
+	else if (enPassant)
+	{
+		ss << (char)(alkuRuutu.getSarake() + 'a');
+		ss << (char)(alkuRuutu.getRivi() + '1');
+		ss << 'x';
+		ss << (char)(loppuRuutu.getSarake() + 'a');
+		ss << (char)(loppuRuutu.getRivi() + '1');
+		return ss.str();
+	}
 
-	if (nappula == Asema::vk || nappula == Asema::mk) {
+	if (nappula == Asema::vk || nappula == Asema::mk)
+	{
 		ss << "K";
 	}
-	else if (nappula == Asema::vd || nappula == Asema::md) {
+	else if (nappula == Asema::vd || nappula == Asema::md)
+	{
 		ss << "Q";
 	}
-	else if (nappula == Asema::vl || nappula == Asema::ml) {
+	else if (nappula == Asema::vl || nappula == Asema::ml)
+	{
 		ss << "B";
 	}
-	else if (nappula == Asema::vt || nappula == Asema::mt) {
+	else if (nappula == Asema::vt || nappula == Asema::mt)
+	{
 		ss << "R";
 	}
-	else if (nappula == Asema::vr || nappula == Asema::mr) {
+	else if (nappula == Asema::vr || nappula == Asema::mr)
+	{
 		ss << "N";
 	}
-	else if (nappula == Asema::vs || nappula == Asema::ms) {
-		if (!(getLoppuruutu().getRivi() == 0 || getLoppuruutu().getRivi() == 7)) {
+	else if (nappula == Asema::vs || nappula == Asema::ms)
+	{
+		if (!(getLoppuruutu().getRivi() == 0 || getLoppuruutu().getRivi() == 7))
+		{
 			ss << "";
 		}
 	}
 
 	ss << (char)(alkuRuutu.getSarake() + 'a');
 	ss << (char)(alkuRuutu.getRivi() + '1');
-	ss << '-';
+	if (vnappula != nullptr)
+	{
+		ss << 'x';
+	}
+	else
+	{
+		ss << '-';
+	}
 	ss << (char)(loppuRuutu.getSarake() + 'a');
 	ss << (char)(loppuRuutu.getRivi() + '1');
 
-
-	if (nappula != NULL && (nappula == Asema::vs || nappula == Asema::ms) && (getLoppuruutu().getRivi() == 0 ||
-		getLoppuruutu().getRivi() == 7)) {
-
-		switch (getMiksiKorotetaan()) {
-		case VD: case MD:
-			ss << "->Q";
+	if (nappula != NULL && (nappula == Asema::vs || nappula == Asema::ms) && (getLoppuruutu().getRivi() == 0 || getLoppuruutu().getRivi() == 7))
+	{
+		switch (getMiksiKorotetaan())
+		{
+		case VD:
+		case MD:
+			ss << "=Q";
 			break;
-		case VL: case ML:
-			ss << "->B";
+		case VL:
+		case ML:
+			ss << "=B";
 			break;
-		case VT: case MT:
-			ss << "->R";
+		case VT:
+		case MT:
+			ss << "=R";
 			break;
-		case VR: case MR:
-			ss << "->N";
+		case VR:
+		case MR:
+			ss << "=N";
 			break;
 		}
+	}
+	Asema uusiAsema = Asema(*asema);
+	uusiAsema.paivitaAsema(this);
+	if(uusiAsema.onkoKuningasUhattu()){
+		ss << "+";
 	}
 
 	return ss.str();
 }
 
-bool Siirto::operator==(const Siirto& other) const {
-	if (lyhytLinna == true && other.lyhytLinna == true) return true;
-	if (pitkalinna == true && other.pitkalinna == true) return true;
+bool Siirto::operator==(const Siirto &other) const
+{
+	if (lyhytLinna == true && other.lyhytLinna == true)
+		return true;
+	if (pitkalinna == true && other.pitkalinna == true)
+		return true;
 	if (!lyhytLinna && !pitkalinna && !other.lyhytLinna && !other.pitkalinna && alkuRuutu.getRivi() == other.alkuRuutu.getRivi() &&
 		alkuRuutu.getSarake() == other.alkuRuutu.getSarake() &&
 		loppuRuutu.getRivi() == other.loppuRuutu.getRivi() &&
 		loppuRuutu.getSarake() == other.loppuRuutu.getSarake() &&
-		miksiKorotetaan == other.miksiKorotetaan) {
+		miksiKorotetaan == other.miksiKorotetaan)
+	{
 		return true;
 	}
 	return false;
 }
 
-bool Siirto::operator!=(const Siirto& other) const {
+bool Siirto::operator!=(const Siirto &other) const
+{
 	return !(*this == other);
 }
 
-bool Siirto::operator<(const Siirto& other)const {
+bool Siirto::operator<(const Siirto &other) const
+{
 	return this->syontiArvo < other.syontiArvo;
 }
 
-bool Siirto::operator>(const Siirto& other)const {
+bool Siirto::operator>(const Siirto &other) const
+{
 	return this->syontiArvo > other.syontiArvo;
 }

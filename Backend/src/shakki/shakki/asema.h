@@ -80,6 +80,7 @@ public:
 	std::vector<Siirto> annaRaakaSiirrotKillerTt(Siirto ttSiirto, Siirto killer1, Siirto killer2);
 	std::vector<Siirto> annaLaillisetSiirrot();
 	bool onkoRuutuUhattu(Ruutu ruutu);
+	bool onkoKuningasUhattu();
 	Ruutu getValkeaKuningasRuutu();
 	Ruutu getMustaKuningasRuutu();
 	Nappula* getNappulaRuudussa(int sarake, int rivi);

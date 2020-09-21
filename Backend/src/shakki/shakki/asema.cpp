@@ -5,6 +5,7 @@
 #include "peli.h"
 #include <string>
 #include <exception>
+#include <regex>
 
 Nappula *Asema::vk = new Kuningas(L"\u265A", 0, VK, 200);
 Nappula *Asema::vd = new Daami(L"\u265B", 0, VD, 9);
@@ -204,6 +205,8 @@ Asema::Asema(std::string fen)
 	bool bKAllowed = false;
 	bool bQAllowed = false;
 
+	const std::regex re("a|b|c|d|e|f|g|h");
+
 	for (char c : fen)
 	{
 		if (j < 8)
@@ -228,6 +231,7 @@ Asema::Asema(std::string fen)
 					{
 						mustaKuningasRuutu = Ruutu(i, 7 - j);
 					}
+
 					lauta[i][7 - j] = fenToPiece(c);
 					i++;
 				}
@@ -263,6 +267,10 @@ Asema::Asema(std::string fen)
 			else if (c == 'q')
 			{
 				bQAllowed = true;
+			}
+			else if (std::regex_match(std::string(1, c), re))
+			{
+				kaksoisaskelSarakkeella = (int)c - 97;
 			}
 		}
 	}
@@ -554,6 +562,24 @@ bool Asema::onkoRuutuUhattu(Ruutu ruutu)
 	return false;
 }
 
+bool Asema::onkoKuningasUhattu()
+{
+	Asema uusiAsema = Asema(*this);
+	uusiAsema.setSiirtovuoro(!siirtovuoro);
+
+	Ruutu kuningas = uusiAsema.siirtovuoro == 1 ? this->getValkeaKuningasRuutu() : this->getMustaKuningasRuutu();
+	std::vector<Siirto> lista = uusiAsema.annaRaakaSiirrot();
+
+	for (auto s : lista)
+	{
+		if (s.getLoppuruutu() == kuningas)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
 Ruutu Asema::getValkeaKuningasRuutu()
 {
 	return valkeaKuningasRuutu;
@@ -823,6 +849,19 @@ std::string Asema::getFen()
 	{
 		fen += "q";
 	}
+	if (kaksoisaskelSarakkeella != -1)
+	{
+		fen += " ";
+		fen += (char)kaksoisaskelSarakkeella + 'a';
+		if (getSiirtovuoro() == 0)
+		{
+			fen += 3 + '0';
+		}
+		else
+		{
+			fen += 6 + '0';
+		}
+	}
 
 	return fen;
 }
@@ -892,7 +931,7 @@ MinMaxPaluu Asema::iteratiivinenAlphaBeta2(const lautaDict &historia, float kell
 
 		if (depth > 30)
 			break;
-		if(maxSyvyys > 0 && depth > maxSyvyys)
+		if (maxSyvyys > 0 && depth > maxSyvyys)
 			break;
 	}
 	std::wcout << std::endl;
@@ -921,7 +960,7 @@ MinMaxPaluu Asema::iteratiivinenAlphaBeta2(const lautaDict &historia, float kell
 			i = 0;
 		}
 	}
-	// Get a random move 
+	// Get a random move
 	//viimeParas = viimePaluuLista[rand() % viimePaluuLista.size()];
 
 	*syvyys = depth;

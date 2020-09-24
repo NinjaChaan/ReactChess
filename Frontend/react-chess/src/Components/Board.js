@@ -5,6 +5,7 @@ import Square from '../Components/Square'
 import Ellipsis from './Ellipsis'
 import { CoordinatesNumbers, CoordinatesLetters } from '../Components/Coordinates'
 import FENBoard from 'fen-chess-board'
+import { device } from '../devices'
 import axios from 'axios'
 import w_q from '../../resources/chesspieces/Chess_qlt45.svg'
 import b_q from '../../resources/chesspieces/Chess_qdt45.svg'
@@ -44,7 +45,15 @@ const BoardStyle = styled.div`
 	border-radius: 4px;
 `
 const BoardContainer = styled.div`
-	margin: 0 200px 0 500px;
+	/* margin: 0 200px 0 500px; */
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+    flex-wrap: wrap;
+
+	@media ${device.tablet} {
+    	flex-direction: row;
+  	}
 `
 
 const StartButton = styled.button`
@@ -93,10 +102,13 @@ const BannerText = styled.span`
 
 const MoveContainerContainer = styled.div`
 	background-color: burlywood;
-	margin-left: 50px;
+	height: max-content;
+	margin-left: ${(props) => (props.mobile || '50px')};
 	padding: 5px;
 	border-radius: 4px;
 	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+	width: ${(props) => (props.mobile && '445px')};
+	margin-top: ${(props) => (props.mobile && '20px')};
 `
 
 const MoveHistoryContainer = styled.div`
@@ -104,23 +116,44 @@ const MoveHistoryContainer = styled.div`
 	border-radius: 4px;
 	/* margin-left: 50px; */
 	padding: 10px 0;
-	height: 420px;
+	
+	height: max-content;
 	/* width: 110px; */
 	/* overflow: auto; */
 	/* box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75); */
 `
 
 const MoveContainer = styled.div`
-	height: 410px;
-	width: 90px;
+	height: ${(props) => (props.mobile && '200px') || '405px'};
+	width: ${(props) => (props.mobile && '100%') || '170px'};
 	overflow: auto;
 	&::-webkit-scrollbar {
 		display: none;
 	}
   	-ms-overflow-style: none;  /* IE and Edge */
  	scrollbar-width: none;  /* Firefox */
-	padding-left: 15px;
+	/* padding-left: 15px; */
 	/* margin-top: 5px; */
+	display: inline-flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	align-content: flex-start;
+	overflow-y: scroll;
+`
+
+const MoveText = styled.span`
+	color:#f1d2ab;
+	max-width: ${(props) => (props.mobile && '15%') || '35%'};
+	flex: 0 0 35%;
+	max-height: 20px;
+	margin-left: 15px;
+`
+
+const MoveNumber = styled(MoveText)`
+	max-width: 5%;
+	flex: 0 0 5%;
+	max-height: 20px;
+	margin-left: ${(props) => (props.mobile && '30px') || '10px'};
 `
 
 const TitleContainer = styled.div`
@@ -133,7 +166,7 @@ const TitleContainer = styled.div`
 		top: 0px;
 		bottom: 0;
 		box-shadow: 0px 5px 8px -2px rgba(0,0,0,0.60);
-		width: 105px;
+		width: 100%;
 		height: 20px;
 		display: inherit;
 	}	
@@ -221,22 +254,35 @@ const DifficultyButton = styled.button`
 `
 
 const SettingsContainer = styled.div`
-	position: absolute;
+	/* position: absolute; */
 	left: 50px;
 	top: 10px;
-	margin: 25px -150px 0 50px;
+	margin: 25px 150px 0 50px;
 	background-color: burlywood;
 	padding: 5px;
 	border-radius: 4px;
 	height: max-content;
 	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+	/* flex-basis: 0;
+	flex-grow: 1; */
+	
+	flex: 0 0 10%;
+	max-width: max-content;
+
+	@media ${device.tablet}{
+		/* flex: 0 0 20%; */
+		flex: 0 0 17.7%;
+		max-width: max-content;
+	}
 `
 
 const SettingsInner = styled.div`
 	background-color: sienna;
 	border-radius: 4px;
 	padding: 10px;
-	height: 100%;
+	display: inline-block;
+	width: max-content;
+	/* height: 100%; */
 `
 
 const pieceSwitch = (piece, size) => {
@@ -328,7 +374,7 @@ const Board = () => {
 	const [turn, setTurn] = useState(0)
 	const [playAs, setPlayAs] = useState(0)
 	const [fen, setFen] = useState(`${new FENBoard("start").fen}`)
-	const [fenExtras, setFenExtras] = useState({ toMove: 'w', castling: '' })
+	const [fenExtras, setFenExtras] = useState({ toMove: 'w', castling: 'KQkq' })
 	const [items, setItems] = useState([])
 	const [startWidth, setStartWidth] = useState()
 	const [fenHistory, setFenHistory] = useState({})
@@ -348,7 +394,7 @@ const Board = () => {
 		setFenHistory({})
 		setFen(`${new FENBoard("start").fen}`)
 		// setFen(`${new FENBoard("start").fen}`)
-		setFenExtras({ toMove: 'w', castling: '' })
+		setFenExtras({ toMove: 'w', castling: 'KQkq' })
 		setMoveHistory([])
 		setLastMove("")
 		setTurn(0)
@@ -476,7 +522,7 @@ const Board = () => {
 					dash = 'x'
 				}
 				move = `${(fenBoard.board[coords.y][coords.x] !== 'P' ? fenBoard.board[coords.y][coords.x] : '')}${String.fromCharCode(selectedPiece.x + 97)}${8 - selectedPiece.y}${dash}${String.fromCharCode(coords.x + 97)}${8 - coords.y}`
-			
+
 				if (fenBoard.board[coords.y][coords.x] === 'P' && Math.abs(coords.y - selectedPiece.y) === 2) {
 					console.log('en passant possible')
 					setEnPassant(`${String.fromCharCode(coords.x + 97)}${fenExtras.toMove === 'w' ? '3' : '6'}`)
@@ -588,9 +634,9 @@ const Board = () => {
 				move: result.data.lastMove,
 				color: splitfen[1] === "b" ? "w" : "b"
 			})
-			fenBoard.move(`${result.data.lastMove[0]}${result.data.lastMove[1]}`, `${result.data.lastMove[3]}${result.data.lastMove[4]}`);
-			setFen(fenBoard.fen)
-			setBoard(true)
+		fenBoard.move(`${result.data.lastMove[0]}${result.data.lastMove[1]}`, `${result.data.lastMove[3]}${result.data.lastMove[4]}`);
+		setFen(fenBoard.fen)
+		setBoard(true)
 	}
 
 	const playBotTurn = (fen) => {
@@ -665,84 +711,133 @@ const Board = () => {
 		}
 	}, [fen, fenExtras, allowedMoves, selectedPiece, legalMoves, botThinking, turn, promotion])
 
+	useEffect(() => {
+        document.addEventListener("touchmove", function(e) { e.preventDefault() });
+        return () => {
+			document.removeEventListener("touchmove", function(e) { e.preventDefault() });
+        };
+      });
+
 	return (
 		<>
-			<>
+			<div style={{ display: 'flex', width: '100%' }}>
 				<BoardContainer>
-					<SettingsContainer>
-						<SettingsInner>
-							<Title>Difficulty</Title>
-							<DifficultyButton selected={difficulty === 1} onClick={() => { setDifficulty(1) }}>Easy</DifficultyButton>
-							<DifficultyButton selected={difficulty === 2} onClick={() => { setDifficulty(2) }}>Medium</DifficultyButton>
-							<DifficultyButton selected={difficulty === 3} onClick={() => { setDifficulty(3) }}>Hard</DifficultyButton>
-						</SettingsInner>
-					</SettingsContainer>
-					<ThinkingText>
-						{botThinking ? (
-							<>
-								<span>The bot is thinking</span>
-								<Ellipsis />
-							</>
-						) : (
-								<span> </span>
+					{window.matchMedia(device.laptop).matches && (
+						<SettingsContainer>
+							<SettingsInner>
+								<Title>Difficulty</Title>
+								<DifficultyButton selected={difficulty === 1} onClick={() => { setDifficulty(1) }}>Easy</DifficultyButton>
+								<DifficultyButton selected={difficulty === 2} onClick={() => { setDifficulty(2) }}>Medium</DifficultyButton>
+								<DifficultyButton selected={difficulty === 3} onClick={() => { setDifficulty(3) }}>Hard</DifficultyButton>
+							</SettingsInner>
+						</SettingsContainer>
+					)}
+					<div style={{ marginLeft: '25px' }}>
+						<ThinkingText>
+							{botThinking ? (
+								<>
+									<span>The bot is thinking</span>
+									<Ellipsis />
+								</>
+							) : (
+									<span> </span>
+								)}
+						</ThinkingText>
+						<Container>
+							<CoordinatesLetters />
+							<CoordinatesNumbers />
+							<BoardBorder>
+								<BoardStyle>
+									{items}
+								</BoardStyle>
+							</BoardBorder>
+							<CoordinatesNumbers />
+							{window.matchMedia(device.laptop).matches && (
+								<MoveContainerContainer>
+									<MoveHistoryContainer>
+										<TitleContainer>
+											<Title >Move history</Title>
+										</TitleContainer>
+										<MoveContainer id="moveContainer">
+											{moveHistory.map((move, i) => (
+												<>
+													{(moveHistory.indexOf(move) + 1) % 2 !== 0 && (
+														<MoveNumber>{(moveHistory.indexOf(move) + 2) / 2}.</MoveNumber>
+													)}
+													{/* <MoveLi key={i} color={move.color}>{move.move}</MoveLi> */}
+													<MoveText>{move.move}</MoveText>
+												</>
+											))}
+										</MoveContainer>
+									</MoveHistoryContainer>
+								</MoveContainerContainer>
 							)}
-					</ThinkingText>
-					<Container>
-						<CoordinatesLetters />
-						<CoordinatesNumbers />
-						<BoardBorder>
-							<BoardStyle>
-								{items}
-							</BoardStyle>
-						</BoardBorder>
-						<CoordinatesNumbers />
-						<MoveContainerContainer>
-							<MoveHistoryContainer>
+							{!running && (
+								<Mask>
+									{winner && (
+										<Banner
+											winner={winner}>
+											<BannerText>{winnerText}</BannerText>
+										</Banner>
+									)}
+
+									<StartButton
+										id="start"
+										width={startWidth}
+										onClick={startGame}>{winner ? "Start new game" : "Start game"}
+									</StartButton>
+								</Mask>
+							)}
+							<CoordinatesLetters offsetTop={430} />
+							{promotion && (
+								<Mask>
+									<PromotionContainer>
+										<PromotionInner>
+											<PromotionTitle>What to promote to?</PromotionTitle>
+											<div>
+												<PromotionButton image={w_q} onClick={() => promote('Q')}></PromotionButton>
+												<PromotionButton image={w_r} onClick={() => promote('R')}></PromotionButton>
+												<PromotionButton image={w_b} onClick={() => promote('B')}></PromotionButton>
+												<PromotionButton image={w_n} onClick={() => promote('N')}></PromotionButton>
+											</div>
+										</PromotionInner>
+									</PromotionContainer>
+								</Mask>
+							)}
+						</Container>
+					</div>
+					{window.matchMedia(device.tabletMAX).matches && (
+						<MoveContainerContainer mobile>
+							<MoveHistoryContainer mobile>
 								<TitleContainer>
 									<Title >Move history</Title>
 								</TitleContainer>
-								<MoveContainer id="moveContainer">
+								<MoveContainer mobile id="moveContainer">
 									{moveHistory.map((move, i) => (
-										<MoveLi key={i} color={move.color}>{move.move}</MoveLi>
+										<>
+											{(moveHistory.indexOf(move) + 1) % 2 !== 0 && (
+												<MoveNumber mobile>{(moveHistory.indexOf(move) + 2) / 2}.</MoveNumber>
+											)}
+											{/* <MoveLi key={i} color={move.color}>{move.move}</MoveLi> */}
+											<MoveText mobile>{move.move}</MoveText>
+										</>
 									))}
 								</MoveContainer>
 							</MoveHistoryContainer>
 						</MoveContainerContainer>
-						{!running && (
-							<Mask>
-								{winner && (
-									<Banner
-										winner={winner}>
-										<BannerText>{winnerText}</BannerText>
-									</Banner>
-								)}
-
-								<StartButton
-									id="start"
-									width={startWidth}
-									onClick={startGame}>{winner ? "Start new game" : "Start game"}
-								</StartButton>
-							</Mask>
-						)}
-						<CoordinatesLetters offsetTop={430} />
-						{promotion && (
-							<Mask>
-								<PromotionContainer>
-									<PromotionInner>
-										<PromotionTitle>What to promote to?</PromotionTitle>
-										<div>
-											<PromotionButton image={w_q} onClick={() => promote('Q')}></PromotionButton>
-											<PromotionButton image={w_r} onClick={() => promote('R')}></PromotionButton>
-											<PromotionButton image={w_b} onClick={() => promote('B')}></PromotionButton>
-											<PromotionButton image={w_n} onClick={() => promote('N')}></PromotionButton>
-										</div>
-									</PromotionInner>
-								</PromotionContainer>
-							</Mask>
-						)}
-					</Container>
+					)}
+					{/* {window.matchMedia(device.tabletMAX).matches && (
+						<SettingsContainer>
+							<SettingsInner>
+								<Title>Difficulty</Title>
+								<DifficultyButton selected={difficulty === 1} onClick={() => { setDifficulty(1) }}>Easy</DifficultyButton>
+								<DifficultyButton selected={difficulty === 2} onClick={() => { setDifficulty(2) }}>Medium</DifficultyButton>
+								<DifficultyButton selected={difficulty === 3} onClick={() => { setDifficulty(3) }}>Hard</DifficultyButton>
+							</SettingsInner>
+						</SettingsContainer>
+					)} */}
 				</BoardContainer>
-			</>
+			</div>
 		</>
 	)
 }

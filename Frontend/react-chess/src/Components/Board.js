@@ -233,9 +233,33 @@ const PromotionButton = styled.button`
 	border-radius: 4px;
 `
 
-const DifficultyButton = styled.button`
+const SettingsButton = styled.button`
 	background-color: sienna;
-	width: 75px;
+	min-width: 75px;
+	width: max-content;
+	height: 30px;
+	border-radius: 4px;
+	color: #f1d2ab;
+	border: 2px solid burlywood;
+	margin-right: 10px;
+	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+	outline: none;
+	&:hover {
+		background-color: #a5603f;
+		opacity: 100%;
+	};
+	&:last-of-type{
+		margin-right: 0px;
+	}
+	&:active {
+		transform: translateY(2px);
+	}
+`
+
+const DifficultyButton = styled(SettingsButton)`
+	background-color: sienna;
+	min-width: 75px;
+	width: max-content;
 	height: 30px;
 	border-radius: 4px;
 	color: #f1d2ab;
@@ -280,9 +304,22 @@ const SettingsInner = styled.div`
 	background-color: sienna;
 	border-radius: 4px;
 	padding: 10px;
-	display: inline-block;
+	display: flex;
+	flex-direction: column;
 	width: max-content;
 	/* height: 100%; */
+`
+
+const SettingsGroup = styled.div`
+	padding: 10px;
+	display: inline-block;
+	width: auto;
+	/* height: 100%; */
+`
+
+const ButtonGroup = styled.div`
+	display: flex;
+	justify-content: center;
 `
 
 const pieceSwitch = (piece, size) => {
@@ -343,6 +380,11 @@ const getLegalMoves = (fen) => {
 	return request.then((response) => response).catch((error) => (error.response))
 }
 
+const getBestMove = (fen) => {
+	const request = axios.post(`/getBestMove`, fen)
+	return request.then((response) => response).catch((error) => (error.response))
+}
+
 const startStream = () => {
 	console.log('Connecting to event stream')
 	const eventSourceInitDict = {
@@ -381,6 +423,8 @@ const Board = () => {
 	const [moveHistory, setMoveHistory] = useState([])
 	const [legalMoves, setLegalMoves] = useState([])
 	const [lastMove, setLastMove] = useState("")
+	const [hintMove, setHintMove] = useState("")
+	const [showOnlyStart, setShowOnlyStart] = useState(false)
 	const [selectedPiece, setSelectedPiece] = useState({})
 	const [allowedMoves, setAllowedMoves] = useState([])
 	const [botThinking, setBotThinking] = useState(false)
@@ -417,7 +461,10 @@ const Board = () => {
 		}
 	}, [winner]);
 
-	const squareInLastMove = (i, j, r1c, r1r, r2c, r2r) => {
+	const squareInLastMove = (i, j, r1c, r1r, r2c, r2r, onlyStart = false) => {
+		if (onlyStart) {
+			return (j === r1c && i === r1r)
+		}
 		return (j === r1c && i === r1r) || (j === r2c && i === r2r)
 	}
 
@@ -559,6 +606,7 @@ const Board = () => {
 		// setEnPassant('-')
 
 		if (moved) {
+			setHintMove("")
 			setLastMove(move)
 			setTurn(1)
 			setFen(fenBoard.fen)
@@ -587,6 +635,35 @@ const Board = () => {
 		return (pieceSide === playAs && playAs === turn)
 	}
 
+	const checkHint = (i, j) => {
+		const regex = RegExp('B|R|N|K|Q')
+		const cleanedMove = (regex.test(hintMove[0]) ? hintMove.substring(1) : hintMove) || "öööööö"
+		let showMove = true
+		if (hintMove === "O-O") {
+			const h1c = 4;
+			const h1r = fenExtras.toMove === 'w' ? 7 : 0;
+			const h2c = 6;
+			const h2r = fenExtras.toMove === 'w' ? 7 : 0;
+
+			return hintMove !== "" ? squareInLastMove(i, j, h1c, h1r, h2c, h2r) : false
+		} else if (hintMove === "O-O-O") {
+			const h1c = 4;
+			const h1r = fenExtras.toMove === 'w' ? 7 : 0;
+			const h2c = 2;
+			const h2r = fenExtras.toMove === 'w' ? 7 : 0;
+
+			return hintMove !== "" ? squareInLastMove(i, j, h1c, h1r, h2c, h2r) : false
+
+		} else {
+			const h1c = showMove ? cleanedMove[0].charCodeAt(0) - 'a'.charCodeAt(0) : "";
+			const h1r = showMove ? 7 - (cleanedMove[1].charCodeAt(0) - '1'.charCodeAt(0)) : "";
+			const h2c = showMove ? cleanedMove[3].charCodeAt(0) - 'a'.charCodeAt(0) : "";
+			const h2r = showMove ? 7 - (cleanedMove[4].charCodeAt(0) - '1'.charCodeAt(0)) : "";
+			console.log("only start", showOnlyStart)
+			return hintMove !== "" ? squareInLastMove(i, j, h1c, h1r, h2c, h2r, showOnlyStart) : false
+		}
+	}
+
 	const setBoard = (movedPiece) => {
 		const fenBoard = new FENBoard(fen)
 		let showMove = true;
@@ -610,9 +687,20 @@ const Board = () => {
 				const shortCastle = allowedMoves.includes("O-O") && ((turn === 0 && j === 6 && i === 7) || (turn === 1 && j === 6 && i === 0))
 				const longCastle = allowedMoves.includes("O-O-O") && ((turn === 0 && j === 2 && i === 7) || (turn === 1 && j === 2 && i === 0))
 				const allowed = !movedPiece && (allowedMoves.includes(`${j}-${i}`) || allowedMoves.includes(`${j}x${i}`) || shortCastle || longCastle)
+				const showHint = checkHint(i, j)
+				// console.log('show hint', showHint)
 
 				tempItems.push(
-					<Square id={`${j}${i}`} key={`${j}-${i}`} allowedMoves={allowedMoves.length} white={(i * 7 + j) % 2 === 0} allowed={allowed} coords={{ x: j, y: i }} clickCallback={clickSquare} moved={moved}>
+					<Square
+						id={`${j}${i}`}
+						key={`${j}-${i}`}
+						allowedMoves={allowedMoves.length}
+						white={(i * 7 + j) % 2 === 0}
+						allowed={allowed}
+						hint={showHint}
+						coords={{ x: j, y: i }}
+						clickCallback={clickSquare}
+						moved={moved}>
 						{pieceSwitch(fenBoard.board[i][j], 46)}
 					</Square>
 				)
@@ -627,19 +715,22 @@ const Board = () => {
 	}
 
 	const doFinalMove = (result) => {
-		const fenBoard = new FENBoard(fen)
-		var splitfen = result.data.fen.split(' ')
-		moveHistory.push(
-			{
-				move: result.data.lastMove,
-				color: splitfen[1] === "b" ? "w" : "b"
-			})
-		fenBoard.move(`${result.data.lastMove[0]}${result.data.lastMove[1]}`, `${result.data.lastMove[3]}${result.data.lastMove[4]}`);
-		setFen(fenBoard.fen)
-		setBoard(true)
+		if (result.data.lastMove !== '') {
+			const fenBoard = new FENBoard(fen)
+			var splitfen = result.data.fen.split(' ')
+			moveHistory.push(
+				{
+					move: result.data.lastMove,
+					color: splitfen[1] === "b" ? "w" : "b"
+				})
+			fenBoard.move(`${result.data.lastMove[0]}${result.data.lastMove[1]}`, `${result.data.lastMove[3]}${result.data.lastMove[4]}`);
+			setFen(fenBoard.fen)
+			setBoard(true)
+		}
 	}
 
 	const playBotTurn = (fen) => {
+		setShowOnlyStart(false)
 		console.log('play fen', fen)
 		setBotThinking(true)
 		if (fen.length > 0) {
@@ -708,15 +799,31 @@ const Board = () => {
 		if (fenExtras.toMove === 'b' && !botThinking && running) {
 			const castling = fenExtras.castling !== '' ? ' ' + fenExtras.castling : ''
 			playBotTurn(`${fen} ${fenExtras.toMove}${castling}${' ' + enPassant}`)
+			setShowOnlyStart(false)
 		}
-	}, [fen, fenExtras, allowedMoves, selectedPiece, legalMoves, botThinking, turn, promotion])
+	}, [fen, fenExtras, allowedMoves, selectedPiece, legalMoves, botThinking, turn, promotion, hintMove, showOnlyStart])
 
 	useEffect(() => {
-        document.addEventListener("touchmove", function(e) { e.preventDefault() });
-        return () => {
-			document.removeEventListener("touchmove", function(e) { e.preventDefault() });
-        };
-      });
+		document.addEventListener("touchmove", function (e) { e.preventDefault() });
+		return () => {
+			document.removeEventListener("touchmove", function (e) { e.preventDefault() });
+		};
+	});
+
+	const getHint = (onlyStart) => {
+
+		setShowOnlyStart(onlyStart)
+
+		if (fen.length > 0) {
+			const castling = fenExtras.castling !== '' ? ' ' + fenExtras.castling : ''
+			getBestMove({ fen: `${fen} ${fenExtras.toMove}${castling}${' ' + enPassant}` })
+				.then((result) => {
+					console.log('result', result)
+					console.log('best move', result.data)
+					setHintMove(result.data)
+				})
+		}
+	}
 
 	return (
 		<>
@@ -725,10 +832,21 @@ const Board = () => {
 					{window.matchMedia(device.laptop).matches && (
 						<SettingsContainer>
 							<SettingsInner>
-								<Title>Difficulty</Title>
-								<DifficultyButton selected={difficulty === 1} onClick={() => { setDifficulty(1) }}>Easy</DifficultyButton>
-								<DifficultyButton selected={difficulty === 2} onClick={() => { setDifficulty(2) }}>Medium</DifficultyButton>
-								<DifficultyButton selected={difficulty === 3} onClick={() => { setDifficulty(3) }}>Hard</DifficultyButton>
+								<SettingsGroup>
+									<Title>Difficulty</Title>
+									<ButtonGroup>
+										<DifficultyButton selected={difficulty === 1} onClick={() => { setDifficulty(1) }}>Easy</DifficultyButton>
+										<DifficultyButton selected={difficulty === 2} onClick={() => { setDifficulty(2) }}>Medium</DifficultyButton>
+										<DifficultyButton selected={difficulty === 3} onClick={() => { setDifficulty(3) }}>Hard</DifficultyButton>
+									</ButtonGroup>
+								</SettingsGroup>
+								<SettingsGroup>
+									<Title>Get a hint</Title>
+									<ButtonGroup>
+										<SettingsButton onClick={() => { getHint(true) }}>Best piece</SettingsButton>
+										<SettingsButton onClick={() => { getHint(false) }}>Best move</SettingsButton>
+									</ButtonGroup>
+								</SettingsGroup>
 							</SettingsInner>
 						</SettingsContainer>
 					)}

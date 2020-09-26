@@ -10,6 +10,7 @@ const SquareStyle = styled.button`
 		|| 'sienna'
 	};
 	box-shadow: ${(props) => (props.moved && 'inset 2000px 0 0 0 rgba(0, 255, 0, 0.25)')};
+	box-shadow: ${(props) => (props.hint && 'inset 2000px 0 0 0 rgba(255, 0, 0, 0.35)')};
 	border: none;
 	outline: none;
 	&:after {
@@ -37,7 +38,7 @@ const SquareStyle = styled.button`
 	}
 `
 
-const Square = ({ white, moved, children, selected, allowed, id, coords, clickCallback }) => {
+const Square = ({ white, moved, children, selected, allowed, hint, id, coords, clickCallback }) => {
 	const [clicked, setClicked] = useState(false)
 
 	const selectPiece = () => {
@@ -57,6 +58,7 @@ const Square = ({ white, moved, children, selected, allowed, id, coords, clickCa
 			moved={moved}
 			selected={clicked}
 			allowed={allowed}
+			hint={hint}
 			onClick={click}
 			onBlur={() => { setClicked(false)}}>
 			{children}

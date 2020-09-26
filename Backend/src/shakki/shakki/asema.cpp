@@ -204,6 +204,7 @@ Asema::Asema(std::string fen)
 	bool wQAllowed = false;
 	bool bKAllowed = false;
 	bool bQAllowed = false;
+	bool turnFound = false;
 
 	const std::regex re("a|b|c|d|e|f|g|h");
 
@@ -244,13 +245,15 @@ Asema::Asema(std::string fen)
 		}
 		else
 		{
-			if (c == 'w')
+			if (c == 'w' && !turnFound)
 			{
 				setSiirtovuoro(0);
+				turnFound = true;
 			}
-			else if (c == 'b')
+			else if (c == 'b' && !turnFound)
 			{
 				setSiirtovuoro(1);
+				turnFound = true;
 			}
 			else if (c == 'K')
 			{

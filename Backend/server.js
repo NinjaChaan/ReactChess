@@ -22,6 +22,10 @@ async function getLegalMoves(fen) {
 	return await Promise.resolve(bot.getLegalMoves(fen));
 }
 
+async function getBestMove(fen) {
+	return await Promise.resolve(bot.getBestMove(fen));
+}
+
 app.post('/playTurn', async (request, response, next) => {
 	const { body } = request
 	console.log('body: ', body)
@@ -36,6 +40,16 @@ app.post('/getLegalMoves', async (request, response, next) => {
 	const { body } = request
 	console.log('body: ', body)
 	getLegalMoves(body.fen)
+		.then((result) => {
+			console.log('result: ', result)
+			response.json(result)
+		})
+		.catch((error) => next(error))
+})
+app.post('/getBestMove', async (request, response, next) => {
+	const { body } = request
+	console.log('body: ', body)
+	getBestMove(body.fen)
 		.then((result) => {
 			console.log('result: ', result)
 			response.json(result)

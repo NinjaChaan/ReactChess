@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
 import EventSourcePoly from 'eventsource'
 import Square from '../Components/Square'
+import SettingsModule from '../Components/SettingsModule'
 import Ellipsis from './Ellipsis'
 import { CoordinatesNumbers, CoordinatesLetters } from '../Components/Coordinates'
 import FENBoard from 'fen-chess-board'
@@ -160,6 +161,8 @@ const TitleContainer = styled.div`
 	height:20px;
 	position: relative;
 	margin-top: -5px;
+	width: auto;
+	display: flex;
 	&:after{
 		content: "";
 		position: absolute;
@@ -178,16 +181,7 @@ const Title = styled.span`
 	text-align: center;
 	display: grid;
 	padding-bottom: 5px;
-`
-
-const MoveLi = styled.li`
-	color:#f1d2ab;
-	margin: 2.5px 0;
-	&::marker {
-		color: ${(props) => (props.color === "w" && 'white')
-		|| 'black'
-	};
-	}
+	width: 100%;
 `
 
 const ThinkingText = styled.span`
@@ -231,95 +225,6 @@ const PromotionButton = styled.button`
 	height: 50px;
 	width: 50px;
 	border-radius: 4px;
-`
-
-const SettingsButton = styled.button`
-	background-color: sienna;
-	min-width: 75px;
-	width: max-content;
-	height: 30px;
-	border-radius: 4px;
-	color: #f1d2ab;
-	border: 2px solid burlywood;
-	margin-right: 10px;
-	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
-	outline: none;
-	&:hover {
-		background-color: #a5603f;
-		opacity: 100%;
-	};
-	&:last-of-type{
-		margin-right: 0px;
-	}
-	&:active {
-		transform: translateY(2px);
-	}
-`
-
-const DifficultyButton = styled(SettingsButton)`
-	background-color: sienna;
-	min-width: 75px;
-	width: max-content;
-	height: 30px;
-	border-radius: 4px;
-	color: #f1d2ab;
-	border: 2px solid burlywood;
-	margin-right: 10px;
-	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
-	opacity:${(props) => (props.selected && '100%')
-		|| '60%'};
-	&:hover {
-		background-color: #a5603f;
-		opacity: 100%;
-	};
-	&:last-of-type{
-		margin-right: 0px;
-	}
-`
-
-const SettingsContainer = styled.div`
-	/* position: absolute; */
-	left: 50px;
-	top: 10px;
-	margin: 25px 150px 0 50px;
-	background-color: burlywood;
-	padding: 5px;
-	border-radius: 4px;
-	height: max-content;
-	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
-	/* flex-basis: 0;
-	flex-grow: 1; */
-	
-	flex: 0 0 10%;
-	max-width: max-content;
-
-	@media ${device.tablet}{
-		/* flex: 0 0 20%; */
-		flex: 0 0 17.7%;
-		max-width: max-content;
-	}
-`
-
-const SettingsInner = styled.div`
-	background-color: sienna;
-	border-radius: 4px;
-	padding: 10px;
-	display: flex;
-	flex-direction: column;
-	width: max-content;
-	/* height: 100%; */
-`
-
-const SettingsGroup = styled.div`
-	padding: 10px;
-	display: inline-block;
-	width: auto;
-	/* height: 100%; */
-`
-
-const ButtonGroup = styled.div`
-	display: flex;
-	justify-content: center;
 `
 
 const pieceSwitch = (piece, size) => {
@@ -424,6 +329,7 @@ const Board = () => {
 	const [legalMoves, setLegalMoves] = useState([])
 	const [lastMove, setLastMove] = useState("")
 	const [hintMove, setHintMove] = useState("")
+	const [canAskForHint, setCanAskForHint] = useState(true)
 	const [showOnlyStart, setShowOnlyStart] = useState(false)
 	const [selectedPiece, setSelectedPiece] = useState({})
 	const [allowedMoves, setAllowedMoves] = useState([])
@@ -431,6 +337,7 @@ const Board = () => {
 	const [promotion, setPromotion] = useState(false)
 	const [toPromote, setToPromote] = useState({})
 	const [enPassant, setEnPassant] = useState('-')
+	const [showOptions, setShowOptions] = useState(window.matchMedia(device.laptop).matches)
 
 	const startGame = () => {
 		setWinner(null)
@@ -659,7 +566,6 @@ const Board = () => {
 			const h1r = showMove ? 7 - (cleanedMove[1].charCodeAt(0) - '1'.charCodeAt(0)) : "";
 			const h2c = showMove ? cleanedMove[3].charCodeAt(0) - 'a'.charCodeAt(0) : "";
 			const h2r = showMove ? 7 - (cleanedMove[4].charCodeAt(0) - '1'.charCodeAt(0)) : "";
-			console.log("only start", showOnlyStart)
 			return hintMove !== "" ? squareInLastMove(i, j, h1c, h1r, h2c, h2r, showOnlyStart) : false
 		}
 	}
@@ -811,17 +717,17 @@ const Board = () => {
 	});
 
 	const getHint = (onlyStart) => {
-
-		setShowOnlyStart(onlyStart)
-
-		if (fen.length > 0) {
-			const castling = fenExtras.castling !== '' ? ' ' + fenExtras.castling : ''
-			getBestMove({ fen: `${fen} ${fenExtras.toMove}${castling}${' ' + enPassant}` })
-				.then((result) => {
-					console.log('result', result)
-					console.log('best move', result.data)
-					setHintMove(result.data)
-				})
+		if (canAskForHint) {
+			setCanAskForHint(false)
+			setShowOnlyStart(onlyStart)
+			if (fen.length > 0) {
+				const castling = fenExtras.castling !== '' ? ' ' + fenExtras.castling : ''
+				getBestMove({ fen: `${fen} ${fenExtras.toMove}${castling}${' ' + enPassant}` })
+					.then((result) => {
+						setHintMove(result.data)
+						setCanAskForHint(true)
+					})
+			}
 		}
 	}
 
@@ -830,25 +736,13 @@ const Board = () => {
 			<div style={{ display: 'flex', width: '100%' }}>
 				<BoardContainer>
 					{window.matchMedia(device.laptop).matches && (
-						<SettingsContainer>
-							<SettingsInner>
-								<SettingsGroup>
-									<Title>Difficulty</Title>
-									<ButtonGroup>
-										<DifficultyButton selected={difficulty === 1} onClick={() => { setDifficulty(1) }}>Easy</DifficultyButton>
-										<DifficultyButton selected={difficulty === 2} onClick={() => { setDifficulty(2) }}>Medium</DifficultyButton>
-										<DifficultyButton selected={difficulty === 3} onClick={() => { setDifficulty(3) }}>Hard</DifficultyButton>
-									</ButtonGroup>
-								</SettingsGroup>
-								<SettingsGroup>
-									<Title>Get a hint</Title>
-									<ButtonGroup>
-										<SettingsButton onClick={() => { getHint(true) }}>Best piece</SettingsButton>
-										<SettingsButton onClick={() => { getHint(false) }}>Best move</SettingsButton>
-									</ButtonGroup>
-								</SettingsGroup>
-							</SettingsInner>
-						</SettingsContainer>
+						<SettingsModule
+							showOptions={showOptions}
+							difficulty={difficulty}
+							setDifficulty={setDifficulty}
+							getHint={getHint}
+							setShowOptions={setShowOptions}
+							showOptions={showOptions} />
 					)}
 					<div style={{ marginLeft: '25px' }}>
 						<ThinkingText>
@@ -882,7 +776,6 @@ const Board = () => {
 													{(moveHistory.indexOf(move) + 1) % 2 !== 0 && (
 														<MoveNumber>{(moveHistory.indexOf(move) + 2) / 2}.</MoveNumber>
 													)}
-													{/* <MoveLi key={i} color={move.color}>{move.move}</MoveLi> */}
 													<MoveText>{move.move}</MoveText>
 												</>
 											))}
@@ -925,18 +818,28 @@ const Board = () => {
 						</Container>
 					</div>
 					{window.matchMedia(device.tabletMAX).matches && (
+						<SettingsModule
+							mobile
+							showOptions={showOptions}
+							difficulty={difficulty}
+							setDifficulty={setDifficulty}
+							getHint={getHint}
+							setShowOptions={setShowOptions}
+							showOptions={showOptions} />
+					)}
+					{window.matchMedia(device.tabletMAX).matches && (
 						<MoveContainerContainer mobile>
 							<MoveHistoryContainer mobile>
 								<TitleContainer>
 									<Title >Move history</Title>
 								</TitleContainer>
+
 								<MoveContainer mobile id="moveContainer">
 									{moveHistory.map((move, i) => (
 										<>
 											{(moveHistory.indexOf(move) + 1) % 2 !== 0 && (
 												<MoveNumber mobile>{(moveHistory.indexOf(move) + 2) / 2}.</MoveNumber>
 											)}
-											{/* <MoveLi key={i} color={move.color}>{move.move}</MoveLi> */}
 											<MoveText mobile>{move.move}</MoveText>
 										</>
 									))}
@@ -944,16 +847,6 @@ const Board = () => {
 							</MoveHistoryContainer>
 						</MoveContainerContainer>
 					)}
-					{/* {window.matchMedia(device.tabletMAX).matches && (
-						<SettingsContainer>
-							<SettingsInner>
-								<Title>Difficulty</Title>
-								<DifficultyButton selected={difficulty === 1} onClick={() => { setDifficulty(1) }}>Easy</DifficultyButton>
-								<DifficultyButton selected={difficulty === 2} onClick={() => { setDifficulty(2) }}>Medium</DifficultyButton>
-								<DifficultyButton selected={difficulty === 3} onClick={() => { setDifficulty(3) }}>Hard</DifficultyButton>
-							</SettingsInner>
-						</SettingsContainer>
-					)} */}
 				</BoardContainer>
 			</div>
 		</>

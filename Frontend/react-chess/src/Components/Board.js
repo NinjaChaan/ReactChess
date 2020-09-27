@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import EventSourcePoly from 'eventsource'
 import Square from '../Components/Square'
 import SettingsModule from '../Components/SettingsModule'
+import Movehistory from '../Components/Movehistory'
 import Ellipsis from './Ellipsis'
 import { CoordinatesNumbers, CoordinatesLetters } from '../Components/Coordinates'
 import FENBoard from 'fen-chess-board'
@@ -25,10 +26,6 @@ const Container = styled.div`
 	display: flex;
 `
 
-const VertContainer = styled.div`
-	display: grid;
-`
-
 const BoardBorder = styled.div`
 	background-color: sienna;
 	padding: 20px;
@@ -45,8 +42,8 @@ const BoardStyle = styled.div`
 	border: 5px solid peru;
 	border-radius: 4px;
 `
+
 const BoardContainer = styled.div`
-	/* margin: 0 200px 0 500px; */
 	width: 100%;
 	display: flex;
 	flex-direction: column;
@@ -101,89 +98,6 @@ const BannerText = styled.span`
 	font-weight: 600;
 `
 
-const MoveContainerContainer = styled.div`
-	background-color: burlywood;
-	height: max-content;
-	margin-left: ${(props) => (props.mobile || '50px')};
-	padding: 5px;
-	border-radius: 4px;
-	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
-	width: ${(props) => (props.mobile && '445px')};
-	margin-top: ${(props) => (props.mobile && '20px')};
-`
-
-const MoveHistoryContainer = styled.div`
-	background-color: sienna;
-	border-radius: 4px;
-	/* margin-left: 50px; */
-	padding: 10px 0;
-	
-	height: max-content;
-	/* width: 110px; */
-	/* overflow: auto; */
-	/* box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75); */
-`
-
-const MoveContainer = styled.div`
-	height: ${(props) => (props.mobile && '200px') || '405px'};
-	width: ${(props) => (props.mobile && '100%') || '170px'};
-	overflow: auto;
-	&::-webkit-scrollbar {
-		display: none;
-	}
-  	-ms-overflow-style: none;  /* IE and Edge */
- 	scrollbar-width: none;  /* Firefox */
-	/* padding-left: 15px; */
-	/* margin-top: 5px; */
-	display: inline-flex;
-	flex-wrap: wrap;
-	flex-direction: row;
-	align-content: flex-start;
-	overflow-y: scroll;
-`
-
-const MoveText = styled.span`
-	color:#f1d2ab;
-	max-width: ${(props) => (props.mobile && '15%') || '35%'};
-	flex: 0 0 35%;
-	max-height: 20px;
-	margin-left: 15px;
-`
-
-const MoveNumber = styled(MoveText)`
-	max-width: 5%;
-	flex: 0 0 5%;
-	max-height: 20px;
-	margin-left: ${(props) => (props.mobile && '30px') || '10px'};
-`
-
-const TitleContainer = styled.div`
-	height:20px;
-	position: relative;
-	margin-top: -5px;
-	width: auto;
-	display: flex;
-	&:after{
-		content: "";
-		position: absolute;
-		top: 0px;
-		bottom: 0;
-		box-shadow: 0px 5px 8px -2px rgba(0,0,0,0.60);
-		width: 100%;
-		height: 20px;
-		display: inherit;
-	}	
-`
-
-const Title = styled.span`
-	color:#f1d2ab;
-	font-weight: 600;
-	text-align: center;
-	display: grid;
-	padding-bottom: 5px;
-	width: 100%;
-`
-
 const ThinkingText = styled.span`
 	display: block;
 	height: 22px;
@@ -231,47 +145,33 @@ const pieceSwitch = (piece, size) => {
 	switch (piece) {
 		case 'k':
 			return (<img width={size} height={size} src={b_k}></img>)
-			break;
 		case 'K':
 			return (<img width={size} height={size} src={w_k}></img>)
-			break;
 		case 'q':
 			return (<img width={size} height={size} src={b_q}></img>)
-			break;
 		case 'Q':
 			return (<img width={size} height={size} src={w_q}></img>)
-			break;
 		case 'n':
 			return (<img width={size} height={size} src={b_n}></img>)
-			break;
 		case 'N':
 			return (<img width={size} height={size} src={w_n}></img>)
-			break;
 		case 'r':
 			return (<img width={size} height={size} src={b_r}></img>)
-			break;
 		case 'R':
 			return (<img width={size} height={size} src={w_r}></img>)
-			break;
 		case 'b':
 			return (<img width={size} height={size} src={b_b}></img>)
-			break;
 		case 'B':
 			return (<img width={size} height={size} src={w_b}></img>)
-			break;
 		case 'p':
 			return (<img width={size} height={size} src={b_p}></img>)
-			break;
 		case 'P':
 			return (<img width={size} height={size} src={w_p}></img>)
-			break;
 		case '':
 			return (null)
-			break;
 
 		default:
 			return (null)
-			break;
 	}
 }
 
@@ -288,29 +188,6 @@ const getLegalMoves = (fen) => {
 const getBestMove = (fen) => {
 	const request = axios.post(`/getBestMove`, fen)
 	return request.then((response) => response).catch((error) => (error.response))
-}
-
-const startStream = () => {
-	console.log('Connecting to event stream')
-	const eventSourceInitDict = {
-		headers: {
-			Authorization: `Bearer `
-		}
-	}
-	const eventSource = new EventSourcePoly(`/fen`, eventSourceInitDict)
-	eventSource.onopen = (m) => {
-		console.log('Connected!', m)
-	}
-	eventSource.onerror = (e) => console.log(e)
-	eventSource.onmessage = (e) => {
-		const data = JSON.parse(e.data)
-		console.log('stream data', data)
-	}
-
-	return () => {
-		eventSource.close()
-		console.log('eventSource closed!')
-	}
 }
 
 const Board = () => {
@@ -343,13 +220,12 @@ const Board = () => {
 		setWinner(null)
 		setRunning(true)
 		setFenHistory({})
-		setFen(`${new FENBoard("start").fen}`)
-		// setFen(`${new FENBoard("start").fen}`)
+		setFen(`${new FENBoard("r1b1kb1r/1ppnnppp/p7/8/P3qPPP/8/3B4/RN1QK1NR").fen}`)
 		setFenExtras({ toMove: 'w', castling: 'KQkq' })
 		setMoveHistory([])
 		setLastMove("")
 		setTurn(0)
-		getLegalMoves({ fen: `${new FENBoard("start").fen} w ` })
+		getLegalMoves({ fen: `${new FENBoard("r1b1kb1r/1ppnnppp/p7/8/P3qPPP/8/3B4/RN1QK1NR").fen} w KQkq` })
 			.then((result) => {
 				console.log('fen result', result)
 				let moves = []
@@ -510,8 +386,6 @@ const Board = () => {
 			}
 		}
 
-		// setEnPassant('-')
-
 		if (moved) {
 			setHintMove("")
 			setLastMove(move)
@@ -636,9 +510,9 @@ const Board = () => {
 	}
 
 	const playBotTurn = (fen) => {
-		setShowOnlyStart(false)
 		console.log('play fen', fen)
 		setBotThinking(true)
+		setShowOnlyStart(false)
 		if (fen.length > 0) {
 			playTurn({ fen, difficulty })
 				.then((result) => {
@@ -733,7 +607,7 @@ const Board = () => {
 
 	return (
 		<>
-			<div style={{ display: 'flex', width: '100%' }}>
+			<div style={{ display: 'flex', width: '100%', marginLeft: '2.5px' }}>
 				<BoardContainer>
 					{window.matchMedia(device.laptop).matches && (
 						<SettingsModule
@@ -765,23 +639,7 @@ const Board = () => {
 							</BoardBorder>
 							<CoordinatesNumbers />
 							{window.matchMedia(device.laptop).matches && (
-								<MoveContainerContainer>
-									<MoveHistoryContainer>
-										<TitleContainer>
-											<Title >Move history</Title>
-										</TitleContainer>
-										<MoveContainer id="moveContainer">
-											{moveHistory.map((move, i) => (
-												<>
-													{(moveHistory.indexOf(move) + 1) % 2 !== 0 && (
-														<MoveNumber>{(moveHistory.indexOf(move) + 2) / 2}.</MoveNumber>
-													)}
-													<MoveText>{move.move}</MoveText>
-												</>
-											))}
-										</MoveContainer>
-									</MoveHistoryContainer>
-								</MoveContainerContainer>
+								<Movehistory moveHistory={moveHistory} />
 							)}
 							{!running && (
 								<Mask>
@@ -828,24 +686,7 @@ const Board = () => {
 							showOptions={showOptions} />
 					)}
 					{window.matchMedia(device.tabletMAX).matches && (
-						<MoveContainerContainer mobile>
-							<MoveHistoryContainer mobile>
-								<TitleContainer>
-									<Title >Move history</Title>
-								</TitleContainer>
-
-								<MoveContainer mobile id="moveContainer">
-									{moveHistory.map((move, i) => (
-										<>
-											{(moveHistory.indexOf(move) + 1) % 2 !== 0 && (
-												<MoveNumber mobile>{(moveHistory.indexOf(move) + 2) / 2}.</MoveNumber>
-											)}
-											<MoveText mobile>{move.move}</MoveText>
-										</>
-									))}
-								</MoveContainer>
-							</MoveHistoryContainer>
-						</MoveContainerContainer>
+						<Movehistory moveHistory={moveHistory} mobile={true} />
 					)}
 				</BoardContainer>
 			</div>

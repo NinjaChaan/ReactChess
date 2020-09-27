@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import styled, { css } from 'styled-components'
+import React from 'react'
+import styled from 'styled-components'
 import { device } from '../devices'
 
 const TitleContainer = styled.div`
@@ -11,7 +11,7 @@ const TitleContainer = styled.div`
 	&:after{
 		content: "";
 		position: absolute;
-		top: 0px;
+		top: 2px;
 		bottom: 0;
 		box-shadow: 0px 5px 8px -2px rgba(0,0,0,0.60);
 		width: 100%;
@@ -105,7 +105,7 @@ const SettingsContainer = styled.div`
 const SettingsInner = styled.div`
 	background-color: sienna;
 	border-radius: 4px;
-	padding: 10px;
+	padding: 5px;
 	display: flex;
 	flex-direction: column;
 	width: auto;
@@ -113,7 +113,7 @@ const SettingsInner = styled.div`
 `
 
 const SettingsGroup = styled.div`
-	padding: 10px;
+	padding: 5px;
 	display: inline-block;
 	width: auto;
 	/* height: 100%; */
@@ -128,7 +128,7 @@ const SettingsModule = ({ difficulty, setDifficulty, getHint, showOptions, setSh
 	return (
 		<SettingsContainer mobile={mobile}>
 			<SettingsInner>
-				<TitleContainer style={{ margin: "0 -10px" }} onClick={() => { setShowOptions(!showOptions) }}>
+				<TitleContainer style={{ margin: "0 -5px" }} onClick={() => { setShowOptions(!showOptions) }}>
 					<Title style={{ width: "1%", marginLeft: "10px" }}>{showOptions ? '▲' : '▼'}</Title>
 					<Title style={{ width: "90%" }}>Settings</Title>
 				</TitleContainer>

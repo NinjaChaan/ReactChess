@@ -104,7 +104,7 @@ const Movehistory = ({ moveHistory, mobile }) => {
 
 				<MoveContainer id="moveContainer">
 					{moveHistory.map((move, i) => (
-						<div key={i}>
+						<div key={i} style={{ display: 'contents' }}>
 							{(moveHistory.indexOf(move) + 1) % 2 !== 0 && (
 								<MoveNumber>{(moveHistory.indexOf(move) + 2) / 2}.</MoveNumber>
 							)}

@@ -1010,8 +1010,8 @@ MinMaxPaluu Asema::iterAlphaBetaRoot2(int syvyys, std::vector<MinMaxPaluu> *palu
 		{
 			Asema uusiAsema = Asema(*this);
 			uusiAsema.paivitaAsema(&s);
-			//double nVal = -uusiAsema.iterAlphaBeta2(syvyys - 1, 0, historia, -betaNum, -alphaNum);
-			double nVal = -uusiAsema.iterAlphaBeta2(syvyys - 1, 0, historia, INT_MIN, INT_MAX);
+			double nVal = -uusiAsema.iterAlphaBeta2(syvyys - 1, 0, historia, -betaNum, -alphaNum);
+			//double nVal = -uusiAsema.iterAlphaBeta2(syvyys - 1, 0, historia, INT_MIN, INT_MAX);
 			MinMaxPaluu arvo;
 			arvo._evaluointiArvo = nVal;
 			arvo._parasSiirto = s;

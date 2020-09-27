@@ -220,12 +220,12 @@ const Board = () => {
 		setWinner(null)
 		setRunning(true)
 		setFenHistory({})
-		setFen(`${new FENBoard("r1b1kb1r/1ppnnppp/p7/8/P3qPPP/8/3B4/RN1QK1NR").fen}`)
+		setFen(`${new FENBoard("start").fen}`)
 		setFenExtras({ toMove: 'w', castling: 'KQkq' })
 		setMoveHistory([])
 		setLastMove("")
 		setTurn(0)
-		getLegalMoves({ fen: `${new FENBoard("r1b1kb1r/1ppnnppp/p7/8/P3qPPP/8/3B4/RN1QK1NR").fen} w KQkq` })
+		getLegalMoves({ fen: `${new FENBoard("start").fen} w KQkq` })
 			.then((result) => {
 				console.log('fen result', result)
 				let moves = []

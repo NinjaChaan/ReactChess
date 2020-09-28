@@ -31,31 +31,33 @@ const CoordinatesHorizontal = styled.span`
 	text-align: center;
 	color: #f1d2ab;
 `
-const CoordinatesLetters = ({ offsetTop, offsetBottom }) => {
+const CoordinatesLetters = ({ offsetTop, offsetBottom, playAs }) => {
+	const arr = playAs === 0 ? ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'] : ['H', 'G', 'F', 'E', 'D', 'C', 'B', 'A']
 	return (
 		<CoordinatesContainerHorizontal offsetTop={offsetTop} offsetBottom={offsetBottom}>
-			<CoordinatesHorizontal>A</CoordinatesHorizontal>
-			<CoordinatesHorizontal>B</CoordinatesHorizontal>
-			<CoordinatesHorizontal>C</CoordinatesHorizontal>
-			<CoordinatesHorizontal>D</CoordinatesHorizontal>
-			<CoordinatesHorizontal>E</CoordinatesHorizontal>
-			<CoordinatesHorizontal>F</CoordinatesHorizontal>
-			<CoordinatesHorizontal>G</CoordinatesHorizontal>
-			<CoordinatesHorizontal>H</CoordinatesHorizontal>
+			<CoordinatesHorizontal>{arr[0]}</CoordinatesHorizontal>
+			<CoordinatesHorizontal>{arr[1]}</CoordinatesHorizontal>
+			<CoordinatesHorizontal>{arr[2]}</CoordinatesHorizontal>
+			<CoordinatesHorizontal>{arr[3]}</CoordinatesHorizontal>
+			<CoordinatesHorizontal>{arr[4]}</CoordinatesHorizontal>
+			<CoordinatesHorizontal>{arr[5]}</CoordinatesHorizontal>
+			<CoordinatesHorizontal>{arr[6]}</CoordinatesHorizontal>
+			<CoordinatesHorizontal>{arr[7]}</CoordinatesHorizontal>
 		</CoordinatesContainerHorizontal>
 	)
 }
-const CoordinatesNumbers = ({ offsetRight, offsetLeft }) => {
+const CoordinatesNumbers = ({ offsetRight, offsetLeft, playAs }) => {
+	const arr = playAs === 0 ? [8, 7, 6, 5, 4, 3, 2, 1] : [1, 2, 3, 4, 5, 6, 7, 8]
 	return (
 		<CoordinatesContainerVertical offsetRight={offsetRight} offsetLeft={offsetLeft}>
-			<CoordinatesVertical>8</CoordinatesVertical>
-			<CoordinatesVertical>7</CoordinatesVertical>
-			<CoordinatesVertical>6</CoordinatesVertical>
-			<CoordinatesVertical>5</CoordinatesVertical>
-			<CoordinatesVertical>4</CoordinatesVertical>
-			<CoordinatesVertical>3</CoordinatesVertical>
-			<CoordinatesVertical>2</CoordinatesVertical>
-			<CoordinatesVertical>1</CoordinatesVertical>
+			<CoordinatesVertical>{arr[0]}</CoordinatesVertical>
+			<CoordinatesVertical>{arr[1]}</CoordinatesVertical>
+			<CoordinatesVertical>{arr[2]}</CoordinatesVertical>
+			<CoordinatesVertical>{arr[3]}</CoordinatesVertical>
+			<CoordinatesVertical>{arr[4]}</CoordinatesVertical>
+			<CoordinatesVertical>{arr[5]}</CoordinatesVertical>
+			<CoordinatesVertical>{arr[6]}</CoordinatesVertical>
+			<CoordinatesVertical>{arr[7]}</CoordinatesVertical>
 		</CoordinatesContainerVertical>
 	)
 }

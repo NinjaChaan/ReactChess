@@ -31,6 +31,7 @@ const BoardBorder = styled.div`
 	padding: 20px;
 	border-radius: 4px;
 	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+	height: 410px;
 `
 
 const BoardStyle = styled.div`
@@ -41,6 +42,7 @@ const BoardStyle = styled.div`
 	border-radius: 4px;
 	border: 5px solid peru;
 	border-radius: 4px;
+	transform: ${(props) => (props.playAs === 1 && `rotate(180deg)`)};
 `
 
 const BoardContainer = styled.div`
@@ -58,10 +60,15 @@ const StartButton = styled.button`
 	height: 40px;
 	position: absolute;
 	top: 200px;
-	left: ${(props) => (props.width && `calc(50% - ${props.width}px/ 2)`)};
+	left: ${(props) => (props.width && `calc(50% - ${props.width}px/ 2 ${props.offset})`)};
 	border: none;
 	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
-
+	background-color: ${(props) => (props.white && 'white')
+		|| 'black'
+	};
+	color: ${(props) => (props.white && 'black')
+		|| 'white'
+	};
 	border-radius: 4px;
 	font-weight: 600;
 	&:hover{
@@ -216,7 +223,7 @@ const Board = () => {
 	const [enPassant, setEnPassant] = useState('-')
 	const [showOptions, setShowOptions] = useState(window.matchMedia(device.laptop).matches)
 
-	const startGame = () => {
+	const startGame = (white) => {
 		setWinner(null)
 		setRunning(true)
 		setFenHistory({})
@@ -224,18 +231,23 @@ const Board = () => {
 		setFenExtras({ toMove: 'w', castling: 'KQkq' })
 		setMoveHistory([])
 		setLastMove("")
-		setTurn(0)
-		getLegalMoves({ fen: `${new FENBoard("start").fen} w KQkq` })
-			.then((result) => {
-				console.log('fen result', result)
-				let moves = []
-				for (const move in result.data) {
-					if (!isNaN(move)) {
-						moves.push(result.data[move])
+		setPlayAs(white ? 0 : 1)
+		if (white === true) {
+			setTurn(0)
+			getLegalMoves({ fen: `${new FENBoard("start").fen} w KQkq` })
+				.then((result) => {
+					console.log('fen result', result)
+					let moves = []
+					for (const move in result.data) {
+						if (!isNaN(move)) {
+							moves.push(result.data[move])
+						}
 					}
-				}
-				setLegalMoves(moves)
-			})
+					setLegalMoves(moves)
+				})
+		} else {
+			setTurn(0)
+		}
 	}
 
 	useEffect(() => {
@@ -367,8 +379,8 @@ const Board = () => {
 				moved = true
 				move = 'O-O'
 			} else if (fenExtras.toMove === 'b' && coords.x === 6 && coords.y === 0) {
-				fenBoard.move(`e7`, `g7`);
-				fenBoard.move(`h7`, `f7`);
+				fenBoard.move(`e8`, `g8`);
+				fenBoard.move(`h8`, `f8`);
 				moved = true
 				move = 'O-O'
 			}
@@ -379,8 +391,8 @@ const Board = () => {
 				moved = true
 				move = 'O-O-O'
 			} else if (fenExtras.toMove === 'b' && coords.x === 2 && coords.y === 0) {
-				fenBoard.move(`e7`, `c7`);
-				fenBoard.move(`a7`, `d7`);
+				fenBoard.move(`e8`, `c8`);
+				fenBoard.move(`a8`, `d8`);
 				moved = true
 				move = 'O-O-O'
 			}
@@ -389,7 +401,7 @@ const Board = () => {
 		if (moved) {
 			setHintMove("")
 			setLastMove(move)
-			setTurn(1)
+			setTurn(turn === 0 ? 1 : 0)
 			setFen(fenBoard.fen)
 			setSelectedPiece({})
 			setAllowedMoves([])
@@ -480,7 +492,8 @@ const Board = () => {
 						hint={showHint}
 						coords={{ x: j, y: i }}
 						clickCallback={clickSquare}
-						moved={moved}>
+						moved={moved}
+						playAs={playAs}>
 						{pieceSwitch(fenBoard.board[i][j], 46)}
 					</Square>
 				)
@@ -575,13 +588,14 @@ const Board = () => {
 
 	useEffect(() => {
 		setBoard(false)
-
-		if (fenExtras.toMove === 'b' && !botThinking && running) {
+		console.log('black bot to move', (playAs === 0 && turn === 1))
+		console.log('white bot to move', (playAs === 1 && turn === 0))
+		if (((playAs === 0 && turn === 1) || (playAs === 1 && turn === 0)) && !botThinking && running) {
 			const castling = fenExtras.castling !== '' ? ' ' + fenExtras.castling : ''
 			playBotTurn(`${fen} ${fenExtras.toMove}${castling}${' ' + enPassant}`)
 			setShowOnlyStart(false)
 		}
-	}, [fen, fenExtras, allowedMoves, selectedPiece, legalMoves, botThinking, turn, promotion, hintMove, showOnlyStart])
+	}, [fen, fenExtras, allowedMoves, selectedPiece, legalMoves, botThinking, turn, promotion, hintMove, showOnlyStart, playAs])
 
 	useEffect(() => {
 		document.addEventListener("touchmove", function (e) { e.preventDefault() });
@@ -630,14 +644,14 @@ const Board = () => {
 								)}
 						</ThinkingText>
 						<Container>
-							<CoordinatesLetters />
-							<CoordinatesNumbers />
+							<CoordinatesLetters playAs={playAs} />
+							<CoordinatesNumbers playAs={playAs} />
 							<BoardBorder>
-								<BoardStyle>
+								<BoardStyle playAs={playAs}>
 									{items}
 								</BoardStyle>
 							</BoardBorder>
-							<CoordinatesNumbers />
+							<CoordinatesNumbers playAs={playAs} />
 							{window.matchMedia(device.laptop).matches && (
 								<Movehistory moveHistory={moveHistory} />
 							)}
@@ -653,11 +667,22 @@ const Board = () => {
 									<StartButton
 										id="start"
 										width={startWidth}
-										onClick={startGame}>{winner ? "Start new game" : "Start game"}
+										offset={'- 55px'}
+										white={true}
+										onClick={() => { startGame(true) }}>
+										Play as white
+									</StartButton>
+									<StartButton
+										id="start"
+										width={startWidth}
+										offset={'+ 55px'}
+										white={false}
+										onClick={() => { startGame(false) }}>
+										Play as black
 									</StartButton>
 								</Mask>
 							)}
-							<CoordinatesLetters offsetTop={430} />
+							<CoordinatesLetters offsetTop={430} playAs={playAs} />
 							{promotion && (
 								<Mask>
 									<PromotionContainer>

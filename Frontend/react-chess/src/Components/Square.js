@@ -13,6 +13,7 @@ const SquareStyle = styled.button`
 	box-shadow: ${(props) => (props.hint && 'inset 2000px 0 0 0 rgba(255, 0, 0, 0.35)')};
 	border: none;
 	outline: none;
+	transform: ${(props) => (props.playAs === 1 && `rotate(180deg)`)};
 	&:after {
 		${(props) => props.selected && css`
 			content: "";
@@ -38,7 +39,7 @@ const SquareStyle = styled.button`
 	}
 `
 
-const Square = ({ white, moved, children, selected, allowed, hint, id, coords, clickCallback }) => {
+const Square = ({ white, moved, children, selected, allowed, hint, id, coords, clickCallback, playAs }) => {
 	const [clicked, setClicked] = useState(false)
 
 	const selectPiece = () => {
@@ -49,7 +50,7 @@ const Square = ({ white, moved, children, selected, allowed, hint, id, coords, c
 
 	const click = () => {
 		setClicked(clickCallback(coords) && children !== null)
-	}	
+	}
 
 	return (
 		<SquareStyle
@@ -59,8 +60,9 @@ const Square = ({ white, moved, children, selected, allowed, hint, id, coords, c
 			selected={clicked}
 			allowed={allowed}
 			hint={hint}
+			playAs={playAs}
 			onClick={click}
-			onBlur={() => { setClicked(false)}}>
+			onBlur={() => { setClicked(false) }}>
 			{children}
 		</SquareStyle>
 	)

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
-import EventSourcePoly from 'eventsource'
+import EventSource from 'eventsource'
 import Square from '../Components/Square'
 import SettingsModule from '../Components/SettingsModule'
 import Movehistory from '../Components/Movehistory'
@@ -9,6 +9,7 @@ import { CoordinatesNumbers, CoordinatesLetters } from '../Components/Coordinate
 import FENBoard from 'fen-chess-board'
 import { device } from '../devices'
 import axios from 'axios'
+import { v4 as uuidv4 } from 'uuid'
 import w_q from '../../resources/chesspieces/Chess_qlt45.svg'
 import b_q from '../../resources/chesspieces/Chess_qdt45.svg'
 import w_k from '../../resources/chesspieces/Chess_klt45.svg'
@@ -197,6 +198,13 @@ const getBestMove = (fen) => {
 	return request.then((response) => response).catch((error) => (error.response))
 }
 
+const startPVP = (pguid, color) => {
+	const request = axios.post(`/startPVP`, { playerId: pguid, color })
+	return request.then((response) => response).catch((error) => (error.response))
+}
+
+
+
 const Board = () => {
 	const [difficulty, setDifficulty] = useState(1)
 	const [running, setRunning] = useState(false)
@@ -222,6 +230,100 @@ const Board = () => {
 	const [toPromote, setToPromote] = useState({})
 	const [enPassant, setEnPassant] = useState('-')
 	const [showOptions, setShowOptions] = useState(window.matchMedia(device.laptop).matches)
+	const [showPVPOptions, setShowPVPOptions] = useState(false)
+	const [gameId, setGameId] = useState("")
+	const [playerId, setPlayerId] = useState("")
+	const [message, setMessage] = useState("")
+	const [pvpRunning, setPVPRunning] = useState(false)
+	const [moved, setMoved] = useState(false)
+	const [data, setData] = useState(null)
+
+	const playPVPTurn = (fen) => {
+		const request = axios.post(`/pvp/move/${gameId}/${playerId}`, { gameId, playerId, fen, move: lastMove })
+		return request.then((response) => response).catch((error) => (error.response))
+	}
+
+	useEffect(() => {
+		if (data) {
+			var splitfen = data.fen.split(' ')
+
+			if (data.fen.includes("wins")) {
+				setRunning(false)
+				setWinnerText(data.fen)
+				if (data.fen.includes("White")) {
+					setWinner("w")
+				} else {
+					setWinner("b")
+				}
+				doFinalMove(result) //TODO: check
+			} else if (data.fen.includes("Draw")) {
+				setRunning(false)
+				setWinnerText(data.fen)
+				setWinner("d")
+				doFinalMove(result)//check
+			} else {
+				if (data.fen in fenHistory) {
+					fenHistory[data.fen]++
+					if (fenHistory[data.fen] === 3) {
+						setRunning(false)
+						setWinnerText("Draw")
+						setWinner("d")
+					}
+				} else {
+					fenHistory[data.fen] = 1
+				}
+				if (data.lastMove !== '' && lastMove !== data.lastMove) {
+					setLastMove(data.lastMove)
+					moveHistory.push(
+						{
+							move: data.lastMove,
+							color: splitfen[1] === "b" ? "w" : "b"
+						})
+				}
+				setLegalMoves(Object.values(data.legalMoves))
+				setTurn(splitfen[1] === "b" ? 1 : 0)
+				setTimeout(() => {
+					updateScroll()
+				}, 100)
+				// fenBoard.fen = result.data.fen
+				setFen(splitfen[0])
+				setFenExtras({ toMove: splitfen[1], castling: splitfen[2] || '' })
+				setEnPassant(data.fen[data.fen.length - 1] !== '-' ? data.fen.substring(data.fen.length - 2) : '-')
+			}
+		}
+	}, [data]);
+
+	const startStream = (guid, pguid) => {
+		console.log('Connecting to event stream')
+		const eventSourceInitDict = {
+			headers: {
+
+			}
+		}
+		const eventSource = new EventSource(`/pvp/${guid}/${pguid}`)
+		eventSource.onopen = (m) => {
+			console.log('Connected!', m)
+		}
+		eventSource.onerror = (e) => console.log(e)
+		eventSource.onmessage = (e) => {
+			const data = JSON.parse(e.data)
+			console.log('stream data', data)
+
+			if (!(typeof (data) !== 'string' && 'fen' in data && 'lastMove' in data && 'legalMoves' in data)) {
+				setMessage(data)
+				return
+			}
+			setPVPRunning(true)
+			setMessage("")
+
+			setData(data)
+
+			return () => {
+				eventSource.close()
+				console.log('eventSource closed!')
+			}
+		}
+	}
 
 	const startGame = (white) => {
 		setWinner(null)
@@ -285,7 +387,7 @@ const Board = () => {
 		fenBoard.move(`${String.fromCharCode(selectedPiece.x + 97)}${8 - selectedPiece.y}`, `${String.fromCharCode(toPromote.x + 97)}${8 - toPromote.y}`)
 		fenBoard.board[toPromote.y][toPromote.x] = selection
 		setFen(fenBoard.fen)
-		const move = `${(fenBoard.board[toPromote.y][toPromote.x] !== 'P' ? fenBoard.board[toPromote.y][toPromote.x] : '')}${String.fromCharCode(selectedPiece.x + 97)}${8 - selectedPiece.y}-${String.fromCharCode(toPromote.x + 97)}${8 - toPromote.y}`
+		const move = `${((fenBoard.board[toPromote.y][toPromote.x] !== 'P' && fenBoard.board[toPromote.y][toPromote.x] !== 'p') ? fenBoard.board[toPromote.y][toPromote.x] : '')}${String.fromCharCode(selectedPiece.x + 97)}${8 - selectedPiece.y}-${String.fromCharCode(toPromote.x + 97)}${8 - toPromote.y}`
 		setLastMove(move)
 		setTurn(1)
 		setFen(fenBoard.fen)
@@ -353,7 +455,7 @@ const Board = () => {
 				dash = 'x'
 			}
 			fenBoard.move(`${String.fromCharCode(selectedPiece.x + 97)}${8 - selectedPiece.y}`, `${String.fromCharCode(coords.x + 97)}${8 - coords.y}`)
-			if (fenExtras.toMove === 'w' && coords.y === 0 && fenBoard.board[coords.y][coords.x] === 'P') {
+			if (fenExtras.toMove === 'w' && coords.y === 0 && (fenBoard.board[coords.y][coords.x] === 'P' || fenBoard.board[coords.y][coords.x] === 'p')) {
 				setPromotion(true)
 				setToPromote(coords)
 			} else {
@@ -363,9 +465,9 @@ const Board = () => {
 					fenBoard.put(`${String.fromCharCode(coords.x + 97)}${8 - coords.y + (fenExtras.toMove === 'w' ? -1 : 1)}`, "");
 					dash = 'x'
 				}
-				move = `${(fenBoard.board[coords.y][coords.x] !== 'P' ? fenBoard.board[coords.y][coords.x] : '')}${String.fromCharCode(selectedPiece.x + 97)}${8 - selectedPiece.y}${dash}${String.fromCharCode(coords.x + 97)}${8 - coords.y}`
+				move = `${((fenBoard.board[coords.y][coords.x] !== 'P' || fenBoard.board[coords.y][coords.x] !== 'p') ? fenBoard.board[coords.y][coords.x] : '')}${String.fromCharCode(selectedPiece.x + 97)}${8 - selectedPiece.y}${dash}${String.fromCharCode(coords.x + 97)}${8 - coords.y}`
 
-				if (fenBoard.board[coords.y][coords.x] === 'P' && Math.abs(coords.y - selectedPiece.y) === 2) {
+				if ((fenBoard.board[coords.y][coords.x] === 'P' || fenBoard.board[coords.y][coords.x] === 'p') && Math.abs(coords.y - selectedPiece.y) === 2) {
 					console.log('en passant possible')
 					setEnPassant(`${String.fromCharCode(coords.x + 97)}${fenExtras.toMove === 'w' ? '3' : '6'}`)
 				} else {
@@ -424,6 +526,7 @@ const Board = () => {
 					color: fenExtras.toMove
 				})
 		}
+		setMoved(true)
 
 		return (pieceSide === playAs && playAs === turn)
 	}
@@ -534,7 +637,7 @@ const Board = () => {
 					var splitfen = result.data.fen.split(' ')
 					if (result.data.fen.includes("wins")) {
 						setRunning(false)
-						setWinnerText(result.data.fen)
+						setMessage(result.data.fen)
 						if (result.data.fen.includes("White")) {
 							setWinner("w")
 						} else {
@@ -544,7 +647,7 @@ const Board = () => {
 						doFinalMove(result)
 					} else if (result.data.fen.includes("Draw")) {
 						setRunning(false)
-						setWinnerText(result.data.fen)
+						setMessage(result.data.fen)
 						setWinner("d")
 						setBotThinking(false)
 						doFinalMove(result)
@@ -553,7 +656,7 @@ const Board = () => {
 							fenHistory[result.data.fen]++
 							if (fenHistory[result.data.fen] === 3) {
 								setRunning(false)
-								setWinnerText("Draw")
+								setMessage("Draw")
 								setWinner("d")
 							}
 						} else {
@@ -588,14 +691,19 @@ const Board = () => {
 
 	useEffect(() => {
 		setBoard(false)
-		console.log('black bot to move', (playAs === 0 && turn === 1))
-		console.log('white bot to move', (playAs === 1 && turn === 0))
 		if (((playAs === 0 && turn === 1) || (playAs === 1 && turn === 0)) && !botThinking && running) {
 			const castling = fenExtras.castling !== '' ? ' ' + fenExtras.castling : ''
 			playBotTurn(`${fen} ${fenExtras.toMove}${castling}${' ' + enPassant}`)
 			setShowOnlyStart(false)
 		}
-	}, [fen, fenExtras, allowedMoves, selectedPiece, legalMoves, botThinking, turn, promotion, hintMove, showOnlyStart, playAs])
+		else if (((playAs === 0 && turn === 1) || (playAs === 1 && turn === 0)) && moved && pvpRunning) {
+			console.log('lastmove at send', lastMove)
+			const castling = fenExtras.castling !== '' ? ' ' + fenExtras.castling : ''
+			playPVPTurn(`${fen} ${fenExtras.toMove}${castling}${' ' + enPassant}`)
+			setShowOnlyStart(false)
+			setMoved(false)
+		}
+	}, [fen, fenExtras, allowedMoves, selectedPiece, legalMoves, botThinking, turn, promotion, hintMove, showOnlyStart, playAs, lastMove])
 
 	useEffect(() => {
 		document.addEventListener("touchmove", function (e) { e.preventDefault() });
@@ -619,6 +727,25 @@ const Board = () => {
 		}
 	}
 
+	const startNewPVP = (color) => {
+		const pguid = uuidv4()
+		setPlayerId(pguid)
+		startPVP(pguid, color)
+			.then((result) => {
+				console.log('result', result)
+				startStream(result.data.gameId, pguid)
+				setGameId(result.data.gameId)
+			})
+	}
+
+	const joinPVP = (gameId, color) => {
+		const pguid = uuidv4()
+		setPlayerId(pguid)
+		setGameId(gameId)
+		startStream(gameId, pguid)
+		setPlayAs(1)
+	}
+
 	return (
 		<>
 			<div style={{ display: 'flex', width: '100%', marginLeft: '2.5px' }}>
@@ -630,6 +757,11 @@ const Board = () => {
 							setDifficulty={setDifficulty}
 							getHint={getHint}
 							setShowOptions={setShowOptions}
+							showPVPOptions={showPVPOptions}
+							setShowPVPOptions={setShowPVPOptions}
+							startPVP={startNewPVP}
+							joinPVP={joinPVP}
+							gameId={gameId}
 							showOptions={showOptions} />
 					)}
 					<div style={{ marginLeft: '25px' }}>
@@ -655,12 +787,12 @@ const Board = () => {
 							{window.matchMedia(device.laptop).matches && (
 								<Movehistory moveHistory={moveHistory} />
 							)}
-							{!running && (
+							{!running && !pvpRunning && (
 								<Mask>
-									{winner && (
+									{message !== "" && (
 										<Banner
 											winner={winner}>
-											<BannerText>{winnerText}</BannerText>
+											<BannerText>{message}</BannerText>
 										</Banner>
 									)}
 
@@ -708,6 +840,11 @@ const Board = () => {
 							setDifficulty={setDifficulty}
 							getHint={getHint}
 							setShowOptions={setShowOptions}
+							showPVPOptions={showPVPOptions}
+							setShowPVPOptions={setShowPVPOptions}
+							startPVP={startNewPVP}
+							joinPVP={joinPVP}
+							gameId={gameId}
 							showOptions={showOptions} />
 					)}
 					{window.matchMedia(device.tabletMAX).matches && (

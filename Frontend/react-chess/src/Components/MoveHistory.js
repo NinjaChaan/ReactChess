@@ -106,7 +106,7 @@ const Movehistory = ({ moveHistory, mobile }) => {
 					{moveHistory.map((move, i) => (
 						<div key={i} style={{ display: 'contents' }}>
 							{(moveHistory.indexOf(move) + 1) % 2 !== 0 && (
-								<MoveNumber>{(moveHistory.indexOf(move) + 2) / 2}.</MoveNumber>
+								<MoveNumber>{(moveHistory.indexOf(move) + 2) / 2}.{(moveHistory.indexOf(move) + 2) / 2 < 10 && ' '}</MoveNumber>
 							)}
 							<MoveText>{move.move}</MoveText>
 						</div>

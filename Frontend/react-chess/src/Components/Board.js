@@ -465,7 +465,7 @@ const Board = () => {
 					fenBoard.put(`${String.fromCharCode(coords.x + 97)}${8 - coords.y + (fenExtras.toMove === 'w' ? -1 : 1)}`, "");
 					dash = 'x'
 				}
-				move = `${((fenBoard.board[coords.y][coords.x] !== 'P' || fenBoard.board[coords.y][coords.x] !== 'p') ? fenBoard.board[coords.y][coords.x] : '')}${String.fromCharCode(selectedPiece.x + 97)}${8 - selectedPiece.y}${dash}${String.fromCharCode(coords.x + 97)}${8 - coords.y}`
+				move = `${((fenBoard.board[coords.y][coords.x] !== 'P' && fenBoard.board[coords.y][coords.x] !== 'p') ? fenBoard.board[coords.y][coords.x].toUpperCase() : '')}${String.fromCharCode(selectedPiece.x + 97)}${8 - selectedPiece.y}${dash}${String.fromCharCode(coords.x + 97)}${8 - coords.y}`
 
 				if ((fenBoard.board[coords.y][coords.x] === 'P' || fenBoard.board[coords.y][coords.x] === 'p') && Math.abs(coords.y - selectedPiece.y) === 2) {
 					console.log('en passant possible')
@@ -761,6 +761,7 @@ const Board = () => {
 							setShowPVPOptions={setShowPVPOptions}
 							startPVP={startNewPVP}
 							joinPVP={joinPVP}
+							pvpRunning={pvpRunning}
 							gameId={gameId}
 							showOptions={showOptions} />
 					)}
@@ -844,6 +845,7 @@ const Board = () => {
 							setShowPVPOptions={setShowPVPOptions}
 							startPVP={startNewPVP}
 							joinPVP={joinPVP}
+							pvpRunning={pvpRunning}
 							gameId={gameId}
 							showOptions={showOptions} />
 					)}

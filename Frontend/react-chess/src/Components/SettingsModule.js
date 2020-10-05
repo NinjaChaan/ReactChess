@@ -146,7 +146,7 @@ const GameIdInput = styled.input`
     outline: none;
 `
 
-const SettingsModule = ({ difficulty, setDifficulty, getHint, showOptions, showPVPOptions, setShowOptions, setShowPVPOptions, mobile, gameId, startPVP, joinPVP }) => {
+const SettingsModule = ({ difficulty, setDifficulty, getHint, showOptions, showPVPOptions, setShowOptions, setShowPVPOptions, mobile, gameId, startPVP, joinPVP, pvpRunning }) => {
 
 	const copyId = () => {
 		var element = document.getElementById("gameidinput")
@@ -181,13 +181,15 @@ const SettingsModule = ({ difficulty, setDifficulty, getHint, showOptions, showP
 									<DifficultyButton selected={difficulty === 3} onClick={() => { setDifficulty(3) }}>Hard</DifficultyButton>
 								</ButtonGroup>
 							</SettingsGroup>
-							<SettingsGroup>
-								<Title>Get a hint</Title>
-								<ButtonGroup>
-									<SettingsButton onClick={() => { getHint(true) }}>Best piece</SettingsButton>
-									<SettingsButton onClick={() => { getHint(false) }}>Best move</SettingsButton>
-								</ButtonGroup>
-							</SettingsGroup>
+							{!pvpRunning && (
+								<SettingsGroup>
+									<Title>Get a hint</Title>
+									<ButtonGroup>
+										<SettingsButton onClick={() => { getHint(true) }}>Best piece</SettingsButton>
+										<SettingsButton onClick={() => { getHint(false) }}>Best move</SettingsButton>
+									</ButtonGroup>
+								</SettingsGroup>
+							)}
 						</SettingsInner>
 					)}
 				</SettingsInner>

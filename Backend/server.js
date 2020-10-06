@@ -95,6 +95,19 @@ app.post('/startPVP', async (request, response, next) => {
 	}
 	response.json({ gameId })
 })
+app.post('/joinRandomPVP', async (request, response, next) => {
+	const { body } = request
+
+	console.log('join random pvp body: ', body)
+
+	const playerId = body.playerId
+
+	const games = Object.keys(pvpgames).filter((gameId) => (pvpgames[gameId].p1 !== null && pvpgames[gameId].p2 === null))
+	if(games.length === 0){
+		response.status(404).json({ error: 'Couldn\'t find a game'})
+	}
+	response.json({ gameId: games[0] })
+})
 
 app.post('/pvp/move/:gameId/:playerId', async (request, response, next) => {
 	const { body } = request
@@ -164,6 +177,7 @@ app.get('/pvp/:gameId/:playerId', async (request, response, next) => {
 		if (!(pvpgames[gameId].p1 === playerId || pvpgames[gameId].p2 === playerId)) {
 			//join game
 			pvpgames[gameId].p2 = playerId
+			pvpgames[gameId].p2connected = true
 		}
 	} else {
 		console.log('game created', gameId)
@@ -171,7 +185,9 @@ app.get('/pvp/:gameId/:playerId', async (request, response, next) => {
 		pvpgames[gameId] = {
 			turn: 0,
 			p1: playerId,
+			p1connected: true,
 			p2: null,
+			p2connected: false,
 			fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq -",
 			lastMove: ""
 		}
@@ -206,9 +222,31 @@ app.get('/pvp/:gameId/:playerId', async (request, response, next) => {
 		console.log('client dropped me')
 		clearInterval(interValID)
 		response.end()
+		const game = pvpgames[gameId]
+		if(game.p1 === playerId){
+			game.p1connected = false
+		}else if(game.p2 === playerId){
+			game.p2connected = false
+		}
+		if(!game.p1connected && !game.p2connected){
+			delete pvpgames[gameId]
+		}
 	})
 })
 
+app.get('/matches', async (request, response, next) => {
+	console.log('pvpgames', Object.values(pvpgames))
+	const games = Object.values(pvpgames).filter((game) => game.p1 && game.p2)
+	console.log('matches', games.length)
+	response.status(200).json(`${games.length}`)
+})
+
+app.get('/matchmaking', async (request, response, next) => {
+	console.log('pvpgames', Object.values(pvpgames))
+	const games = Object.values(pvpgames).filter((game) => (game.p1 === null && game.p2 !== null) || (game.p1 !== null && game.p2 === null))
+	console.log('matchmaking', games)
+	response.status(200).json(`${games.length}`)
+})
 
 app.use(express.static(path.join(__dirname, '../Frontend/react-chess/dist')))
 

@@ -146,7 +146,7 @@ const GameIdInput = styled.input`
     outline: none;
 `
 
-const SettingsModule = ({ difficulty, setDifficulty, getHint, showOptions, showPVPOptions, setShowOptions, setShowPVPOptions, mobile, gameId, startPVP, joinPVP, pvpRunning }) => {
+const SettingsModule = ({ difficulty, setDifficulty, getHint, showOptions, showPVPOptions, setShowOptions, setShowPVPOptions, mobile, gameId, playerId, joinPVP, pvpRunning }) => {
 
 	const copyId = () => {
 		var element = document.getElementById("gameidinput")
@@ -190,51 +190,60 @@ const SettingsModule = ({ difficulty, setDifficulty, getHint, showOptions, showP
 									</ButtonGroup>
 								</SettingsGroup>
 							)}
+							{playerId && (
+								<>
+									<Title>Game id (share this with a friend) </Title>
+									<div style={{ flexDirection: 'row' }}>
+										<GameIdInput id="gameidinput" readOnly value={gameId}></GameIdInput>
+										<SettingsButton style={{ marginTop: '-2.5px', float: 'right' }} onClick={copyId}>Copy id</SettingsButton>
+									</div>
+								</>
+							)}
 						</SettingsInner>
 					)}
 				</SettingsInner>
 			</SettingsContainer>
-			<SettingsContainer mobile={mobile} show={showPVPOptions}>
+			{/* <SettingsContainer mobile={mobile} show={showPVPOptions}>
 				<SettingsInner>
 					<TitleContainer style={{ margin: "0 -5px" }} onClick={() => { setShowPVPOptions(!showPVPOptions) }}>
 						<Title style={{ width: "1%", marginLeft: "10px" }}>{showPVPOptions ? '▲' : '▼'}</Title>
 						<Title style={{ width: "90%" }}>PVP options</Title>
 					</TitleContainer>
-					{showPVPOptions && (
-						<SettingsGroup>
-							<SettingsInner>
-								<Title>Start a pvp match</Title>
-								<ButtonGroup>
-									<PvpContainer>
-										<div style={{ display: 'flex', justifyContent: 'center', marginBottom: '5px' }}>
-											<SettingsButton onClick={() => { startPVP('white') }}>Play as white</SettingsButton>
-											<SettingsButton onClick={() => { startPVP('black') }}>Play as black</SettingsButton>
-										</div>
-										<Title>Game id (share this with a friend) </Title>
+					{ showPVPOptions && (
+					<SettingsGroup>
+						<SettingsInner>
+							<Title>Start a pvp match</Title>
+							<ButtonGroup>
+								<PvpContainer>
+									<div style={{ display: 'flex', justifyContent: 'center', marginBottom: '5px' }}>
+										<SettingsButton onClick={() => { startPVP('white') }}>Play as white</SettingsButton>
+										<SettingsButton onClick={() => { startPVP('black') }}>Play as black</SettingsButton>
+									</div>
+									<Title>Game id (share this with a friend) </Title>
 
-										<div style={{ flexDirection: 'row' }}>
-											<GameIdInput id="gameidinput" readOnly value={gameId}></GameIdInput>
-											<SettingsButton style={{ marginTop: '-2.5px', float: 'right' }} onClick={copyId}>Copy id</SettingsButton>
-										</div>
-									</PvpContainer>
-								</ButtonGroup>
-							</SettingsInner>
-							<SettingsInner>
-								<Title>Join a pvp match</Title>
-								<ButtonGroup>
-									<PvpContainer>
-										<Title>Enter a game id to join</Title>
-										<div style={{ flexDirection: 'row' }}>
-											<GameIdInput id="gameidjoin"></GameIdInput>
-											<SettingsButton style={{ marginTop: '-2.5px', float: 'right' }} onClick={joinPVPGame}>Join</SettingsButton>
-										</div>
-									</PvpContainer>
-								</ButtonGroup>
-							</SettingsInner>
-						</SettingsGroup>
+									<div style={{ flexDirection: 'row' }}>
+										<GameIdInput id="gameidinput" readOnly value={gameId}></GameIdInput>
+										<SettingsButton style={{ marginTop: '-2.5px', float: 'right' }} onClick={copyId}>Copy id</SettingsButton>
+									</div>
+								</PvpContainer>
+							</ButtonGroup>
+						</SettingsInner>
+						<SettingsInner>
+							<Title>Join a pvp match</Title>
+							<ButtonGroup>
+								<PvpContainer>
+									<Title>Enter a game id to join</Title>
+									<div style={{ flexDirection: 'row' }}>
+										<GameIdInput id="gameidjoin"></GameIdInput>
+										<SettingsButton style={{ marginTop: '-2.5px', float: 'right' }} onClick={joinPVPGame}>Join</SettingsButton>
+									</div>
+								</PvpContainer>
+							</ButtonGroup>
+						</SettingsInner>
+					</SettingsGroup>
 					)}
 				</SettingsInner>
-			</SettingsContainer>
+			</SettingsContainer> */}
 		</Container >
 	)
 }

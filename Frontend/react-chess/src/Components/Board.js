@@ -57,11 +57,40 @@ const BoardContainer = styled.div`
   	}
 `
 
+const StartContainer = styled.div`
+	background-color: burlywood;
+	border-radius: 4px;
+	width: 90%;
+    height: 70%;
+    margin: 10% 15%;
+    padding: 5px;
+`
+const StartContainerInner = styled.div`
+	background-color: sienna;
+	border-radius: 4px;
+	height: calc(100% - 10px);
+	padding: 5px;
+`
+
+const ButtonGroup = styled.div`
+	display: flex;
+	justify-content: space-around;
+	width: 80%;
+	margin: 10px auto;
+`
+
+const Line = styled.hr`
+	border-radius: 4px;
+	background-image: linear-gradient(to right,rgba(0,0,0,0),rgb(241, 210, 171.75),rgba(0,0,0,0));
+	height: 1px;
+	border: none;
+`
+
 const StartButton = styled.button`
 	height: 40px;
-	position: absolute;
-	top: 200px;
-	left: ${(props) => (props.width && `calc(50% - ${props.width}px/ 2 ${props.offset})`)};
+	/* position: absolute; */
+	/* top: 200px; */
+	/* left: ${(props) => (props.width && `calc(50% - ${props.width}px/ 2 ${props.offset})`)}; */
 	border: none;
 	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 	background-color: ${(props) => (props.white && 'white')
@@ -75,6 +104,65 @@ const StartButton = styled.button`
 	&:hover{
 		background-color:#fffafac7;
 	}
+`
+
+const ColumnContainer = styled.div`
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+    flex-wrap: wrap;
+	align-items: center;
+`
+
+const SettingsButton = styled.button`
+	background-color: sienna;
+	background-color: ${(props) => (props.background === 'white' && 'white')
+		|| (props.background === 'black' && 'black')
+	};
+	min-width: 60px;
+	width: fit-content;
+	height: 35px;
+	@media ${device.tablet}{
+		width: max-content;
+		height: 30px;
+	}
+	border-radius: 4px;
+	color: #f1d2ab;
+	color: ${(props) => (props.background === 'white' && 'black')
+		|| (props.background === 'black' && 'white')
+	};
+	border: 2px solid burlywood;
+	margin-right: 10px;
+	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+	outline: none;
+	&:hover {
+		background-color: ${(props) => (props.background === 'white' && 'rgb(220,220,220)')
+		|| (props.background === 'black' && 'rgb(80,80,80)')
+		|| 'sienna'
+	};
+		opacity: 100%;
+	};
+	/* &:last-of-type{
+		margin-right: 0px;
+	} */
+	&:active {
+		transform: translateY(2px);
+	}
+`
+
+const MatchmakingButton = styled(SettingsButton)`
+	width: 50% !important;
+	margin-bottom: 10px;
+`
+
+const GameIdInput = styled.input`
+	width: 90%;
+	background-color: sienna;
+    border-radius: 4px;
+    border: 2px solid burlywood;
+    color: #f1d2ab;
+    outline: none;
+	margin-bottom: 10px;
 `
 
 const Mask = styled.div`
@@ -136,7 +224,9 @@ const PromotionTitle = styled.span`
     text-align: center;
     width: 100%;
     display: block;
-    font-size: larger;
+	font-size: ${(props) => (props.size && `${props.size}px`)
+		|| 'larger'
+	};
     margin-bottom: 5px;
 	color: #f1d2ab;
 `
@@ -198,8 +288,13 @@ const getBestMove = (fen) => {
 	return request.then((response) => response).catch((error) => (error.response))
 }
 
-const startPVP = (pguid, color) => {
-	const request = axios.post(`/startPVP`, { playerId: pguid, color })
+const startPVP = (pguid) => {
+	const request = axios.post(`/startPVP`, { playerId: pguid, color: 'white' })
+	return request.then((response) => response).catch((error) => (error.response))
+}
+
+const joinRandomPVP = (pguid) => {
+	const request = axios.post(`/joinRandomPVP`, { playerId: pguid })
 	return request.then((response) => response).catch((error) => (error.response))
 }
 
@@ -237,11 +332,30 @@ const Board = () => {
 	const [pvpRunning, setPVPRunning] = useState(false)
 	const [moved, setMoved] = useState(false)
 	const [data, setData] = useState(null)
+	const [matches, setMatches] = useState(0)
+	const [playersMatchmaking, setPlayersMatchmaking] = useState(0)
 
 	const playPVPTurn = (fen) => {
 		const request = axios.post(`/pvp/move/${gameId}/${playerId}`, { gameId, playerId, fen, move: lastMove })
 		return request.then((response) => response).catch((error) => (error.response))
 	}
+
+	const getMatchesInfo = () => {
+		const request = axios.get(`/matches`)
+		request.then((response) => {
+			console.log('matches', response.data)
+			setMatches(response.data)
+		}).catch((error) => (error.response))
+		const request2 = axios.get(`/matchmaking`)
+		request2.then((response) => {
+			console.log('matchmaking', response.data)
+			setPlayersMatchmaking(response.data)
+		}).catch((error) => (error.response))
+	}
+
+	useEffect(() => {
+		getMatchesInfo()
+	}, []);
 
 	useEffect(() => {
 		if (data) {
@@ -727,10 +841,11 @@ const Board = () => {
 		}
 	}
 
-	const startNewPVP = (color) => {
+	const startNewPVP = () => {
+		console.log('start pvp??')
 		const pguid = uuidv4()
 		setPlayerId(pguid)
-		startPVP(pguid, color)
+		startPVP(pguid)
 			.then((result) => {
 				console.log('result', result)
 				startStream(result.data.gameId, pguid)
@@ -738,12 +853,23 @@ const Board = () => {
 			})
 	}
 
-	const joinPVP = (gameId, color) => {
+	const joinPVP = () => {
+		const gameId = document.getElementById("gameid").value
 		const pguid = uuidv4()
 		setPlayerId(pguid)
 		setGameId(gameId)
 		startStream(gameId, pguid)
 		setPlayAs(1)
+	}
+
+	const joinPVPRand = () => {
+		const pguid = uuidv4()
+		setPlayerId(pguid)
+		joinRandomPVP(pguid).then((result) => {
+			setGameId(result.data.gameId)
+			startStream(result.data.gameId, pguid)
+			setPlayAs(1)
+		})
 	}
 
 	return (
@@ -762,6 +888,7 @@ const Board = () => {
 							startPVP={startNewPVP}
 							joinPVP={joinPVP}
 							pvpRunning={pvpRunning}
+							playerId={playerId}
 							gameId={gameId}
 							showOptions={showOptions} />
 					)}
@@ -796,23 +923,42 @@ const Board = () => {
 											<BannerText>{message}</BannerText>
 										</Banner>
 									)}
-
-									<StartButton
-										id="start"
-										width={startWidth}
-										offset={'- 55px'}
-										white={true}
-										onClick={() => { startGame(true) }}>
-										Play as white
-									</StartButton>
-									<StartButton
-										id="start"
-										width={startWidth}
-										offset={'+ 55px'}
-										white={false}
-										onClick={() => { startGame(false) }}>
-										Play as black
-									</StartButton>
+									{!playerId && (
+										<StartContainer>
+											<StartContainerInner>
+												<div>
+													<PromotionTitle>Play against a bot</PromotionTitle>
+													<ButtonGroup>
+														<SettingsButton
+															id="start"
+															background="white"
+															onClick={() => { startGame(true) }}>
+															Play as white
+												</SettingsButton>
+														<SettingsButton
+															id="start"
+															background="black"
+															onClick={() => { startGame(false) }}>
+															Play as black
+												</SettingsButton>
+													</ButtonGroup>
+												</div>
+												<Line />
+												<PromotionTitle>Play against a human</PromotionTitle>
+												{/* <PromotionTitle size="14">{`Matches running: ${matches}`}</PromotionTitle> */}
+												<PromotionTitle size="14">{`Players looking for a match: ${playersMatchmaking}`}</PromotionTitle>
+												<ColumnContainer>
+													<MatchmakingButton onClick={startNewPVP}>Start a match</MatchmakingButton>
+													<MatchmakingButton onClick={joinPVPRand}>Find a match</MatchmakingButton>
+												</ColumnContainer>
+												<PromotionTitle size="16">Join a match with id</PromotionTitle>
+												<ColumnContainer>
+													<GameIdInput id="gameid"></GameIdInput>
+													<MatchmakingButton onClick={joinPVP}>Join</MatchmakingButton>
+												</ColumnContainer>
+											</StartContainerInner>
+										</StartContainer>
+									)}
 								</Mask>
 							)}
 							<CoordinatesLetters offsetTop={430} playAs={playAs} />
@@ -846,6 +992,7 @@ const Board = () => {
 							startPVP={startNewPVP}
 							joinPVP={joinPVP}
 							pvpRunning={pvpRunning}
+							playerId={playerId}
 							gameId={gameId}
 							showOptions={showOptions} />
 					)}

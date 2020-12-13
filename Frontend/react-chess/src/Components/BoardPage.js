@@ -641,9 +641,14 @@ const BoardPage = () => {
 		const pguid = uuidv4()
 		setPlayerId(pguid)
 		joinRandomPVP(pguid).then((result) => {
+			console.log(result)
+			if ('error' in result.data){
+				startNewPVP()
+			}else{
 			setGameId(result.data.gameId)
 			setPlayAs(1)
 			startStream(result.data.gameId, pguid, 1)
+		}
 		})
 	}
 
@@ -767,7 +772,7 @@ const BoardPage = () => {
 											</DrawAnswerButton>
 										</ButtonGroup>
 									)}
-									{!playerId && (
+									{!running && !pvpRunning && (
 										<StartContainer>
 											<StartContainerInner>
 												<div>

@@ -111,6 +111,7 @@ app.post('/joinRandomPVP', async (request, response, next) => {
 	const games = Object.keys(pvpgames).filter((gameId) => (pvpgames[gameId].p1 !== null && pvpgames[gameId].p2 === null))
 	if (games.length === 0) {
 		response.status(404).json({ error: 'Couldn\'t find a game' })
+		return
 	}
 	response.json({ gameId: games[0] })
 })

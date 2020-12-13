@@ -21,6 +21,7 @@ public:
 	std::tuple<std::string, std::string, std::vector<std::string>, std::string> Play_turn(std::string fen, int difficulty);
 	std::vector<std::string> GetLegalMoves(std::string fen);
 	std::string GetBestMove(std::string fen);
+	std::string IsGameOver(std::string fen);
 private:
 	static Napi::FunctionReference constructor;
 	Napi::FunctionReference jsFnRef;
@@ -29,6 +30,7 @@ private:
 	Napi::Value playTurn(const Napi::CallbackInfo& info);
 	Napi::Value getLegalMoves(const Napi::CallbackInfo& info);
 	Napi::Value getBestMove(const Napi::CallbackInfo& info);
+	Napi::Value isGameOver(const Napi::CallbackInfo& info);
 
 	OpeningBook openingBook;
 };

@@ -94,7 +94,7 @@ const SettingsContainer = styled.div`
 	/* flex-basis: 0;
 	flex-grow: 1; */
 	
-	flex: 0 0 10%;
+	/* flex: 0 0 10%; */
 	max-width: max-content;
 	user-select: none;
 	min-width: 365px;
@@ -102,7 +102,7 @@ const SettingsContainer = styled.div`
 
 	@media ${device.tablet}{
 		/* flex: 0 0 20%; */
-		flex: 0 0 17.7%;
+		/* flex: 0 0 17.7%; */
 		max-width: max-content;
 		flex: ${(props) => (!props.show && '0 0 0%')};
 	}
@@ -146,7 +146,7 @@ const GameIdInput = styled.input`
     outline: none;
 `
 
-const SettingsModule = ({ difficulty, setDifficulty, getHint, showOptions, showPVPOptions, setShowOptions, setShowPVPOptions, mobile, gameId, playerId, joinPVP, pvpRunning }) => {
+const SettingsModule = ({ difficulty, setDifficulty, getHint, showOptions, showPVPOptions, setShowOptions, setShowPVPOptions, mobile, gameId, playerId, joinPVP, pvpRunning, draw, resign }) => {
 
 	const copyId = () => {
 		var element = document.getElementById("gameidinput")
@@ -173,77 +173,56 @@ const SettingsModule = ({ difficulty, setDifficulty, getHint, showOptions, showP
 					</TitleContainer>
 					{showOptions && (
 						<SettingsInner>
-							<SettingsGroup>
-								<Title>Difficulty</Title>
-								<ButtonGroup>
-									<DifficultyButton selected={difficulty === 1} onClick={() => { setDifficulty(1) }}>Easy</DifficultyButton>
-									<DifficultyButton selected={difficulty === 2} onClick={() => { setDifficulty(2) }}>Medium</DifficultyButton>
-									<DifficultyButton selected={difficulty === 3} onClick={() => { setDifficulty(3) }}>Hard</DifficultyButton>
-								</ButtonGroup>
-							</SettingsGroup>
 							{!pvpRunning && (
-								<SettingsGroup>
-									<Title>Get a hint</Title>
-									<ButtonGroup>
-										<SettingsButton onClick={() => { getHint(true) }}>Best piece</SettingsButton>
-										<SettingsButton onClick={() => { getHint(false) }}>Best move</SettingsButton>
-									</ButtonGroup>
-								</SettingsGroup>
-							)}
-							{playerId && (
 								<>
-									<Title>Game id (share this with a friend) </Title>
-									<div style={{ flexDirection: 'row' }}>
-										<GameIdInput id="gameidinput" readOnly value={gameId}></GameIdInput>
-										<SettingsButton style={{ marginTop: '-2.5px', float: 'right' }} onClick={copyId}>Copy id</SettingsButton>
-									</div>
+									<SettingsGroup>
+										<Title>Difficulty</Title>
+										<ButtonGroup>
+											<DifficultyButton selected={difficulty === 1} onClick={() => { setDifficulty(1) }}>Easy</DifficultyButton>
+											<DifficultyButton selected={difficulty === 2} onClick={() => { setDifficulty(2) }}>Medium</DifficultyButton>
+											<DifficultyButton selected={difficulty === 3} onClick={() => { setDifficulty(3) }}>Hard</DifficultyButton>
+										</ButtonGroup>
+									</SettingsGroup>
+									<SettingsGroup>
+										<Title>Get a hint</Title>
+										<ButtonGroup>
+											<SettingsButton onClick={() => { getHint(true) }}>Best piece</SettingsButton>
+											<SettingsButton onClick={() => { getHint(false) }}>Best move</SettingsButton>
+										</ButtonGroup>
+									</SettingsGroup>
+									{playerId && (
+										<>
+											<Title>Game id (share this with a friend) </Title>
+											<div style={{ flexDirection: 'row' }}>
+												<GameIdInput id="gameidinput" readOnly value={gameId}></GameIdInput>
+												<SettingsButton style={{ marginTop: '-2.5px', float: 'right' }} onClick={copyId}>Copy id</SettingsButton>
+											</div>
+										</>
+									)}
 								</>
+							)}
+							{pvpRunning && (
+								<SettingsGroup>
+									<SettingsInner>
+										{/* <Title>Start a pvp match</Title> */}
+										<ButtonGroup>
+											<PvpContainer>
+												<div style={{ display: 'flex', justifyContent: 'center', marginBottom: '-5px' }}>
+													<SettingsButton onClick={() => { draw() }}>Offer a draw</SettingsButton>
+													<SettingsButton onClick={() => { resign() }}>Resign</SettingsButton>
+												</div>												
+											</PvpContainer>
+										</ButtonGroup>
+									</SettingsInner>									
+								</SettingsGroup>
 							)}
 						</SettingsInner>
 					)}
 				</SettingsInner>
 			</SettingsContainer>
-			{/* <SettingsContainer mobile={mobile} show={showPVPOptions}>
-				<SettingsInner>
-					<TitleContainer style={{ margin: "0 -5px" }} onClick={() => { setShowPVPOptions(!showPVPOptions) }}>
-						<Title style={{ width: "1%", marginLeft: "10px" }}>{showPVPOptions ? '▲' : '▼'}</Title>
-						<Title style={{ width: "90%" }}>PVP options</Title>
-					</TitleContainer>
-					{ showPVPOptions && (
-					<SettingsGroup>
-						<SettingsInner>
-							<Title>Start a pvp match</Title>
-							<ButtonGroup>
-								<PvpContainer>
-									<div style={{ display: 'flex', justifyContent: 'center', marginBottom: '5px' }}>
-										<SettingsButton onClick={() => { startPVP('white') }}>Play as white</SettingsButton>
-										<SettingsButton onClick={() => { startPVP('black') }}>Play as black</SettingsButton>
-									</div>
-									<Title>Game id (share this with a friend) </Title>
-
-									<div style={{ flexDirection: 'row' }}>
-										<GameIdInput id="gameidinput" readOnly value={gameId}></GameIdInput>
-										<SettingsButton style={{ marginTop: '-2.5px', float: 'right' }} onClick={copyId}>Copy id</SettingsButton>
-									</div>
-								</PvpContainer>
-							</ButtonGroup>
-						</SettingsInner>
-						<SettingsInner>
-							<Title>Join a pvp match</Title>
-							<ButtonGroup>
-								<PvpContainer>
-									<Title>Enter a game id to join</Title>
-									<div style={{ flexDirection: 'row' }}>
-										<GameIdInput id="gameidjoin"></GameIdInput>
-										<SettingsButton style={{ marginTop: '-2.5px', float: 'right' }} onClick={joinPVPGame}>Join</SettingsButton>
-									</div>
-								</PvpContainer>
-							</ButtonGroup>
-						</SettingsInner>
-					</SettingsGroup>
-					)}
-				</SettingsInner>
-			</SettingsContainer> */}
+			{/* {<SettingsContainer mobile={mobile} show={showPVPOptions}>
+				
+			</SettingsContainer>} */}
 		</Container >
 	)
 }

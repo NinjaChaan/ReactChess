@@ -27,6 +27,10 @@ async function getBestMove(fen) {
 	return await Promise.resolve(bot.getBestMove(fen));
 }
 
+async function isGameOver(fen) {
+	return await Promise.resolve(bot.isGameOver(fen));
+}
+
 app.post('/playTurn', async (request, response, next) => {
 	const { body } = request
 	console.log('body: ', body)
@@ -37,6 +41,7 @@ app.post('/playTurn', async (request, response, next) => {
 		})
 		.catch((error) => next(error))
 })
+
 
 app.post('/getLegalMoves', async (request, response, next) => {
 	const { body } = request
@@ -89,6 +94,7 @@ app.post('/startPVP', async (request, response, next) => {
 			p1: body.color === "white" ? playerId : null,
 			p2: body.color === "black" ? playerId : null,
 			fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq -",
+			status: "created",
 			lastMove: ""
 		}
 		console.log('game data', pvpgames[gameId])
@@ -103,11 +109,13 @@ app.post('/joinRandomPVP', async (request, response, next) => {
 	const playerId = body.playerId
 
 	const games = Object.keys(pvpgames).filter((gameId) => (pvpgames[gameId].p1 !== null && pvpgames[gameId].p2 === null))
-	if(games.length === 0){
-		response.status(404).json({ error: 'Couldn\'t find a game'})
+	if (games.length === 0) {
+		response.status(404).json({ error: 'Couldn\'t find a game' })
 	}
 	response.json({ gameId: games[0] })
 })
+
+
 
 app.post('/pvp/move/:gameId/:playerId', async (request, response, next) => {
 	const { body } = request
@@ -123,11 +131,22 @@ app.post('/pvp/move/:gameId/:playerId', async (request, response, next) => {
 		response.status(404).json({ error: 'Couldn\'t find game with id ' + gameID })
 		return
 	}
+	if (game.status.includes('resigned')) {
+		response.status(403).json('Game is already over')
+		return
+	}
 	if (game.p1 === playerId) {
 		if (game.turn % 2 === 0) {
 			console.log('p1 move')
 			game.fen = fen
 			game.lastMove = move
+			game.status = 'ongoing'
+			isGameOver(game.fen)
+				.then((result) => {
+					if (result.includes("wins") || result.includes("Draw")) {
+						game.status = result
+					}
+				})
 			response.status(200).json({ data: 'Moved succesfully' })
 		} else {
 			response.status(403).json({ error: 'Wait for your turn, dummy' })
@@ -138,6 +157,13 @@ app.post('/pvp/move/:gameId/:playerId', async (request, response, next) => {
 			console.log('p2 move')
 			game.fen = fen
 			game.lastMove = move
+			game.status = 'ongoing'
+			isGameOver(game.fen)
+				.then((result) => {
+					if (result.includes("wins") || result.includes("Draw")) {
+						game.status = result
+					}
+				})
 			response.status(200).json({ data: 'Moved succesfully' })
 		} else {
 			response.status(403).json({ error: 'Wait for your turn, dummy' })
@@ -150,6 +176,98 @@ app.post('/pvp/move/:gameId/:playerId', async (request, response, next) => {
 
 	game.turn++
 })
+
+app.post('/pvp/resign/:gameId/:playerId', async (request, response, next) => {
+	const { body } = request
+	const gameId = request.params.gameId
+	const playerId = request.params.playerId
+	console.log('resign body', body)
+
+	const game = pvpgames[gameId]
+
+	if (game === undefined) {
+		response.status(404).json({ error: 'Couldn\'t find game with id ' + gameID })
+		return
+	}
+	if (game.p1 === playerId) {
+		console.log('p1 resign')
+		game.status = 'White resigned'
+		response.status(200).json({ data: 'Resigned succesfully' })
+	} else if (game.p2 === playerId) {
+		console.log('p2 resign')
+		game.status = 'Black resigned'
+		response.status(200).json({ data: 'Resigned succesfully' })
+	} else {
+		response.status(401).json({ error: 'You are not a part of this game' })
+		return
+	}
+})
+
+app.post('/pvp/offerdraw/:gameId/:playerId', async (request, response, next) => {
+	const { body } = request
+	const gameId = request.params.gameId
+	const playerId = request.params.playerId
+	console.log('offer draw body', body)
+
+	const game = pvpgames[gameId]
+
+	if (game === undefined) {
+		response.status(404).json({ error: 'Couldn\'t find game with id ' + gameID })
+		return
+	}
+	if(game.status == 'reject'){
+		response.status(402).json({ data: 'You cannot ask for a draw again.' })
+		return
+	}
+	if (game.p1 === playerId) {
+		console.log('p1 ask for draw')
+		if (game.status == 'black offer') {
+			game.status = 'Draw'
+		}else{
+			game.status = 'white offer'
+		}
+		response.status(200).json({ data: 'Asked draw succesfully' })
+	} else if (game.p2 === playerId) {
+		console.log('p2 ask for draw')
+		if (game.status == 'white offer') {
+			game.status = 'Draw'
+		}else{
+			game.status = 'black offer'
+		}
+		response.status(200).json({ data: 'Asked draw succesfully' })
+	} else {
+		response.status(401).json({ error: 'You are not a part of this game' })
+		return
+	}
+})
+
+app.post('/pvp/rejectdraw/:gameId/:playerId', async (request, response, next) => {
+	const { body } = request
+	const gameId = request.params.gameId
+	const playerId = request.params.playerId
+	console.log('reject draw body', body)
+
+	const game = pvpgames[gameId]
+
+	if (game === undefined) {
+		response.status(404).json({ error: 'Couldn\'t find game with id ' + gameID })
+		return
+	}
+	if (game.p1 === playerId) {
+		console.log('p1 reject draw')
+		game.status = 'reject'
+		response.status(200).json({ data: 'Rejected draw succesfully' })
+	} else if (game.p2 === playerId) {
+		console.log('p2 reject draw')
+		game.status = 'reject'
+		response.status(200).json({ data: 'Rejected draw succesfully' })
+	} else {
+		response.status(401).json({ error: 'You are not a part of this game' })
+		return
+	}
+})
+
+
 
 app.get('/pvp/:gameId/:playerId', async (request, response, next) => {
 	const { body } = request
@@ -174,10 +292,17 @@ app.get('/pvp/:gameId/:playerId', async (request, response, next) => {
 
 	if (gameId in pvpgames) {
 		console.log('game found', gameId)
+		if (pvpgames[gameId].p1 === playerId) {
+			pvpgames[gameId].p1connected = true
+		} else if (pvpgames[gameId].p2 === playerId){
+			pvpgames[gameId].p2connected = true
+		}
+
 		if (!(pvpgames[gameId].p1 === playerId || pvpgames[gameId].p2 === playerId)) {
 			//join game
 			pvpgames[gameId].p2 = playerId
 			pvpgames[gameId].p2connected = true
+			pvpgames[gameId].status = "ongoing"
 		}
 	} else {
 		console.log('game created', gameId)
@@ -188,6 +313,7 @@ app.get('/pvp/:gameId/:playerId', async (request, response, next) => {
 			p1connected: true,
 			p2: null,
 			p2connected: false,
+			status: 'created',
 			fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq -",
 			lastMove: ""
 		}
@@ -195,25 +321,36 @@ app.get('/pvp/:gameId/:playerId', async (request, response, next) => {
 	}
 
 	let lastTurn = -1
+	let lastStatus = ""
 	const interValID = setInterval(() => {
 		const game = pvpgames[gameId]
-		if (game.p1 !== null && game.p2 !== null) {
-			if (game.turn !== lastTurn) {
-				console.log('updating')
-				console.log('game data', game)
-				console.log('lastTurn', lastTurn)
-				getLegalMoves(game.fen)
-					.then((moves) => {
-						response.write(`data: ${JSON.stringify({ fen: game.fen, lastMove: game.lastMove, legalMoves: moves })}`)
+		if (game) {
+			if (game.p1 !== null && game.p2 !== null) {
+				console.log('game fen', game.fen)
+				if (game.turn !== lastTurn || game.status != lastStatus) {
+					console.log('updating')
+					console.log('game data', game)
+					console.log('lastTurn', lastTurn)
+					if (game.status.includes("wins") || game.status.includes("resigned") || game.status.includes("Draw")) {
+						response.write(`data: ${JSON.stringify({ fen: game.fen, status: game.status, lastMove: game.lastMove })}`)
 						response.write('\n\n')
 						response.flush()
-					})
-					.catch((error) => next(error))
-				lastTurn = game.turn
+					} else {
+						getLegalMoves(game.fen)
+							.then((moves) => {
+								response.write(`data: ${JSON.stringify({ fen: game.fen, status: game.status, lastMove: game.lastMove, legalMoves: moves })}`)
+								response.write('\n\n')
+								response.flush()
+							})
+							.catch((error) => next(error))
+					}
+					lastTurn = game.turn
+					lastStatus = game.status
+				}
+			} else {
+				response.write(`data: "Waiting for player 2" \n\n`)
+				response.flush()
 			}
-		} else {
-			response.write(`data: "Waiting for player 2" \n\n`)
-			response.flush()
 		}
 	}, 1000)
 
@@ -223,13 +360,15 @@ app.get('/pvp/:gameId/:playerId', async (request, response, next) => {
 		clearInterval(interValID)
 		response.end()
 		const game = pvpgames[gameId]
-		if(game.p1 === playerId){
-			game.p1connected = false
-		}else if(game.p2 === playerId){
-			game.p2connected = false
-		}
-		if(!game.p1connected && !game.p2connected){
-			delete pvpgames[gameId]
+		if (game) {
+			if (game.p1 === playerId) {
+				game.p1connected = false
+			} else if (game.p2 === playerId) {
+				game.p2connected = false
+			}
+			if (!game.p1connected && !game.p2connected) {
+				delete pvpgames[gameId]
+			}
 		}
 	})
 })

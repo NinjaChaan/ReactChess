@@ -8,7 +8,7 @@ Napi::Object Bot::Init(Napi::Env env, Napi::Object exports)
 {
 	Napi::HandleScope scope(env);
 
-	Napi::Function func = DefineClass(env, "Bot", {InstanceMethod("playTurn", &Bot::playTurn), InstanceMethod("getLegalMoves", &Bot::getLegalMoves), InstanceMethod("getBestMove", &Bot::getBestMove)});
+	Napi::Function func = DefineClass(env, "Bot", {InstanceMethod("playTurn", &Bot::playTurn), InstanceMethod("getLegalMoves", &Bot::getLegalMoves), InstanceMethod("getBestMove", &Bot::getBestMove), InstanceMethod("isGameOver", &Bot::isGameOver)});
 
 	constructor = Napi::Persistent(func);
 	constructor.SuppressDestruct();
@@ -258,6 +258,48 @@ Napi::Value Bot::getBestMove(const Napi::CallbackInfo &info)
 	Napi::String fen = info[0].As<Napi::String>();
 
 	Napi::String returnValue = Napi::String::New(env, GetBestMove(fen.Utf8Value()));
+
+	return returnValue;
+}
+
+std::string Bot::IsGameOver(string fen)
+{
+	Asema asema(fen);
+	vector<Siirto> siirtolista = asema.annaLaillisetSiirrot();
+
+	if (siirtolista.size() == 0)
+	{
+		// wprintf(L"%s voitti!", asema.getSiirtovuoro() == 1 ? L"Valkoinen" : L"Musta");
+		return asema.getSiirtovuoro() == 1 ? "White wins" : "Black wins";
+	}
+	if (asema.mahdotonLoppupeli())
+	{
+		return "Draw";
+	}
+	return "Continue";
+}
+
+Napi::Value Bot::isGameOver(const Napi::CallbackInfo &info)
+{
+	Napi::Env env = info.Env();
+
+	if (info.Length() < 1)
+	{
+		Napi::TypeError::New(env, "Wrong number of arguments")
+			.ThrowAsJavaScriptException();
+		return env.Null();
+	}
+
+	if (!info[0].IsString())
+	{
+		Napi::TypeError::New(env, "Pass a fen to the function")
+			.ThrowAsJavaScriptException();
+		return env.Null();
+	}
+
+	Napi::String fen = info[0].As<Napi::String>();
+
+	Napi::String returnValue = Napi::String::New(env, IsGameOver(fen.Utf8Value()));
 
 	return returnValue;
 }

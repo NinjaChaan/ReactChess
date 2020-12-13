@@ -60,8 +60,8 @@ const BoardContainer = styled.div`
 const StartContainer = styled.div`
 	background-color: burlywood;
 	border-radius: 4px;
-	width: 90%;
-    height: 70%;
+	/* width: 90%; */
+    height: max-content;
     margin: 10% 15%;
     padding: 5px;
 `
@@ -150,6 +150,12 @@ const SettingsButton = styled.button`
 	}
 `
 
+const DrawAnswerButton = styled(SettingsButton)`
+	color: black;
+	border: 2px solid rgba(0,0,0,0.75);
+	font-weight: bold;
+`
+
 const MatchmakingButton = styled(SettingsButton)`
 	width: 50% !important;
 	margin-bottom: 10px;
@@ -173,10 +179,12 @@ const Mask = styled.div`
 	display: flex;
 	border-radius: 4px;
 	margin-left: -21px;
+	flex-direction: column;
 `
 
 const Banner = styled.div`
-	margin: 160px auto 0 auto;
+	margin: 160px auto 0 auto;	
+	margin-top: ${(props) => (props.topMargin + 'px')};
 	background-color: ${(props) => (props.winner === "w" && '#c1fc90')
 		|| '#fc9590'
 	};
@@ -334,6 +342,7 @@ const Board = () => {
 	const [data, setData] = useState(null)
 	const [matches, setMatches] = useState(0)
 	const [playersMatchmaking, setPlayersMatchmaking] = useState(0)
+	const [offer, setOffer] = useState(-1)
 
 	const playPVPTurn = (fen) => {
 		const request = axios.post(`/pvp/move/${gameId}/${playerId}`, { gameId, playerId, fen, move: lastMove })
@@ -394,7 +403,12 @@ const Board = () => {
 							color: splitfen[1] === "b" ? "w" : "b"
 						})
 				}
-				setLegalMoves(Object.values(data.legalMoves))
+				if ('legalMoves' in data) {
+					setLegalMoves(Object.values(data.legalMoves))
+				} else {
+					setLegalMoves([])
+				}
+
 				setTurn(splitfen[1] === "b" ? 1 : 0)
 				setTimeout(() => {
 					updateScroll()
@@ -423,14 +437,111 @@ const Board = () => {
 			const data = JSON.parse(e.data)
 			console.log('stream data', data)
 
-			if (!(typeof (data) !== 'string' && 'fen' in data && 'lastMove' in data && 'legalMoves' in data)) {
+			if (!(typeof (data) !== 'string' && 'fen' in data && 'lastMove' in data)) {
 				setMessage(data)
+
+				// if (typeof (data) === 'string') {
+				// 	if (data.includes("wins")) {
+				// 		setRunning(false)
+				// 		setWinnerText(data)
+				// 		if (data.includes("White")) {
+				// 			setWinner("w")
+				// 		} else {
+				// 			setWinner("b")
+				// 		}
+
+				// 		setPVPRunning(false)
+				// 		eventSource.close()
+				// 		return
+				// 	} else if (data.includes("Draw")) {
+				// 		setRunning(false)
+				// 		setWinnerText(data)
+				// 		setWinner("d")
+				// 		setPVPRunning(false)
+				// 		eventSource.close()
+				// 		return
+				// 	}else if (data.includes("resigned")) {
+				// 		setRunning(false)
+				// 		setWinnerText(data)
+				// 		if (data.includes("White")) {
+				// 			setWinner("b")
+				// 		} else {
+				// 			setWinner("w")
+				// 		}
+
+				// 		setPVPRunning(false)
+				// 		eventSource.close()
+				// 		return
+				// 	}
+				// }
+
 				return
 			}
+
+
 			setPVPRunning(true)
+			setShowPVPOptions(true)
 			setMessage("")
 
 			setData(data)
+
+			if ('status' in data) {
+				status = data['status']
+				if (!status.includes("ongoing")) {
+					setMessage(status)
+				}
+				if (status.includes("wins")) {
+					setRunning(false)
+					setWinnerText(status)
+					if (status.includes("White")) {
+						setWinner("w")
+					} else {
+						setWinner("b")
+					}
+
+					setPVPRunning(false)
+					eventSource.close()
+					return
+				} else if (status.includes("Draw")) {
+					setRunning(false)
+					setWinnerText(status)
+					setWinner("d")
+					setPVPRunning(false)
+					eventSource.close()
+					return
+				} else if (status.includes("resigned")) {
+					setRunning(false)
+					setWinnerText(status)
+					if (status.includes("White")) {
+						setWinner("b")
+					} else {
+						setWinner("w")
+					}
+
+					setPVPRunning(false)
+					eventSource.close()
+					return
+				} else if (status.includes("offer")) {
+					if (status.includes("white")) {
+						setOffer(0)
+						setWinnerText('white offers draw')
+						setWinner("w")
+						console.log('white offers draw')
+					} else {
+						setOffer(1)
+						setWinnerText('black offers draw')
+						setWinner("w")
+						console.log('black offers draw')
+					}
+					if (offer != playAs) {
+						setMessage("Opponent is considering your draw offer")
+					}
+					return
+				} else if (status.includes("reject")) {
+					setOffer(-1)
+					return
+				}
+			}
 
 			return () => {
 				eventSource.close()
@@ -872,6 +983,27 @@ const Board = () => {
 		})
 	}
 
+	const resign = () => {
+		const request = axios.post(`/pvp/resign/${gameId}/${playerId}`, { gameId, playerId })
+		return request.then((response) => response).catch((error) => (error.response))
+	}
+
+	const offerDraw = () => {
+		setOffer(-1)
+		const request = axios.post(`/pvp/offerdraw/${gameId}/${playerId}`, { gameId, playerId })
+		return request.then((response) => response).catch((error) => (error.response))
+	}
+
+	const acceptDraw = () => {
+		offerDraw()
+	}
+
+	const rejectDraw = () => {
+		setOffer(-1)
+		const request = axios.post(`/pvp/rejectdraw/${gameId}/${playerId}`, { gameId, playerId })
+		return request.then((response) => response).catch((error) => (error.response))
+	}
+
 	return (
 		<>
 			<div style={{ display: 'flex', width: '100%', marginLeft: '2.5px' }}>
@@ -887,6 +1019,8 @@ const Board = () => {
 							setShowPVPOptions={setShowPVPOptions}
 							startPVP={startNewPVP}
 							joinPVP={joinPVP}
+							resign={resign}
+							draw={offerDraw}
 							pvpRunning={pvpRunning}
 							playerId={playerId}
 							gameId={gameId}
@@ -915,13 +1049,30 @@ const Board = () => {
 							{window.matchMedia(device.laptop).matches && (
 								<Movehistory moveHistory={moveHistory} />
 							)}
-							{!running && !pvpRunning && (
+							{((!running && !pvpRunning) || offer != -1) && (
 								<Mask>
 									{message !== "" && (
 										<Banner
+											topMargin={(!running && !pvpRunning) ? 20 : 160}
 											winner={winner}>
 											<BannerText>{message}</BannerText>
 										</Banner>
+									)}
+									{offer != -1 && offer != playAs && (
+										<ButtonGroup>
+											<DrawAnswerButton
+												id="start"
+												style={{ backgroundColor: "#c1fc90" }}
+												onClick={acceptDraw}>
+												Accept
+											</DrawAnswerButton>
+											<DrawAnswerButton
+												id="start"
+												style={{ backgroundColor: "#fc9590" }}
+												onClick={rejectDraw}>
+												Reject
+											</DrawAnswerButton>
+										</ButtonGroup>
 									)}
 									{!playerId && (
 										<StartContainer>
@@ -991,6 +1142,8 @@ const Board = () => {
 							setShowPVPOptions={setShowPVPOptions}
 							startPVP={startNewPVP}
 							joinPVP={joinPVP}
+							resign={resign}
+							draw={offerDraw}
 							pvpRunning={pvpRunning}
 							playerId={playerId}
 							gameId={gameId}

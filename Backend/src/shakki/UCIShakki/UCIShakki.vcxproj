@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{02bed33b-707d-444f-a8f1-ddc2944202b4}</ProjectGuid>
-    <RootNamespace>shakki</RootNamespace>
+    <ProjectGuid>{13bd05de-6f5e-4bcc-8634-69145ebc88d3}</ProjectGuid>
+    <RootNamespace>UCIShakki</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -88,7 +88,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Stuff\Projects\JS_Chess\Backend\node_modules\node-addon-api;C:\Users\Nina\AppData\Local\node-gyp\Cache\13.12.0\include\node;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -140,40 +139,39 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\node_modules\node-addon-api\napi.h" />
-    <ClInclude Include="..\..\node_api.h" />
-    <ClInclude Include="asema.h" />
-    <ClInclude Include="Bot.h" />
-    <ClInclude Include="hashing.h" />
-    <ClInclude Include="Header.h" />
-    <ClInclude Include="kayttoliittyma.h" />
-    <ClInclude Include="lautaDict.h" />
-    <ClInclude Include="minmaxpaluu.h" />
-    <ClInclude Include="nappula.h" />
-    <ClInclude Include="openingBook.h" />
-    <ClInclude Include="peli.h" />
-    <ClInclude Include="Ruutu.h" />
-    <ClInclude Include="Siirto.h" />
-    <ClInclude Include="siirtokello.h" />
-    <ClInclude Include="stats.h" />
-    <ClInclude Include="stringSplit.h" />
-    <ClInclude Include="transpositionTable.h" />
-    <ClInclude Include="vastustaja.h" />
+    <ClCompile Include="..\shakki\asema.cpp" />
+    <ClCompile Include="..\shakki\hashing.cpp" />
+    <ClCompile Include="..\shakki\kayttoliittyma.cpp" />
+    <ClCompile Include="..\shakki\nappula.cpp" />
+    <ClCompile Include="..\shakki\openingBook.cpp" />
+    <ClCompile Include="..\shakki\peli.cpp" />
+    <ClCompile Include="..\shakki\Ruutu.cpp" />
+    <ClCompile Include="..\shakki\Siirto.cpp" />
+    <ClCompile Include="..\shakki\siirtokello.cpp" />
+    <ClCompile Include="..\shakki\stats.cpp" />
+    <ClCompile Include="..\shakki\transpositionTable.cpp" />
+    <ClCompile Include="..\shakki\vastustaja.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="UCIEngine.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="asema.cpp" />
-    <ClCompile Include="Bot.cpp" />
-    <ClCompile Include="hashing.cpp" />
-    <ClCompile Include="kayttoliittyma.cpp" />
-    <ClCompile Include="nappula.cpp" />
-    <ClCompile Include="openingBook.cpp" />
-    <ClCompile Include="peli.cpp" />
-    <ClCompile Include="Ruutu.cpp" />
-    <ClCompile Include="Siirto.cpp" />
-    <ClCompile Include="siirtokello.cpp" />
-    <ClCompile Include="stats.cpp" />
-    <ClCompile Include="transpositionTable.cpp" />
-    <ClCompile Include="vastustaja.cpp" />
+    <ClInclude Include="..\shakki\asema.h" />
+    <ClInclude Include="..\shakki\hashing.h" />
+    <ClInclude Include="..\shakki\Header.h" />
+    <ClInclude Include="..\shakki\kayttoliittyma.h" />
+    <ClInclude Include="..\shakki\lautaDict.h" />
+    <ClInclude Include="..\shakki\minmaxpaluu.h" />
+    <ClInclude Include="..\shakki\nappula.h" />
+    <ClInclude Include="..\shakki\openingBook.h" />
+    <ClInclude Include="..\shakki\peli.h" />
+    <ClInclude Include="..\shakki\Ruutu.h" />
+    <ClInclude Include="..\shakki\Siirto.h" />
+    <ClInclude Include="..\shakki\siirtokello.h" />
+    <ClInclude Include="..\shakki\stats.h" />
+    <ClInclude Include="..\shakki\stringSplit.h" />
+    <ClInclude Include="..\shakki\transpositionTable.h" />
+    <ClInclude Include="..\shakki\vastustaja.h" />
+    <ClInclude Include="UCIEngine.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

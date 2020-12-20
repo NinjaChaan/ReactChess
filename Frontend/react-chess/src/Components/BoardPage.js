@@ -642,13 +642,13 @@ const BoardPage = () => {
 		setPlayerId(pguid)
 		joinRandomPVP(pguid).then((result) => {
 			console.log(result)
-			if ('error' in result.data){
+			if ('error' in result.data) {
 				startNewPVP()
-			}else{
-			setGameId(result.data.gameId)
-			setPlayAs(1)
-			startStream(result.data.gameId, pguid, 1)
-		}
+			} else {
+				setGameId(result.data.gameId)
+				setPlayAs(1)
+				startStream(result.data.gameId, pguid, 1)
+			}
 		})
 	}
 

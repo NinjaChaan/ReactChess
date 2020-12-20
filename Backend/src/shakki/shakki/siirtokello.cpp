@@ -6,6 +6,10 @@ void Siirtokello::Aloita(float seconds) {
 	endTime = (sec)seconds;
 }
 
+void Siirtokello::Lopeta() {
+	endTime = (sec)0;
+}
+
 bool Siirtokello::AikaLoppu() {
 	const sec duration = clock::now() - startTime;
 	return duration >= endTime;

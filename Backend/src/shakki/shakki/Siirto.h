@@ -19,6 +19,8 @@ public:
 	void setEnPassant(bool enPassant);
 	std::wstring toString(Asema* asema);
 	std::string toNormalString(Asema* asema);
+	std::string toUCIString(Asema* asema);
+	static Siirto fromUCIString(std::string uciMove, Asema* asema);
 	bool operator==(const Siirto& other)const;
 	bool operator!=(const Siirto& other)const;
 	bool operator<(const Siirto& other)const;

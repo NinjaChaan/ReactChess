@@ -11,5 +11,6 @@ private:
 	sec endTime;
 public:
 	void Aloita(float sec);
+	void Lopeta();
 	bool AikaLoppu();
 };

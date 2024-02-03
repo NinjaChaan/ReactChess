@@ -10,7 +10,7 @@
 #include "stats.h"
 #include "siirtokello.h"
 #include <thread>
-#include<ctype.h>
+#include <ctype.h>
 
 
 

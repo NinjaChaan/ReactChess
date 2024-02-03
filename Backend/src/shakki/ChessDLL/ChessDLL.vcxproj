@@ -21,26 +21,26 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{02bed33b-707d-444f-a8f1-ddc2944202b4}</ProjectGuid>
-    <RootNamespace>shakki</RootNamespace>
+    <ProjectGuid>{5bec9fc5-0997-4bcf-8389-ab0a1e33b540}</ProjectGuid>
+    <RootNamespace>ChessDLL</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -81,19 +81,20 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;CHESSDLL_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Stuff\Projects\JS_Chess\Backend\node_modules\node-addon-api;C:\Users\Nina\AppData\Local\node-gyp\Cache\13.12.0\include\node;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -102,26 +103,32 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;CHESSDLL_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;CHESSDLL_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -130,52 +137,63 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;CHESSDLL_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\node_modules\node-addon-api\napi.h" />
     <ClInclude Include="..\..\node_api.h" />
-    <ClInclude Include="asema.h" />
-    <ClInclude Include="Bot.h" />
-    <ClInclude Include="hashing.h" />
-    <ClInclude Include="Header.h" />
-    <ClInclude Include="kayttoliittyma.h" />
-    <ClInclude Include="lautaDict.h" />
-    <ClInclude Include="minmaxpaluu.h" />
-    <ClInclude Include="nappula.h" />
-    <ClInclude Include="openingBook.h" />
-    <ClInclude Include="peli.h" />
-    <ClInclude Include="Ruutu.h" />
-    <ClInclude Include="Siirto.h" />
-    <ClInclude Include="siirtokello.h" />
-    <ClInclude Include="stats.h" />
-    <ClInclude Include="stringSplit.h" />
-    <ClInclude Include="transpositionTable.h" />
-    <ClInclude Include="vastustaja.h" />
+    <ClInclude Include="..\shakki\asema.h" />
+    <ClInclude Include="..\shakki\Bot.h" />
+    <ClInclude Include="..\shakki\hashing.h" />
+    <ClInclude Include="..\shakki\Header.h" />
+    <ClInclude Include="..\shakki\kayttoliittyma.h" />
+    <ClInclude Include="..\shakki\lautaDict.h" />
+    <ClInclude Include="..\shakki\minmaxpaluu.h" />
+    <ClInclude Include="..\shakki\nappula.h" />
+    <ClInclude Include="..\shakki\openingBook.h" />
+    <ClInclude Include="..\shakki\peli.h" />
+    <ClInclude Include="..\shakki\Ruutu.h" />
+    <ClInclude Include="..\shakki\Siirto.h" />
+    <ClInclude Include="..\shakki\siirtokello.h" />
+    <ClInclude Include="..\shakki\stats.h" />
+    <ClInclude Include="..\shakki\stringSplit.h" />
+    <ClInclude Include="..\shakki\transpositionTable.h" />
+    <ClInclude Include="..\shakki\vastustaja.h" />
+    <ClInclude Include="framework.h" />
+    <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="asema.cpp" />
-    <ClCompile Include="Bot.cpp" />
-    <ClCompile Include="hashing.cpp" />
-    <ClCompile Include="kayttoliittyma.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="nappula.cpp" />
-    <ClCompile Include="openingBook.cpp" />
-    <ClCompile Include="peli.cpp" />
-    <ClCompile Include="Ruutu.cpp" />
-    <ClCompile Include="Siirto.cpp" />
-    <ClCompile Include="siirtokello.cpp" />
-    <ClCompile Include="stats.cpp" />
-    <ClCompile Include="transpositionTable.cpp" />
-    <ClCompile Include="vastustaja.cpp" />
+    <ClCompile Include="..\shakki\asema.cpp" />
+    <ClCompile Include="..\shakki\hashing.cpp" />
+    <ClCompile Include="..\shakki\kayttoliittyma.cpp" />
+    <ClCompile Include="..\shakki\main.cpp" />
+    <ClCompile Include="..\shakki\nappula.cpp" />
+    <ClCompile Include="..\shakki\openingBook.cpp" />
+    <ClCompile Include="..\shakki\peli.cpp" />
+    <ClCompile Include="..\shakki\Ruutu.cpp" />
+    <ClCompile Include="..\shakki\Siirto.cpp" />
+    <ClCompile Include="..\shakki\siirtokello.cpp" />
+    <ClCompile Include="..\shakki\stats.cpp" />
+    <ClCompile Include="..\shakki\transpositionTable.cpp" />
+    <ClCompile Include="..\shakki\vastustaja.cpp" />
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

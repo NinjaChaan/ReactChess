@@ -3,7 +3,7 @@ const express = require('express')
 const cors = require('cors')
 const path = require('path')
 const { v4: uuidv4 } = require('uuid')
-const { Bot } = require('./build/Release/greet.node')
+const { Bot } = require('./build/Release/shakki.node')
 
 const app = express()
 app.use(cors())
@@ -33,10 +33,8 @@ async function isGameOver(fen) {
 
 app.post('/playTurn', async (request, response, next) => {
 	const { body } = request
-	console.log('body: ', body)
 	playTurn(body.fen, body.difficulty)
 		.then((result) => {
-			console.log('result: ', result)
 			response.json(result)
 		})
 		.catch((error) => next(error))
@@ -45,10 +43,8 @@ app.post('/playTurn', async (request, response, next) => {
 
 app.post('/getLegalMoves', async (request, response, next) => {
 	const { body } = request
-	console.log('ask moves body: ', body)
 	getLegalMoves(body.fen)
 		.then((result) => {
-			console.log('result: ', result)
 			response.json(result)
 		})
 		.catch((error) => next(error))
@@ -56,10 +52,8 @@ app.post('/getLegalMoves', async (request, response, next) => {
 
 app.post('/getBestMove', async (request, response, next) => {
 	const { body } = request
-	console.log('hint body: ', body)
 	getBestMove(body.fen)
 		.then((result) => {
-			console.log('result: ', result)
 			response.json(result)
 		})
 		.catch((error) => next(error))
@@ -69,15 +63,10 @@ const pvpgames = {}
 
 app.post('/startPVP', async (request, response, next) => {
 	const { body } = request
-
-	console.log('start pvp body: ', body)
-
 	const playerId = body.playerId
 	const gameId = uuidv4()
-	const game = pvpgames[gameId]
 
 	if (gameId in pvpgames) {
-		console.log('game found', gameId)
 		if (!pvpgames[gameId].p1 === playerId && body.color === 'white') {
 			//join game as white
 			pvpgames[gameId].p1 = playerId
@@ -86,9 +75,7 @@ app.post('/startPVP', async (request, response, next) => {
 			pvpgames[gameId].p2 = playerId
 		}
 	} else {
-		console.log('game created', gameId)
 		//create game
-
 		pvpgames[gameId] = {
 			turn: 0,
 			p1: body.color === "white" ? playerId : null,
@@ -97,14 +84,11 @@ app.post('/startPVP', async (request, response, next) => {
 			status: "created",
 			lastMove: ""
 		}
-		console.log('game data', pvpgames[gameId])
 	}
 	response.json({ gameId })
 })
 app.post('/joinRandomPVP', async (request, response, next) => {
 	const { body } = request
-
-	console.log('join random pvp body: ', body)
 
 	const playerId = body.playerId
 
@@ -124,7 +108,6 @@ app.post('/pvp/move/:gameId/:playerId', async (request, response, next) => {
 	const playerId = request.params.playerId
 	const fen = body.fen
 	const move = body.move
-	console.log('move body', body)
 
 	const game = pvpgames[gameId]
 

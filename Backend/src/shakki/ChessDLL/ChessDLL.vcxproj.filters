@@ -15,105 +15,114 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Bot.h">
+    <ClInclude Include="framework.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="asema.h">
+    <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="hashing.h">
+    <ClInclude Include="..\shakki\asema.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Header.h">
+    <ClInclude Include="..\shakki\Bot.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="kayttoliittyma.h">
+    <ClInclude Include="..\shakki\hashing.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="lautaDict.h">
+    <ClInclude Include="..\shakki\Header.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="minmaxpaluu.h">
+    <ClInclude Include="..\shakki\kayttoliittyma.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="nappula.h">
+    <ClInclude Include="..\shakki\lautaDict.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="openingBook.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="peli.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Ruutu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Siirto.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="siirtokello.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="stats.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="stringSplit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="transpositionTable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="vastustaja.h">
+    <ClInclude Include="..\shakki\minmaxpaluu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\node_modules\node-addon-api\napi.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\shakki\nappula.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\node_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shakki\openingBook.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shakki\peli.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shakki\Ruutu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shakki\Siirto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shakki\siirtokello.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shakki\stats.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shakki\stringSplit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shakki\transpositionTable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shakki\vastustaja.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="asema.cpp">
+    <ClCompile Include="dllmain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="hashing.cpp">
+    <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="kayttoliittyma.cpp">
+    <ClCompile Include="..\shakki\asema.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="nappula.cpp">
+    <ClCompile Include="..\shakki\hashing.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="openingBook.cpp">
+    <ClCompile Include="..\shakki\kayttoliittyma.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="peli.cpp">
+    <ClCompile Include="..\shakki\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Ruutu.cpp">
+    <ClCompile Include="..\shakki\nappula.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Siirto.cpp">
+    <ClCompile Include="..\shakki\openingBook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="siirtokello.cpp">
+    <ClCompile Include="..\shakki\peli.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="stats.cpp">
+    <ClCompile Include="..\shakki\Ruutu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="transpositionTable.cpp">
+    <ClCompile Include="..\shakki\Siirto.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="vastustaja.cpp">
+    <ClCompile Include="..\shakki\siirtokello.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Bot.cpp">
+    <ClCompile Include="..\shakki\stats.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="..\shakki\transpositionTable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\shakki\vastustaja.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

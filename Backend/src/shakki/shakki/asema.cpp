@@ -1271,7 +1271,7 @@ vai olla est�m�ss� vastustajan korotusta siksi ei oteta kantaa
 */
 double Asema::evaluoi()
 {
-	double laudanArvo = 0;
+	double laudanArvo = laskeNappuloidenArvo();
 	//1. Nappuloiden arvo
 	laudanArvo += 1.0 * paikkaEvaluointi();
 	laudanArvo += 1 * sotilaidenLiikeArvo();

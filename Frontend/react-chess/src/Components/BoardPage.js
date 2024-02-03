@@ -208,6 +208,11 @@ const playTurn = (fen) => {
 	return request.then((response) => response).catch((error) => (error.response))
 }
 
+const playPVPTurn = (fen) => {
+	const request = axios.post(`/pvp/move/${gameId}/${playerId}`, { gameId, playerId, fen, move: lastMove })
+	return request.then((response) => response).catch((error) => (error.response))
+}
+
 const getLegalMoves = (fen) => {
 	const request = axios.post(`/getLegalMoves`, fen)
 	return request.then((response) => response).catch((error) => (error.response))
@@ -260,11 +265,6 @@ const BoardPage = () => {
 	const [matches, setMatches] = useState(0)
 	const [playersMatchmaking, setPlayersMatchmaking] = useState(0)
 	const [offer, setOffer] = useState(-1)
-
-	const playPVPTurn = (fen) => {
-		const request = axios.post(`/pvp/move/${gameId}/${playerId}`, { gameId, playerId, fen, move: lastMove })
-		return request.then((response) => response).catch((error) => (error.response))
-	}
 
 	const getMatchesInfo = () => {
 		const request = axios.get(`/matches`)
@@ -340,11 +340,7 @@ const BoardPage = () => {
 
 	const startStream = (guid, pguid, playAs) => {
 		console.log('Connecting to event stream')
-		const eventSourceInitDict = {
-			headers: {
 
-			}
-		}
 		const eventSource = new EventSource(`/pvp/${guid}/${pguid}`)
 		eventSource.onopen = (m) => {
 			console.log('Connected!', m)
@@ -358,7 +354,6 @@ const BoardPage = () => {
 				setMessage(data)
 				return
 			}
-
 
 			setPVPRunning(true)
 			setShowPVPOptions(true)

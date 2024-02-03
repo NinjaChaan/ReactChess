@@ -6,14 +6,13 @@ const SquareStyle = styled.button`
 	width: 50px;
 	height: 50px;
 	padding: 0;
-	background-color: ${(props) => (props.white && 'burlywood')
-		|| 'sienna'
-	};
+	background-color: ${(props) => (props.white && 'burlywood') || 'sienna'};
 	box-shadow: ${(props) => (props.moved && 'inset 2000px 0 0 0 rgba(0, 255, 0, 0.25)')};
 	box-shadow: ${(props) => (props.hint && 'inset 2000px 0 0 0 rgba(255, 0, 0, 0.35)')};
 	border: none;
 	outline: none;
 	transform: ${(props) => (props.playAs === 1 && `rotate(180deg)`)};
+
 	&:after {
 		${(props) => props.selected && css`
 			content: "";
@@ -41,12 +40,6 @@ const SquareStyle = styled.button`
 
 const Square = ({ white, moved, children, selected, allowed, hint, id, coords, clickCallback, playAs }) => {
 	const [clicked, setClicked] = useState(false)
-
-	const selectPiece = () => {
-		if (children && canClick) {
-			setClicked(true)
-		}
-	}
 
 	const click = () => {
 		setClicked(clickCallback(coords) && children !== null)

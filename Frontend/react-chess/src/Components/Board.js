@@ -301,6 +301,7 @@ const Board = ({ fen, fenExtras, lastMove, hintMove, showOnlyStart, legalMoves, 
 		if (lastMove === "O-O" || lastMove === "O-O-O") {
 			showMove = false
 		}
+
 		const r1c = showMove ? cleanedMove[0].charCodeAt(0) - 'a'.charCodeAt(0) : "";
 		const r1r = showMove ? 7 - (cleanedMove[1].charCodeAt(0) - '1'.charCodeAt(0)) : "";
 		const r2c = showMove ? cleanedMove[3].charCodeAt(0) - 'a'.charCodeAt(0) : "";
@@ -314,7 +315,6 @@ const Board = ({ fen, fenExtras, lastMove, hintMove, showOnlyStart, legalMoves, 
 				const longCastle = allowedMoves.includes("O-O-O") && ((turn === 0 && j === 2 && i === 7) || (turn === 1 && j === 2 && i === 0))
 				const allowed = !movedPiece && (allowedMoves.includes(`${j}-${i}`) || allowedMoves.includes(`${j}x${i}`) || shortCastle || longCastle)
 				const showHint = checkHint(i, j)
-				// console.log('show hint', showHint)
 
 				tempItems.push(
 					<Square

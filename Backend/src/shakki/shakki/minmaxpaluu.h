@@ -1,5 +1,5 @@
 #pragma once
-#include "siirto.h"
+#include "Siirto.h"
 
 
 // luokka, jonka avulla saadaan palautettua minmax:ssa sekä siirto-olio että evaluointifunktion arvo

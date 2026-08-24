@@ -4,7 +4,6 @@
     "use_ccache_win": 0,
     "clang": 0,
     "llvm_version": "0.0",
-    "node_enable_experimentals": "false",
     "node_prefix": "/usr",
     "node_install_npm": "false",
     "node_install_corepack": "false",
@@ -25,8 +24,7 @@
     "node_enable_v8_vtunejit": "false",
     "enable_pgo_generate": "false",
     "enable_pgo_use": "false",
-    "enable_lto": "true",
-    "enable_thin_lto": "false",
+    "enable_lto": "false",
     "single_executable_application": "true",
     "node_with_ltcg": "false",
     "node_tag": "",
@@ -137,7 +135,6 @@
       "lib/internal/crypto/sig.js",
       "lib/internal/crypto/util.js",
       "lib/internal/crypto/webcrypto.js",
-      "lib/internal/crypto/webcrypto_util.js",
       "lib/internal/crypto/webidl.js",
       "lib/internal/crypto/x509.js",
       "lib/internal/data_url.js",
@@ -315,7 +312,6 @@
       "lib/internal/test_runner/reporter/v8-serializer.js",
       "lib/internal/test_runner/runner.js",
       "lib/internal/test_runner/snapshot.js",
-      "lib/internal/test_runner/tag_filter.js",
       "lib/internal/test_runner/test.js",
       "lib/internal/test_runner/tests_stream.js",
       "lib/internal/test_runner/utils.js",
@@ -400,6 +396,7 @@
       "lib/zlib.js"
     ],
     "node_cctest_sources": [
+      "src/node_snapshot_stub.cc",
       "test/cctest/inspector/test_network_requests_buffer.cc",
       "test/cctest/inspector/test_node_protocol.cc",
       "test/cctest/node_test_fixture.cc",
@@ -419,7 +416,6 @@
       "test/cctest/test_node_api.cc",
       "test/cctest/test_node_crypto.cc",
       "test/cctest/test_node_crypto_env.cc",
-      "test/cctest/test_node_ipc_serdes.cc",
       "test/cctest/test_node_postmortem_metadata.cc",
       "test/cctest/test_node_task_runner.cc",
       "test/cctest/test_path.cc",
@@ -500,9 +496,10 @@
       "deps/amaro/dist/index.js"
     ],
     "ossfuzz": "false",
-    "nodedir": "/home/ninja/.cache/node-gyp/24.19.0",
+    "nodedir": "/home/ninja/.cache/node-gyp/24.16.0",
     "python": "/usr/bin/python3",
-    "standalone_static_library": 1
+    "standalone_static_library": 1,
+    "user_agent": "pnpm/11.3.0 npm/? node/v24.16.0 linux x64"
   },
   "target_defaults": {
     "include_dirs": [],

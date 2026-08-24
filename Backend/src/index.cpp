@@ -1,8 +1,10 @@
 #include <napi.h>
 #include <string>
+#ifdef _WIN32
 #include <Windows.h>
 #include <io.h>
 #include <fcntl.h>
+#endif
 #include <iostream>
 #include <string>
 #include "shakki/shakki/Bot.h"

@@ -1,10 +1,33 @@
+#ifdef _WIN32
 #include <Windows.h>
+#endif
 #include <iostream>
 #include <string>
+#ifdef _WIN32
 #include <fcntl.h>
+#endif
+#ifdef _WIN32
 #include <io.h>
+#endif
 #include <iostream>
 #include "kayttoliittyma.h"
+
+// --- Portable stubs for Windows console text-coloring API (CLI board drawing only) ---
+#ifndef _WIN32
+typedef unsigned int WORD;
+#define STD_OUTPUT_HANDLE 0
+#define FOREGROUND_BLUE 0
+#define FOREGROUND_GREEN 0
+#define FOREGROUND_RED 0
+#define FOREGROUND_INTENSITY 0
+#define BACKGROUND_BLUE 0
+#define BACKGROUND_RED 0
+#define BACKGROUND_GREEN 0
+#define BACKGROUND_INTENSITY 0
+static inline void* GetStdHandle(int) { return nullptr; }
+static inline void SetConsoleTextAttribute(void*, WORD) {}
+#endif
+// --- end portable stubs ---
 
 using namespace std;
 
@@ -118,7 +141,9 @@ Siirto Kayttoliittyma::annaVastustajanSiirto() {
 
 void Kayttoliittyma::piirraLauta(Siirto* viimeSiirto) {
 	//Saa unicode shakkinappulat toimimaan cout:n kanssa:
+#ifdef _WIN32
 	_setmode(_fileno(stdout), _O_U16TEXT);
+#endif
 	int alkuSarake, alkuRivi, loppuSarake, loppuRivi;
 	if (viimeSiirto != NULL) {
 		alkuSarake = viimeSiirto->getAlkuruutu().getSarake();

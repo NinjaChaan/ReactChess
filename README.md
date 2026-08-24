@@ -1,11 +1,8 @@
 # ReactChess
 
-A chess app — React front end, Node back end, with a C++ engine compiled as a
+A chess app with React front end and a Node back end that serve a chess engine built with C++  compiled as a
 native Node addon. You can play against the engine or against another person
 (same network).
-
-The back end serves the built front end, so both run together on
-**http://localhost:3000**.
 
 ## What you need
 
@@ -37,10 +34,7 @@ cd Backend
 pnpm run dev
 ```
 
-Then open http://localhost:3000.
-
-If you're working on the front end, run `pnpm run dev` in `Frontend/react-chess`
-too — it rebuilds `dist/` on change. Hard-refresh the browser to pick it up.
+Then open http://localhost:3000
 
 ## Playing on another device
 
@@ -48,14 +42,3 @@ The server listens on all interfaces, so open port 3000 in your firewall and
 connect the other device to your machine's LAN IP (e.g.
 `http://192.168.0.192:3000`) instead of localhost.
 
-## If the build breaks
-
-Usually a stale `build/` folder. Delete it and reinstall:
-
-```bash
-cd Backend
-rm -rf build && pnpm install
-```
-
-(On Windows use `npm`/`pnpm` the same way; swap `rm -rf` for
-`Remove-Item -Recurse -Force build`.)

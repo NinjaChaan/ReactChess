@@ -61,6 +61,11 @@ app.post('/getBestMove', async (request, response, next) => {
 
 const pvpgames = {}
 
+// How long a random-match reservation is held before it's released back to the
+// pool. The joiner opens their SSE stream immediately after /joinRandomPVP
+// resolves, so this only fires if they never actually connect.
+const RESERVATION_TIMEOUT_MS = 10000
+
 app.post('/startPVP', async (request, response, next) => {
 	const { body } = request
 	const playerId = body.playerId
@@ -92,12 +97,38 @@ app.post('/joinRandomPVP', async (request, response, next) => {
 
 	const playerId = body.playerId
 
-	const games = Object.keys(pvpgames).filter((gameId) => (pvpgames[gameId].p1 !== null && pvpgames[gameId].p2 === null))
+	// Only match games whose host is still connected and whose second slot is
+	// open. Without the p1connected check we hand out "leaked" games whose host
+	// called /startPVP but never opened (or dropped) their SSE stream, leaving
+	// the joiner waiting forever for a player who never moves.
+	const games = Object.keys(pvpgames).filter((gameId) => {
+		const game = pvpgames[gameId]
+		return game.p1 !== null && game.p2 === null && game.p1connected
+	})
 	if (games.length === 0) {
 		response.status(404).json({ error: 'Couldn\'t find a game' })
 		return
 	}
-	response.json({ gameId: games[0] })
+	// Reserve the slot immediately so two simultaneous joiners can't both grab
+	// the same host. The joiner's SSE connection will set p2connected.
+	const gameId = games[0]
+	const game = pvpgames[gameId]
+	game.p2 = playerId
+	game.status = 'ongoing'
+
+	// If the joiner never opens their SSE stream, release the reservation so the
+	// host can be matched again. Cleared once the joiner connects (p2connected).
+	game.reservationTimer = setTimeout(() => {
+		const g = pvpgames[gameId]
+		if (g && g.p2 === playerId && !g.p2connected) {
+			console.log('reservation timed out, releasing', gameId)
+			g.p2 = null
+			g.status = 'created'
+			g.reservationTimer = null
+		}
+	}, RESERVATION_TIMEOUT_MS)
+
+	response.json({ gameId })
 })
 
 
@@ -112,7 +143,7 @@ app.post('/pvp/move/:gameId/:playerId', async (request, response, next) => {
 	const game = pvpgames[gameId]
 
 	if (game === undefined) {
-		response.status(404).json({ error: 'Couldn\'t find game with id ' + gameID })
+		response.status(404).json({ error: 'Couldn\'t find game with id ' + gameId })
 		return
 	}
 	if (game.status.includes('resigned')) {
@@ -170,7 +201,7 @@ app.post('/pvp/resign/:gameId/:playerId', async (request, response, next) => {
 	const game = pvpgames[gameId]
 
 	if (game === undefined) {
-		response.status(404).json({ error: 'Couldn\'t find game with id ' + gameID })
+		response.status(404).json({ error: 'Couldn\'t find game with id ' + gameId })
 		return
 	}
 	if (game.p1 === playerId) {
@@ -196,7 +227,7 @@ app.post('/pvp/offerdraw/:gameId/:playerId', async (request, response, next) => 
 	const game = pvpgames[gameId]
 
 	if (game === undefined) {
-		response.status(404).json({ error: 'Couldn\'t find game with id ' + gameID })
+		response.status(404).json({ error: 'Couldn\'t find game with id ' + gameId })
 		return
 	}
 	if(game.status == 'reject'){
@@ -234,7 +265,7 @@ app.post('/pvp/rejectdraw/:gameId/:playerId', async (request, response, next) =>
 	const game = pvpgames[gameId]
 
 	if (game === undefined) {
-		response.status(404).json({ error: 'Couldn\'t find game with id ' + gameID })
+		response.status(404).json({ error: 'Couldn\'t find game with id ' + gameId })
 		return
 	}
 	if (game.p1 === playerId) {
@@ -272,7 +303,7 @@ app.get('/pvp/:gameId/:playerId', async (request, response, next) => {
 		'Access-Control-Allow-Headers':
 			'Origin, X-Requested-With, Content-Type, Accept',
 	})
-	response.flush()
+	response.flushHeaders()
 
 	if (gameId in pvpgames) {
 		console.log('game found', gameId)
@@ -280,6 +311,9 @@ app.get('/pvp/:gameId/:playerId', async (request, response, next) => {
 			pvpgames[gameId].p1connected = true
 		} else if (pvpgames[gameId].p2 === playerId){
 			pvpgames[gameId].p2connected = true
+			// Joiner showed up, so the reservation is fulfilled.
+			clearTimeout(pvpgames[gameId].reservationTimer)
+			pvpgames[gameId].reservationTimer = null
 		}
 
 		if (!(pvpgames[gameId].p1 === playerId || pvpgames[gameId].p2 === playerId)) {
@@ -318,13 +352,11 @@ app.get('/pvp/:gameId/:playerId', async (request, response, next) => {
 					if (game.status.includes("wins") || game.status.includes("resigned") || game.status.includes("Draw")) {
 						response.write(`data: ${JSON.stringify({ fen: game.fen, status: game.status, lastMove: game.lastMove })}`)
 						response.write('\n\n')
-						response.flush()
 					} else {
 						getLegalMoves(game.fen)
 							.then((moves) => {
 								response.write(`data: ${JSON.stringify({ fen: game.fen, status: game.status, lastMove: game.lastMove, legalMoves: moves })}`)
 								response.write('\n\n')
-								response.flush()
 							})
 							.catch((error) => next(error))
 					}
@@ -333,7 +365,6 @@ app.get('/pvp/:gameId/:playerId', async (request, response, next) => {
 				}
 			} else {
 				response.write(`data: "Waiting for player 2" \n\n`)
-				response.flush()
 			}
 		}
 	}, 1000)

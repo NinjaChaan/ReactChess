@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
-import EventSource from 'eventsource'
 import Square from './Square'
 import Board from './Board'
 import SettingsModule from './SettingsModule'
-import Movehistory from './Movehistory'
+import Movehistory from './MoveHistory'
 import Ellipsis from './Ellipsis'
 import { CoordinatesNumbers, CoordinatesLetters } from './Coordinates'
 import FENBoard from 'fen-chess-board'
@@ -208,11 +207,6 @@ const playTurn = (fen) => {
 	return request.then((response) => response).catch((error) => (error.response))
 }
 
-const playPVPTurn = (fen) => {
-	const request = axios.post(`/pvp/move/${gameId}/${playerId}`, { gameId, playerId, fen, move: lastMove })
-	return request.then((response) => response).catch((error) => (error.response))
-}
-
 const getLegalMoves = (fen) => {
 	const request = axios.post(`/getLegalMoves`, fen)
 	return request.then((response) => response).catch((error) => (error.response))
@@ -341,7 +335,7 @@ const BoardPage = () => {
 	const startStream = (guid, pguid, playAs) => {
 		console.log('Connecting to event stream')
 
-		const eventSource = new EventSource(`/pvp/${guid}/${pguid}`)
+		const eventSource = new window.EventSource(`/pvp/${guid}/${pguid}`)
 		eventSource.onopen = (m) => {
 			console.log('Connected!', m)
 		}
@@ -645,6 +639,11 @@ const BoardPage = () => {
 				startStream(result.data.gameId, pguid, 1)
 			}
 		})
+	}
+
+	const playPVPTurn = (fen) => {
+		const request = axios.post(`/pvp/move/${gameId}/${playerId}`, { gameId, playerId, fen, move: lastMove })
+		return request.then((response) => response).catch((error) => (error.response))
 	}
 
 	const resign = () => {

@@ -1,63 +1,16 @@
-const http = require('http');
 const express = require('express')
 const cors = require('cors')
 const path = require('path')
 const { v4: uuidv4 } = require('uuid')
-const { Bot } = require('./build/Release/shakki.node')
 
+// The chess engine now runs in the browser as WebAssembly, so this process is
+// only a relay for player-vs-player games. No native addon, no build step.
 const app = express()
 app.use(cors())
 app.use(express.json({ limit: '50mb' }))
 
 const hostname = '0.0.0.0'
-const port = 3000
-
-const bot = new Bot()
-// console.log(bot.playTurn("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"))
-
-async function playTurn(fen, difficulty) {
-	return await Promise.resolve(bot.playTurn(fen, difficulty));
-}
-
-async function getLegalMoves(fen) {
-	return await Promise.resolve(bot.getLegalMoves(fen));
-}
-
-async function getBestMove(fen) {
-	return await Promise.resolve(bot.getBestMove(fen));
-}
-
-async function isGameOver(fen) {
-	return await Promise.resolve(bot.isGameOver(fen));
-}
-
-app.post('/playTurn', async (request, response, next) => {
-	const { body } = request
-	playTurn(body.fen, body.difficulty)
-		.then((result) => {
-			response.json(result)
-		})
-		.catch((error) => next(error))
-})
-
-
-app.post('/getLegalMoves', async (request, response, next) => {
-	const { body } = request
-	getLegalMoves(body.fen)
-		.then((result) => {
-			response.json(result)
-		})
-		.catch((error) => next(error))
-})
-
-app.post('/getBestMove', async (request, response, next) => {
-	const { body } = request
-	getBestMove(body.fen)
-		.then((result) => {
-			response.json(result)
-		})
-		.catch((error) => next(error))
-})
+const port = process.env.PORT || 3000
 
 const pvpgames = {}
 
@@ -139,6 +92,8 @@ app.post('/pvp/move/:gameId/:playerId', async (request, response, next) => {
 	const playerId = request.params.playerId
 	const fen = body.fen
 	const move = body.move
+	// The mover's browser ran isGameOver locally; the relay just records it.
+	const status = body.status && body.status !== 'Continue' ? body.status : 'ongoing'
 
 	const game = pvpgames[gameId]
 
@@ -155,13 +110,7 @@ app.post('/pvp/move/:gameId/:playerId', async (request, response, next) => {
 			console.log('p1 move')
 			game.fen = fen
 			game.lastMove = move
-			game.status = 'ongoing'
-			isGameOver(game.fen)
-				.then((result) => {
-					if (result.includes("wins") || result.includes("Draw")) {
-						game.status = result
-					}
-				})
+			game.status = status
 			response.status(200).json({ data: 'Moved succesfully' })
 		} else {
 			response.status(403).json({ error: 'Wait for your turn, dummy' })
@@ -172,13 +121,7 @@ app.post('/pvp/move/:gameId/:playerId', async (request, response, next) => {
 			console.log('p2 move')
 			game.fen = fen
 			game.lastMove = move
-			game.status = 'ongoing'
-			isGameOver(game.fen)
-				.then((result) => {
-					if (result.includes("wins") || result.includes("Draw")) {
-						game.status = result
-					}
-				})
+			game.status = status
 			response.status(200).json({ data: 'Moved succesfully' })
 		} else {
 			response.status(403).json({ error: 'Wait for your turn, dummy' })
@@ -349,17 +292,10 @@ app.get('/pvp/:gameId/:playerId', async (request, response, next) => {
 					console.log('updating')
 					console.log('game data', game)
 					console.log('lastTurn', lastTurn)
-					if (game.status.includes("wins") || game.status.includes("resigned") || game.status.includes("Draw")) {
-						response.write(`data: ${JSON.stringify({ fen: game.fen, status: game.status, lastMove: game.lastMove })}`)
-						response.write('\n\n')
-					} else {
-						getLegalMoves(game.fen)
-							.then((moves) => {
-								response.write(`data: ${JSON.stringify({ fen: game.fen, status: game.status, lastMove: game.lastMove, legalMoves: moves })}`)
-								response.write('\n\n')
-							})
-							.catch((error) => next(error))
-					}
+					// No legalMoves here any more - the receiving client computes
+					// them from the fen with its own wasm engine.
+					response.write(`data: ${JSON.stringify({ fen: game.fen, status: game.status, lastMove: game.lastMove })}`)
+					response.write('\n\n')
 					lastTurn = game.turn
 					lastStatus = game.status
 				}

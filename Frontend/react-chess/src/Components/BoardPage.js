@@ -10,6 +10,7 @@ import FENBoard from 'fen-chess-board'
 import { device } from '../devices'
 import axios from 'axios'
 import { v4 as uuidv4 } from 'uuid'
+import { playTurn, getLegalMoves, getBestMove, isGameOver, preload } from '../engine/client'
 import w_q from '../../resources/chesspieces/Chess_qlt45.svg'
 import b_q from '../../resources/chesspieces/Chess_qdt45.svg'
 import w_k from '../../resources/chesspieces/Chess_klt45.svg'
@@ -202,28 +203,17 @@ const PromotionTitle = styled.span`
 `
 
 
-const playTurn = (fen) => {
-	const request = axios.post(`/playTurn`, fen)
-	return request.then((response) => response).catch((error) => (error.response))
-}
-
-const getLegalMoves = (fen) => {
-	const request = axios.post(`/getLegalMoves`, fen)
-	return request.then((response) => response).catch((error) => (error.response))
-}
-
-const getBestMove = (fen) => {
-	const request = axios.post(`/getBestMove`, fen)
-	return request.then((response) => response).catch((error) => (error.response))
-}
+// Empty means same-origin. Set it to point at a separately hosted relay.
+const API_BASE = process.env.API_BASE || ''
+const PVP_ENABLED = process.env.PVP_ENABLED !== '0'
 
 const startPVP = (pguid) => {
-	const request = axios.post(`/startPVP`, { playerId: pguid, color: 'white' })
+	const request = axios.post(`${API_BASE}/startPVP`, { playerId: pguid, color: 'white' })
 	return request.then((response) => response).catch((error) => (error.response))
 }
 
 const joinRandomPVP = (pguid) => {
-	const request = axios.post(`/joinRandomPVP`, { playerId: pguid })
+	const request = axios.post(`${API_BASE}/joinRandomPVP`, { playerId: pguid })
 	return request.then((response) => response).catch((error) => (error.response))
 }
 
@@ -261,12 +251,13 @@ const BoardPage = () => {
 	const [offer, setOffer] = useState(-1)
 
 	const getMatchesInfo = () => {
-		const request = axios.get(`/matches`)
+		if (!PVP_ENABLED) return
+		const request = axios.get(`${API_BASE}/matches`)
 		request.then((response) => {
 			console.log('matches', response.data)
 			setMatches(response.data)
 		}).catch((error) => (error.response))
-		const request2 = axios.get(`/matchmaking`)
+		const request2 = axios.get(`${API_BASE}/matchmaking`)
 		request2.then((response) => {
 			console.log('matchmaking', response.data)
 			setPlayersMatchmaking(response.data)
@@ -274,6 +265,7 @@ const BoardPage = () => {
 	}
 
 	useEffect(() => {
+		preload()
 		getMatchesInfo()
 	}, []);
 
@@ -317,7 +309,9 @@ const BoardPage = () => {
 				if ('legalMoves' in data) {
 					setLegalMoves(Object.values(data.legalMoves))
 				} else {
-					setLegalMoves([])
+					getLegalMoves({ fen: data.fen })
+						.then((result) => setLegalMoves(Object.values(result.data)))
+						.catch(() => setLegalMoves([]))
 				}
 
 				setTurn(splitfen[1] === "b" ? 1 : 0)
@@ -335,7 +329,7 @@ const BoardPage = () => {
 	const startStream = (guid, pguid, playAs) => {
 		console.log('Connecting to event stream')
 
-		const eventSource = new window.EventSource(`/pvp/${guid}/${pguid}`)
+		const eventSource = new window.EventSource(`${API_BASE}/pvp/${guid}/${pguid}`)
 		eventSource.onopen = (m) => {
 			console.log('Connected!', m)
 		}
@@ -642,18 +636,23 @@ const BoardPage = () => {
 	}
 
 	const playPVPTurn = (fen) => {
-		const request = axios.post(`/pvp/move/${gameId}/${playerId}`, { gameId, playerId, fen, move: lastMove })
-		return request.then((response) => response).catch((error) => (error.response))
+		return isGameOver({ fen })
+			.then((result) => result.data)
+			.catch(() => 'Continue')
+			.then((status) => {
+				const request = axios.post(`${API_BASE}/pvp/move/${gameId}/${playerId}`, { gameId, playerId, fen, move: lastMove, status })
+				return request.then((response) => response).catch((error) => (error.response))
+			})
 	}
 
 	const resign = () => {
-		const request = axios.post(`/pvp/resign/${gameId}/${playerId}`, { gameId, playerId })
+		const request = axios.post(`${API_BASE}/pvp/resign/${gameId}/${playerId}`, { gameId, playerId })
 		return request.then((response) => response).catch((error) => (error.response))
 	}
 
 	const offerDraw = () => {
 		setOffer(-1)
-		const request = axios.post(`/pvp/offerdraw/${gameId}/${playerId}`, { gameId, playerId })
+		const request = axios.post(`${API_BASE}/pvp/offerdraw/${gameId}/${playerId}`, { gameId, playerId })
 		return request.then((response) => response).catch((error) => (error.response))
 	}
 
@@ -663,7 +662,7 @@ const BoardPage = () => {
 
 	const rejectDraw = () => {
 		setOffer(-1)
-		const request = axios.post(`/pvp/rejectdraw/${gameId}/${playerId}`, { gameId, playerId })
+		const request = axios.post(`${API_BASE}/pvp/rejectdraw/${gameId}/${playerId}`, { gameId, playerId })
 		return request.then((response) => response).catch((error) => (error.response))
 	}
 
@@ -786,19 +785,23 @@ const BoardPage = () => {
 												</SettingsButton>
 													</ButtonGroup>
 												</div>
-												<Line />
-												<PromotionTitle>Play against a human</PromotionTitle>
-												{/* <PromotionTitle size="14">{`Matches running: ${matches}`}</PromotionTitle> */}
-												<PromotionTitle size="14">{`Players looking for a match: ${playersMatchmaking}`}</PromotionTitle>
-												<ColumnContainer>
-													<MatchmakingButton onClick={startNewPVP}>Start a match</MatchmakingButton>
-													<MatchmakingButton onClick={joinPVPRand}>Find a match</MatchmakingButton>
-												</ColumnContainer>
-												<PromotionTitle size="16">Join a match with id</PromotionTitle>
-												<ColumnContainer>
-													<GameIdInput id="gameid"></GameIdInput>
-													<MatchmakingButton onClick={joinPVP}>Join</MatchmakingButton>
-												</ColumnContainer>
+												{PVP_ENABLED && (
+													<>
+														<Line />
+														<PromotionTitle>Play against a human</PromotionTitle>
+														{/* <PromotionTitle size="14">{`Matches running: ${matches}`}</PromotionTitle> */}
+														<PromotionTitle size="14">{`Players looking for a match: ${playersMatchmaking}`}</PromotionTitle>
+														<ColumnContainer>
+															<MatchmakingButton onClick={startNewPVP}>Start a match</MatchmakingButton>
+															<MatchmakingButton onClick={joinPVPRand}>Find a match</MatchmakingButton>
+														</ColumnContainer>
+														<PromotionTitle size="16">Join a match with id</PromotionTitle>
+														<ColumnContainer>
+															<GameIdInput id="gameid"></GameIdInput>
+															<MatchmakingButton onClick={joinPVP}>Join</MatchmakingButton>
+														</ColumnContainer>
+													</>
+												)}
 											</StartContainerInner>
 										</StartContainer>
 									)}

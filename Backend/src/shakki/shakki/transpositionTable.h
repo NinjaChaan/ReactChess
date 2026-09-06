@@ -9,7 +9,12 @@ enum SolmuTyyppi {
 	ala
 };
 const int maxAge = 11;
-const int transposition_table_size = 0b1000000000000000000000000;
+
+// 2^24 entries is 2 GiB across the two tables; wasm32 cannot address that much.
+#ifndef TT_SIZE_LOG2
+#define TT_SIZE_LOG2 24
+#endif
+const int transposition_table_size = 1 << TT_SIZE_LOG2;
 const int transposition_table_mask = transposition_table_size - 1;
 struct TranspositionItem {
 	long hash;

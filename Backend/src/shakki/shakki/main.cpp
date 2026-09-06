@@ -2,5 +2,5 @@
 #include "peli.h"
 
 int main() {
-	Peli::Peli(-1);
+	Peli peli(-1);
 }

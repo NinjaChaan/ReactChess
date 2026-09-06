@@ -8,6 +8,9 @@
         "dev": "webpack --watch --mode development",
         "devserver": "webpack-dev-server",
         "build": "webpack --mode production",
+        "build:wasm": "bash ../../Backend/build-wasm.sh",
+        "build:all": "webpack --mode production && bash ../../Backend/build-wasm.sh",
+        "build:demo": "PVP_ENABLED=0 webpack --mode production && bash ../../Backend/build-wasm.sh",
         "nodemon": "webpack watch ./src/index.js"
     },
     "author": "",

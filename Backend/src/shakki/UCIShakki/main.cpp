@@ -1,13 +1,16 @@
 #include <iostream>
+#ifdef _WIN32
 #include <Windows.h>
 #include <io.h>
 #include <fcntl.h>
+#endif
 #include <iostream>
 #include <string>
 #include <queue>
 #include <mutex>
 #include "UCIEngine.h"
 #include <sstream>
+#include <iterator>
 
 using namespace std;
 
@@ -30,10 +33,8 @@ int main() {
 	UCIEngine engine(&outputQueue, &queueMutex);
 
 	std::thread([&] {
-		while (true) {
-			string cmd;
-			getline(cin, cmd);
-
+		string cmd;
+		while (getline(cin, cmd)) {
 			const std::lock_guard<std::mutex> lock(queueMutex);
 			inputQueue.push(cmd);
 		}

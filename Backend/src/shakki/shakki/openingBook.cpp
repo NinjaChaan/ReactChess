@@ -1,4 +1,5 @@
 #include "openingBook.h"
+#include "asema.h"
 #include <fstream>
 #include <iostream>
 #include "stringSplit.h"
@@ -58,8 +59,8 @@ void OpeningBook::Initialize(std::vector<std::string> filenames) {
 
 		inFile.open(filename);
 		if (!inFile) {
-			cerr << "Unable to open file " << filename;
-			exit(1);
+			cerr << "Unable to open file " << filename << ", skipping\n";
+			continue;
 		}
 
 		string line;
@@ -71,7 +72,7 @@ void OpeningBook::Initialize(std::vector<std::string> filenames) {
 		inFile.close();
 		wcout << L"done\n";
 	}
-	//Sort liikkeiden pituusjärjestyksessä
+	//Sort liikkeiden pituusjï¿½rjestyksessï¿½
 	std::sort(lines.begin(), lines.end(), greaterMoves);
 	for (string line : lines) {
 
@@ -141,7 +142,108 @@ void OpeningBook::Initialize(std::vector<std::string> filenames) {
 
 
 	Sort();
+	RakennaAsemaIndeksi();
 }
+
+
+std::string OpeningBook::NormalisoiFen(const std::string& fen) {
+	// getFen() omits the en passant square, the tsv fen column includes it.
+	// Round-tripping both through Asema makes the two agree.
+	try {
+		Asema asema(fen);
+		return asema.getFen() + " " + asema.getEnPassant();
+	}
+	catch (...) {
+		return "";
+	}
+}
+
+
+static void indeksoiSolmut(Asema asema, const std::vector<OpeningNode*>& solmut,
+	std::unordered_map<std::string, std::vector<BookMove>>& indeksi) {
+
+	const std::string avain = asema.getFen() + " " + asema.getEnPassant();
+	std::vector<Siirto> lailliset = asema.annaLaillisetSiirrot();
+
+	for (OpeningNode* solmu : solmut) {
+		// haeSiirrot() only reads the from/to squares, so castling, en passant
+		// and promotion flags come from the matching legal move.
+		const Siirto* laillinen = nullptr;
+		for (const Siirto& s : lailliset) {
+			if (s == solmu->siirto) {
+				laillinen = &s;
+				break;
+			}
+		}
+		if (laillinen == nullptr) {
+			continue;
+		}
+
+		std::vector<BookMove>& siirrot = indeksi[avain];
+		bool jo = false;
+		for (const BookMove& bm : siirrot) {
+			if (bm.siirto == *laillinen) {
+				jo = true;
+				break;
+			}
+		}
+		if (!jo) {
+			BookMove bm;
+			bm.siirto = *laillinen;
+			bm.evaluaatio = solmu->evaluaatio;
+			bm.nimi = solmu->nimi;
+			siirrot.push_back(bm);
+		}
+
+		if (!solmu->lapset.empty()) {
+			Asema seuraava = asema;
+			Siirto s = *laillinen;
+			seuraava.paivitaAsema(&s);
+			indeksoiSolmut(seuraava, solmu->lapset, indeksi);
+		}
+	}
+}
+
+
+void OpeningBook::RakennaAsemaIndeksi() {
+	// The book is a move-sequence tree, but lookups only have a position, so
+	// replay it from the start and index by position instead.
+	asemaIndeksi.clear();
+	if (juuriSolmut.empty()) {
+		return;
+	}
+
+	Asema alkuasema;
+	indeksoiSolmut(alkuasema, juuriSolmut, asemaIndeksi);
+
+	for (auto& pari : asemaIndeksi) {
+		std::sort(pari.second.begin(), pari.second.end(),
+			[](const BookMove& a, const BookMove& b) { return a.evaluaatio > b.evaluaatio; });
+	}
+
+	wcout << L"Opening book: " << asemaIndeksi.size() << L" positions indexed" << endl;
+}
+
+
+const std::vector<BookMove>* OpeningBook::HaeAsemasta(const std::string& fenAvain) const {
+	auto it = asemaIndeksi.find(fenAvain);
+	if (it == asemaIndeksi.end() || it->second.empty()) {
+		return nullptr;
+	}
+	return &it->second;
+}
+
+
+bool OpeningBook::HaeHyvaSiirto(const std::string& fenAvain, BookMove& tulos) const {
+	const std::vector<BookMove>* siirrot = HaeAsemasta(fenAvain);
+	if (siirrot == nullptr) {
+		return false;
+	}
+	int hyvat = std::max((int)(siirrot->size() * 0.3), 1);
+	tulos = (*siirrot)[rand() % hyvat];
+	return true;
+}
+
 
 OpeningNode* OpeningBook::HaeJuuri(Siirto siirto) {
 	for (auto juuri : juuriSolmut) {

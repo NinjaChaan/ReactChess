@@ -34,8 +34,7 @@ pnpm --dir Web start
 Everything needed to run the app ends up in `Web/dist/`. To rebuild only the
 engine after changing C++, use `run build:wasm`.
 
-`start` runs `server.js`, which serves `dist/` and relays multiplayer games. For
-single-player alone, any static file server over `dist/` is enough.
+`start` runs `server.js`, which serves `dist/` and relays multiplayer games.
 
 The engine runs in a Web Worker, so the UI stays responsive while the bot
 thinks. The opening book is consulted first and answers instantly; once out of
@@ -43,42 +42,24 @@ book the engine searches for about a second per move.
 
 ### Deploying
 
-The engine artifacts in `dist/engine/` are committed, because no Node host has
-Emscripten installed. Rebuild and commit them whenever the C++ changes;
-everything else is built on the host.
+`Web/` is one deployable unit: the same process serves the bundle and relays
+multiplayer games, so the front end talks to its own origin and needs no
+configuration.
 
-**One service, single-player and multiplayer** — deploy `Web/` to a host that
-runs a long-lived Node process (Render, Fly.io, Railway). Build with
-`pnpm install && pnpm run build`, start with `node server.js`. `API_BASE` stays
-empty because the relay serves the bundle from the same origin.
+Deploy it to a host that runs a long-lived Node process (Render, Fly.io,
+Railway). Build with `pnpm install && pnpm run build`, start with
+`node server.js`. The engine artifacts in `dist/engine/` are committed, because
+no Node host has Emscripten installed — rebuild and commit them whenever the C++
+changes; everything else is built on the host.
 
 The relay keeps game state in memory and clients hold an open SSE connection, so
 it must run as a **single always-on instance**. Request-scoped serverless
 platforms (Vercel, Netlify Functions, Lambda) will not work, and neither will
 multiple replicas.
 
-**Static only** — for a host with no server at all:
-
-```bash
-pnpm --dir Web run build:demo
-```
-
-Same build with the human-vs-human UI hidden. Upload `dist/` to Netlify,
-Cloudflare Pages, GitHub Pages, or similar. Prefer a host that serves from the
-domain root; under a project subpath the engine assets still resolve (they are
-located relative to the page), but it is one less thing to get wrong. `.wasm`
-must be served as `application/wasm`, which those hosts do by default.
-
-**Split** — static front end on one host, relay on another. Point the front end
-at the relay at build time:
-
-```bash
-API_BASE=https://your-relay.example.com pnpm --dir Web run build:all
-```
-
-The relay allows any origin, so no further configuration is needed. On a LAN it
-listens on all interfaces: open its port in your firewall and use your machine's
-LAN IP (e.g. `http://192.168.0.192:3000`).
+On a LAN the relay listens on all interfaces, so opening its port in your
+firewall is enough for another machine to reach it at
+`http://<your-lan-ip>:3000`.
 
 ## Console
 

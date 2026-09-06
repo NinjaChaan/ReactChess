@@ -10,8 +10,7 @@
         "devserver": "webpack-dev-server",
         "build": "webpack --mode production",
         "build:wasm": "bash ../Engine/build-wasm.sh",
-        "build:all": "webpack --mode production && bash ../Engine/build-wasm.sh",
-        "build:demo": "PVP_ENABLED=0 webpack --mode production && bash ../Engine/build-wasm.sh"
+        "build:all": "webpack --mode production && bash ../Engine/build-wasm.sh"
     },
     "author": "",
     "license": "ISC",

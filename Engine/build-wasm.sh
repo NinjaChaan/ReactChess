@@ -5,7 +5,7 @@ set -euo pipefail
 
 cd "$(dirname "$0")"
 
-OUT_DIR="${1:-../Frontend/react-chess/dist/engine}"
+OUT_DIR="${1:-../Web/dist/engine}"
 mkdir -p "$OUT_DIR"
 
 SRC=(

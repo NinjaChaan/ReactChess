@@ -1,32 +1,31 @@
 {
     "name": "react-chess",
     "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
+    "description": "Chess front end and multiplayer relay",
+    "main": "server.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node server.js",
         "dev": "webpack --watch --mode development",
         "devserver": "webpack-dev-server",
         "build": "webpack --mode production",
-        "build:wasm": "bash ../../Backend/build-wasm.sh",
-        "build:all": "webpack --mode production && bash ../../Backend/build-wasm.sh",
-        "build:demo": "PVP_ENABLED=0 webpack --mode production && bash ../../Backend/build-wasm.sh",
-        "nodemon": "webpack watch ./src/index.js"
+        "build:wasm": "bash ../Engine/build-wasm.sh",
+        "build:all": "webpack --mode production && bash ../Engine/build-wasm.sh",
+        "build:demo": "PVP_ENABLED=0 webpack --mode production && bash ../Engine/build-wasm.sh"
     },
     "author": "",
     "license": "ISC",
     "dependencies": {
         "axios": "^0.20.0",
+        "cors": "^2.8.5",
         "eventsource": "2.0.2",
+        "express": "^4.17.1",
         "fen-chess-board": "^2.0.5",
-        "html-webpack-plugin": "^4.4.1",
-        "nodemon": "^2.0.4",
         "react": "^16.13.1",
         "react-beautiful-dnd": "^13.0.0",
         "react-dom": "^16.13.1",
         "styled-components": "^5.1.1",
-        "uuid": "^8.3.0",
-        "webpack-dev-server": "^3.11.0"
+        "uuid": "^8.3.0"
     },
     "devDependencies": {
         "@babel/core": "^7.11.5",
@@ -35,8 +34,10 @@
         "babel-loader": "^8.1.0",
         "css-loader": "^4.2.2",
         "file-loader": "^6.1.0",
+        "html-webpack-plugin": "^4.4.1",
         "style-loader": "^1.2.1",
         "webpack": "^4.44.1",
-        "webpack-cli": "^3.3.12"
+        "webpack-cli": "^3.3.12",
+        "webpack-dev-server": "^3.11.0"
     }
 }

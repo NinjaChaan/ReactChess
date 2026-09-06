@@ -115,6 +115,8 @@ void UCIEngine::Run() {
 					break;
 			}
 
+			_shouldSearch = false;
+
 			_queueLock->lock();
 			_outputQueue->push("bestmove " + viimeParas._parasSiirto.toUCIString(&_asema));
 			_queueLock->unlock();

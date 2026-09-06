@@ -334,7 +334,7 @@ app.get('/matchmaking', async (request, response, next) => {
 	response.status(200).json(`${games.length}`)
 })
 
-app.use(express.static(path.join(__dirname, '../Frontend/react-chess/dist')))
+app.use(express.static(path.join(__dirname, 'dist')))
 
 app.listen(port, hostname, () => {
 	console.log(`Server running at http://${hostname}:${port}/`);

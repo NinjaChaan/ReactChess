@@ -11,6 +11,7 @@
 #include "UCIEngine.h"
 #include <sstream>
 #include <iterator>
+#include <cstdlib>
 
 using namespace std;
 
@@ -151,7 +152,8 @@ int main() {
 			} else if (cmd == "ponderhit") {
 				//Our ponder move was correct
 			} else if (cmd == "quit") {
-				break;
+				cout.flush();
+				std::_Exit(0);
 			}
 		} else if (!outputQueue.empty()) {
 			queueMutex.lock();

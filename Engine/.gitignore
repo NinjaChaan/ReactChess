@@ -1,0 +1,6 @@
+bin/
+.vs/
+Debug/
+Release/
+*.vcxproj.user
+.DS_Store

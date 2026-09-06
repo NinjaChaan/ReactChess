@@ -1,4 +1,4 @@
-#   make shakki   console game, run from Backend/ (it reads ./db/*.tsv)
+#   make shakki   console game, run from Engine/ (it reads ./db/*.tsv)
 #   make uci      UCI engine for chess GUIs
 
 CXX      ?= g++
